@@ -1,0 +1,14 @@
+{
+  "version": "0.2",
+  "archive": "LectureLive-Windows-ARM64-Recovery.zip",
+  "archive_bytes": 1575118381,
+  "archive_sha256": "ee1a1cf7f026c249c9a26deea1c8626e6ee3108a5d77b3434c94e7abf1e71a24",
+  "payload_files_verified": 691,
+  "zip_crc_verified": true,
+  "fresh_destination": true,
+  "relocated_executable_self_test": true,
+  "fresh_offline_runtime_restored": true,
+  "restored_payload_checksums_verified": true,
+  "seconds": 128.16,
+  "passed": true
+}

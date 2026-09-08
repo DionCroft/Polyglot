@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "description": "Optional public-domain speech fixture for developer self-tests; not part of ordinary app setup",
+  "assets": [
+    {
+      "path": "tests/fixtures/jfk.wav",
+      "url": "https://raw.githubusercontent.com/ggml-org/whisper.cpp/c44b60b8053bbf2a5c1e014f11323fb3f2485177/samples/jfk.wav",
+      "bytes": 352078,
+      "sha256": "59dfb9a4acb36fe2a2affc14bacbee2920ff435cb13cc314a08c13f66ba7860e"
+    }
+  ]
+}

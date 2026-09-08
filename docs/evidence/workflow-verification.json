@@ -1,0 +1,12 @@
+{
+  "presets_roundtrip": true,
+  "projector_preview": true,
+  "configurable_hotkeys": true,
+  "microphone_check": "Microphone signal received. Input level looks usable.",
+  "compact_controls": true,
+  "model_bundle_loads": 1,
+  "graceful_stop": true,
+  "simulated_disconnect_retry": true,
+  "physical_projector_test": "pending",
+  "long_caption_layout_and_shrink": true
+}

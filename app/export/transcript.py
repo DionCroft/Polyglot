@@ -104,9 +104,52 @@ class Transcript:
         with self.lock:
             if self.closed:
                 return
-            for identifier, caption in self.pending.items():
-                self.ready.setdefault(identifier, caption)
-            self._flush_pairs()
-            for f in self.files.values():
-                f.close()
-            self.closed = True
+            error = None
+            try:
+                for identifier, caption in self.pending.items():
+                    self.ready.setdefault(identifier, caption)
+                self._flush_pairs()
+            except OSError as exc:
+                error = exc
+            finally:
+                self.closed = True
+                for handle in self.files.values():
+                    try:
+                        handle.close()
+                    except OSError as exc:
+                        error = error or exc
+            if error:
+                raise error
+
+
+def recover_journal(journal, destination):
+    """Rebuild new exports from complete journal records; never overwrite originals."""
+    from app.captions.state import Caption
+
+    english, pairs = {}, {}
+    skipped = 0
+    with Path(journal).open("rb") as source:
+        for line in source:
+            try:
+                event = json.loads(line.decode("utf-8"))
+                if not isinstance(event, dict):
+                    raise ValueError("Invalid journal record")
+                kind = event.pop("type")
+                caption = Caption(**event)
+                if kind == "english":
+                    english[caption.identifier] = caption
+                elif kind == "pair":
+                    pairs[caption.identifier] = caption
+                else:
+                    skipped += 1
+            except (ValueError, TypeError, KeyError):
+                skipped += 1
+    recovered = Transcript(destination, "Recovered lecture")
+    try:
+        for identifier in sorted(english):
+            caption = english[identifier]
+            recovered.english(caption)
+            recovered.pair(pairs.get(identifier, caption))
+    finally:
+        recovered.close()
+    return recovered.folder, skipped

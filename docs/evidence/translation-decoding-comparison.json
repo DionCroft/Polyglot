@@ -1,0 +1,146 @@
+[
+  {
+    "variant": "baseline",
+    "english": "The ESP32 communicates with the sensor using the I-squared-C protocol.",
+    "chinese": "ESP32使用I -quared-C协议与传感器进行通信。",
+    "seconds": 0.1143
+  },
+  {
+    "variant": "baseline",
+    "english": "Pulse-width modulation changes the average voltage applied to the motor.",
+    "chinese": "脉冲调制改变发动机的平均电压。",
+    "seconds": 0.084
+  },
+  {
+    "variant": "baseline",
+    "english": "An interrupt service routine should execute as quickly as possible.",
+    "chinese": "中断服务程序应尽快执行。",
+    "seconds": 0.0504
+  },
+  {
+    "variant": "baseline",
+    "english": "The FreeRTOS scheduler performs a context switch between tasks.",
+    "chinese": "FreeRTOS 调度器执行任务之间的上下文切换 。",
+    "seconds": 0.0967
+  },
+  {
+    "variant": "baseline",
+    "english": "The FPGA design is written in VHDL and synthesised into logic resources.",
+    "chinese": "FPGA设计用VHDL编写,并合成逻辑资源。",
+    "seconds": 0.1056
+  },
+  {
+    "variant": "baseline",
+    "english": "The MOSFET is being driven using a pulse-width-modulated signal.",
+    "chinese": "MOSFET正在使用脉冲调整信号进行驱动。",
+    "seconds": 0.0653
+  },
+  {
+    "variant": "baseline",
+    "english": "The robot uses an ultrasonic sensor to estimate its distance from an obstacle.",
+    "chinese": "机器人使用超声波传感器来估计距离",
+    "seconds": 0.0634
+  },
+  {
+    "variant": "baseline",
+    "english": "A convolutional neural network can perform image classification at the edge.",
+    "chinese": "进化神经网络可以在边缘进行图像分类。",
+    "seconds": 0.0613
+  },
+  {
+    "variant": "beam-heuristic",
+    "english": "The ESP32 communicates with the sensor using the I-squared-C protocol.",
+    "chinese": "ESP32使用I -quared-C协议与传感器进行通信。",
+    "seconds": 0.0967
+  },
+  {
+    "variant": "beam-heuristic",
+    "english": "Pulse-width modulation changes the average voltage applied to the motor.",
+    "chinese": "脉冲调制改变发动机的平均电压。",
+    "seconds": 0.064
+  },
+  {
+    "variant": "beam-heuristic",
+    "english": "An interrupt service routine should execute as quickly as possible.",
+    "chinese": "中断服务程序应尽快执行。",
+    "seconds": 0.0506
+  },
+  {
+    "variant": "beam-heuristic",
+    "english": "The FreeRTOS scheduler performs a context switch between tasks.",
+    "chinese": "FreeRTOS 调度器执行任务之间的上下文切换 。",
+    "seconds": 0.0841
+  },
+  {
+    "variant": "beam-heuristic",
+    "english": "The FPGA design is written in VHDL and synthesised into logic resources.",
+    "chinese": "FPGA设计用VHDL编写,并合成逻辑资源。",
+    "seconds": 0.0949
+  },
+  {
+    "variant": "beam-heuristic",
+    "english": "The MOSFET is being driven using a pulse-width-modulated signal.",
+    "chinese": "MOSFET正在使用脉冲调整信号进行驱动。",
+    "seconds": 0.0705
+  },
+  {
+    "variant": "beam-heuristic",
+    "english": "The robot uses an ultrasonic sensor to estimate its distance from an obstacle.",
+    "chinese": "机器人使用超声波传感器 来估计它距离障碍物的距离",
+    "seconds": 0.0804
+  },
+  {
+    "variant": "beam-heuristic",
+    "english": "A convolutional neural network can perform image classification at the edge.",
+    "chinese": "进化神经网络可以在边缘进行图像分类。",
+    "seconds": 0.0651
+  },
+  {
+    "variant": "beam-length-1.2",
+    "english": "The ESP32 communicates with the sensor using the I-squared-C protocol.",
+    "chinese": "ESP32使用I -quared-C协议与传感器进行通信。",
+    "seconds": 0.0909
+  },
+  {
+    "variant": "beam-length-1.2",
+    "english": "Pulse-width modulation changes the average voltage applied to the motor.",
+    "chinese": "脉冲调制改变发动机的平均电压。",
+    "seconds": 0.0746
+  },
+  {
+    "variant": "beam-length-1.2",
+    "english": "An interrupt service routine should execute as quickly as possible.",
+    "chinese": "中断服务程序应尽快执行。",
+    "seconds": 0.0414
+  },
+  {
+    "variant": "beam-length-1.2",
+    "english": "The FreeRTOS scheduler performs a context switch between tasks.",
+    "chinese": "FreeRTOS 调度器执行任务之间的上下文切换 。",
+    "seconds": 0.0821
+  },
+  {
+    "variant": "beam-length-1.2",
+    "english": "The FPGA design is written in VHDL and synthesised into logic resources.",
+    "chinese": "FPGA设计用VHDL编写,并合成逻辑资源。",
+    "seconds": 0.1056
+  },
+  {
+    "variant": "beam-length-1.2",
+    "english": "The MOSFET is being driven using a pulse-width-modulated signal.",
+    "chinese": "MOSFET正在使用脉冲调整信号进行驱动。",
+    "seconds": 0.0831
+  },
+  {
+    "variant": "beam-length-1.2",
+    "english": "The robot uses an ultrasonic sensor to estimate its distance from an obstacle.",
+    "chinese": "机器人使用超声波传感器 来估计它距离障碍物的距离",
+    "seconds": 0.0785
+  },
+  {
+    "variant": "beam-length-1.2",
+    "english": "A convolutional neural network can perform image classification at the edge.",
+    "chinese": "进化神经网络可以在边缘进行图像分类。",
+    "seconds": 0.0632
+  }
+]

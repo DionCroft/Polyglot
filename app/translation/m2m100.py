@@ -9,6 +9,9 @@ class M2M100(OpusMT):
     name = "M2M100 · local ARM64 CPU"
 
     def __init__(self, folder):
+        self.beams = 4
+        self.length_penalty = 1.0
+        self.early_stopping = False
         self.cfg = json.loads((folder / "config.json").read_text())
         self.vocab = json.loads((folder / "vocab.json").read_text(encoding="utf-8"))
         self.reverse = {i: s for s, i in self.vocab.items()}

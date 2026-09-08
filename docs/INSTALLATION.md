@@ -1,26 +1,57 @@
-# Installation
+# Installation and reproducible builds
 
-## Current native build
+The ready-to-run app is `dist/LectureLive/LectureLive.exe` on Windows 11 ARM64. Keep
+its entire `_internal` directory. The existing Surface/Qualcomm driver supplies the
+NPU device runtime; no separate QAIRT SDK was needed on the tested machine.
+The build is unsigned and still requires classroom acceptance.
 
-Use `dist/LectureLive/LectureLive.exe` on Windows 11 ARM64. Keep its `_internal`
-directory intact: it contains Qt, Python, native inference libraries and models.
-The Surface's installed Qualcomm driver is used. No separately installed QAIRT SDK
-was needed for the successful NPU test. A local CPU model is bundled for recovery.
+## First setup from a Git clone
 
-The executable is a development build and is not code-signed. Complete the acceptance
-checklist before teaching. Do not describe it as production validated yet.
+Run the following in the project directory while internet access is available:
 
-A Start Menu shortcut can be created by `scripts/install-shortcut.ps1` after the
-bundle is placed in its final location. It never enables startup-at-login or recording.
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\setup.ps1 -Build
+```
 
-## Build from this repository
+This downloads the pinned CPython ARM64 ZIP, verifies it before extraction, fetches
+exact dependency wheels from `dependencies.lock.json`, installs them with pip using
+`--no-index`, downloads/verifies `assets.lock.json`, and builds the native bundle.
+There is no runtime network fallback. The setup script does not change system PATH.
 
-Run `scripts/build.ps1` with the bundled runtime. Python 3.11.9 ARM64, PySide6 6.11.2,
-ONNX Runtime 1.29.0, QNN plugin 2.5.0 and PyInstaller 6.22.2 are pinned in
-`requirements-lock.txt`. PyInstaller 6.22.2 has a `win_arm64` wheel and ARM64 bootloader;
-this build does not package an x64 emulator executable.
+Each model URL includes a fixed release or repository revision. Downloads use temporary
+files and resume when the server supports ranges; SHA-256 and byte counts must match
+before a file is installed. Corrupt extracted QNN files are repaired from verified
+archives. Extraction rejects paths outside the target folder.
 
-The project-local CPython embeddable distribution is an application runtime with a
-private site-packages directory, not a system Python replacement. It does not modify
-PATH or the existing x64 Python installation. Its official redistribution license is
-retained in `runtime/LICENSE.txt` and the recovery archive.
+To verify without downloading or changing models:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\setup.ps1 -VerifyOnly
+```
+
+Run setup normally again to repair missing/corrupt assets. Use `-Offline` when all
+required artifacts are cached. Offline failures are reported rather than fetching data.
+The first offline installation was verified in a separate directory; see
+`evidence/fresh-setup-verification.json`. A real pinned HTTPS download and bootstrap
+URL were checked separately in `evidence/online-setup-check.json`.
+
+## Development checks
+
+```powershell
+.\runtime\python.exe -m pytest -q
+.\runtime\python.exe scripts\setup_assets.py --fixtures
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts\prepare_fixtures.ps1
+.\runtime\python.exe scripts\verify_workflow.py
+.\runtime\python.exe scripts\classroom_check.py
+.\runtime\python.exe scripts\stress_test.py --seconds 7200 --noise-snr 20
+```
+
+The optional public speech fixture is pinned in `fixtures.lock.json`; other speech
+fixtures are synthesised locally using an installed Windows voice. Voice-dependent
+results vary by machine. Developer fixtures are excluded from Git and recovery ZIPs.
+Normal app use requires none of these test commands.
+
+Use `scripts/build.ps1` for subsequent builds and `scripts/install-shortcut.ps1` for
+an optional Start Menu launcher. Neither enables startup-at-login nor audio recording.
+Package versions remain pinned in `requirements-lock.txt`; QNN and all runtime binaries
+are native ARM64. The existing x64 Python installation is not modified.

@@ -6,5 +6,11 @@
   "actuator": {
     "english": "actuator",
     "chinese": "执行器"
+  },
+  "proportional gain": {
+    "chinese": "比例增益",
+    "target_aliases": [
+      "比例收益"
+    ]
   }
 }

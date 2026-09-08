@@ -1,0 +1,697 @@
+{
+  "version": 1,
+  "reference_status": "Draft references; qualified bilingual review required. Concept checks are heuristics, not semantic acceptance.",
+  "cases": [
+    {
+      "id": "technical-01",
+      "glossary": "robotics",
+      "english": "The robot uses an ultrasonic sensor to estimate its distance from an obstacle.",
+      "draft_reference_chinese": "机器人使用超声波传感器估计自身与障碍物之间的距离。",
+      "required_concept_alternatives": [
+        [
+          "障碍"
+        ],
+        [
+          "距离"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-02",
+      "glossary": "robotics",
+      "english": "The robot must not move while a person is inside the safety area.",
+      "draft_reference_chinese": "安全区域内有人时，机器人不得移动。",
+      "required_concept_alternatives": [
+        [
+          "不",
+          "禁止"
+        ],
+        [
+          "安全"
+        ],
+        [
+          "人"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-03",
+      "glossary": "robotics",
+      "english": "The left wheel rotates faster than the right wheel.",
+      "draft_reference_chinese": "左轮的转速高于右轮。",
+      "required_concept_alternatives": [
+        [
+          "左"
+        ],
+        [
+          "右"
+        ],
+        [
+          "快",
+          "高"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-04",
+      "glossary": "robotics",
+      "english": "The sensor measures distance, not speed.",
+      "draft_reference_chinese": "该传感器测量的是距离，而不是速度。",
+      "required_concept_alternatives": [
+        [
+          "距离"
+        ],
+        [
+          "不"
+        ],
+        [
+          "速度"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-05",
+      "glossary": "robotics",
+      "english": "A lower proportional gain can reduce oscillation.",
+      "draft_reference_chinese": "降低比例增益可以减小振荡。",
+      "required_concept_alternatives": [
+        [
+          "增益"
+        ],
+        [
+          "振荡",
+          "振动"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-06",
+      "glossary": "robotics",
+      "english": "The measured position differs from the target position.",
+      "draft_reference_chinese": "测量位置与目标位置不同。",
+      "required_concept_alternatives": [
+        [
+          "目标"
+        ],
+        [
+          "位置"
+        ],
+        [
+          "不同",
+          "差"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-07",
+      "glossary": "robotics",
+      "english": "Stop the motor before disconnecting the encoder.",
+      "draft_reference_chinese": "断开编码器之前，先停止电机。",
+      "required_concept_alternatives": [
+        [
+          "编码器"
+        ],
+        [
+          "前"
+        ],
+        [
+          "停止"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-08",
+      "glossary": "robotics",
+      "english": "An obstacle behind the robot is outside the front sensor field of view.",
+      "draft_reference_chinese": "机器人后方的障碍物不在前向传感器的视野内。",
+      "required_concept_alternatives": [
+        [
+          "后"
+        ],
+        [
+          "前"
+        ],
+        [
+          "障碍"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-09",
+      "glossary": "embedded_systems",
+      "english": "The ESP32 communicates with the sensor using the I2C protocol.",
+      "draft_reference_chinese": "ESP32通过I2C协议与传感器通信。",
+      "required_concept_alternatives": [
+        [
+          "ESP32"
+        ],
+        [
+          "I2C"
+        ],
+        [
+          "传感器"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-10",
+      "glossary": "embedded_systems",
+      "english": "Pulse width modulation changes the average voltage applied to the motor.",
+      "draft_reference_chinese": "脉宽调制改变施加在电机上的平均电压。",
+      "required_concept_alternatives": [
+        [
+          "脉宽",
+          "脉冲宽度"
+        ],
+        [
+          "电机"
+        ],
+        [
+          "平均"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-11",
+      "glossary": "embedded_systems",
+      "english": "An interrupt service routine should execute as quickly as possible.",
+      "draft_reference_chinese": "中断服务程序应尽快执行。",
+      "required_concept_alternatives": [
+        [
+          "中断服务程序"
+        ],
+        [
+          "快"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-12",
+      "glossary": "embedded_systems",
+      "english": "The FreeRTOS scheduler performs a context switch between tasks.",
+      "draft_reference_chinese": "FreeRTOS调度器在任务之间进行上下文切换。",
+      "required_concept_alternatives": [
+        [
+          "FreeRTOS"
+        ],
+        [
+          "调度"
+        ],
+        [
+          "上下文"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-13",
+      "glossary": "embedded_systems",
+      "english": "The FPGA design is written in VHDL and synthesised into logic resources.",
+      "draft_reference_chinese": "FPGA设计使用VHDL编写，并综合为逻辑资源。",
+      "required_concept_alternatives": [
+        [
+          "FPGA"
+        ],
+        [
+          "VHDL"
+        ],
+        [
+          "逻辑"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-14",
+      "glossary": "embedded_systems",
+      "english": "The MOSFET is driven by a pulse width modulated signal.",
+      "draft_reference_chinese": "MOSFET由脉宽调制信号驱动。",
+      "required_concept_alternatives": [
+        [
+          "MOSFET"
+        ],
+        [
+          "信号"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-15",
+      "glossary": "embedded_systems",
+      "english": "Do not enable interrupts until initialisation is complete.",
+      "draft_reference_chinese": "初始化完成之前，不要使能中断。",
+      "required_concept_alternatives": [
+        [
+          "不"
+        ],
+        [
+          "中断"
+        ],
+        [
+          "初始化"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-16",
+      "glossary": "embedded_systems",
+      "english": "The task is blocked while it waits for a message.",
+      "draft_reference_chinese": "任务在等待消息时处于阻塞状态。",
+      "required_concept_alternatives": [
+        [
+          "任务"
+        ],
+        [
+          "等待"
+        ],
+        [
+          "消息"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-17",
+      "glossary": "electronics",
+      "english": "The supply voltage is 3.3 volts, not 5 volts.",
+      "draft_reference_chinese": "电源电压是3.3伏，而不是5伏。",
+      "required_concept_alternatives": [
+        [
+          "3.3"
+        ],
+        [
+          "5"
+        ],
+        [
+          "不"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-18",
+      "glossary": "electronics",
+      "english": "A 10 kiloohm resistor limits the current.",
+      "draft_reference_chinese": "一个10千欧电阻限制电流。",
+      "required_concept_alternatives": [
+        [
+          "10"
+        ],
+        [
+          "电阻"
+        ],
+        [
+          "电流"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-19",
+      "glossary": "electronics",
+      "english": "The capacitor stores charge rather than producing energy.",
+      "draft_reference_chinese": "电容器储存电荷，而不是产生能量。",
+      "required_concept_alternatives": [
+        [
+          "电容"
+        ],
+        [
+          "电荷"
+        ],
+        [
+          "能量"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-20",
+      "glossary": "electronics",
+      "english": "Increasing resistance decreases current when voltage stays constant.",
+      "draft_reference_chinese": "电压不变时，增大电阻会减小电流。",
+      "required_concept_alternatives": [
+        [
+          "电阻"
+        ],
+        [
+          "电流"
+        ],
+        [
+          "电压"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-21",
+      "glossary": "electronics",
+      "english": "The output frequency is 20 kilohertz.",
+      "draft_reference_chinese": "输出频率为20千赫。",
+      "required_concept_alternatives": [
+        [
+          "20"
+        ],
+        [
+          "频率"
+        ],
+        [
+          "千赫",
+          "kHz"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-22",
+      "glossary": "electronics",
+      "english": "The duty cycle changes from 25 percent to 75 percent.",
+      "draft_reference_chinese": "占空比从25%变为75%。",
+      "required_concept_alternatives": [
+        [
+          "25"
+        ],
+        [
+          "75"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-23",
+      "glossary": "electronics",
+      "english": "A negative voltage is measured relative to the reference node.",
+      "draft_reference_chinese": "负电压是相对于参考节点测得的。",
+      "required_concept_alternatives": [
+        [
+          "负"
+        ],
+        [
+          "参考"
+        ],
+        [
+          "电压"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-24",
+      "glossary": "electronics",
+      "english": "The diode conducts current in only one direction.",
+      "draft_reference_chinese": "二极管只允许电流沿一个方向流动。",
+      "required_concept_alternatives": [
+        [
+          "二极管"
+        ],
+        [
+          "电流"
+        ],
+        [
+          "方向"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-25",
+      "glossary": "artificial_intelligence",
+      "english": "A convolutional neural network can perform image classification at the edge.",
+      "draft_reference_chinese": "卷积神经网络可以在边缘端进行图像分类。",
+      "required_concept_alternatives": [
+        [
+          "卷积神经网络"
+        ],
+        [
+          "图像"
+        ],
+        [
+          "分类"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-26",
+      "glossary": "artificial_intelligence",
+      "english": "The validation data must remain separate from the training data.",
+      "draft_reference_chinese": "验证数据必须与训练数据分开。",
+      "required_concept_alternatives": [
+        [
+          "验证"
+        ],
+        [
+          "训练"
+        ],
+        [
+          "分"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-27",
+      "glossary": "artificial_intelligence",
+      "english": "A high accuracy does not guarantee good performance on unseen data.",
+      "draft_reference_chinese": "高准确率并不能保证模型在未见数据上表现良好。",
+      "required_concept_alternatives": [
+        [
+          "不"
+        ],
+        [
+          "数据"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-28",
+      "glossary": "artificial_intelligence",
+      "english": "The model has overfitted the training examples.",
+      "draft_reference_chinese": "模型过拟合了训练样本。",
+      "required_concept_alternatives": [
+        [
+          "过拟合",
+          "过度拟合"
+        ],
+        [
+          "训练"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-29",
+      "glossary": "artificial_intelligence",
+      "english": "Quantisation can reduce memory use but may change numerical accuracy.",
+      "draft_reference_chinese": "量化可以减少内存使用，但可能影响数值精度。",
+      "required_concept_alternatives": [
+        [
+          "量化"
+        ],
+        [
+          "内存"
+        ],
+        [
+          "精度",
+          "准确"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-30",
+      "glossary": "artificial_intelligence",
+      "english": "Inference runs locally without sending data to a server.",
+      "draft_reference_chinese": "推理在本地运行，不会将数据发送到服务器。",
+      "required_concept_alternatives": [
+        [
+          "本地"
+        ],
+        [
+          "不"
+        ],
+        [
+          "服务器"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-31",
+      "glossary": "iot",
+      "english": "The device sends a message only when the temperature exceeds 30 degrees Celsius.",
+      "draft_reference_chinese": "只有温度超过30摄氏度时，设备才发送消息。",
+      "required_concept_alternatives": [
+        [
+          "30"
+        ],
+        [
+          "温度"
+        ],
+        [
+          "超过"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-32",
+      "glossary": "iot",
+      "english": "A lost packet does not always mean that the connection has failed.",
+      "draft_reference_chinese": "丢失一个数据包并不总意味着连接已经失败。",
+      "required_concept_alternatives": [
+        [
+          "不"
+        ],
+        [
+          "连接"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-33",
+      "glossary": "iot",
+      "english": "The battery should last for at least 12 hours.",
+      "draft_reference_chinese": "电池应至少持续供电12小时。",
+      "required_concept_alternatives": [
+        [
+          "12"
+        ],
+        [
+          "小时"
+        ],
+        [
+          "至少"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-34",
+      "glossary": "iot",
+      "english": "The sensor wakes every 500 milliseconds.",
+      "draft_reference_chinese": "传感器每500毫秒唤醒一次。",
+      "required_concept_alternatives": [
+        [
+          "500"
+        ],
+        [
+          "毫秒"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-35",
+      "glossary": "general",
+      "english": "First read the value, then calculate the average.",
+      "draft_reference_chinese": "先读取数值，然后计算平均值。",
+      "required_concept_alternatives": [
+        [
+          "先"
+        ],
+        [
+          "平均"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-36",
+      "glossary": "general",
+      "english": "If the value is zero, skip this step.",
+      "draft_reference_chinese": "如果数值为零，就跳过这一步。",
+      "required_concept_alternatives": [
+        [
+          "零",
+          "0"
+        ],
+        [
+          "跳过"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-37",
+      "glossary": "general",
+      "english": "The measured result is approximately 2.5 times the predicted value.",
+      "draft_reference_chinese": "测量结果约为预测值的2.5倍。",
+      "required_concept_alternatives": [
+        [
+          "2.5"
+        ],
+        [
+          "预测"
+        ],
+        [
+          "倍"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-38",
+      "glossary": "general",
+      "english": "This example explains why the earlier assumption was incorrect.",
+      "draft_reference_chinese": "这个例子解释了先前假设为何不正确。",
+      "required_concept_alternatives": [
+        [
+          "假设"
+        ],
+        [
+          "不正确",
+          "错误"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-39",
+      "glossary": "general",
+      "english": "The first experiment succeeded, but the second experiment failed.",
+      "draft_reference_chinese": "第一次实验成功，但第二次实验失败。",
+      "required_concept_alternatives": [
+        [
+          "成功"
+        ],
+        [
+          "失败"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "technical-40",
+      "glossary": "general",
+      "english": "We will compare the two methods after the break.",
+      "draft_reference_chinese": "休息之后，我们将比较这两种方法。",
+      "required_concept_alternatives": [
+        [
+          "休息"
+        ],
+        [
+          "比较"
+        ],
+        [
+          "方法"
+        ]
+      ],
+      "human_review": "pending"
+    }
+  ]
+}

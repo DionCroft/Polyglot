@@ -1,4 +1,4 @@
-import json,time,platform
+import time,platform
 from pathlib import Path
 from app.system.offline import enforce_offline
 enforce_offline()

@@ -1,38 +1,37 @@
 # Offline setup and recovery
 
-Copy the entire `dist/LectureLive` directory to a second drive. Launch the executable
-from that copy once before travel. The build includes Fast and Balanced NPU models,
-the independent CPU speech model, translation, VAD and tokenization assets.
+Copy the complete `dist/LectureLive` folder to a second drive and launch it there before
+travel. The bundle contains Fast and Balanced NPU speech models, independent CPU
+speech recovery, translation, VAD, tokenisation assets and required libraries.
 
-The recovery directory retains:
-- Native CPython 3.11.9 embeddable ARM64 ZIP.
-- Pinned ARM64/pure-Python dependency wheels.
-- Original Qualcomm model ZIPs.
-- `SHA256SUMS.json` for downloaded dependencies/models and the deployable files.
-- The app bundle and these instructions in the generated recovery ZIP.
+`recovery/LectureLive-Windows-ARM64-Recovery.zip` contains the app bundle, source,
+documentation, pinned manifests, Python ARM64 ZIP and dependency wheels. QNN models
+are already expanded inside the bundle; original model ZIPs are retained in the
+project's `offline_dependencies` directory but are not duplicated in the recovery ZIP.
+Microphone recordings and private transcripts are excluded.
 
-Run `runtime/python.exe scripts/checksums.py --verify` to detect damaged files.
-The development runtime can reinstall dependencies with
-`runtime/python.exe -m pip install --no-index --find-links offline_dependencies/wheels -r requirements-lock.txt`.
-A packaged application already contains its dependencies and needs no pip operation.
+Extract the archive and launch `dist/LectureLive/LectureLive.exe`. No setup, account
+or network is needed for normal use. For development recovery run:
 
-The Python `_pth` file explicitly includes only the private runtime and project.
-There are no model downloads at ordinary startup. Setup scripts are separate tools
-and may use networking only when preparing a new installation.
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts\restore-runtime.ps1
+.\runtime\python.exe scripts\checksums.py --verify --recovery
+```
 
-Qualcomm QNN libraries were supplied by the official onnxruntime-qnn wheel. The
-working system driver is supplied by Windows/Surface; it is not copied into the
-recovery ZIP. Obtain any required device driver from the Surface/Qualcomm vendor
-before travel. Do not redistribute a separately acquired proprietary SDK without
-checking its own terms. The archive is for this installation's recovery; review all
-third-party notices before wider redistribution.
+Restoration copies bundled models into the development model folder if needed, then
+uses the pinned offline setup workflow. All wheels are verified and installed with
+`--no-index`. `RECOVERY_SHA256.json` verifies original extracted payload files.
+The adjacent `.zip.sha256` file verifies the archive before extraction.
 
-If the NPU cannot initialize, the app reports local CPU recovery. If translation
-cannot initialize, English continues and a warning is shown. Never use an online
-translator as a hidden replacement.
+For project model repair use `scripts/setup.ps1 -Offline` if cached archives exist,
+or run it online before travel to fetch missing pinned assets. Setup networking is
+separate from the ordinary app. A corrupted model cannot silently trigger a runtime
+download or cloud inference request.
 
-The generated recovery ZIP is in `recovery/LectureLive-Windows-ARM64-Recovery.zip`.
-Extract it to a local folder. Launch `dist/LectureLive/LectureLive.exe` directly.
-For development recovery, run `scripts/restore-runtime.ps1` using only the included
-Python ZIP and wheels. Then `runtime/python.exe scripts/checksums.py --verify --recovery`
-verifies the original extracted files. No network is needed for either path.
+The Qualcomm device driver belongs to the Windows/Surface installation and is not
+redistributed in the archive. Prepare vendor-supported device drivers before travel.
+Third-party notices are retained in `docs/licenses`; review terms before redistributing.
+
+NPU errors retry locally on CPU. Missing translation allows English to continue with
+an explicit warning. Export errors leave captions running; a journal can be recovered
+through Diagnostics into a separate new folder.

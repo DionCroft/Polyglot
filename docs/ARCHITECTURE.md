@@ -8,7 +8,7 @@ add_provider_for_devices; old examples assuming a monolithic QNN wheel are obsol
 Whisper: Qualcomm precompiled Whisper Base, release 0.61.0, exact X Elite variant.
 QNN sessions disable CPU fallback so NPU proof cannot accidentally measure CPU.
 A distinct standard ONNX Whisper graph is required for CPU recovery; an EPContext
-binary cannot execute on CPU. Balanced Small and Accuracy stay unavailable until tested.
+binary cannot execute on CPU. Balanced uses verified Whisper Small FP16 on the NPU. Accuracy remains unavailable.
 
 Translation: onnx-community/opus-mt-en-zh, quantized encoder, first decoder and cached
 decoder, SentencePiece + local vocab; no Transformers or hosted model loader.
@@ -48,8 +48,9 @@ Surface WASAPI input requires shared-mode sample-rate conversion (48 kHz hardwar
 translation queue capacities are four. Completed captions remain on screen while the
 next phrase is provisional. A session epoch invalidates stale display events on pause.
 
-All regular launches run local encoder, VAD and translation inference checks on a
-background thread. Speech/model inference never runs on the Qt event thread.
+All regular launches run encoder/decoder, VAD and translation checks on a background
+thread. A per-window ModelStore retains one warmed bundle for the selected profile;
+lecture startup and subsequent sessions reuse it. Profile changes replace the bundle. Speech/model inference never runs on the Qt event thread.
 OPUS uses the required `>>cmn_Hans<<` prefix, four-beam cached decoding, and local
 OpenCC normalization. A tested M2M100 alternative was slower and had its own technical
 errors, so it is excluded from the default bundle.
@@ -58,3 +59,24 @@ Append-only English export precedes translation. A bounded pending-pair map pres
 subtitle order if a later translation is skipped before an earlier one finishes.
 ONNX telemetry is explicitly disabled. Python socket creation, DNS and send operations
 are denied. OS-level native traffic verification remains an acceptance requirement.
+
+## 0.2 session and display state
+
+Stop rejects new capture but does not invalidate accepted audio. Input closure,
+segment completion and recognition completion are separate events, so downstream
+workers drain in order. Pause deliberately invalidates unfinished speech via epochs.
+A runtime NPU failure retries the same phrase on independent CPU graphs.
+
+CaptionDisplay separates completed bilingual pairs, pending final English and confirmed
+provisional prefixes. Qt renders that state without replacing a pair prematurely.
+Sentence-ending hypotheses permit shorter silence boundaries; latency is referenced
+to the last voiced audio, including the endpoint pause.
+
+Export writes and failure detachment share a lock. Close attempts every file even if
+flushing fails; the pipeline contains cleanup errors. Journal recovery creates a new
+export folder. Native backend calls are still in-process: a driver call that never
+returns cannot be safely killed as a Python thread and remains a reliability limit.
+
+Runtime modules have no model-download imports. Pinned setup manifests and resumable
+HTTPS download/extraction code live only in scripts. Presets and microphone checking
+are local; audio is not saved by the microphone-check flow.

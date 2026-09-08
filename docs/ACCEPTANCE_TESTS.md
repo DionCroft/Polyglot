@@ -1,40 +1,55 @@
-# Acceptance ledger
+# Acceptance ledger — LectureLive 0.2
 
-A partial pass is not a completed acceptance test. Keep final teaching approval open.
+Implementation checks and classroom acceptance are separate. The intended teaching
+setup is assumed to have a microphone. Tests using the built-in microphone verify
+capture here; they do not stand in for a rehearsal with the actual lecture microphone.
 
-| Requirement | Evidence / status |
+## Automated and local checks
+
+| Area | Evidence |
 |---|---|
-| Native Windows ARM64 | Verified CPython, packages; packaged EXE PE header verification is recorded by build script |
-| Real NPU speech | PASS: Base and Small transcribed local WAV; strict-QNN profile contains QNN kernels |
-| Local CPU speech recovery | PASS: Base int8 transcribed same WAV; simulated missing QNN startup tested separately |
-| Microphone capture | PASS: built-in array, WASAPI shared conversion, 3-second sample held only in RAM |
-| Live phrase pipeline | PASS: real-time technical WAV, stable EN/ZH and UTF-8 exports |
-| UI responsiveness/pause/shutdown | PASS: automated Qt harness delivers translated caption, hides on pause, joins workers |
-| Native overlay flags | PASS: topmost/noactivate/click-through flags checked; actual PowerPoint test recorded separately |
-| PowerPoint click-through | PASS: real PowerPoint slideshow click-through + Ctrl+Alt+C, see evidence/powerpoint-test.json |
-| Projector / display hot-unplug | PENDING: only one physical display was available during automated checks |
-| Physical microphone disconnect / USB / Bluetooth | PENDING: do not equate simulated failure with unplugging hardware |
-| Airplane Mode | PENDING: machine radios were not disabled during development |
-| Network audit | Python audit guard blocks sockets; runtime source audited; process TCP/UDP snapshots during stress sampled zero sockets if report confirms. OS packet/ETW trace still PENDING |
-| Ten-minute stress | PASS: 107 bilingual pairs, zero drops, workers joined; evidence/stress-10min.json |
-| Multi-hour thermal/resource test | PENDING |
-| Technical Chinese quality | REVIEW REQUIRED: baseline OPUS can omit/mistranslate detail |
+| Graceful Stop | Regression finishes an utterance with no trailing silence and saves its translation |
+| Disk-full/write cleanup | Regression contains both write and cleanup errors; all handles attempted |
+| Journal recovery | Truncated final record, torn UTF-8 and non-object records skipped; source preserved |
+| Pause privacy | Queued and in-flight recognition invalidated; callback cannot relabel old audio with a new epoch |
+| Bilingual continuity | Completed pair retained until replacement; stale results rejected; failures explicit |
+| Sentence boundaries | Short pause requires a sentence-ending hypothesis; ongoing speech stays intact |
+| NPU runtime recovery | Same phrase retried on CPU in a simulated device-failure regression |
+| Presets and shortcuts | Persistence, validation, conflict-safe application and native UI workflow |
+| Microphone check | Real three-second RAM-only capture and level assessment; no file recording |
+| Compact controls/retry | Actual Qt workflow including simulated disconnected-input retry |
+| Readiness reuse | One warmed model bundle reused by lecture startup and restart |
+| Asset setup | Real pinned HTTPS download; offline fresh bootstrap/extraction; range/corruption tests |
+| Synthetic speech/noise | 24 cases over clean, 20 dB and 10 dB noise; 19.2 s silence produces no phrases |
+| Sustained replay | 903 seconds, 161 bilingual captions, zero drops/skips; controlled 20 dB noise |
+| Translation evaluation | 40 development cases; concept checks only; human semantic acceptance pending |
 
-## Physical rehearsal before travel
+Run unit checks with `runtime/python.exe -m pytest -q`. Native tests are separate
+scripts described in INSTALLATION.md; they are not accidentally collected by pytest.
 
-1. Enable Airplane Mode manually; disconnect Ethernet/VPN if applicable. Launch the
-   packaged EXE, speak the technical sentences, and confirm both languages work.
-2. Use Windows packet/ETW tracing or an approved network monitor to observe the
-   LectureLive process and child processes. Verify no external requests while loading,
-   listening, translating, pausing and stopping. A zero-socket snapshot alone is not a
-   packet audit. Save only application-specific evidence.
-3. Start a PowerPoint slideshow, show captions at bottom, lock them, and click within
-   their rectangle. Slides must still advance; captions must remain visible.
-4. Attach the projector. Keep controls on Surface and overlay on the projector. Unplug
-   it, verify fallback, reconnect and reselect.
-5. Test USB/Bluetooth microphones and unplug while listening; confirm clear errors and
-   recovery via Stop → refresh → Start.
-6. Run a full teaching-length session on battery and power. Record responsiveness,
-   temperatures, memory, queue depth, latency, and transcript integrity.
+## Physical rehearsal still required
 
-Do not mark the project complete until these physical checks and quality review pass.
+1. Use the intended lecture microphone and speak real subject material from normal
+   teaching positions. Check audience questions, room noise, pacing and accents.
+2. Enable Airplane Mode, disconnect any Ethernet/VPN path, and verify startup, both
+   languages, pause, finish and reopen. The current automated tests do not toggle radios.
+3. Use an application-scoped OS packet/ETW trace for LectureLive and its child processes.
+   The Python network guard and zero-socket samples do not prove native DLL silence.
+   Do not publish unrelated machine traffic or private transcript contents.
+4. Attach the actual projector, check caption readability from the back row, and test
+   disconnect/reconnect, display scaling and full-screen PowerPoint click-through.
+5. Physically unplug/reconnect the lecture microphone and exercise Reconnect / retry.
+   A simulated disconnect is not evidence of this physical test.
+6. Rehearse a full lecture on mains and battery, including Windows sleep/resume and
+   a lid-close interruption. Record battery state, responsiveness, temperatures if
+   available, queue depth and caption latency. Do not equate a 15-minute replay with
+   a multi-hour thermal or battery pass.
+7. Have a qualified bilingual reviewer inspect a separate real lecturer test set for
+   negation, quantities/units, comparisons, terminology and complete meaning.
+
+For an extended automated replay use `scripts/stress_test.py --seconds 7200 --noise-snr 20`.
+It records sampled resources, power state, latency percentiles and queue drops. The
+replay uses synthetic audio and cannot establish room acoustics or projector behaviour.
+
+The application is not production classroom-approved until these physical and quality
+checks are signed off. A hung in-process native driver remains a shutdown limitation.

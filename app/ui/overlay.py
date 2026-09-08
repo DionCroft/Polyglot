@@ -1,8 +1,9 @@
 import html
-from PySide6.QtCore import Qt, QRectF, Signal
+from PySide6.QtCore import Qt, QRectF, Signal, QTimer
 from PySide6.QtGui import QColor, QPainter, QTextDocument, QFont
 from PySide6.QtWidgets import QWidget, QApplication
 from app.system.windows import overlay_input
+from app.captions.display import CaptionDisplay
 
 
 class Overlay(QWidget):
@@ -17,6 +18,7 @@ class Overlay(QWidget):
             | Qt.WindowDoesNotAcceptFocus,
         )
         self.settings = settings
+        self.display = CaptionDisplay()
         self.caption = None
         self.partial = None
         self.drag = None
@@ -50,29 +52,15 @@ class Overlay(QWidget):
         self.move(x, y)
 
     def set_caption(self, caption):
-        if caption.final:
-            if self.caption and (caption.epoch, caption.identifier) < (
-                self.caption.epoch,
-                self.caption.identifier,
-            ):
-                return
-            self.caption = caption
-            if self.partial and (self.partial.epoch, self.partial.identifier) <= (
-                caption.epoch,
-                caption.identifier,
-            ):
-                self.partial = None
-        else:
-            if self.caption and (caption.epoch, caption.identifier) <= (
-                self.caption.epoch,
-                self.caption.identifier,
-            ):
-                return
-            self.partial = caption
+        if not self.display.accept(caption):
+            return
+        self.caption = self.display.pair
+        self.partial = self.display.partial
         self.preview = False
         self.update()
 
     def reset(self):
+        self.display = CaptionDisplay()
         self.caption = None
         self.partial = None
         self.preview = True
@@ -88,29 +76,17 @@ class Overlay(QWidget):
         super().showEvent(event)
         overlay_input(int(self.winId()), self.settings.locked)
 
-    def paintEvent(self, event):
-        painter = QPainter(self)
-        painter.setRenderHint(QPainter.Antialiasing)
-        backdrop = QColor("#10191e")
-        backdrop.setAlphaF(self.settings.opacity / 100)
-        painter.setBrush(backdrop)
-        painter.setPen(Qt.NoPen)
-        painter.drawRoundedRect(self.rect(), 16, 16)
-        if self.caption:
-            en = self.caption.english
-            zh = self.caption.chinese
-            provisional = not self.caption.final
-        elif self.partial:
-            en = self.partial.english
-            zh = ""
-            provisional = True
-        else:
+    def _caption_document(self, point_size, width=None):
+        en, zh, upcoming = self.display.contents(self.settings.mode)
+        if self.preview:
             en = "Your words. Understood."
             zh = "让每一句话，都被听懂。"
-            provisional = False
+        provisional = bool(
+            self.display.partial and not self.display.pair and not self.display.pending
+        )
         doc = QTextDocument()
-        doc.setDefaultFont(QFont("Microsoft YaHei UI", self.settings.font_size))
-        doc.setTextWidth(self.width() - 64)
+        doc.setDefaultFont(QFont("Microsoft YaHei UI", point_size))
+        doc.setTextWidth((width or self.width()) - 64)
         lines = []
         if self.settings.mode != "Chinese":
             lines.append(
@@ -120,26 +96,64 @@ class Overlay(QWidget):
             lines.append(
                 f'<p style="margin-top:8px;margin-bottom:0;color:{self.settings.chinese_color};line-height:{self.settings.spacing}%;">{html.escape(zh)}</p>'
             )
-        if self.caption and self.partial and self.settings.mode != "Chinese":
+        if upcoming and self.settings.mode != "Chinese":
             lines.append(
-                f'<p style="font-size:{max(14, int(self.settings.font_size * 0.65))}pt;color:#b3c5cb;margin-top:12px;">{html.escape(self.partial.english)} …</p>'
+                f'<p style="font-size:{max(14, int(point_size * 0.65))}pt;color:#b3c5cb;margin-top:12px;">{html.escape(upcoming)} …</p>'
             )
         doc.setHtml("".join(lines))
-        desired = int(doc.size().height()) + 52
-        # Expand for real content rather than silently clipping a long Chinese sentence.
+        return doc
+
+    def _fit_geometry(self, width, desired):
+        if self.drag or (desired == self.height() and width == self.width()):
+            return
         screen = self.screen().availableGeometry()
-        if desired > self.height() and desired < screen.height() - 40:
-            bottom = self.y() + self.height()
-            self.resize(self.width(), desired)
-            if self.settings.placement == "Bottom":
-                self.move(self.x(), max(screen.y(), bottom - desired))
+        bottom = self.y() + self.height()
+        self.resize(width, desired)
+        x = max(screen.left(), min(self.x(), screen.right() - width + 1))
+        y = (
+            max(screen.y(), bottom - desired)
+            if self.settings.placement == "Bottom"
+            else self.y()
+        )
+        self.move(x, y)
+
+    def paintEvent(self, event):
+        screen = self.screen().availableGeometry()
+        max_height = screen.height() - 40
+        width = (
+            self.width() if self.drag else min(self.settings.width, screen.width() - 32)
+        )
+        point_size = self.settings.font_size
+        doc = self._caption_document(point_size, width)
+        while doc.size().height() + 52 > max_height and point_size > 16:
+            point_size -= 1
+            doc = self._caption_document(point_size, width)
+        if doc.size().height() + 52 > max_height:
+            width = screen.width() - 32
+            doc = self._caption_document(point_size, width)
+        desired = min(
+            max_height, max(self.settings.height, int(doc.size().height()) + 52)
+        )
+        if (desired != self.height() or width != self.width()) and not self.drag:
+            QTimer.singleShot(0, lambda h=desired, w=width: self._fit_geometry(w, h))
+        painter = QPainter(self)
+        painter.setRenderHint(QPainter.Antialiasing)
+        backdrop = QColor("#10191e")
+        backdrop.setAlphaF(self.settings.opacity / 100)
+        painter.setBrush(backdrop)
+        painter.setPen(Qt.NoPen)
+        painter.drawRoundedRect(self.rect(), 16, 16)
         painter.translate(32, 20)
         doc.drawContents(painter, QRectF(0, 0, self.width() - 64, self.height() - 30))
         painter.resetTransform()
         if not self.settings.locked:
             painter.setPen(QColor("#6e8b95"))
             painter.drawText(
-                18, self.height() - 8, "Drag to move · resize ↘ · Ctrl+Alt+C to lock"
+                18,
+                self.height() - 8,
+                "Drag to move · resize ↘ · "
+                + getattr(self.settings, "lock_shortcut", "Ctrl+Alt+C")
+                + " to lock",
             )
             painter.drawLine(
                 self.width() - 20,

@@ -23,6 +23,7 @@ from PySide6.QtWidgets import (
     QFileDialog,
     QScrollArea,
     QColorDialog,
+    QInputDialog,
 )
 from app.config.settings import ROOT, DATA, Settings
 from app.audio.capture import microphones
@@ -70,6 +71,17 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.cfg = Settings.load()
+        from app.system.models import ModelStore
+
+        self.model_store = ModelStore(ROOT)
+        from app.config.presets import Presets
+
+        self.presets = Presets(DATA / "presets.json")
+        self.microphone_checker = None
+        self.microphone_cancel = threading.Event()
+        self.teaching = None
+        self.appearance_spins = {}
+        self.restart_requested = False
         self.pipeline = None
         self.loader = None
         self.closer = None
@@ -116,16 +128,44 @@ class MainWindow(QMainWindow):
         tabs.addTab(self.appearance_tab(), "Overlay")
         tabs.addTab(self.diagnostics_tab(), "Diagnostics")
         tabs.addTab(self.about_tab(), "About")
+        actions = QHBoxLayout()
+        actions.addWidget(self.start_button, 2)
+        actions.addWidget(self.pause_button, 1)
+        actions.addWidget(self.compact_button, 1)
+        self.retry_button = QPushButton("Reconnect / retry")
+        self.retry_button.clicked.connect(self.reconnect)
+        self.retry_button.hide()
+        actions.addWidget(self.retry_button)
+        layout.addLayout(actions)
         footer = QHBoxLayout()
         privacy = QLabel("LOCAL PROCESSING  ·  ENGLISH → 简体中文")
         privacy.setObjectName("muted")
         footer.addWidget(privacy)
         footer.addStretch()
-        shortcut = QLabel("Pause  Ctrl+Alt+Space     Lock  Ctrl+Alt+C")
+        shortcut = QLabel(
+            f"Pause  {self.cfg.pause_shortcut}     Lock  {self.cfg.lock_shortcut}"
+        )
+        self.shortcut_label = shortcut
         shortcut.setObjectName("muted")
         footer.addWidget(shortcut)
         layout.addLayout(footer)
-        self.hotkeys = Hotkeys(QApplication.instance(), self.toggle_lock, self.pause)
+        try:
+            self.hotkeys = Hotkeys(
+                QApplication.instance(),
+                self.toggle_lock,
+                self.pause,
+                self.cfg.lock_shortcut,
+                self.cfg.pause_shortcut,
+            )
+        except ValueError:
+            self.cfg.lock_shortcut, self.cfg.pause_shortcut = (
+                "Ctrl+Alt+C",
+                "Ctrl+Alt+Space",
+            )
+            self.hotkeys = Hotkeys(
+                QApplication.instance(), self.toggle_lock, self.pause
+            )
+            self.warn("Saved shortcuts were invalid; defaults have been restored.")
         if self.hotkeys.errors:
             self.warn(
                 "Shortcut already in use: "
@@ -151,7 +191,7 @@ class MainWindow(QMainWindow):
         from app.system.readiness import check
 
         try:
-            result = check(ROOT, self.cfg.profile)
+            result = check(ROOT, self.cfg.profile, self.model_store)
         except Exception:
             logging.exception("Readiness check failed")
             result = {
@@ -162,6 +202,210 @@ class MainWindow(QMainWindow):
                 "messages": ["Readiness check failed. See local logs."],
             }
         self.bridge.event.emit("readiness", result)
+
+    def capture_preset_settings(self):
+        from dataclasses import replace
+
+        return replace(
+            self.cfg,
+            lecture_title=self.title.text(),
+            vocabulary=self.vocabulary.toPlainText(),
+            microphone=self.microphone.currentText(),
+            profile=self.profile.currentData(),
+            glossary=self.glossary.currentData(),
+            save_transcripts=self.save.isChecked(),
+        )
+
+    def save_preset(self):
+        name, ok = QInputDialog.getText(
+            self,
+            "Save lecture preset",
+            "Preset name:",
+            text=self.preset_choice.currentText(),
+        )
+        if not ok:
+            return
+        try:
+            self.presets.save(name, self.capture_preset_settings())
+            self.preset_choice.clear()
+            self.preset_choice.addItems(sorted(self.presets.read()))
+            self.preset_choice.setCurrentText(name.strip())
+        except (OSError, ValueError) as exc:
+            self.warn(str(exc))
+
+    def load_preset(self):
+        if self.pipeline:
+            self.warn("Finish the lecture before loading a different preset.")
+            return
+        try:
+            cfg = self.presets.load(self.preset_choice.currentText())
+            # Global shortcuts are app preferences, not changed by a lecture preset.
+            cfg.lock_shortcut = self.cfg.lock_shortcut
+            cfg.pause_shortcut = self.cfg.pause_shortcut
+            self.cfg = cfg
+            self.overlay.settings = cfg
+            self.title.setText(cfg.lecture_title)
+            self.vocabulary.setPlainText(cfg.vocabulary)
+            self.profile.setCurrentIndex(max(0, self.profile.findData(cfg.profile)))
+            self.glossary.setCurrentIndex(max(0, self.glossary.findData(cfg.glossary)))
+            self.save.setChecked(cfg.save_transcripts)
+            for key, spin in self.appearance_spins.items():
+                spin.blockSignals(True)
+                spin.setValue(getattr(cfg, key))
+                spin.blockSignals(False)
+            self.mode.setCurrentText(cfg.mode)
+            self.placement.setCurrentText(cfg.placement)
+            self.refresh_microphones()
+            self.refresh_displays()
+            self.overlay.place()
+            self.overlay.update()
+            self.persist()
+        except (OSError, ValueError, KeyError, TypeError) as exc:
+            self.warn("Could not load preset: " + str(exc))
+
+    def test_microphone(self):
+        if self.pipeline or (
+            self.microphone_checker and self.microphone_checker.is_alive()
+        ):
+            return
+        if self.microphone.currentData() is None:
+            self.warn("Connect and select a microphone first.")
+            return
+        from app.audio.check import check_microphone
+
+        self.microphone_cancel.clear()
+        self.start_button.setEnabled(False)
+        self.mic_test_button.setEnabled(False)
+        self.mic_test_result.setText("Speak now… checking the selected microphone.")
+        device = self.microphone.currentData()
+
+        def run():
+            try:
+                result = check_microphone(
+                    device, self.bridge.event.emit, self.microphone_cancel
+                )
+            except Exception:
+                result = {
+                    "message": "Microphone check failed. Check device access and try again."
+                }
+            self.bridge.event.emit("microphone-check", result)
+
+        self.microphone_checker = threading.Thread(
+            target=run, name="LectureLive microphone check", daemon=False
+        )
+        self.microphone_checker.start()
+
+    def projector_preview(self):
+        if self.pipeline:
+            self.warn("Finish the lecture before displaying a test caption.")
+            return
+        from app.captions.state import Caption
+
+        self.overlay.reset()
+        self.overlay.place()
+        self.overlay.set_caption(
+            Caption(
+                1,
+                0,
+                1,
+                "Projector preview · captions appear here.",
+                "投影预览：字幕将在这里显示。",
+                True,
+            )
+        )
+        self.overlay.show()
+        self.overlay.lock(False)
+        self.lock_button.setText("Lock overlay")
+        self.show_button.setText("Hide overlay")
+
+    def reconnect(self):
+        if not self.pipeline:
+            return
+        self.restart_requested = True
+        self.retry_button.setEnabled(False)
+        self.stop()
+
+    def restart_after_failure(self):
+        self.restart_requested = False
+        if self.closing:
+            return
+        self.refresh_microphones()
+        if self.wav or self.microphone.findText(self.cfg.microphone) >= 0:
+            self.start_stop()
+        else:
+            self.warn(
+                "The selected microphone is still unavailable. Reconnect it, refresh microphones, then start the lecture."
+            )
+
+    def show_teaching(self):
+        if not self.pipeline:
+            self.warn("Start a lecture to use compact teaching controls.")
+            return
+        if self.teaching is None:
+            from app.ui.teaching import TeachingControls
+
+            self.teaching = TeachingControls(self)
+        self.teaching.status.setText(self.status.text())
+        self.teaching.show()
+        self.teaching.raise_()
+        self.hide()
+
+    def apply_shortcuts(self):
+        from app.system.shortcuts import parse_shortcut
+
+        lock = self.lock_shortcut_edit.text().strip()
+        pause = self.pause_shortcut_edit.text().strip()
+        try:
+            if parse_shortcut(lock) == parse_shortcut(pause):
+                raise ValueError("Lock and pause shortcuts must differ")
+        except ValueError as exc:
+            self.warn(str(exc))
+            return
+        old = (self.cfg.lock_shortcut, self.cfg.pause_shortcut)
+        self.hotkeys.close()
+        candidate = Hotkeys(
+            QApplication.instance(), self.toggle_lock, self.pause, lock, pause
+        )
+        if candidate.errors:
+            candidate.close()
+            self.hotkeys = Hotkeys(
+                QApplication.instance(), self.toggle_lock, self.pause, *old
+            )
+            self.warn(
+                "Shortcut already in use: "
+                + ", ".join(candidate.errors)
+                + ". Previous shortcuts restored."
+            )
+            return
+        self.hotkeys = candidate
+        self.cfg.lock_shortcut = lock
+        self.cfg.pause_shortcut = pause
+        self.shortcut_label.setText(f"Pause  {pause}     Lock  {lock}")
+        self.overlay.update()
+        self.persist()
+
+    def recover_transcript(self):
+        if self.pipeline:
+            self.warn("Finish the lecture before recovering a journal.")
+            return
+        path, _ = QFileDialog.getOpenFileName(
+            self,
+            "Recover transcript journal",
+            str(DATA / "transcripts"),
+            "Lecture journal (events.jsonl)",
+        )
+        if not path:
+            return
+        from app.export.transcript import recover_journal
+
+        try:
+            folder, skipped = recover_journal(path, DATA / "transcripts")
+            self.open_folder(folder)
+            self.warn(
+                f"Recovered to a new folder. Incomplete or invalid records skipped: {skipped}."
+            )
+        except (OSError, ValueError) as exc:
+            self.warn("Recovery failed: " + str(exc))
 
     def group(self, title):
         box = QGroupBox(title)
@@ -177,6 +421,24 @@ class MainWindow(QMainWindow):
         controls = QWidget()
         left = QVBoxLayout(controls)
         left.setContentsMargins(0, 0, 0, 0)
+        preset_box, preset_form = self.group("LECTURE PRESET")
+        preset_row = QHBoxLayout()
+        self.preset_choice = QComboBox()
+        try:
+            self.preset_choice.addItems(sorted(self.presets.read()))
+        except (OSError, ValueError):
+            self.warn(
+                "Saved presets could not be read. Existing files have been retained."
+            )
+        preset_row.addWidget(self.preset_choice, 1)
+        load_preset = QPushButton("Load")
+        load_preset.clicked.connect(self.load_preset)
+        save_preset = QPushButton("Save…")
+        save_preset.clicked.connect(self.save_preset)
+        preset_row.addWidget(load_preset)
+        preset_row.addWidget(save_preset)
+        preset_form.addLayout(preset_row)
+        left.addWidget(preset_box)
         mic, form = self.group("MICROPHONE")
         row = QHBoxLayout()
         self.microphone = QComboBox()
@@ -194,6 +456,12 @@ class MainWindow(QMainWindow):
         note = QLabel("Shared audio input · audio recording is off")
         note.setObjectName("muted")
         form.addWidget(note)
+        self.mic_test_button = QPushButton("Test microphone · 3 seconds")
+        self.mic_test_button.clicked.connect(self.test_microphone)
+        form.addWidget(self.mic_test_button)
+        self.mic_test_result = QLabel("Speak during the check. No audio file is saved.")
+        self.mic_test_result.setWordWrap(True)
+        form.addWidget(self.mic_test_result)
         left.addWidget(mic)
         captions, form = self.group("CAPTIONS")
         self.mode = QComboBox()
@@ -220,6 +488,7 @@ class MainWindow(QMainWindow):
         topic, form = self.group("LECTURE")
         self.title = QLineEdit()
         self.title.setPlaceholderText("Lecture title (optional)")
+        self.title.setText(self.cfg.lecture_title)
         form.addWidget(self.title)
         self.glossary = QComboBox()
         for path in sorted((ROOT / "glossaries").glob("*.json")):
@@ -233,11 +502,11 @@ class MainWindow(QMainWindow):
         self.start_button = QPushButton("Start lecture")
         self.start_button.setObjectName("primary")
         self.start_button.clicked.connect(self.start_stop)
-        left.addWidget(self.start_button)
         self.pause_button = QPushButton("Pause")
         self.pause_button.setEnabled(False)
         self.pause_button.clicked.connect(self.pause)
-        left.addWidget(self.pause_button)
+        self.compact_button = QPushButton("Teaching controls")
+        self.compact_button.clicked.connect(self.show_teaching)
         left.addStretch()
         right = QVBoxLayout()
         preview, form = self.group("CAPTION PREVIEW")
@@ -269,10 +538,11 @@ class MainWindow(QMainWindow):
         self.vocabulary.setPlaceholderText(
             "One term per line, for example:\nESP32\nFreeRTOS\ninterrupt service routine"
         )
+        self.vocabulary.setPlainText(self.cfg.vocabulary)
         self.vocabulary.setMaximumHeight(140)
         form.addWidget(self.vocabulary)
         label = QLabel(
-            "Preserves spelling of exact matches. This backend does not support acoustic vocabulary biasing."
+            "Add names and technical terms to preserve their spelling when recognised. Save them in a lecture preset."
         )
         label.setWordWrap(True)
         label.setObjectName("muted")
@@ -287,7 +557,10 @@ class MainWindow(QMainWindow):
         grid.addLayout(right, 0, 1)
         grid.setColumnStretch(0, 1)
         grid.setColumnStretch(1, 1)
-        return widget
+        scroll = QScrollArea()
+        scroll.setWidgetResizable(True)
+        scroll.setWidget(widget)
+        return scroll
 
     def appearance_tab(self):
         scroll = QScrollArea()
@@ -302,6 +575,9 @@ class MainWindow(QMainWindow):
         self.control_displays = QComboBox()
         self.control_displays.currentIndexChanged.connect(self.select_control_display)
         form.addRow("Control panel display", self.control_displays)
+        projector_preview = QPushButton("Preview captions on selected display")
+        projector_preview.clicked.connect(self.projector_preview)
+        form.addRow(projector_preview)
         self.placement = QComboBox()
         self.placement.addItems(["Bottom", "Top", "Custom"])
         self.placement.setCurrentText(self.cfg.placement)
@@ -316,6 +592,7 @@ class MainWindow(QMainWindow):
             spin = QSpinBox()
             spin.setRange(minimum, maximum)
             spin.setValue(getattr(self.cfg, key))
+            self.appearance_spins[key] = spin
             spin.valueChanged.connect(lambda value, k=key: self.appearance(k, value))
             form.addRow(title, spin)
         for title, key in [
@@ -330,6 +607,13 @@ class MainWindow(QMainWindow):
         )
         help.setWordWrap(True)
         form.addRow(help)
+        self.lock_shortcut_edit = QLineEdit(self.cfg.lock_shortcut)
+        self.pause_shortcut_edit = QLineEdit(self.cfg.pause_shortcut)
+        form.addRow("Lock shortcut", self.lock_shortcut_edit)
+        form.addRow("Pause shortcut", self.pause_shortcut_edit)
+        apply_shortcuts = QPushButton("Apply shortcuts")
+        apply_shortcuts.clicked.connect(self.apply_shortcuts)
+        form.addRow(apply_shortcuts)
         return scroll
 
     def diagnostics_tab(self):
@@ -355,12 +639,15 @@ class MainWindow(QMainWindow):
         reset = QPushButton("Use microphone again")
         reset.clicked.connect(self.clear_wav)
         layout.addWidget(reset)
+        recover = QPushButton("Recover transcript journal…")
+        recover.clicked.connect(self.recover_transcript)
+        layout.addWidget(recover)
         return widget
 
     def about_tab(self):
         widget = QWidget()
         layout = QVBoxLayout(widget)
-        title = QLabel("Teach freely. Keep your data here.")
+        title = QLabel("LectureLive 0.2 · Keep your data here.")
         title.setFont(QFont("Segoe UI", 24))
         title.setWordWrap(True)
         layout.addWidget(title)
@@ -480,6 +767,10 @@ class MainWindow(QMainWindow):
             self.persist()
 
     def persist(self):
+        if hasattr(self, "title"):
+            self.cfg.lecture_title = self.title.text()
+        if hasattr(self, "vocabulary"):
+            self.cfg.vocabulary = self.vocabulary.toPlainText()
         try:
             self.cfg.save()
         except OSError:
@@ -553,10 +844,15 @@ class MainWindow(QMainWindow):
         self.wav_label.setText("Live microphone input")
 
     def start_stop(self):
+        if self.microphone_checker and self.microphone_checker.is_alive():
+            return
         if self.pipeline:
             self.stop()
             return
         self.warning.hide()
+        self.retry_button.hide()
+        self.cfg.lecture_title = self.title.text()
+        self.cfg.vocabulary = self.vocabulary.toPlainText()
         self.cfg.microphone = self.microphone.currentText()
         self.cfg.profile = self.profile.currentData()
         self.cfg.glossary = self.glossary.currentData()
@@ -573,6 +869,7 @@ class MainWindow(QMainWindow):
             self.vocabulary.toPlainText(),
             self.title.text(),
             self.wav,
+            model_store=self.model_store,
         )
         self.last_caption = None
         self.overlay.reset()
@@ -581,6 +878,7 @@ class MainWindow(QMainWindow):
         self.lock_button.setText("Unlock overlay")
         self.start_button.setText("Stop lecture")
         self.pause_button.setEnabled(True)
+        self.mic_test_button.setEnabled(False)
         for w in [
             self.microphone,
             self.profile,
@@ -607,7 +905,6 @@ class MainWindow(QMainWindow):
         if not self.pipeline or self.closer:
             return
         self.pipeline.request_stop()
-        self.overlay.hide()
         self.status.setText("●  Finishing…")
         self.pause_button.setEnabled(False)
         self.start_button.setEnabled(False)
@@ -626,6 +923,15 @@ class MainWindow(QMainWindow):
         self.closer.start()
 
     def on_event(self, kind, value):
+        if kind == "microphone-level":
+            self.meter.setValue(value)
+            return
+        if kind == "microphone-check":
+            self.mic_test_result.setText(value["message"])
+            self.mic_test_button.setEnabled(True)
+            self.start_button.setEnabled(True)
+            self.meter.setValue(0)
+            return
         if kind == "readiness":
             self.start_button.setEnabled(True)
             self.status.setText(
@@ -658,6 +964,13 @@ class MainWindow(QMainWindow):
             if self.closing:
                 QTimer.singleShot(50, self.close)
         elif kind == "stopped":
+            if self.teaching:
+                self.teaching.hide()
+                if not self.closing:
+                    self.show()
+            self.mic_test_button.setEnabled(True)
+            self.retry_button.hide()
+            self.retry_button.setEnabled(True)
             self.pipeline = None
             self.loader = None
             self.closer = None
@@ -676,6 +989,8 @@ class MainWindow(QMainWindow):
                 w.setEnabled(True)
             if self.closing:
                 self.close()
+            elif self.restart_requested:
+                QTimer.singleShot(100, self.restart_after_failure)
         elif kind == "warning":
             self.warn(str(value))
         elif kind == "backend":
@@ -683,7 +998,15 @@ class MainWindow(QMainWindow):
         elif kind == "transcript":
             self.transcript_path = Path(value)
         elif kind == "state":
+            if "unavailable" in str(value):
+                self.retry_button.show()
             self.status.setText("●  " + str(value))
+            if self.teaching:
+                self.teaching.status.setText(str(value))
+                self.teaching.pause.setText("Resume" if value == "Paused" else "Pause")
+                self.teaching.pause.setEnabled(
+                    not self.pipeline.stop_event.is_set() if self.pipeline else False
+                )
             self.pause_button.setText("Resume" if value == "Paused" else "Pause")
             if (
                 value == "Listening"
@@ -701,22 +1024,27 @@ class MainWindow(QMainWindow):
                 or value.epoch != self.pipeline.epoch
             ):
                 return
-            if self.last_caption and (value.epoch, value.identifier) < (
-                self.last_caption.epoch,
-                self.last_caption.identifier,
-            ):
-                return
             self.overlay.set_caption(value)
-            if value.final:
+            en, zh, upcoming = self.overlay.display.contents(self.cfg.mode)
+            if value.final and (value.chinese or self.last_caption is None):
                 self.last_caption = value
-                self.preview_en.setText(value.english)
-                self.preview_zh.setText(value.chinese or "Translation pending…")
-                self.preview_hint.setText("Stable phrase")
-            else:
-                if not self.last_caption:
-                    self.preview_en.setText(value.english)
-                    self.preview_zh.setText("")
-                self.preview_hint.setText("Live English: " + value.english)
+            self.preview_en.setText(en)
+            self.preview_zh.setText(
+                zh
+                or (
+                    "Translation unavailable — English continues"
+                    if self.overlay.display.pair
+                    and self.overlay.display.pair.translation_status == "unavailable"
+                    else "Translation pending…"
+                )
+            )
+            self.preview_hint.setText(
+                "Next phrase: " + upcoming
+                if upcoming
+                else "Stable phrase"
+                if zh
+                else "Listening…"
+            )
 
     def tick(self):
         if self.pipeline:
@@ -724,10 +1052,18 @@ class MainWindow(QMainWindow):
             self.diagnostics.setPlainText(
                 json.dumps(self.pipeline.diagnostics(), indent=2)
             )
-        else:
+            if self.teaching:
+                self.teaching.meter.setValue(self.pipeline.level)
+        elif not (self.microphone_checker and self.microphone_checker.is_alive()):
             self.meter.setValue(0)
 
     def closeEvent(self, event):
+        self.closing = True
+        if self.microphone_checker and self.microphone_checker.is_alive():
+            self.microphone_cancel.set()
+            event.ignore()
+            QTimer.singleShot(100, self.close)
+            return
         if self.checker and self.checker.is_alive():
             self.closing = True
             event.ignore()
@@ -738,6 +1074,8 @@ class MainWindow(QMainWindow):
             self.stop()
             event.ignore()
             return
+        if self.teaching:
+            self.teaching.hide()
         self.hotkeys.close()
         self.overlay.close()
         self.persist()

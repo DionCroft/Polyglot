@@ -1,0 +1,802 @@
+{
+  "source": "Authored synthetic evaluation text; no microphone recordings",
+  "human_semantic_acceptance": "pending",
+  "summaries": {
+    "current": {
+      "cases": 40,
+      "concept_checks_passed": 37,
+      "latency_p50": 0.060504149998450885,
+      "latency_p95": 0.09220982000224466
+    },
+    "baseline": {
+      "cases": 40,
+      "concept_checks_passed": 30,
+      "latency_p50": 0.06205939999927068,
+      "latency_p95": 0.09415438499527226
+    }
+  },
+  "results": [
+    {
+      "variant": "current",
+      "id": "technical-01",
+      "english": "The robot uses an ultrasonic sensor to estimate its distance from an obstacle.",
+      "chinese": "机器人使用超声波传感器 来估计它距离障碍物的距离",
+      "seconds": 0.09215840000251774,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-02",
+      "english": "The robot must not move while a person is inside the safety area.",
+      "chinese": "机器人不能移动 当一个人在安全区。",
+      "seconds": 0.07667599999695085,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-03",
+      "english": "The left wheel rotates faster than the right wheel.",
+      "chinese": "左轮旋转比右轮更快。",
+      "seconds": 0.069110800002818,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-04",
+      "english": "The sensor measures distance, not speed.",
+      "chinese": "感应器测量距离,而不是速度。",
+      "seconds": 0.054877899994608015,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-05",
+      "english": "A lower proportional gain can reduce oscillation.",
+      "chinese": "较低的比例增益可以减少振动。",
+      "seconds": 0.05211370000324678,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-06",
+      "english": "The measured position differs from the target position.",
+      "chinese": "所测量的位置与目标位置不同。",
+      "seconds": 0.04854899999918416,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-07",
+      "english": "Stop the motor before disconnecting the encoder.",
+      "chinese": "在解开编码器之前先停机",
+      "seconds": 0.04525830000056885,
+      "missing_concept_groups": [
+        [
+          "停止"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-08",
+      "english": "An obstacle behind the robot is outside the front sensor field of view.",
+      "chinese": "机器人背后的一个障碍 是在前传感器外的视野。",
+      "seconds": 0.061867599994002376,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-09",
+      "english": "The ESP32 communicates with the sensor using the I2C protocol.",
+      "chinese": "ESP32 使用 集成电路互连总线 (I2C) 协议与传感器通信。",
+      "seconds": 0.08184569999866653,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-10",
+      "english": "Pulse width modulation changes the average voltage applied to the motor.",
+      "chinese": "脉宽调制改变电机的平均电压。",
+      "seconds": 0.0769635999968159,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-11",
+      "english": "An interrupt service routine should execute as quickly as possible.",
+      "chinese": "中断服务程序应尽快执行。",
+      "seconds": 0.042675700002291705,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-12",
+      "english": "The FreeRTOS scheduler performs a context switch between tasks.",
+      "chinese": "FreeRTOS 调度器执行任务之间的上下文切换 。",
+      "seconds": 0.08561819999886211,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-13",
+      "english": "The FPGA design is written in VHDL and synthesised into logic resources.",
+      "chinese": "FPGA设计用VHDL编写,并合成逻辑资源。",
+      "seconds": 0.10694710000097984,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-14",
+      "english": "The MOSFET is driven by a pulse width modulated signal.",
+      "chinese": "MOSFET是由脉冲宽度调制信号驱动的。",
+      "seconds": 0.07630149999749847,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-15",
+      "english": "Do not enable interrupts until initialisation is complete.",
+      "chinese": "在初始化完成之前不启用中断 。",
+      "seconds": 0.059113300005265046,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-16",
+      "english": "The task is blocked while it waits for a message.",
+      "chinese": "任务在等待消息时被屏蔽 。",
+      "seconds": 0.06714620000275318,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-17",
+      "english": "The supply voltage is 3.3 volts, not 5 volts.",
+      "chinese": "供应电压为3.3伏,而不是5伏。",
+      "seconds": 0.062389799997617956,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-18",
+      "english": "A 10 kiloohm resistor limits the current.",
+      "chinese": "10千欧姆的电阻控制了电流",
+      "seconds": 0.07129059999715537,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-19",
+      "english": "The capacitor stores charge rather than producing energy.",
+      "chinese": "电容器储存电荷,而不是生产能量。",
+      "seconds": 0.07645590000174707,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-20",
+      "english": "Increasing resistance decreases current when voltage stays constant.",
+      "chinese": "当电压保持恒定时,电阻增加会降低电流。",
+      "seconds": 0.08976970000367146,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-21",
+      "english": "The output frequency is 20 kilohertz.",
+      "chinese": "输出频率是20千赫",
+      "seconds": 0.04237140000623185,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-22",
+      "english": "The duty cycle changes from 25 percent to 75 percent.",
+      "chinese": "工作周期从25%改为75%。",
+      "seconds": 0.04160280000360217,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-23",
+      "english": "A negative voltage is measured relative to the reference node.",
+      "chinese": "相对于参考节点测量负电压。",
+      "seconds": 0.05726640000648331,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-24",
+      "english": "The diode conducts current in only one direction.",
+      "chinese": "二极管只向一个方向运行电流。",
+      "seconds": 0.05376189999515191,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-25",
+      "english": "A convolutional neural network can perform image classification at the edge.",
+      "chinese": "卷积神经网络可以在边缘进行图像分类。",
+      "seconds": 0.06281279999529943,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-26",
+      "english": "The validation data must remain separate from the training data.",
+      "chinese": "验证数据必须与训练数据分开。",
+      "seconds": 0.04812780000065686,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-27",
+      "english": "A high accuracy does not guarantee good performance on unseen data.",
+      "chinese": "高精确度并不能保证对无形数据的良好性能。",
+      "seconds": 0.0716247000018484,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-28",
+      "english": "The model has overfitted the training examples.",
+      "chinese": "该模式已经超出了训练样本的范围。",
+      "seconds": 0.050427900001523085,
+      "missing_concept_groups": [
+        [
+          "过拟合",
+          "过度拟合"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-29",
+      "english": "Quantisation can reduce memory use but may change numerical accuracy.",
+      "chinese": "量化可以减少内存使用,但可能会改变数字精确度。",
+      "seconds": 0.09318679999705637,
+      "missing_concept_groups": [
+        [
+          "精度",
+          "准确"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-30",
+      "english": "Inference runs locally without sending data to a server.",
+      "chinese": "推论在不向服务器发送数据的情况下在本地运行 。",
+      "seconds": 0.08256660000188276,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-31",
+      "english": "The device sends a message only when the temperature exceeds 30 degrees Celsius.",
+      "chinese": "只有在温度超过30摄氏度时, 设备才会发出消息 。",
+      "seconds": 0.09173899999586865,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-32",
+      "english": "A lost packet does not always mean that the connection has failed.",
+      "chinese": "丢失的包并不总意味着连接失败 。",
+      "seconds": 0.062133300001733005,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-33",
+      "english": "The battery should last for at least 12 hours.",
+      "chinese": "电池应至少持续12小时。",
+      "seconds": 0.04027999999379972,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-34",
+      "english": "The sensor wakes every 500 milliseconds.",
+      "chinese": "传感器每500毫秒就醒过来",
+      "seconds": 0.05498079999961192,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-35",
+      "english": "First read the value, then calculate the average.",
+      "chinese": "首先读取数值,然后计算平均值。",
+      "seconds": 0.049907799999346025,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-36",
+      "english": "If the value is zero, skip this step.",
+      "chinese": "如果值为零, 请跳过此步 。",
+      "seconds": 0.05914070000289939,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-37",
+      "english": "The measured result is approximately 2.5 times the predicted value.",
+      "chinese": "测量结果约为预测值的2.5倍。",
+      "seconds": 0.05659960000048159,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-38",
+      "english": "This example explains why the earlier assumption was incorrect.",
+      "chinese": "这个例子解释了早先的假设为何不正确。",
+      "seconds": 0.051173699997889344,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-39",
+      "english": "The first experiment succeeded, but the second experiment failed.",
+      "chinese": "第一个实验成功,但第二个试验失败。",
+      "seconds": 0.05093460000352934,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "current",
+      "id": "technical-40",
+      "english": "We will compare the two methods after the break.",
+      "chinese": "休息后,我们将比较这两种方法。",
+      "seconds": 0.043673100000887644,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-01",
+      "english": "The robot uses an ultrasonic sensor to estimate its distance from an obstacle.",
+      "chinese": "机器人使用超声波传感器来估计距离",
+      "seconds": 0.0662397999985842,
+      "missing_concept_groups": [
+        [
+          "障碍"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-02",
+      "english": "The robot must not move while a person is inside the safety area.",
+      "chinese": "机器人不能移动 当一个人在安全区。",
+      "seconds": 0.05395639999915147,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-03",
+      "english": "The left wheel rotates faster than the right wheel.",
+      "chinese": "左轮旋转比右轮更快。",
+      "seconds": 0.055407400002877694,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-04",
+      "english": "The sensor measures distance, not speed.",
+      "chinese": "传感器测量距离,而不是速度。",
+      "seconds": 0.041771099997276906,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-05",
+      "english": "A lower proportional gain can reduce oscillation.",
+      "chinese": "较低的比例收益可以减少振动。",
+      "seconds": 0.04786189999867929,
+      "missing_concept_groups": [
+        [
+          "增益"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-06",
+      "english": "The measured position differs from the target position.",
+      "chinese": "所测量的位置与目标位置不同。",
+      "seconds": 0.04776139999739826,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-07",
+      "english": "Stop the motor before disconnecting the encoder.",
+      "chinese": "在解开编码器之前先停机",
+      "seconds": 0.04694790000212379,
+      "missing_concept_groups": [
+        [
+          "停止"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-08",
+      "english": "An obstacle behind the robot is outside the front sensor field of view.",
+      "chinese": "机器人背后的一个障碍 是在前传感器视野外",
+      "seconds": 0.057558699998480733,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-09",
+      "english": "The ESP32 communicates with the sensor using the I2C protocol.",
+      "chinese": "ESP32 使用 集成电路互连总线 (I2C) 协议与传感器通信。",
+      "seconds": 0.07350530000258004,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-10",
+      "english": "Pulse width modulation changes the average voltage applied to the motor.",
+      "chinese": "脉宽调制改变电机的平均电压。",
+      "seconds": 0.06853180000325665,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-11",
+      "english": "An interrupt service routine should execute as quickly as possible.",
+      "chinese": "中断服务程序应尽快执行。",
+      "seconds": 0.043402099996455945,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-12",
+      "english": "The FreeRTOS scheduler performs a context switch between tasks.",
+      "chinese": "FreeRTOS 调度器执行任务之间的上下文切换 。",
+      "seconds": 0.0858721999975387,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-13",
+      "english": "The FPGA design is written in VHDL and synthesised into logic resources.",
+      "chinese": "FPGA设计用VHDL编写,并合成逻辑资源。",
+      "seconds": 0.09644699999626027,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-14",
+      "english": "The MOSFET is driven by a pulse width modulated signal.",
+      "chinese": "MOSFET是由脉冲宽度调制信号驱动的。",
+      "seconds": 0.07566349999979138,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-15",
+      "english": "Do not enable interrupts until initialisation is complete.",
+      "chinese": "在初始化完成之前不启用中断 。",
+      "seconds": 0.05838199999561766,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-16",
+      "english": "The task is blocked while it waits for a message.",
+      "chinese": "任务在等待消息时被屏蔽 。",
+      "seconds": 0.05754999999771826,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-17",
+      "english": "The supply voltage is 3.3 volts, not 5 volts.",
+      "chinese": "供应电压为3.3伏,而不是5伏。",
+      "seconds": 0.05903869999747258,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-18",
+      "english": "A 10 kiloohm resistor limits the current.",
+      "chinese": "10千兆赫的阻力控制了水流",
+      "seconds": 0.06370140000217361,
+      "missing_concept_groups": [
+        [
+          "电阻"
+        ],
+        [
+          "电流"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-19",
+      "english": "The capacitor stores charge rather than producing energy.",
+      "chinese": "电容器仓库充电,而不是生产能量。",
+      "seconds": 0.06466530000034254,
+      "missing_concept_groups": [
+        [
+          "电荷"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-20",
+      "english": "Increasing resistance decreases current when voltage stays constant.",
+      "chinese": "当电压保持恒定时,抗药性增加会降低电流。",
+      "seconds": 0.09522380000271369,
+      "missing_concept_groups": [
+        [
+          "电阻"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-21",
+      "english": "The output frequency is 20 kilohertz.",
+      "chinese": "输出频率是20千赫",
+      "seconds": 0.05257559999881778,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-22",
+      "english": "The duty cycle changes from 25 percent to 75 percent.",
+      "chinese": "工作周期从25%改为75%。",
+      "seconds": 0.05008960000122897,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-23",
+      "english": "A negative voltage is measured relative to the reference node.",
+      "chinese": "相对于参考节点测量负电压。",
+      "seconds": 0.06538870000076713,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-24",
+      "english": "The diode conducts current in only one direction.",
+      "chinese": "二极管只向一个方向运行流线。",
+      "seconds": 0.06467910000355914,
+      "missing_concept_groups": [
+        [
+          "电流"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-25",
+      "english": "A convolutional neural network can perform image classification at the edge.",
+      "chinese": "卷积神经网络可以在边缘进行图像分类。",
+      "seconds": 0.06341219999740133,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-26",
+      "english": "The validation data must remain separate from the training data.",
+      "chinese": "验证数据必须与培训数据分开。",
+      "seconds": 0.061816499997803476,
+      "missing_concept_groups": [
+        [
+          "训练"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-27",
+      "english": "A high accuracy does not guarantee good performance on unseen data.",
+      "chinese": "高精确度并不能保证对无形数据的良好性能。",
+      "seconds": 0.08369289999973262,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-28",
+      "english": "The model has overfitted the training examples.",
+      "chinese": "该模式已经超出了培训范例的范围。",
+      "seconds": 0.053248900003382005,
+      "missing_concept_groups": [
+        [
+          "过拟合",
+          "过度拟合"
+        ],
+        [
+          "训练"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-29",
+      "english": "Quantisation can reduce memory use but may change numerical accuracy.",
+      "chinese": "量化可以减少内存使用,但可能会改变数字精确度。",
+      "seconds": 0.09331599999859463,
+      "missing_concept_groups": [
+        [
+          "精度",
+          "准确"
+        ]
+      ],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-30",
+      "english": "Inference runs locally without sending data to a server.",
+      "chinese": "推论在不向服务器发送数据的情况下在本地运行 。",
+      "seconds": 0.08537690000230214,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-31",
+      "english": "The device sends a message only when the temperature exceeds 30 degrees Celsius.",
+      "chinese": "只有在温度超过30摄氏度时, 设备才会发出消息 。",
+      "seconds": 0.09409809999488061,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-32",
+      "english": "A lost packet does not always mean that the connection has failed.",
+      "chinese": "丢失的包并不总意味着连接失败 。",
+      "seconds": 0.06325780000042869,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-33",
+      "english": "The battery should last for at least 12 hours.",
+      "chinese": "电池应至少持续12小时。",
+      "seconds": 0.04642479999893112,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-34",
+      "english": "The sensor wakes every 500 milliseconds.",
+      "chinese": "传感器每500毫秒就醒过来",
+      "seconds": 0.06194179999874905,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-35",
+      "english": "First read the value, then calculate the average.",
+      "chinese": "首先读取数值,然后计算平均值。",
+      "seconds": 0.057505299999320414,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-36",
+      "english": "If the value is zero, skip this step.",
+      "chinese": "如果值为零, 请跳过此步 。",
+      "seconds": 0.06652999999641906,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-37",
+      "english": "The measured result is approximately 2.5 times the predicted value.",
+      "chinese": "测量结果约为预测值的2.5倍。",
+      "seconds": 0.06315010000253096,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-38",
+      "english": "This example explains why the earlier assumption was incorrect.",
+      "chinese": "这个例子解释了早先的假设为何不正确。",
+      "seconds": 0.055663700004515704,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-39",
+      "english": "The first experiment succeeded, but the second experiment failed.",
+      "chinese": "第一个实验成功,但第二个试验失败。",
+      "seconds": 0.062176999999792315,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    },
+    {
+      "variant": "baseline",
+      "id": "technical-40",
+      "english": "We will compare the two methods after the break.",
+      "chinese": "休息后我们会比较这两种方法。",
+      "seconds": 0.0451937000034377,
+      "missing_concept_groups": [],
+      "human_review": "pending"
+    }
+  ]
+}

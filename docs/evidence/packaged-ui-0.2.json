@@ -1,0 +1,20 @@
+{
+  "version": "0.2",
+  "method": "Native Windows accessibility tree and screenshot of rebuilt executable",
+  "ready": true,
+  "readiness": [
+    "speech",
+    "Chinese",
+    "voice detection",
+    "NPU"
+  ],
+  "controls_observed": [
+    "presets Load/Save",
+    "three-second microphone test",
+    "visible Start lecture",
+    "Teaching controls",
+    "About 0.2"
+  ],
+  "capture_started": false,
+  "closed": true
+}

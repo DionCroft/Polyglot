@@ -1,0 +1,8 @@
+{
+  "fresh_offline_setup": true,
+  "private_runtime_bootstrapped": true,
+  "qnn_archives_extracted_and_verified": true,
+  "models_and_dependencies_pinned": true,
+  "self_test_passed": true,
+  "seconds": 121.03
+}

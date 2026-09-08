@@ -13,13 +13,28 @@ acceptance still need sign-off. Translation quality needs lecturer review.
 
 ## Repository contents
 
-This repository contains source code, glossaries, build/setup scripts, documentation,
-and test evidence from public or synthetic speech samples. Executables, model weights,
-private runtimes, dependency wheels, recovery archives, recordings and user transcripts
-are not committed. A fresh clone alone is not a runnable installation; the launch path
-below refers to the separately built local bundle. Use the offline recovery bundle to
-restore the tested dependencies and models before rebuilding; see
-[installation](docs/INSTALLATION.md) and [recovery](docs/OFFLINE_SETUP.md).
+This repository contains source, glossaries, pinned setup manifests, build scripts,
+documentation and synthetic/public test evidence. Model weights, runtimes, binaries,
+recovery archives, recordings and private transcripts remain outside Git.
+
+For first setup on Windows ARM64, run:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\setup.ps1 -Build
+```
+
+Setup downloads and verifies pinned assets while online; ordinary app use remains
+fully local. See [installation](docs/INSTALLATION.md) and [offline recovery](docs/OFFLINE_SETUP.md).
+
+## Version 0.2 improvements
+
+- Finish captured speech and translations on Stop; isolate saving failures and recover journals.
+- Keep bilingual pairs visible until replacements arrive; stabilise provisional prefixes.
+- Save lecture presets, check microphone levels, preview the projector and use compact controls.
+- Configure global shortcuts and retry interrupted input; retry NPU failures on local CPU.
+- Reuse verified models and repair assets through pinned, resumable setup.
+- Expanded translation, noise, failure, workflow and long-session checks; see
+  [the improvement goal](docs/IMPROVEMENT_PLAN.md) and [translation evaluation](docs/TRANSLATION_EVALUATION.md).
 
 ## Launch
 

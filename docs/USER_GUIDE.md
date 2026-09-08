@@ -1,64 +1,81 @@
-# Teaching with LectureLive
+# Teaching with LectureLive 0.2
 
-1. Open **LectureLive.exe** in the `dist/LectureLive` folder.
-2. Select your microphone. The Surface microphone array normally works with the
-   WASAPI entry. Audio recording is always off; only captions are generated.
-3. Select a subject glossary and optionally type a lecture title. Paste unusual
-   spellings into Today's vocabulary, one per line.
-4. Press **Start lecture**. A green input meter and Listening status confirm input.
-5. Open **Overlay**, choose the projector display, and choose Bottom or Top.
-6. Lock the overlay using **Ctrl+Alt+C** so clicks reach PowerPoint or other apps.
-7. Open your teaching materials. The controls can stay on the Surface display.
+1. Open `LectureLive.exe` in `dist/LectureLive`, or the project launcher shortcut.
+2. Load a saved lecture preset, or select a microphone and subject glossary.
+3. Press **Test microphone · 3 seconds**, speak, and check the reported level. This
+   creates no recording. A quiet-room result is not an accuracy test of your voice.
+4. Enter a title and technical vocabulary. **Save…** stores a named preset locally.
+5. In **Overlay**, select the caption display and use **Preview captions on selected
+   display**. Check visibility from the back of the room; lock before teaching.
+6. Press **Start lecture**. The input meter and Listening status confirm capture.
+7. Use **Teaching controls** for a compact floating panel while your slides are open.
+   **Full controls** returns to the main window.
 
-Use **Ctrl+Alt+Space** for an immediate pause. Captions hide and pending display
-updates are invalidated. Press it again to resume. Stop lecture closes the input,
-finishes already queued translations, and closes transcript files. Closing the
-control panel also shuts down all workers.
+The Start/Finish and Pause controls remain visible outside the scrolling preparation
+area. Captions automatically lock when a lecture starts.
 
-## Captions and placement
+## Pause, finish and reconnect
 
-Choose Bilingual, English, or Chinese at any time. English may be provisional while
-you speak. Translation happens once a pause or maximum phrase length establishes a
-boundary. Short sentences and brief pauses improve reliability.
+**Pause** immediately hides captions and invalidates unfinished speech so private
+asides do not appear when you resume. **Finish lecture** stops accepting new audio,
+finishes speech already captured, drains recognition and translation, and closes
+transcripts. The final bilingual caption remains visible. Closing the app uses the
+same finishing sequence. A slow native inference call can delay completion; status
+messages explain that local processing is still finishing.
 
-Show overlay lets you preview placement before teaching. When unlocked, drag the
-backdrop to move it; drag its lower-right corner to resize. Font size, line spacing,
-width, backdrop opacity and both text colours are adjustable in Overlay. Locking
-makes the caption area click-through and prevents it taking keyboard focus.
+When an input failure is reported, reconnect the microphone and press **Reconnect /
+retry**. The old session is finished before another starts. If the saved microphone
+is still absent, select and refresh it rather than silently switching to another input.
+A runtime NPU error triggers one retry of the same phrase on the local CPU backend.
 
-If a projector disconnects, captions move to an available display. Reconnect and
-select the desired display again. The last selected display is remembered.
+Default global shortcuts are **Ctrl+Alt+C** for lock and **Ctrl+Alt+Space** for pause.
+Change them under Overlay using Ctrl/Alt/Shift plus a letter, digit, Space or F1–F12.
+A conflicting shortcut is rejected and the previous bindings are restored.
 
-## Glossaries
+## Caption behaviour
 
-Select Electronics, Embedded Systems, Robotics, IoT, Artificial Intelligence, or
-General before starting. Exact English terminology activates preferred Chinese
-corrections. Vocabulary preserves exact spelling/capitalization; this version does
-not acoustically bias Whisper or guess replacements for ordinary words.
+English provisional text appears after agreement between successive hypotheses.
+Completed English/Chinese pairs remain together while the next phrase is being
+translated. New English is shown separately underneath. Translation failures are
+identified explicitly; stale Chinese is not labelled as the new phrase.
 
-Machine translation can omit or mistranslate technical detail. Review your subject's
-sample output before class. This development build still needs bilingual quality
-sign-off; glossary corrections do not make it a professionally validated translator.
+A normal phrase ends after roughly 576 ms of silence. A sentence-ending hypothesis
+can shorten that to 320 ms after sufficient speech. Continuous speech still has a
+9.6-second bound. Brief natural pauses help translation preserve complete thoughts.
 
-## Transcripts and privacy
+Choose English, Chinese or bilingual display. Drag an unlocked overlay to move it,
+and drag its lower-right corner to resize. Text size, width, spacing, opacity and
+colours are adjustable. Long content can expand the overlay and reduce its font to
+fit the screen; the next short caption restores its normal dimensions.
 
-Text saving is on by default and can be switched off before a session. **Diagnostics →
-Open transcripts** opens the current session. The default location is
-`%LOCALAPPDATA%/LectureLive/transcripts`. English, Chinese and bilingual TXT, English
-and Chinese SRT, bilingual VTT, and a recovery JSONL journal are written in UTF-8.
-Microphone audio is never written to disk by the app. Logs contain timing and errors,
-not caption text. Today's vocabulary is held only in memory.
+If a display disappears, the app falls back to an available screen. Reconnect and
+select your projector again. Physical projector hot-unplug acceptance remains pending.
 
-## Offline use
+## Presets and vocabulary
 
-All required models are already in the bundle. Startup never downloads anything.
-There is no account, hosted inference, or cloud fallback. Before travel, complete the
-Airplane Mode rehearsal in ACCEPTANCE_TESTS.md and copy the recovery package to a
-separate drive. The ordinary application does not need internet access.
+Presets store title, vocabulary, microphone, glossary, speech profile, caption mode,
+appearance and display selection in `%LOCALAPPDATA%/LectureLive/presets.json`.
+Global shortcuts remain app preferences when a preset is loaded. Missing or damaged
+preset files are reported and retained rather than silently replaced.
 
-Starting a lecture automatically locks the overlay. Unlock it with Ctrl+Alt+C only
-when you need to move or resize it. A smaller provisional English line can appear
-below the previous stable bilingual pair; Chinese does not flicker with each token.
+Vocabulary preserves recognised spelling; it does not acoustically bias Whisper.
+Source-gated glossary corrections improve selected technical terms but cannot certify
+sentence meaning. See TRANSLATION_EVALUATION.md before relying on technical Chinese.
 
-Pause and Stop discard the currently unfinished utterance. Allow a brief sentence-end
-pause before stopping if you want its final caption included in the transcript.
+## Transcripts and recovery
+
+Saving is optional. **Diagnostics → Open transcripts** opens the session folder under
+`%LOCALAPPDATA%/LectureLive/transcripts`. English/Chinese/bilingual TXT, subtitles,
+and the UTF-8 `events.jsonl` journal are written incrementally. Saving failures disable
+exports and leave captions running.
+
+**Recover transcript journal…** rebuilds exports into a new folder from complete
+journal records, skipping invalid or truncated records. The original is preserved.
+Microphone samples remain in memory only. Vocabulary and presets are saved locally;
+diagnostic logs omit caption text. No private recordings or transcripts are uploaded.
+
+## Offline rehearsal
+
+Ordinary startup never downloads models or contacts hosted inference. Before class,
+complete the Airplane Mode, intended-microphone, projector and teaching-length checks
+in ACCEPTANCE_TESTS.md. Synthetic tests do not establish real-room accuracy.

@@ -10,3 +10,4 @@ class Caption:
     chinese: str = ""
     final: bool = False
     epoch: int = 0
+    translation_status: str = "pending"

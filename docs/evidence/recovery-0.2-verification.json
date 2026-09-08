@@ -1,0 +1,23 @@
+{
+  "version": "0.2",
+  "archive": "LectureLive-Windows-ARM64-Recovery.zip",
+  "archive_bytes": 1575122363,
+  "archive_sha256": "ca6d00b927b295967bfc4359116acb5a9b280cc6bdf8627f61f337a5f8f71632",
+  "payload_files_verified": 697,
+  "zip_crc_verified": true,
+  "fresh_destination": true,
+  "relocated_executable_self_test": true,
+  "offline_restore": {
+    "passed": true,
+    "evidence": "offline-restore-0.2.json",
+    "tested_archive_sha256": "ee1a1cf7f026c249c9a26deea1c8626e6ee3108a5d77b3434c94e7abf1e71a24",
+    "identical_restore_inputs_verified": 80,
+    "method": "Fresh offline restoration passed before final journal-decoding correction. Final archive scripts, manifests, Python ZIP, wheels and models are byte-identical to that run."
+  },
+  "final_runtime_change_since_restore_test": [
+    "app/export/transcript.py"
+  ],
+  "regression_tests_passed": 49,
+  "seconds": 34.92,
+  "passed": true
+}

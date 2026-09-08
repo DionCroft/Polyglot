@@ -8,7 +8,8 @@ from app.system.readiness import check
 
 
 def run(root, wav_path, report_path):
-    result = {"startup": check(root, "balanced"), "speech": []}
+    from app import __version__
+    result = {"version": __version__, "startup": check(root, "balanced"), "speech": []}
     with wave.open(str(wav_path)) as f:
         if f.getframerate() != 16000 or f.getsampwidth() != 2 or f.getnchannels() != 1:
             raise ValueError("Self-test requires mono 16 kHz 16-bit PCM WAV")

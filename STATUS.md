@@ -1,87 +1,81 @@
-# LectureLive — STATUS
+# LectureLive 0.2 — STATUS
 
-Updated 2026-09-08. **Working native ARM64 development build. Production acceptance remains open.**
+Updated 2026-09-09. Six-part improvement milestone implemented and native executable verified.
+Production classroom acceptance remains open.
 
-## Implemented and exercised
+## Implemented improvements
 
-- Native CPython 3.11.9 ARM64, Qt/PySide6 6.11.2, ORT 1.29.0 + QNN 2.5.0.
-- Fast (Whisper Base) and default Balanced (Whisper Small FP16) actually run on the
-  Snapdragon X Elite NPU. Strict-provider ONNX profiling contains QNN kernels.
-- Separate Whisper Base int8 CPU recovery; simulated unavailable NPU tested.
-- Surface WASAPI microphone capture with shared Windows 48 kHz → 16 kHz conversion.
-- Local Silero VAD, bounded worker queues, provisional English, final-phrase translation,
-  retained stable pairs, source-conditioned glossary corrections and vocabulary spelling.
-- Local OPUS-MT four-beam translation with explicit Mandarin Simplified prefix and OpenCC.
-- Native Qt control panel and overlay: transparency, topmost, non-activation, click-through,
-  drag/resize, monitor choice, modes, font/colour/spacing/opacity and local preferences.
-- Global lock shortcut tested while PowerPoint had focus. A click through the locked
-  caption rectangle advanced a real PowerPoint slideshow; captions remained visible.
-- Text exports and recovery journal; bounded pending translation results maintain cue order.
-- Runtime Python networking guard; ONNX telemetry explicitly disabled; static audit clean.
-- Missing translation: English continues. Device-open failure and worker cleanup tested.
-- Background startup inference checks; packaged EXE self-test and recovery scripts.
-- Native PyInstaller EXE built; PE machine 0xAA64. Packaged self-test passed all NPU/CPU/VAD/translation checks; its first UI run loaded Small on the
-  NPU and captured live microphone input; closing joined its workers.
-- 16 core regression tests and Qt integration checks pass (see evidence).
-
-## Measured performance
-
-Public 11-second speech sample: Base NPU 0.242 s, Small NPU 0.543 s,
-Base ARM64 CPU 0.633 s. These are observed individual runs, not guarantees.
-
-Ten-minute real-time technical replay: 107 bilingual pairs;
-zero dropped audio/phrases/translation skips; all workers joined. After the first
-minute RSS ranged 1365.3–1423.6 MB,
-ending 1365.7 MB. Sampled audio queue peaked at
-1, ASR at 0,
-translation at 0. All sampled process
-TCP/UDP connection counts were zero. See `docs/evidence/stress-10min.json`.
-This run preceded the final language-prefix and subtitle-order refinements; the final
-source has a separate shorter regression run and packaged inference test.
+1. **Translation:** score-based beam termination retains the obstacle relationship
+   omitted by the baseline; source-gated technical terminology improvements; 40-case
+   authored evaluation corpus and original-vs-current comparison. Concept checks
+   improve from 30/40 to 37/40 on development cases. Qualified bilingual review and
+   a separate real-lecturer evaluation remain necessary.
+2. **Reliability:** Stop drains accepted audio and finishes the last utterance before
+   translation/export closure. Pause discards unfinished private asides. Export errors
+   detach the writer and contain cleanup failures; journal recovery preserves originals.
+   A runtime NPU failure retries the same phrase on CPU. Explicit reconnect/retry UI.
+3. **Caption continuity:** completed bilingual pair retained while new English waits;
+   confirmed provisional prefixes; sentence-aware short pauses; long-caption fitting
+   and shrinking; explicit unavailable-translation state. Latency includes endpoint delay.
+4. **Teaching workflow:** local named presets and saved vocabulary/title; real microphone
+   level check; projector preview; compact floating controls; configurable shortcuts;
+   Start/Finish/Pause remain visible outside scrolling preparation controls.
+5. **Reproducibility:** pinned model/dependency/fixture manifests with byte counts and
+   SHA-256; range-aware temporary downloads, safe extraction and repair; one-command
+   ARM64 bootstrap; offline recovery; one warmed model bundle reused across sessions.
+6. **Acceptance tooling:** expanded failure/privacy/setup/workflow regressions; 24 noisy
+   synthetic speech cases, silence check, microphone capture and extended replay tooling.
+   Microphone availability is assumed for the lecture. Physical room/projector checks
+   and full teaching-length battery/thermal rehearsal remain separate acceptance items.
 
 ## Current architecture
 
-Audio → bounded queue → Silero VAD → Whisper QNN/CPU worker → explicit stabiliser →
-bounded local translation worker → caption state/Qt overlay + incremental UTF-8 exports.
-Setup networking lives only in scripts. No hosted inference or cloud fallback exists.
-The experimental M2M100 adapter/model remains in development for comparison but is
-excluded from the teaching bundle: it was slower and not consistently more accurate.
+Microphone → bounded queue → Silero VAD → Whisper QNN/CPU → stable caption state →
+local OPUS translation → Qt overlay and incremental exports. All inference stays local.
+Model readiness verifies encoder AND decoder, translation and VAD away from the UI;
+a per-window model store keeps the warmed bundle for the active speech profile.
 
-## Known issues / acceptance still required
+Native CPython 3.11.9 ARM64; PySide6 6.11.2; ORT 1.29.0; QNN plugin 2.5.0.
+Fast is Whisper Base FP16 NPU; Balanced is Whisper Small FP16 NPU. Separate Base int8
+CPU graphs provide recovery. Accuracy remains unavailable. M2M100 remains an excluded
+experiment. No hosted inference, cloud fallback or microphone recording is introduced.
 
-- Physical Airplane Mode test and application-scoped native packet/ETW trace are pending.
-  Socket snapshots and a Python guard do not prove every native DLL makes no requests.
-- Only one display was available. Real projector selection/disconnection remains pending.
-- Physical USB/Bluetooth microphone unplug/reconnect tests remain pending.
-- Multi-hour thermal/battery and real lecturer speech accuracy tests remain pending.
-- OPUS translation can omit detail or mistranslate terminology. Eight actual comparison
-  sentences are saved in `docs/evidence/translation-comparison.json`; qualified bilingual
-  review is still required. Glossaries correct observed terms, not arbitrary mistranslations.
-- Balanced uses the verified FP16 Small artifact; no quantized Small claim is made.
-- Accuracy profile is visibly unavailable. No untested large model is advertised as ready.
-- Build is unsigned. Audio recording is intentionally not implemented. Hotkeys are fixed.
+## Verification evidence
 
-## Next implementation / validation step
+- Unit suite: expanded from 16 to 49 tests; all passed in 0.53 s (`pytest-0.2.txt`).
+- `docs/evidence/translation-expanded.json`: 40 development cases and latency distributions.
+- `docs/evidence/translation-decoding-comparison.json`: original and revised beam outputs.
+- `docs/evidence/workflow-verification.json`: actual native UI, presets, microphone test,
+  configurable shortcuts, compact controls, long-caption fitting and retry workflow.
+- `docs/evidence/fresh-setup-verification.json`: fresh offline runtime bootstrap and
+  archive extraction, followed by real NPU/CPU/translation self-tests.
+- `docs/evidence/online-setup-check.json`: actual pinned HTTPS download/checksum verification.
+- `docs/evidence/classroom-audio-check.json`: real microphone metrics and synthetic noise checks.
+- `docs/evidence/classroom-stress-15min.json`: 903 s at 20 dB noise, 161 bilingual
+  captions, zero drops/skips, bilingual p95 1.024 s, clean worker shutdown.
+- `docs/evidence/packaged-self-test-0.2.json`: rebuilt ARM64 executable passes both
+  NPU profiles, CPU recovery, translation and VAD readiness. Native UI reaches Ready
+  and displays version 0.2; see `packaged-ui-0.2.json`.
+- `docs/evidence/pipeline.json`: final source replay yields all three bilingual
+  sentences and closes every worker after the last runtime refinements.
+- Recovery ZIP integrity and relocated restore results are recorded separately under
+  `recovery/`; original-release PowerPoint checks remain historical evidence.
 
-Review technical translations with the lecturer, improve or replace the local translator
-where necessary, then complete the physical acceptance checklist. Do not call the project
-complete or travel-ready until `docs/ACCEPTANCE_TESTS.md` is fully signed off.
+## Remaining acceptance and limitations
 
-Final-source 90-second regression: 17 bilingual pairs, zero drops, all workers joined.
-The packaged self-test measured Base NPU 0.297 s, Small NPU 0.599 s, and CPU 0.823 s
-on the 11-second sample. Different background load explains variation; no hard latency
-guarantee is claimed.
+- Translation concept checks are heuristics; they do not certify full meaning. Overfitting
+  terminology and ambiguous technical language still need bilingual review.
+- Physical Airplane Mode and application-scoped native packet/ETW audit are pending.
+  Python socket guards and process socket samples are not equivalent to OS traffic proof.
+- Actual projector hot-unplug, physical microphone unplug/reconnect and real-room
+  speech accuracy are pending. The user will have a microphone; this is not a hardware
+  procurement blocker.
+- Multi-hour lecture, sleep/resume and battery/thermal rehearsal remain pending.
+- Native inference remains in-process. A driver call that never returns can delay shutdown;
+  status remains responsive but Python cannot safely kill that native thread.
+- The build is unsigned. Balanced is FP16, not quantized Small. Accuracy is unavailable.
 
-The full eight-sentence synthetic speech benchmark is in
-`docs/evidence/technical-benchmark.json`. FreeRTOS split-word recognition is handled
-by an explicit selected-glossary alias. The robotics translation still omits the
-obstacle relationship; this is an unresolved quality issue, not a passing semantic test.
+## Next step
 
-Release candidate verification: the final rebuilt executable passed its own local
-self-test (`docs/evidence/packaged-self-test-final.json`), and 16 regression tests pass.
-Recovery archive generation and CRC/checksum validation are recorded separately.
-
-Recovery validation passed: a fresh extraction matched all 634 payload checksums,
-restored the ARM64 development runtime from included wheels with no index access,
-passed `pip check`, and ran NPU/CPU/VAD/translation self-tests from the relocated
-executable. See `docs/evidence/recovery-verification.json`.
+Perform the physical and bilingual rehearsal in `docs/ACCEPTANCE_TESTS.md` before
+calling the application production classroom-approved.

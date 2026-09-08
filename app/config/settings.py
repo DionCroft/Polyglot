@@ -13,6 +13,10 @@ DATA = Path(
 
 @dataclass
 class Settings:
+    lecture_title: str = ""
+    vocabulary: str = ""
+    lock_shortcut: str = "Ctrl+Alt+C"
+    pause_shortcut: str = "Ctrl+Alt+Space"
     microphone: str = ""
     mode: str = "Bilingual"
     profile: str = "balanced"
@@ -33,25 +37,49 @@ class Settings:
     chinese_color: str = "#8fe9d5"
 
     @classmethod
+    def from_dict(cls, data):
+        import re
+
+        if not isinstance(data, dict):
+            raise ValueError("Settings must be a JSON object")
+        cfg = cls(
+            **{k: v for k, v in data.items() if k in {f.name for f in fields(cls)}}
+        )
+        for field in fields(cls):
+            value = getattr(cfg, field.name)
+            if field.type is str and not isinstance(value, str):
+                raise ValueError("Invalid text setting: " + field.name)
+            if field.type is bool and not isinstance(value, bool):
+                raise ValueError("Invalid boolean setting: " + field.name)
+        for key, low, high in [
+            ("font_size", 16, 64),
+            ("opacity", 10, 100),
+            ("width", 400, 4000),
+            ("height", 130, 1200),
+            ("spacing", 100, 180),
+        ]:
+            setattr(cfg, key, max(low, min(high, int(getattr(cfg, key)))))
+        cfg.x = int(cfg.x)
+        cfg.y = int(cfg.y)
+        if cfg.profile not in {"fast", "balanced"}:
+            cfg.profile = "balanced"
+        if cfg.mode not in {"Bilingual", "English", "Chinese"}:
+            cfg.mode = "Bilingual"
+        if cfg.placement not in {"Top", "Bottom", "Custom"}:
+            cfg.placement = "Bottom"
+        if not re.fullmatch(r"[a-z_]+", cfg.glossary):
+            cfg.glossary = "general"
+        for key in ("english_color", "chinese_color"):
+            if not re.fullmatch(r"#[0-9a-fA-F]{6}", getattr(cfg, key)):
+                setattr(cfg, key, getattr(cls(), key))
+        return cfg
+
+    @classmethod
     def load(cls):
         try:
-            data = json.loads((DATA / "settings.json").read_text(encoding="utf-8"))
-            cfg = cls(
-                **{k: v for k, v in data.items() if k in {f.name for f in fields(cls)}}
+            return cls.from_dict(
+                json.loads((DATA / "settings.json").read_text(encoding="utf-8"))
             )
-            for k, low, high in [
-                ("font_size", 16, 64),
-                ("opacity", 10, 100),
-                ("width", 400, 4000),
-                ("height", 130, 1200),
-                ("spacing", 100, 180),
-            ]:
-                setattr(cfg, k, max(low, min(high, int(getattr(cfg, k)))))
-            if cfg.profile not in {"fast", "balanced", "accuracy"}:
-                cfg.profile = "balanced"
-            if cfg.mode not in {"Bilingual", "English", "Chinese"}:
-                cfg.mode = "Bilingual"
-            return cfg
         except (OSError, ValueError, TypeError):
             return cls()
 

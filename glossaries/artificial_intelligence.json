@@ -17,5 +17,18 @@
   "edge computing": {
     "english": "edge computing",
     "chinese": "边缘计算"
+  },
+  "training data": {
+    "chinese": "训练数据",
+    "target_aliases": [
+      "培训数据"
+    ]
+  },
+  "training examples": {
+    "chinese": "训练样本",
+    "target_aliases": [
+      "培训范例",
+      "培训例子"
+    ]
   }
 }

@@ -17,12 +17,16 @@ The decoder's exported ABI is FP16 with static 200-token cache length. The teste
 Balanced artifact is FP16 Small, not an int8 Small model; this difference from the
 preferred quantized profile is explicit.
 
-English provisional requests occur approximately every 1.216 seconds of speech.
-Final phrases use 576 ms of silence, 256 ms pre-roll and a 9.6-second maximum window.
-The displayed English latency metric measures time after the audio chunk endpoint;
-it does not include all speech duration. Bilingual latency has the same endpoint
-reference. Pause-boundary detection adds its own delay. These are not word-aligned
-latencies or formal WER/BLEU benchmarks.
+In version 0.2 provisional requests occur about every 0.768 seconds, with visible text
+requiring prefix agreement across two hypotheses. Final boundaries use 576 ms of
+silence, shortened to 320 ms when a sentence-ending hypothesis is available after
+sufficient speech. Pre-roll is 256 ms; the maximum window remains 9.6 seconds.
+
+Final caption latency now references the last voiced sample, so VAD endpoint delay
+is included along with downstream inference. Provisional latency references its latest
+sample endpoint. Diagnostics report rolling p95 values over up to 2048 observations;
+these are not word-aligned latency measurements. Older reports used segment endpoints
+and should not be compared directly with the new latency numbers.
 
 See `evidence/first-inference.json`, `pipeline.json`, `stress-test.json` (once complete)
 and `technical-benchmark.json`. The ten-minute stress test uses a real-time WAV replay;
@@ -43,6 +47,26 @@ translation 0 in samples; final RSS 1365.7 MB; no worker threads left alive.
 
 `technical-benchmark.json` records all eight requested example sentences. WER is a
 simple word edit distance and counts equivalent I-squared-C / I2C and UK/US spelling
-variants as differences; it is not a human-rated accuracy score. The robot sentence's
-Chinese output omits a relationship, so semantic acceptance is still open.
+variants as differences; it is not a human-rated accuracy score. That baseline robot sentence omitted a relationship. Version 0.2 preserves it in the
+decoder comparison; broader human semantic acceptance remains open.
 M2M100 took roughly 0.95–2.21 s and introduced other term errors; it is not shipped.
+
+## Version 0.2 evaluation
+
+The 40-case development comparison improved from 30 to 37 automatic concept checks.
+Measured translation p95 was about 0.09 seconds in that run. This is neither a human
+accuracy percentage nor a held-out evaluation; see TRANSLATION_EVALUATION.md.
+
+`evidence/workflow-verification.json` records model-bundle reuse and actual UI flows.
+`evidence/fresh-setup-verification.json` records a new offline runtime/model installation.
+`evidence/classroom-audio-check.json` contains 24 synthetic speech/noise outputs and
+microphone-level diagnostics. `classroom-stress-15min.json` records the sustained noisy
+replay: 903 seconds, 161 bilingual captions, zero audio/phrase drops or translation
+skips. Final rolling bilingual p95 was 1.024 s (English 0.779 s). RSS ranged from
+1370.9 to 1427.5 MB and ended at 1375.8 MB; all worker threads exited. Some development checks and setup I/O ran concurrently; timing
+is observed performance under that load, not a guarantee.
+
+The final 0.2 executable self-test measured Fast NPU 0.229 s, Balanced NPU
+0.517 s, CPU 0.607 s and short translation 0.062 s. All startup checks passed.
+A short final source replay verified the callback/privacy and unavailable-caption
+refinements made after the extended replay started; all three pairs completed.

@@ -5,7 +5,7 @@ from dataclasses import replace
 from collections import deque
 import numpy as np
 from app.audio.capture import Microphone, WavSource
-from app.audio.vad import Segmenter, SileroVAD
+from app.audio.vad import Segmenter
 from app.captions.stabiliser import CaptionStabiliser
 from app.captions.glossary import Glossary
 from app.export.transcript import Transcript
@@ -68,6 +68,7 @@ class Pipeline:
         title="Lecture",
         wav=None,
         force_cpu=False,
+        model_store=None,
     ):
         self.root = root
         self.data = data
@@ -75,11 +76,19 @@ class Pipeline:
         self.emit = emit
         self.title = title
         self.wav = wav
+        self.using_npu = False
         self.force_cpu = force_cpu
+        self.model_store = model_store
         self.glossary = Glossary(
             root / "glossaries" / f"{settings.glossary}.json", vocabulary
         )
         self.stop_event = threading.Event()
+        self.input_closed = threading.Event()
+        self.segment_done = threading.Event()
+        self.asr_done = threading.Event()
+        self.export_lock = threading.RLock()
+        self.latencies = {key: deque(maxlen=2048) for key in ("english", "bilingual")}
+        self.last_audio_end = 0.0
         self.paused = threading.Event()
         self.epoch = 0
         self.audio = queue.Queue(maxsize=128)
@@ -112,45 +121,16 @@ class Pipeline:
         self.loading = True
         try:
             self._notify("state", "Loading local models…")
-            from app.asr.qnn_whisper import QnnWhisper
-            from app.asr.cpu_whisper import CpuWhisper
-            from app.translation.opus_mt import OpusMT
+            from app.system.models import ModelStore
 
-            profile = self.settings.profile
-            if profile == "accuracy":
-                raise RuntimeError(
-                    "Accuracy model has not been installed and benchmarked. Select Balanced or Fast."
-                )
-            if not self.force_cpu:
-                try:
-                    self.asr = QnnWhisper(self.root / "models/whisper" / profile)
-                    self.asr.name = "Qualcomm NPU · Whisper " + (
-                        "Small FP16" if profile == "balanced" else "Base FP16"
-                    )
-                except Exception:
-                    log.exception(
-                        "NPU model initialization failed; attempting local CPU"
-                    )
-                    self.asr = CpuWhisper(self.root / "models/whisper/fast")
-                    self._notify(
-                        "warning",
-                        "NPU unavailable. Using local CPU Whisper Base; no internet is required.",
-                    )
-            else:
-                self.asr = CpuWhisper(self.root / "models/whisper/fast")
-            try:
-                self.mt = OpusMT(self.root / "models/translation/opus")
-            except Exception:
-                self.mt = None
-                log.exception("Local translation initialization failed")
-                self._notify(
-                    "warning",
-                    "Translation model could not be loaded. English captions can continue.",
-                )
-            self.segmenter = Segmenter(
-                SileroVAD(self.root / "models/vad/silero_vad.onnx")
+            bundle = (self.model_store or ModelStore(self.root)).load(
+                self.settings.profile, self.force_cpu
             )
-            self.segmenter.vad.probability(np.zeros(512, np.float32))
+            self.asr, self.mt = bundle.asr, bundle.mt
+            self.using_npu = bundle.npu
+            for message in bundle.messages:
+                self._notify("warning", message)
+            self.segmenter = Segmenter(bundle.vad)
             self.segmenter.reset()
             self.stabiliser = CaptionStabiliser()
             if self.stop_event.is_set():
@@ -189,7 +169,11 @@ class Pipeline:
                 )
             else:
                 self.source = Microphone(
-                    self.settings.microphone or None, self._frame, self._error
+                    self.settings.microphone
+                    if self.settings.microphone != ""
+                    else None,
+                    self._frame,
+                    self._error,
                 )
             self.source.start()
             log.info(
@@ -204,11 +188,15 @@ class Pipeline:
             self.loading = False
 
     def _frame(self, frame, end):
+        epoch = self.epoch
         if self.stop_event.is_set() or self.paused.is_set():
             return
+        self.last_audio_end = end
         self.level = min(100, int(float(np.sqrt(np.mean(frame * frame))) * 450))
         try:
-            self.audio.put_nowait((frame, end, self.epoch))
+            if epoch != self.epoch or self.paused.is_set() or self.stop_event.is_set():
+                return
+            self.audio.put_nowait((frame, end, epoch))
         except queue.Full:
             self.metrics["dropped_audio_chunks"] += 1
 
@@ -225,6 +213,8 @@ class Pipeline:
         self._notify("warning", message)
 
     def pause(self):
+        if self.stop_event.is_set():
+            return
         if self.paused.is_set():
             if self.failure_reported:
                 return
@@ -243,11 +233,25 @@ class Pipeline:
             except queue.Empty:
                 break
 
+    def _submit_phrase(self, phrase, epoch):
+        # Once capture stops, preserve accepted final phrases instead of dropping
+        # them to maintain live latency. The downstream worker still drains.
+        while self.stop_event.is_set() and len(self.phrases) >= self.phrases.capacity:
+            if self.asr_done.wait(0.02):
+                return
+        dropped = self.phrases.put((phrase, epoch))
+        if dropped and dropped[0].final:
+            self.metrics["dropped_phrases"] += 1
+            self._notify(
+                "warning",
+                "Recognition is behind live speech. A phrase was skipped; try Fast mode.",
+            )
+
     def _segment(self):
         epoch = -1
         last_end = None
         try:
-            while not self.stop_event.is_set():
+            while not self.input_closed.is_set() or not self.audio.empty():
                 try:
                     frame, end, current = self.audio.get(timeout=0.1)
                 except queue.Empty:
@@ -260,32 +264,71 @@ class Pipeline:
                 last_end = end
                 phrase = self.segmenter.push(frame, end)
                 if phrase:
-                    dropped = self.phrases.put((phrase, current))
-                    if dropped and dropped[0].final:
-                        self.metrics["dropped_phrases"] += 1
-                        self._notify(
-                            "warning",
-                            "Recognition is behind live speech. A phrase was skipped; try Fast mode.",
-                        )
+                    self._submit_phrase(phrase, current)
+            if (
+                last_end is not None
+                and epoch == self.epoch
+                and not self.paused.is_set()
+            ):
+                phrase = self.segmenter.finish(last_end)
+                if phrase:
+                    self._submit_phrase(phrase, epoch)
         except Exception:
             log.exception("VAD failed")
             self._error("Voice detection failed. Stop and restart the session.", True)
+        finally:
+            self.segment_done.set()
 
     def _save(self, method, caption):
-        if self.export:
+        # ASR and translation both write exports. Detach a failed writer before
+        # cleanup so another worker cannot reuse it or emit repeated errors.
+        with self.export_lock:
+            writer = self.export
+            if writer is None:
+                return
             try:
-                getattr(self.export, method)(caption)
+                getattr(writer, method)(caption)
             except OSError:
+                self.export = None
                 log.exception("Transcript write failed")
+                try:
+                    writer.close()
+                except Exception:
+                    log.exception("Failed transcript cleanup")
                 self._notify(
                     "warning",
-                    "Transcript write failed. Check disk space. Captions can continue.",
+                    "Transcript saving stopped: check disk space or folder access. Live captions continue; earlier journal entries can be recovered.",
                 )
-                self.export.close()
-                self.export = None
+
+    def _transcribe(self, audio):
+        try:
+            return self.asr.transcribe(audio)
+        except Exception:
+            if not self.using_npu:
+                raise
+            log.exception("NPU failed during lecture; retrying this phrase on CPU")
+            from app.asr.cpu_whisper import CpuWhisper
+
+            self.asr = CpuWhisper(self.root / "models/whisper/fast")
+            self.using_npu = False
+            text = self.asr.transcribe(audio)
+            if self.model_store:
+                self.model_store.invalidate()
+            self._notify("backend", self.asr.name)
+            self._notify(
+                "warning",
+                "NPU processing failed. This phrase was retried on local CPU; captions continue.",
+            )
+            return text
 
     def _recognize(self):
-        while not self.stop_event.is_set():
+        try:
+            self._recognize_loop()
+        finally:
+            self.asr_done.set()
+
+    def _recognize_loop(self):
+        while not self.segment_done.is_set() or len(self.phrases):
             item = self.phrases.get()
             if not item:
                 continue
@@ -294,18 +337,16 @@ class Pipeline:
                 continue
             try:
                 start = time.monotonic()
-                text = self.asr.transcribe(phrase.audio)
+                text = self._transcribe(phrase.audio)
                 elapsed = time.monotonic() - start
                 self.metrics.update(
                     asr_seconds=elapsed,
                     rtf=elapsed / max(0.032, len(phrase.audio) / 16000),
                 )
-                if (
-                    epoch != self.epoch
-                    or self.paused.is_set()
-                    or self.stop_event.is_set()
-                ):
+                if epoch != self.epoch or self.paused.is_set():
                     continue
+                if text.rstrip().endswith((".", "?", "!")):
+                    self.segmenter.sentence_complete(phrase.identifier)
                 caption = self.stabiliser.accept(
                     phrase, self.glossary.english(text), epoch
                 )
@@ -314,14 +355,20 @@ class Pipeline:
                 self.metrics["english_latency"] = max(
                     0, time.monotonic() - self.origin - phrase.end
                 )
+                self.latencies["english"].append(self.metrics["english_latency"])
                 self._notify("caption", caption)
                 if caption.final:
                     self._save("english", caption)
                     try:
-                        self.translation.put_nowait(caption)
+                        if self.stop_event.is_set():
+                            self.translation.put(caption)
+                        else:
+                            self.translation.put_nowait(caption)
                     except queue.Full:
                         self.metrics["translation_skips"] += 1
+                        caption = replace(caption, translation_status="unavailable")
                         self._save("pair", caption)
+                        self._notify("caption", caption)
                         self._notify(
                             "warning",
                             "Chinese translation is behind. English captions continue; a translation was skipped.",
@@ -340,7 +387,13 @@ class Pipeline:
                 )
 
     def _translate(self):
-        while not self.stop_event.is_set() or not self.translation.empty():
+        while (
+            not (
+                self.asr_done.is_set()
+                or (not self.started and self.stop_event.is_set())
+            )
+            or not self.translation.empty()
+        ):
             try:
                 caption = self.translation.get(timeout=0.1)
             except queue.Empty:
@@ -355,17 +408,21 @@ class Pipeline:
                     else ""
                 )
                 self.metrics["translation_seconds"] = time.monotonic() - start
-                caption = replace(caption, chinese=text)
+                caption = replace(
+                    caption,
+                    chinese=text,
+                    translation_status="complete" if text else "unavailable",
+                )
                 self.metrics["bilingual_latency"] = max(
                     0, time.monotonic() - self.origin - caption.end
                 )
-                if (
-                    caption.epoch == self.epoch
-                    and not self.paused.is_set()
-                    and not self.stop_event.is_set()
-                ):
+                self.latencies["bilingual"].append(self.metrics["bilingual_latency"])
+                if caption.epoch == self.epoch and not self.paused.is_set():
                     self._notify("caption", caption)
             except Exception:
+                caption = replace(caption, translation_status="unavailable")
+                if caption.epoch == self.epoch and not self.paused.is_set():
+                    self._notify("caption", caption)
                 log.exception("Translation failed")
                 self._notify(
                     "warning",
@@ -378,6 +435,7 @@ class Pipeline:
         if (
             isinstance(self.source, Microphone)
             and self.source.stream is not None
+            and not self.stop_event.is_set()
             and not self.failure_reported
         ):
             if (
@@ -390,24 +448,53 @@ class Pipeline:
                 )
         return {
             **self.metrics,
+            **{
+                f"{key}_p95_seconds": round(float(np.percentile(values, 95)), 3)
+                if values
+                else 0
+                for key, values in self.latencies.items()
+            },
             "audio_queue": self.audio.qsize(),
             "asr_queue": len(self.phrases),
             "translation_queue": self.translation.qsize(),
         }
 
     def request_stop(self):
-        self.stop_event.set()
-        self.paused.set()
-        self.epoch += 1
-        self.phrases.clear()
+        if not self.stop_event.is_set():
+            self.stop_event.set()
+            self.level = 0
+            self._notify("state", "Finishing captions…")
 
     def close(self):
         self.request_stop()
-        if self.source:
-            self.source.close()
+        try:
+            if self.source:
+                self.source.close()
+        except Exception:
+            log.exception("Audio source cleanup failed")
+            self._notify(
+                "warning", "Audio cleanup reported an error; finishing captured speech."
+            )
+        finally:
+            self.input_closed.set()
         for thread in self.threads:
-            thread.join()
-        if self.export:
-            self.export.close()
+            # Keep the UI informed if a slow backend delays shutdown.
+            while thread.is_alive():
+                thread.join(timeout=5)
+                if thread.is_alive():
+                    self._notify(
+                        "state", "Finishing captions… waiting for local processing"
+                    )
+        with self.export_lock:
+            writer, self.export = self.export, None
+            if writer:
+                try:
+                    writer.close()
+                except OSError:
+                    log.exception("Final transcript flush failed")
+                    self._notify(
+                        "warning",
+                        "Final transcript save failed. Earlier journal entries remain available for recovery.",
+                    )
         self.started = False
         log.info("Session stopped; all pipeline workers joined")

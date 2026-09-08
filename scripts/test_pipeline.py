@@ -1,5 +1,5 @@
 from pathlib import Path
-import time,json,threading
+import time,json
 from app.system.offline import enforce_offline
 enforce_offline()
 from app.config.settings import Settings

@@ -46,5 +46,36 @@
       "脉冲调整",
       "脉冲宽模块化"
     ]
+  },
+  "resistor": {
+    "chinese": "电阻",
+    "target_aliases": [
+      "阻力"
+    ]
+  },
+  "resistance": {
+    "chinese": "电阻",
+    "target_aliases": [
+      "抗药性"
+    ]
+  },
+  "current": {
+    "chinese": "电流",
+    "target_aliases": [
+      "水流",
+      "流线"
+    ]
+  },
+  "kiloohm": {
+    "chinese": "千欧姆",
+    "target_aliases": [
+      "千兆赫"
+    ]
+  },
+  "stores charge": {
+    "chinese": "储存电荷",
+    "target_aliases": [
+      "仓库充电"
+    ]
   }
 }

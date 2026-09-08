@@ -51,7 +51,12 @@ class Segmenter:
         self.quiet = 0
         self.start = 0
         self.voiced = 0
+        self.last_voice_end = 0.0
         self.last_partial = 0
+        self.sentence_identifier = -1
+
+    def sentence_complete(self, identifier):
+        self.sentence_identifier = identifier
 
     def push(self, frame, end):
         speech = self.vad.probability(frame) >= 0.5
@@ -68,20 +73,34 @@ class Segmenter:
         self.frames.append(frame)
         self.quiet = 0 if speech else self.quiet + 1
         self.voiced += int(speech)
-        final = self.quiet >= 18 or len(self.frames) >= 300
+        if speech:
+            self.last_voice_end = end
+        final = (
+            self.quiet >= 18
+            or len(self.frames) >= 300
+            or (
+                self.quiet >= 10
+                and len(self.frames) >= 64
+                and self.sentence_identifier == self.identifier
+            )
+        )
         if final:
             result = self._phrase(end, True) if self.voiced >= 5 else None
             self.frames = []
             self.quiet = 0
             return result
-        if len(self.frames) >= 38 and len(self.frames) - self.last_partial >= 38:
+        if len(self.frames) >= 24 and len(self.frames) - self.last_partial >= 24:
             self.last_partial = len(self.frames)
             return self._phrase(end, False)
         return None
 
     def _phrase(self, end, final):
         return AudioPhrase(
-            self.identifier, self.start, end, np.concatenate(self.frames), final
+            self.identifier,
+            self.start,
+            self.last_voice_end if final else end,
+            np.concatenate(self.frames),
+            final,
         )
 
     def finish(self, end):

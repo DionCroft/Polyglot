@@ -21,6 +21,9 @@ def main():
 
     app = QApplication(sys.argv)
     app.setApplicationName("LectureLive")
+    from app import __version__
+
+    app.setApplicationVersion(__version__)
     app.setOrganizationName("LectureLive")
     DATA.mkdir(parents=True, exist_ok=True)
     lock = QLockFile(str(DATA / "lecturelive.lock"))

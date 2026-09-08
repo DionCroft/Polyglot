@@ -1,4 +1,3 @@
-import json, threading, queue
 from dataclasses import replace
 from pathlib import Path
 import numpy as np
@@ -19,7 +18,8 @@ def phrase(identifier=1, final=False):
 
 def test_only_final_commits_and_stale_partial_rejected():
     s = CaptionStabiliser()
-    assert not s.accept(phrase(), "hello").final
+    assert s.accept(phrase(), "hello") is None
+    assert not s.accept(phrase(), "hello world").final
     assert s.accept(phrase(final=True), "hello world").final
     assert s.accept(phrase(), "old partial") is None
     assert s.accept(phrase(final=True), "duplicate") is None

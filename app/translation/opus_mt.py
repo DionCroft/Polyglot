@@ -7,9 +7,12 @@ from app.system.inference import session
 class OpusMT:
     name = "OPUS-MT EN → ZH · local CPU"
 
-    def __init__(self, folder):
+    def __init__(self, folder, beams=4, length_penalty=1.0, early_stopping=False):
         from opencc import OpenCC
 
+        self.beams = beams
+        self.length_penalty = length_penalty
+        self.early_stopping = early_stopping
         self.simplify = OpenCC("t2s")
         self.cfg = json.loads((folder / "config.json").read_text())
         self.vocab = json.loads((folder / "vocab.json").read_text(encoding="utf-8"))
@@ -37,7 +40,7 @@ class OpusMT:
         ids = np.array([ids], dtype=np.int64)
         mask = np.ones_like(ids)
         hidden = self.encoder.run(None, {"input_ids": ids, "attention_mask": mask})[0]
-        beams = 4
+        beams = self.beams
         eos = self.cfg["eos_token_id"]
         pad = self.cfg["pad_token_id"]
         active = [[]]
@@ -80,14 +83,24 @@ class OpusMT:
                     continue
                 if token == eos:
                     if rank < beams:
-                        finished.append((score / max(1, len(sequence)), sequence))
+                        finished.append(
+                            (
+                                score / (max(1, len(sequence)) ** self.length_penalty),
+                                sequence,
+                            )
+                        )
                 elif len(new_active) < beams:
                     parents.append(parent)
                     tokens.append(token)
                     new_active.append(sequence)
                     new_scores.append(score)
+            finished = sorted(finished, key=lambda item: item[0], reverse=True)[:beams]
             if len(finished) >= beams:
-                break
+                best_live = max(new_scores, default=-np.inf) / (
+                    (step + 1) ** self.length_penalty
+                )
+                if self.early_stopping or best_live <= finished[-1][0]:
+                    break
             if not new_active:
                 break
             cache = {k: v[parents] for k, v in cache.items()}

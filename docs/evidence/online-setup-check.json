@@ -1,0 +1,6 @@
+{
+  "real_https_asset_download_checksum_verified": true,
+  "python_bootstrap_url_available": true,
+  "python_download_size_matches_manifest": true,
+  "resumable_range_and_corrupt_payload_behaviour": "covered by deterministic HTTP-response regression tests"
+}

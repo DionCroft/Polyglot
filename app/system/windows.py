@@ -3,6 +3,7 @@
 import ctypes, sys
 from ctypes import wintypes
 from PySide6.QtCore import QAbstractNativeEventFilter
+from app.system.shortcuts import parse_shortcut
 
 if sys.platform == "win32":
     user32 = ctypes.WinDLL("user32", use_last_error=True)
@@ -43,20 +44,24 @@ def overlay_input(hwnd, locked):
 
 
 class Hotkeys(QAbstractNativeEventFilter):
-    def __init__(self, app, on_lock, on_pause):
+    def __init__(
+        self, app, on_lock, on_pause, lock="Ctrl+Alt+C", pause="Ctrl+Alt+Space"
+    ):
         super().__init__()
         self.app = app
         self.actions = {4101: on_lock, 4102: on_pause}
         self.registered = []
         self.errors = []
         if sys.platform == "win32":
-            for identifier, key in [(4101, 0x43), (4102, 0x20)]:
-                if user32.RegisterHotKey(None, identifier, 0x1 | 0x2 | 0x4000, key):
+            bindings = [(4101, lock), (4102, pause)]
+            parsed = [parse_shortcut(text) for _, text in bindings]
+            if parsed[0] == parsed[1]:
+                raise ValueError("Lock and pause shortcuts must differ")
+            for (identifier, text), (modifiers, key) in zip(bindings, parsed):
+                if user32.RegisterHotKey(None, identifier, modifiers, key):
                     self.registered.append(identifier)
                 else:
-                    self.errors.append(
-                        "Ctrl+Alt+C" if identifier == 4101 else "Ctrl+Alt+Space"
-                    )
+                    self.errors.append(text)
             app.installNativeEventFilter(self)
 
     def nativeEventFilter(self, event_type, message):
