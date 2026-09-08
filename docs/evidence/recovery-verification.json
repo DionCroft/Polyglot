@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "archive_bytes": 1574901387,
+  "sha256": "238566bcc9953dd37641b8b9fa104ad7fd40ae2e628d849fd73f7b934d696396",
+  "payload_files": 634,
+  "raw_audio_excluded": true,
+  "experimental_model_excluded": true,
+  "offline_runtime_restored": true,
+  "all_extracted_checksums_match": true,
+  "pip_check_passed": true,
+  "relocated_executable_selftest_passed": true,
+  "seconds": 146.8
+}

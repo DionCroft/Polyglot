@@ -1,0 +1,240 @@
+{
+    "version": "0.61.0",
+    "precisions": {
+        "float": {
+            "chipset_assets": {
+                "qualcomm-qcs8275": {
+                    "precompiled_qnn_onnx": {
+                        "tool_versions": {
+                            "qairt": "2.45.0.260326154327",
+                            "onnx_runtime": "1.27.1"
+                        },
+                        "download_url": "https://qaihub-public-assets.s3.us-west-2.amazonaws.com/qai-hub-models/models/whisper_base/releases/v0.61.0/whisper_base-precompiled_qnn_onnx-float-qualcomm_qcs8275.zip"
+                    },
+                    "qnn_context_binary": {
+                        "tool_versions": {
+                            "qairt": "2.45.0.260326154327"
+                        },
+                        "download_url": "https://qaihub-public-assets.s3.us-west-2.amazonaws.com/qai-hub-models/models/whisper_base/releases/v0.61.0/whisper_base-qnn_context_binary-float-qualcomm_qcs8275.zip"
+                    },
+                    "voice_ai": {
+                        "tool_versions": {
+                            "qairt": "2.45.0.260326154327"
+                        },
+                        "download_url": "https://qaihub-public-assets.s3.us-west-2.amazonaws.com/qai-hub-models/models/whisper_base/releases/v0.61.0/whisper_base-voice_ai-float-qualcomm_qcs8275.zip"
+                    }
+                },
+                "qualcomm-qcs8550-proxy": {
+                    "precompiled_qnn_onnx": {
+                        "tool_versions": {
+                            "qairt": "2.45.0.260326154327",
+                            "onnx_runtime": "1.27.1"
+                        },
+                        "download_url": "https://qaihub-public-assets.s3.us-west-2.amazonaws.com/qai-hub-models/models/whisper_base/releases/v0.61.0/whisper_base-precompiled_qnn_onnx-float-qualcomm_qcs8550_proxy.zip"
+                    },
+                    "qnn_context_binary": {
+                        "tool_versions": {
+                            "qairt": "2.45.0.260326154327"
+                        },
+                        "download_url": "https://qaihub-public-assets.s3.us-west-2.amazonaws.com/qai-hub-models/models/whisper_base/releases/v0.61.0/whisper_base-qnn_context_binary-float-qualcomm_qcs8550_proxy.zip"
+                    },
+                    "voice_ai": {
+                        "tool_versions": {
+                            "qairt": "2.45.0.260326154327"
+                        },
+                        "download_url": "https://qaihub-public-assets.s3.us-west-2.amazonaws.com/qai-hub-models/models/whisper_base/releases/v0.61.0/whisper_base-voice_ai-float-qualcomm_qcs8550_proxy.zip"
+                    }
+                },
+                "qualcomm-qcs9075": {
+                    "precompiled_qnn_onnx": {
+                        "tool_versions": {
+                            "qairt": "2.45.0.260326154327",
+                            "onnx_runtime": "1.27.1"
+                        },
+                        "download_url": "https://qaihub-public-assets.s3.us-west-2.amazonaws.com/qai-hub-models/models/whisper_base/releases/v0.61.0/whisper_base-precompiled_qnn_onnx-float-qualcomm_qcs9075.zip"
+                    },
+                    "qnn_context_binary": {
+                        "tool_versions": {
+                            "qairt": "2.45.0.260326154327"
+                        },
+                        "download_url": "https://qaihub-public-assets.s3.us-west-2.amazonaws.com/qai-hub-models/models/whisper_base/releases/v0.61.0/whisper_base-qnn_context_binary-float-qualcomm_qcs9075.zip"
+                    },
+                    "voice_ai": {
+                        "tool_versions": {
+                            "qairt": "2.45.0.260326154327"
+                        },
+                        "download_url": "https://qaihub-public-assets.s3.us-west-2.amazonaws.com/qai-hub-models/models/whisper_base/releases/v0.61.0/whisper_base-voice_ai-float-qualcomm_qcs9075.zip"
+                    }
+                },
+                "qualcomm-sa7255p": {
+                    "qnn_context_binary": {
+                        "tool_versions": {
+                            "qairt": "2.45.0.260326154327"
+                        },
+                        "download_url": "https://qaihub-public-assets.s3.us-west-2.amazonaws.com/qai-hub-models/models/whisper_base/releases/v0.61.0/whisper_base-qnn_context_binary-float-qualcomm_sa7255p.zip"
+                    },
+                    "voice_ai": {
+                        "tool_versions": {
+                            "qairt": "2.45.0.260326154327"
+                        },
+                        "download_url": "https://qaihub-public-assets.s3.us-west-2.amazonaws.com/qai-hub-models/models/whisper_base/releases/v0.61.0/whisper_base-voice_ai-float-qualcomm_sa7255p.zip"
+                    }
+                },
+                "qualcomm-sa8295p": {
+                    "qnn_context_binary": {
+                        "tool_versions": {
+                            "qairt": "2.45.0.260326154327"
+                        },
+                        "download_url": "https://qaihub-public-assets.s3.us-west-2.amazonaws.com/qai-hub-models/models/whisper_base/releases/v0.61.0/whisper_base-qnn_context_binary-float-qualcomm_sa8295p.zip"
+                    },
+                    "voice_ai": {
+                        "tool_versions": {
+                            "qairt": "2.45.0.260326154327"
+                        },
+                        "download_url": "https://qaihub-public-assets.s3.us-west-2.amazonaws.com/qai-hub-models/models/whisper_base/releases/v0.61.0/whisper_base-voice_ai-float-qualcomm_sa8295p.zip"
+                    }
+                },
+                "qualcomm-sa8775p": {
+                    "qnn_context_binary": {
+                        "tool_versions": {
+                            "qairt": "2.45.0.260326154327"
+                        },
+                        "download_url": "https://qaihub-public-assets.s3.us-west-2.amazonaws.com/qai-hub-models/models/whisper_base/releases/v0.61.0/whisper_base-qnn_context_binary-float-qualcomm_sa8775p.zip"
+                    },
+                    "voice_ai": {
+                        "tool_versions": {
+                            "qairt": "2.45.0.260326154327"
+                        },
+                        "download_url": "https://qaihub-public-assets.s3.us-west-2.amazonaws.com/qai-hub-models/models/whisper_base/releases/v0.61.0/whisper_base-voice_ai-float-qualcomm_sa8775p.zip"
+                    }
+                },
+                "qualcomm-snapdragon-8-elite-for-galaxy": {
+                    "precompiled_qnn_onnx": {
+                        "tool_versions": {
+                            "qairt": "2.45.0.260326154327",
+                            "onnx_runtime": "1.27.1"
+                        },
+                        "download_url": "https://qaihub-public-assets.s3.us-west-2.amazonaws.com/qai-hub-models/models/whisper_base/releases/v0.61.0/whisper_base-precompiled_qnn_onnx-float-qualcomm_snapdragon_8_elite_for_galaxy.zip"
+                    },
+                    "qnn_context_binary": {
+                        "tool_versions": {
+                            "qairt": "2.45.0.260326154327"
+                        },
+                        "download_url": "https://qaihub-public-assets.s3.us-west-2.amazonaws.com/qai-hub-models/models/whisper_base/releases/v0.61.0/whisper_base-qnn_context_binary-float-qualcomm_snapdragon_8_elite_for_galaxy.zip"
+                    },
+                    "voice_ai": {
+                        "tool_versions": {
+                            "qairt": "2.45.0.260326154327"
+                        },
+                        "download_url": "https://qaihub-public-assets.s3.us-west-2.amazonaws.com/qai-hub-models/models/whisper_base/releases/v0.61.0/whisper_base-voice_ai-float-qualcomm_snapdragon_8_elite_for_galaxy.zip"
+                    }
+                },
+                "qualcomm-snapdragon-8-elite-gen5-for-galaxy": {
+                    "precompiled_qnn_onnx": {
+                        "tool_versions": {
+                            "qairt": "2.45.0.260326154327",
+                            "onnx_runtime": "1.27.1"
+                        },
+                        "download_url": "https://qaihub-public-assets.s3.us-west-2.amazonaws.com/qai-hub-models/models/whisper_base/releases/v0.61.0/whisper_base-precompiled_qnn_onnx-float-qualcomm_snapdragon_8_elite_gen5_for_galaxy.zip"
+                    },
+                    "qnn_context_binary": {
+                        "tool_versions": {
+                            "qairt": "2.45.0.260326154327"
+                        },
+                        "download_url": "https://qaihub-public-assets.s3.us-west-2.amazonaws.com/qai-hub-models/models/whisper_base/releases/v0.61.0/whisper_base-qnn_context_binary-float-qualcomm_snapdragon_8_elite_gen5_for_galaxy.zip"
+                    },
+                    "voice_ai": {
+                        "tool_versions": {
+                            "qairt": "2.45.0.260326154327"
+                        },
+                        "download_url": "https://qaihub-public-assets.s3.us-west-2.amazonaws.com/qai-hub-models/models/whisper_base/releases/v0.61.0/whisper_base-voice_ai-float-qualcomm_snapdragon_8_elite_gen5_for_galaxy.zip"
+                    }
+                },
+                "qualcomm-snapdragon-8gen1": {
+                    "precompiled_qnn_onnx": {
+                        "tool_versions": {
+                            "qairt": "2.45.0.260326154327",
+                            "onnx_runtime": "1.27.1"
+                        },
+                        "download_url": "https://qaihub-public-assets.s3.us-west-2.amazonaws.com/qai-hub-models/models/whisper_base/releases/v0.61.0/whisper_base-precompiled_qnn_onnx-float-qualcomm_snapdragon_8gen1.zip"
+                    },
+                    "qnn_context_binary": {
+                        "tool_versions": {
+                            "qairt": "2.45.0.260326154327"
+                        },
+                        "download_url": "https://qaihub-public-assets.s3.us-west-2.amazonaws.com/qai-hub-models/models/whisper_base/releases/v0.61.0/whisper_base-qnn_context_binary-float-qualcomm_snapdragon_8gen1.zip"
+                    },
+                    "voice_ai": {
+                        "tool_versions": {
+                            "qairt": "2.45.0.260326154327"
+                        },
+                        "download_url": "https://qaihub-public-assets.s3.us-west-2.amazonaws.com/qai-hub-models/models/whisper_base/releases/v0.61.0/whisper_base-voice_ai-float-qualcomm_snapdragon_8gen1.zip"
+                    }
+                },
+                "qualcomm-snapdragon-8gen3": {
+                    "precompiled_qnn_onnx": {
+                        "tool_versions": {
+                            "qairt": "2.45.0.260326154327",
+                            "onnx_runtime": "1.27.1"
+                        },
+                        "download_url": "https://qaihub-public-assets.s3.us-west-2.amazonaws.com/qai-hub-models/models/whisper_base/releases/v0.61.0/whisper_base-precompiled_qnn_onnx-float-qualcomm_snapdragon_8gen3.zip"
+                    },
+                    "qnn_context_binary": {
+                        "tool_versions": {
+                            "qairt": "2.45.0.260326154327"
+                        },
+                        "download_url": "https://qaihub-public-assets.s3.us-west-2.amazonaws.com/qai-hub-models/models/whisper_base/releases/v0.61.0/whisper_base-qnn_context_binary-float-qualcomm_snapdragon_8gen3.zip"
+                    },
+                    "voice_ai": {
+                        "tool_versions": {
+                            "qairt": "2.45.0.260326154327"
+                        },
+                        "download_url": "https://qaihub-public-assets.s3.us-west-2.amazonaws.com/qai-hub-models/models/whisper_base/releases/v0.61.0/whisper_base-voice_ai-float-qualcomm_snapdragon_8gen3.zip"
+                    }
+                },
+                "qualcomm-snapdragon-x-elite": {
+                    "precompiled_qnn_onnx": {
+                        "tool_versions": {
+                            "qairt": "2.45.0.260326154327",
+                            "onnx_runtime": "1.27.1"
+                        },
+                        "download_url": "https://qaihub-public-assets.s3.us-west-2.amazonaws.com/qai-hub-models/models/whisper_base/releases/v0.61.0/whisper_base-precompiled_qnn_onnx-float-qualcomm_snapdragon_x_elite.zip"
+                    },
+                    "qnn_context_binary": {
+                        "tool_versions": {
+                            "qairt": "2.45.0.260326154327"
+                        },
+                        "download_url": "https://qaihub-public-assets.s3.us-west-2.amazonaws.com/qai-hub-models/models/whisper_base/releases/v0.61.0/whisper_base-qnn_context_binary-float-qualcomm_snapdragon_x_elite.zip"
+                    },
+                    "voice_ai": {
+                        "tool_versions": {
+                            "qairt": "2.45.0.260326154327"
+                        },
+                        "download_url": "https://qaihub-public-assets.s3.us-west-2.amazonaws.com/qai-hub-models/models/whisper_base/releases/v0.61.0/whisper_base-voice_ai-float-qualcomm_snapdragon_x_elite.zip"
+                    }
+                },
+                "qualcomm-snapdragon-x2-elite": {
+                    "precompiled_qnn_onnx": {
+                        "tool_versions": {
+                            "qairt": "2.45.0.260326154327",
+                            "onnx_runtime": "1.27.1"
+                        },
+                        "download_url": "https://qaihub-public-assets.s3.us-west-2.amazonaws.com/qai-hub-models/models/whisper_base/releases/v0.61.0/whisper_base-precompiled_qnn_onnx-float-qualcomm_snapdragon_x2_elite.zip"
+                    },
+                    "qnn_context_binary": {
+                        "tool_versions": {
+                            "qairt": "2.45.0.260326154327"
+                        },
+                        "download_url": "https://qaihub-public-assets.s3.us-west-2.amazonaws.com/qai-hub-models/models/whisper_base/releases/v0.61.0/whisper_base-qnn_context_binary-float-qualcomm_snapdragon_x2_elite.zip"
+                    },
+                    "voice_ai": {
+                        "tool_versions": {
+                            "qairt": "2.45.0.260326154327"
+                        },
+                        "download_url": "https://qaihub-public-assets.s3.us-west-2.amazonaws.com/qai-hub-models/models/whisper_base/releases/v0.61.0/whisper_base-voice_ai-float-qualcomm_snapdragon_x2_elite.zip"
+                    }
+                }
+            }
+        }
+    }
+}

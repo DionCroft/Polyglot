@@ -1,0 +1,21 @@
+{
+  "date": "2026-09-08",
+  "application": "Microsoft PowerPoint",
+  "presentation": "new unsaved blank test presentation",
+  "overlay_rectangle_logical": [
+    170,
+    632,
+    1100,
+    251
+  ],
+  "click_logical": [
+    850,
+    740
+  ],
+  "before": "Slide 1",
+  "after": "End of slide show, click to exit.",
+  "caption_visible_before_and_after": true,
+  "powerpoint_retained_focus": true,
+  "ctrl_alt_c_while_powerpoint_focused": "PASS: changed locked overlay to unlocked (drag hint appeared)",
+  "evidence": "Observed through Windows Computer Use screenshots and accessibility states in this task; static caption used for overlay compatibility."
+}

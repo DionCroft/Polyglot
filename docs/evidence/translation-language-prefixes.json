@@ -1,0 +1,47 @@
+[
+  {
+    "prefix": ">>cmn_Hans<<",
+    "english": "Pulse-width modulation changes the average voltage applied to the motor.",
+    "chinese": "脉冲调制改变发动机的平均电压。"
+  },
+  {
+    "prefix": ">>cmn_Hans<<",
+    "english": "The robot uses an ultrasonic sensor to estimate its distance from an obstacle.",
+    "chinese": "机器人使用超声波传感器来估计距离"
+  },
+  {
+    "prefix": ">>cmn_Hans<<",
+    "english": "A convolutional neural network can perform image classification at the edge.",
+    "chinese": "进化神经网络可以在边缘进行图像分类。"
+  },
+  {
+    "prefix": ">>cmn<<",
+    "english": "Pulse-width modulation changes the average voltage applied to the motor.",
+    "chinese": "Pulse- width 调制器更改了发动机的平均电压 。"
+  },
+  {
+    "prefix": ">>cmn<<",
+    "english": "The robot uses an ultrasonic sensor to estimate its distance from an obstacle.",
+    "chinese": "机器人使用超声波传感器 The robot uses an extrasonic sengers 来估计它与障碍物的距离 to assess its lear from an cable."
+  },
+  {
+    "prefix": ">>cmn<<",
+    "english": "A convolutional neural network can perform image classification at the edge.",
+    "chinese": "convolutional 神经网络可以在边缘进行图像分类。"
+  },
+  {
+    "prefix": ">>cmn_Hant<<",
+    "english": "Pulse-width modulation changes the average voltage applied to the motor.",
+    "chinese": "脉搏调整改变了对马达施用的平均电压。"
+  },
+  {
+    "prefix": ">>cmn_Hant<<",
+    "english": "The robot uses an ultrasonic sensor to estimate its distance from an obstacle.",
+    "chinese": "机器人使用超音波传感器 估计它与障碍的距离"
+  },
+  {
+    "prefix": ">>cmn_Hant<<",
+    "english": "A convolutional neural network can perform image classification at the edge.",
+    "chinese": "变化性神经网络可以在边缘进行影像分类 。"
+  }
+]

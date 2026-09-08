@@ -1,0 +1,6 @@
+{
+  "runtime_python_files": 34,
+  "forbidden_network_imports": [],
+  "ort_telemetry_disabled": true,
+  "native_packet_trace": "pending; not proven by static audit"
+}

@@ -1,0 +1,10 @@
+{
+  "ultrasonic sensor": {
+    "english": "ultrasonic sensor",
+    "chinese": "超声波传感器"
+  },
+  "actuator": {
+    "english": "actuator",
+    "chinese": "执行器"
+  }
+}

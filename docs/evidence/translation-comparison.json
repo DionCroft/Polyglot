@@ -1,0 +1,98 @@
+[
+  {
+    "backend": "opus",
+    "english": "The ESP32 communicates with the sensor using the I-squared-C protocol.",
+    "chinese": "ESP32使用I -quared-C协议与传感器进行通信。",
+    "seconds": 0.2067086000024574
+  },
+  {
+    "backend": "opus",
+    "english": "Pulse-width modulation changes the average voltage applied to the motor.",
+    "chinese": "脉冲调制改变发动机的平均电压。",
+    "seconds": 0.12645440000051167
+  },
+  {
+    "backend": "opus",
+    "english": "An interrupt service routine should execute as quickly as possible.",
+    "chinese": "中断服务程序应尽快执行。",
+    "seconds": 0.08732189999864204
+  },
+  {
+    "backend": "opus",
+    "english": "The FreeRTOS scheduler performs a context switch between tasks.",
+    "chinese": "FreeRTOS 调度器执行任务之间的上下文切换 。",
+    "seconds": 0.17943129999912344
+  },
+  {
+    "backend": "opus",
+    "english": "The FPGA design is written in VHDL and synthesised into logic resources.",
+    "chinese": "FPGA设计用VHDL编写,并合成逻辑资源。",
+    "seconds": 0.22068310000031488
+  },
+  {
+    "backend": "opus",
+    "english": "The MOSFET is being driven using a pulse-width-modulated signal.",
+    "chinese": "MOSFET正在使用脉冲调整信号进行驱动。",
+    "seconds": 0.13753510000242386
+  },
+  {
+    "backend": "opus",
+    "english": "The robot uses an ultrasonic sensor to estimate its distance from an obstacle.",
+    "chinese": "机器人使用超声波传感器来估计距离",
+    "seconds": 0.12494310000329278
+  },
+  {
+    "backend": "opus",
+    "english": "A convolutional neural network can perform image classification at the edge.",
+    "chinese": "进化神经网络可以在边缘进行图像分类。",
+    "seconds": 0.10799129999941215
+  },
+  {
+    "backend": "m2m100",
+    "english": "The ESP32 communicates with the sensor using the I-squared-C protocol.",
+    "chinese": "ESP32 通过 I-squared-C 协议与传感器进行通信。",
+    "seconds": 2.209426599998551
+  },
+  {
+    "backend": "m2m100",
+    "english": "Pulse-width modulation changes the average voltage applied to the motor.",
+    "chinese": "脉冲宽调节改变发动机的平均电压。",
+    "seconds": 1.2706969999999274
+  },
+  {
+    "backend": "m2m100",
+    "english": "An interrupt service routine should execute as quickly as possible.",
+    "chinese": "一个中断的服务习惯应该尽快执行。",
+    "seconds": 0.9501725000009174
+  },
+  {
+    "backend": "m2m100",
+    "english": "The FreeRTOS scheduler performs a context switch between tasks.",
+    "chinese": "FreeRTOS 编程器在任务之间进行背景交换。",
+    "seconds": 1.1784977999996045
+  },
+  {
+    "backend": "m2m100",
+    "english": "The FPGA design is written in VHDL and synthesised into logic resources.",
+    "chinese": "FPGA 设计是用 VHDL 写的,并合成为逻辑资源。",
+    "seconds": 1.748798299995542
+  },
+  {
+    "backend": "m2m100",
+    "english": "The MOSFET is being driven using a pulse-width-modulated signal.",
+    "chinese": "MOSFET 正在使用脉冲宽模块化信号进行驱动。",
+    "seconds": 1.5388922000056482
+  },
+  {
+    "backend": "m2m100",
+    "english": "The robot uses an ultrasonic sensor to estimate its distance from an obstacle.",
+    "chinese": "机器人使用超声波传感器来估计其距离障碍。",
+    "seconds": 1.5454207000002498
+  },
+  {
+    "backend": "m2m100",
+    "english": "A convolutional neural network can perform image classification at the edge.",
+    "chinese": "一个转型神经网络可以在边缘进行图像分类。",
+    "seconds": 1.3842771999989054
+  }
+]

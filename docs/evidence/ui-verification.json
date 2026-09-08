@@ -1,0 +1,10 @@
+{
+  "caption_delivery": true,
+  "pause_hides_overlay": true,
+  "native_clickthrough_flag": true,
+  "native_noactivate_flag": true,
+  "shutdown_joined": true,
+  "screens": [
+    "\\\\.\\DISPLAY1"
+  ]
+}

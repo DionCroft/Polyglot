@@ -1,0 +1,72 @@
+{
+  "events": [
+    {
+      "identifier": 1,
+      "start": 0,
+      "end": 5.088,
+      "english": "The interrupt service routine should execute as quickly as possible.",
+      "chinese": "",
+      "final": true,
+      "epoch": 0
+    },
+    {
+      "identifier": 1,
+      "start": 0,
+      "end": 5.088,
+      "english": "The interrupt service routine should execute as quickly as possible.",
+      "chinese": "中断服务程序应尽快执行。",
+      "final": true,
+      "epoch": 0
+    },
+    {
+      "identifier": 2,
+      "start": 5.247999999999999,
+      "end": 10.592,
+      "english": "Pulse width modulation changes the average voltage applied to the motor.",
+      "chinese": "",
+      "final": true,
+      "epoch": 0
+    },
+    {
+      "identifier": 2,
+      "start": 5.247999999999999,
+      "end": 10.592,
+      "english": "Pulse width modulation changes the average voltage applied to the motor.",
+      "chinese": "脉冲宽度调制改变发动机的平均电压。",
+      "final": true,
+      "epoch": 0
+    },
+    {
+      "identifier": 3,
+      "start": 10.751999999999999,
+      "end": 16.704,
+      "english": "The robot uses an ultrasonic sensor to estimate its distance from an obstacle.",
+      "chinese": "",
+      "final": true,
+      "epoch": 0
+    },
+    {
+      "identifier": 3,
+      "start": 10.751999999999999,
+      "end": 16.704,
+      "english": "The robot uses an ultrasonic sensor to estimate its distance from an obstacle.",
+      "chinese": "机器人使用超声波传感器来估计距离",
+      "final": true,
+      "epoch": 0
+    }
+  ],
+  "metrics": {
+    "dropped_audio_chunks": 0,
+    "dropped_phrases": 0,
+    "translation_skips": 0,
+    "asr_seconds": 0.5630000000019209,
+    "translation_seconds": 0.13999999999941792,
+    "rtf": 0.09459005376376359,
+    "english_latency": 0.5310000000005815,
+    "bilingual_latency": 0.6709999999999994,
+    "audio_queue": 0,
+    "asr_queue": 0,
+    "translation_queue": 0
+  },
+  "worker_threads_remaining": []
+}

@@ -1,0 +1,22 @@
+{
+  "audio_seconds": 11.0,
+  "asr_seconds": 0.24163129999942612,
+  "rtf": 0.021966481818129647,
+  "english": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country.",
+  "translation_seconds": 0.05001610000181245,
+  "chinese": "中断服务常规必须保持相对短的。",
+  "providers": [
+    [
+      "QNNExecutionProvider",
+      "CPUExecutionProvider"
+    ],
+    [
+      "QNNExecutionProvider",
+      "CPUExecutionProvider"
+    ]
+  ],
+  "profiles": [
+    "C:\\NAS\\Back-up\\Projects\\Project\\_Polyglot\\logs\\ort_2026-09-08_23-02-49_776.json",
+    "C:\\NAS\\Back-up\\Projects\\Project\\_Polyglot\\logs\\ort_2026-09-08_23-02-50_021.json"
+  ]
+}

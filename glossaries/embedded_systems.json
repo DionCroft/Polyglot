@@ -1,0 +1,107 @@
+{
+  "PWM": {
+    "aliases": [
+      "pulse width modulation",
+      "pulse-width modulation"
+    ],
+    "english": "Pulse-Width Modulation",
+    "chinese": "脉宽调制",
+    "target_aliases": [
+      "脉冲宽度调制",
+      "脉冲调制",
+      "脉冲宽调节"
+    ]
+  },
+  "ADC": {
+    "aliases": [
+      "analogue-to-digital converter",
+      "analog-to-digital converter"
+    ],
+    "english": "Analog-to-Digital Converter",
+    "chinese": "模数转换器"
+  },
+  "MOSFET": {
+    "english": "Metal-Oxide-Semiconductor Field-Effect Transistor",
+    "chinese": "金属氧化物半导体场效应晶体管"
+  },
+  "FPGA": {
+    "english": "Field-Programmable Gate Array",
+    "chinese": "现场可编程门阵列"
+  },
+  "VHDL": {
+    "english": "VHDL",
+    "chinese": "硬件描述语言"
+  },
+  "motor": {
+    "english": "motor",
+    "chinese": "电机",
+    "target_aliases": [
+      "发动机"
+    ]
+  },
+  "GPIO": {
+    "english": "General Purpose Input/Output",
+    "chinese": "通用输入/输出"
+  },
+  "interrupt service routine": {
+    "aliases": [
+      "ISR"
+    ],
+    "english": "interrupt service routine",
+    "chinese": "中断服务程序",
+    "target_aliases": [
+      "中断服务常规",
+      "中断服务例程"
+    ]
+  },
+  "microcontroller": {
+    "english": "microcontroller",
+    "chinese": "微控制器"
+  },
+  "embedded system": {
+    "english": "embedded system",
+    "chinese": "嵌入式系统"
+  },
+  "context switch": {
+    "aliases": [
+      "context switching"
+    ],
+    "english": "context switch",
+    "chinese": "上下文切换",
+    "target_aliases": [
+      "上下文开关"
+    ]
+  },
+  "I2C": {
+    "aliases": [
+      "I-squared-C",
+      "I squared C"
+    ],
+    "english": "Inter-Integrated Circuit",
+    "chinese": "集成电路互连总线"
+  },
+  "FreeRTOS": {
+    "english": "FreeRTOS",
+    "chinese": "FreeRTOS",
+    "asr_aliases": [
+      "free RTOS",
+      "free R T O S"
+    ]
+  },
+  "mutex": {
+    "english": "mutex",
+    "chinese": "互斥锁"
+  },
+  "semaphore": {
+    "english": "semaphore",
+    "chinese": "信号量"
+  },
+  "pulse-width-modulated": {
+    "english": "pulse-width-modulated",
+    "chinese": "脉宽调制",
+    "target_aliases": [
+      "脉冲调整",
+      "脉冲宽模块化"
+    ]
+  }
+}

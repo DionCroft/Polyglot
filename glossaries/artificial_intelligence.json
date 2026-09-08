@@ -1,0 +1,21 @@
+{
+  "CNN": {
+    "aliases": [
+      "convolutional neural network"
+    ],
+    "english": "Convolutional Neural Network",
+    "chinese": "卷积神经网络",
+    "target_aliases": [
+      "进化神经网络",
+      "转型神经网络"
+    ]
+  },
+  "inference": {
+    "english": "inference",
+    "chinese": "推理"
+  },
+  "edge computing": {
+    "english": "edge computing",
+    "chinese": "边缘计算"
+  }
+}

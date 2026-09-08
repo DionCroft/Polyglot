@@ -1,0 +1,10 @@
+{
+  "IoT": {
+    "english": "Internet of Things",
+    "chinese": "物联网"
+  },
+  "MQTT": {
+    "english": "Message Queuing Telemetry Transport",
+    "chinese": "消息队列遥测传输协议"
+  }
+}
