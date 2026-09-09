@@ -17,6 +17,7 @@ class GuideDialog(QDialog):
             ("Quick start", "QUICK_START.md"),
             ("Full user guide", "USER_GUIDE.md"),
             ("Installation help", "INSTALLATION.md"),
+            ("Windows Intel/AMD beta", "WINDOWS_BETA.md"),
         ]:
             self.pages.addItem(label, filename)
         self.pages.setAccessibleName("Help topic")

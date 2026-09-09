@@ -1,7 +1,33 @@
-# LectureLive 0.3 — STATUS
+# LectureLive — STATUS
 
 Updated 2026-09-09. Six-part improvement milestone implemented and native executable verified.
 Production classroom acceptance remains open.
+
+## Windows x64 beta (0.4.0b1), ARM64 maintenance (0.3.1)
+
+- Separate x64 runtime, immutable model/dependency manifests, installer selection, launcher,
+  preferences and portable package. Source setup automatically selects the Windows architecture.
+- CPU speech, DirectML GPU speech encoding, experimental Windows ML Intel/AMD NPU adapters.
+  CPU remains responsible for decoding, translation and voice detection in the x64 beta.
+- NPU provider preparation is an explicit online setup step. Lectures register only prepared,
+  fingerprint-checked local libraries and never call the Windows ML download catalog.
+- GPU/NPU encoder runs in a private named-pipe worker with bounded initialization/inference.
+  Warm-up execution must prove the requested provider ran without CPU fallback. Failure during
+  a lecture retries the same phrase on CPU. Settings identify the actual verified backend.
+- Beginner [Windows beta guide](docs/WINDOWS_BETA.md), in-app help topic, and separate launchers.
+
+**Hardware scope:** all development checks used a Snapdragon X Elite Surface. x64 CPU ran
+under Windows ARM emulation; DirectML actually executed on its Adreno GPU. This is **not**
+physical Intel/AMD validation. Intel/AMD GPU compatibility, Intel/AMD NPU model acceptance,
+long sessions, native-library network audits and classroom use on those platforms remain pending.
+
+55 tests pass on each architecture, including strict provider trace checks, GPU failure retry,
+unavailable NPU fallback and cache disposal. Public JFK audio produced equivalent CPU/GPU
+transcripts (punctuation differed). One development run took about 0.78 s on x64 CPU and
+0.47 s with GPU encoding after warm-up; this is a single-machine observation, not a benchmark
+or a promise of Intel/AMD performance. The native beta UI completed a synthetic lecture without
+microphone capture. Pinned x64 dependencies/models passed offline verification and pip check.
+See [beta verification evidence](docs/evidence/beta-0.4.md) for packaged checks and limits.
 
 ## Interface and installation polish (0.3)
 

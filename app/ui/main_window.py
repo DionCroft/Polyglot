@@ -26,6 +26,7 @@ from PySide6.QtWidgets import (
     QInputDialog,
 )
 from app.config.settings import ROOT, DATA, Settings
+from app.system.architecture import is_x64
 from app.audio.capture import microphones
 from app.pipeline import Pipeline
 from app.ui.overlay import Overlay
@@ -100,7 +101,9 @@ class MainWindow(QMainWindow):
         self.bridge.event.connect(self.on_event)
         self.last_caption = None
         self.transcript_path = DATA / "transcripts"
-        self.setWindowTitle("LectureLive")
+        self.setWindowTitle(
+            "LectureLive · Windows x64 Beta" if is_x64() else "LectureLive"
+        )
         self.resize(1060, 860)
         self.setMinimumSize(860, 640)
         self.setWindowIcon(QIcon(str(ROOT / "assets/lecturelive.png")))
@@ -114,7 +117,7 @@ class MainWindow(QMainWindow):
         layout.setSpacing(16)
         head = QHBoxLayout()
         brand = QVBoxLayout()
-        name = QLabel("LectureLive")
+        name = QLabel("LectureLive · Beta" if is_x64() else "LectureLive")
         name.setObjectName("brand")
         brand.addWidget(name)
         tagline = QLabel("Offline bilingual live captions for teaching")
@@ -205,7 +208,9 @@ class MainWindow(QMainWindow):
         from app.system.readiness import check
 
         try:
-            result = check(ROOT, self.cfg.profile, self.model_store)
+            result = check(
+                ROOT, self.cfg.profile, self.model_store, self.cfg.accelerator
+            )
         except Exception:
             logging.exception("Readiness check failed")
             result = {
@@ -217,6 +222,13 @@ class MainWindow(QMainWindow):
             }
         self.bridge.event.emit("readiness", result)
 
+    def select_accelerator(self):
+        self.cfg.accelerator = self.accelerator.currentData()
+        self.backend.setText(
+            "Hardware selection will be checked when the next lecture starts."
+        )
+        self.persist()
+
     def capture_preset_settings(self):
         from dataclasses import replace
 
@@ -226,6 +238,7 @@ class MainWindow(QMainWindow):
             vocabulary=self.vocabulary.toPlainText(),
             microphone=self.microphone.currentText(),
             profile=self.profile.currentData(),
+            accelerator=self.accelerator.currentData(),
             glossary=self.glossary.currentData(),
             save_transcripts=self.save.isChecked(),
         )
@@ -261,6 +274,9 @@ class MainWindow(QMainWindow):
             self.title.setText(cfg.lecture_title)
             self.vocabulary.setPlainText(cfg.vocabulary)
             self.profile.setCurrentIndex(max(0, self.profile.findData(cfg.profile)))
+            self.accelerator.setCurrentIndex(
+                max(0, self.accelerator.findData(cfg.accelerator))
+            )
             self.glossary.setCurrentIndex(max(0, self.glossary.findData(cfg.glossary)))
             self.save.setChecked(cfg.save_transcripts)
             for key, spin in self.appearance_spins.items():
@@ -499,6 +515,8 @@ class MainWindow(QMainWindow):
             ("Fast · quicker captions", "fast"),
             ("Balanced · recommended", "balanced"),
         ]:
+            if is_x64() and key != "fast":
+                continue
             exists = (ROOT / "models/whisper" / key / "config.json").exists()
             self.profile.addItem(
                 title if exists or key == "accuracy" else title + " · not installed",
@@ -508,6 +526,30 @@ class MainWindow(QMainWindow):
         idx = self.profile.findData(self.cfg.profile)
         self.profile.setCurrentIndex(max(0, idx))
         form.addWidget(self.profile)
+        self.accelerator = QComboBox()
+        self.accelerator.setAccessibleName("Processing hardware")
+        for label, key in [
+            ("Automatic · checked before captions", "auto"),
+            ("CPU · compatibility mode", "cpu"),
+            ("GPU · DirectML beta", "gpu"),
+            ("Intel NPU · experimental", "intel_npu"),
+            ("AMD NPU · experimental", "amd_npu"),
+        ]:
+            self.accelerator.addItem(label, key)
+        self.accelerator.setCurrentIndex(
+            max(0, self.accelerator.findData(self.cfg.accelerator))
+        )
+        if is_x64():
+            form.addWidget(QLabel("Processing hardware"))
+            form.addWidget(self.accelerator)
+            hint = QLabel(
+                "GPU/NPU accelerates speech encoding. Decoding and Chinese translation use CPU.\nFor NPU setup, read the Windows beta guide."
+            )
+            hint.setWordWrap(True)
+            form.addWidget(hint)
+        else:
+            self.accelerator.hide()
+        self.accelerator.currentIndexChanged.connect(self.select_accelerator)
         left.addWidget(captions)
         topic, form = self.group("3 · LECTURE DETAILS · OPTIONAL")
         self.title = QLineEdit()
@@ -965,6 +1007,7 @@ class MainWindow(QMainWindow):
         self.cfg.vocabulary = self.vocabulary.toPlainText()
         self.cfg.microphone = self.microphone.currentText()
         self.cfg.profile = self.profile.currentData()
+        self.cfg.accelerator = self.accelerator.currentData()
         self.cfg.glossary = self.glossary.currentData()
         self.cfg.save_transcripts = self.save.isChecked()
         self.persist()
@@ -992,6 +1035,7 @@ class MainWindow(QMainWindow):
         for w in [
             self.microphone,
             self.profile,
+            self.accelerator,
             self.glossary,
             self.save,
             self.vocabulary,
@@ -1055,19 +1099,13 @@ class MainWindow(QMainWindow):
                         ("speech", "Speech"),
                         ("translation", "Chinese"),
                         ("vad", "Voice detection"),
-                        ("npu", "NPU"),
                     ]
                 )
             )
             self.backend.setText(
-                "Startup inference passed on "
-                + (
-                    "Qualcomm NPU"
-                    if value["npu"]
-                    else "local CPU"
-                    if value["speech"]
-                    else "no speech backend"
-                )
+                "Verified: " + value.get("backend", "local CPU")
+                if value["speech"]
+                else "No speech backend passed its check."
             )
             if value["messages"]:
                 self.warn(" ".join(value["messages"]))
@@ -1092,6 +1130,7 @@ class MainWindow(QMainWindow):
             for w in [
                 self.microphone,
                 self.profile,
+                self.accelerator,
                 self.glossary,
                 self.save,
                 self.vocabulary,
@@ -1186,6 +1225,7 @@ class MainWindow(QMainWindow):
             return
         if self.teaching:
             self.teaching.hide()
+        self.model_store.close()
         self.hotkeys.close()
         self.overlay.close()
         self.persist()

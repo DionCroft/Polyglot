@@ -1,0 +1,7 @@
+{
+  "beta_title": "LectureLive \u00b7 Windows x64 Beta",
+  "profiles": 1,
+  "hardware_choices": 5,
+  "synthetic_caption": "The ESP32 communicates with the sensor using the iSquared-C protocol.",
+  "passed": true
+}

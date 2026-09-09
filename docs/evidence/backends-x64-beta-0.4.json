@@ -1,0 +1,50 @@
+[
+  {
+    "requested": "cpu",
+    "actual": "Local CPU · Whisper Base int8",
+    "accelerated": false,
+    "npu": false,
+    "text": "And so my fellow Americans ask not what your country can do for you, ask what you can do for your country.",
+    "setup_seconds": 3.504715699999906,
+    "inference_seconds": 0.7814075000001139,
+    "messages": [
+      "Using local CPU Whisper Base; no internet is required."
+    ]
+  },
+  {
+    "requested": "gpu",
+    "actual": "Windows GPU (DirectML) speech encoder + CPU decoder · Beta",
+    "accelerated": true,
+    "npu": false,
+    "text": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country.",
+    "setup_seconds": 4.023685300000125,
+    "inference_seconds": 0.4659636999999748,
+    "messages": []
+  },
+  {
+    "requested": "intel_npu",
+    "actual": "Local CPU · Whisper Base int8",
+    "accelerated": false,
+    "npu": false,
+    "text": "And so my fellow Americans ask not what your country can do for you, ask what you can do for your country.",
+    "setup_seconds": 3.891888200000267,
+    "inference_seconds": 0.7553490000000238,
+    "messages": [
+      "Intel NPU unavailable: Run Prepare-Acceleration.cmd on this PC before selecting its NPU",
+      "Using local CPU Whisper Base; no internet is required."
+    ]
+  },
+  {
+    "requested": "amd_npu",
+    "actual": "Local CPU · Whisper Base int8",
+    "accelerated": false,
+    "npu": false,
+    "text": "And so my fellow Americans ask not what your country can do for you, ask what you can do for your country.",
+    "setup_seconds": 3.5688043000000107,
+    "inference_seconds": 0.7845280999999886,
+    "messages": [
+      "AMD NPU unavailable: Run Prepare-Acceleration.cmd on this PC before selecting its NPU",
+      "Using local CPU Whisper Base; no internet is required."
+    ]
+  }
+]

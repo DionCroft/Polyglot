@@ -5,11 +5,18 @@ from app.asr.qnn_whisper import QnnWhisper
 from app.asr.cpu_whisper import CpuWhisper
 from app.translation.opus_mt import OpusMT
 from app.system.readiness import check
+from app.system.architecture import is_x64
 
 
 def run(root, wav_path, report_path):
     from app import __version__
-    result = {"version": __version__, "startup": check(root, "balanced"), "speech": []}
+
+    result = {
+        "version": __version__,
+        "architecture": "x64" if is_x64() else "ARM64",
+        "startup": check(root, "fast" if is_x64() else "balanced"),
+        "speech": [],
+    }
     with wave.open(str(wav_path)) as f:
         if f.getframerate() != 16000 or f.getsampwidth() != 2 or f.getnchannels() != 1:
             raise ValueError("Self-test requires mono 16 kHz 16-bit PCM WAV")
@@ -17,11 +24,16 @@ def run(root, wav_path, report_path):
             np.frombuffer(f.readframes(f.getnframes()), dtype="<i2").astype(np.float32)
             / 32768
         )
-    for profile, cls in [
-        ("fast", QnnWhisper),
-        ("balanced", QnnWhisper),
-        ("cpu", CpuWhisper),
-    ]:
+    profiles = (
+        [("cpu", CpuWhisper)]
+        if is_x64()
+        else [
+            ("fast", QnnWhisper),
+            ("balanced", QnnWhisper),
+            ("cpu", CpuWhisper),
+        ]
+    )
+    for profile, cls in profiles:
         model = cls(root / "models/whisper" / ("fast" if profile == "cpu" else profile))
         t = time.perf_counter()
         text = model.transcribe(audio)
@@ -32,6 +44,28 @@ def run(root, wav_path, report_path):
         if not text:
             raise RuntimeError("No speech output")
         del model
+    if is_x64() and result["startup"].get("accelerated"):
+        from app.system.models import ModelStore
+
+        store = ModelStore(root)
+        try:
+            bundle = store.load("fast")
+            if not bundle.accelerated:
+                raise RuntimeError("Previously verified accelerator became unavailable")
+            t = time.perf_counter()
+            text = bundle.asr.transcribe(audio)
+            if not text:
+                raise RuntimeError("No accelerated speech output")
+            result["speech"].append(
+                {
+                    "profile": "accelerated",
+                    "backend": bundle.asr.name,
+                    "english": text,
+                    "seconds": time.perf_counter() - t,
+                }
+            )
+        finally:
+            store.close()
     translator = OpusMT(root / "models/translation/opus")
     t = time.perf_counter()
     text = translator.translate(
@@ -39,7 +73,12 @@ def run(root, wav_path, report_path):
     )
     result["translation"] = {"chinese": text, "seconds": time.perf_counter() - t}
     result["passed"] = all(
-        result["startup"][k] for k in ["speech", "translation", "vad", "npu"]
+        result["startup"][k]
+        for k in (
+            ["speech", "translation", "vad"]
+            if is_x64()
+            else ["speech", "translation", "vad", "npu"]
+        )
     ) and bool(text)
     Path(report_path).write_text(
         json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8"

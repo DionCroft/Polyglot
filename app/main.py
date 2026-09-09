@@ -6,6 +6,11 @@ from app.system.offline import enforce_offline
 
 def main():
     enforce_offline()
+    if "--encoder-worker" in sys.argv:
+        from app.asr.encoder_worker import run_worker
+
+        index = sys.argv.index("--encoder-worker")
+        return run_worker(*sys.argv[index + 1 : index + 4])
     from app.config.settings import DATA
     from app.utils.logging import configure
 

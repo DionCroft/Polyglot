@@ -1,5 +1,8 @@
 # Installation and reproducible builds
 
+> **Intel/AMD Windows beta:** start with the [Windows beta guide](WINDOWS_BETA.md).
+> It covers the separate launcher, Fast profile, GPU and optional experimental NPU setup.
+
 The ready-to-run app is `dist/LectureLive/LectureLive.exe` on Windows 11 ARM64. Keep
 its entire `_internal` directory. The existing Surface/Qualcomm driver supplies the
 NPU device runtime; no separate QAIRT SDK was needed on the tested machine.

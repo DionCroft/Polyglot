@@ -4,11 +4,15 @@ from app.system.inference import session
 
 
 class CpuWhisper(QnnWhisper):
-    name = "Local ARM64 CPU · Whisper Base int8"
+    name = "Local CPU · Whisper Base int8"
 
-    def __init__(self, folder):
+    def __init__(self, folder, encoder=None):
         self.load_assets(folder)
-        self.encoder = session(folder / "cpu/encoder_model_quantized.onnx")
+        self.encoder = (
+            encoder
+            if encoder is not None
+            else session(folder / "cpu/encoder_model_quantized.onnx")
+        )
         self.decoder = session(folder / "cpu/decoder_model_quantized.onnx")
         self.past = session(folder / "cpu/decoder_with_past_model_quantized.onnx")
 
@@ -34,3 +38,8 @@ class CpuWhisper(QnnWhisper):
             for info, value in zip(decoder.get_outputs()[1:], out[1:]):
                 cache[info.name.replace("present.", "past_key_values.")] = value
         return self.decode(result)
+
+    def close(self):
+        close = getattr(self.encoder, "close", None)
+        if close:
+            close()

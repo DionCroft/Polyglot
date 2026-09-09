@@ -77,6 +77,7 @@ class Pipeline:
         self.title = title
         self.wav = wav
         self.using_npu = False
+        self.accelerated = False
         self.force_cpu = force_cpu
         self.model_store = model_store
         self.glossary = Glossary(
@@ -124,10 +125,11 @@ class Pipeline:
             from app.system.models import ModelStore
 
             bundle = (self.model_store or ModelStore(self.root)).load(
-                self.settings.profile, self.force_cpu
+                self.settings.profile, self.force_cpu, self.settings.accelerator
             )
             self.asr, self.mt = bundle.asr, bundle.mt
             self.using_npu = bundle.npu
+            self.accelerated = bundle.accelerated
             for message in bundle.messages:
                 self._notify("warning", message)
             self.segmenter = Segmenter(bundle.vad)
@@ -304,20 +306,24 @@ class Pipeline:
         try:
             return self.asr.transcribe(audio)
         except Exception:
-            if not self.using_npu:
+            if not (self.using_npu or self.accelerated):
                 raise
-            log.exception("NPU failed during lecture; retrying this phrase on CPU")
+            log.exception("Accelerator failed during lecture; retrying this phrase on CPU")
             from app.asr.cpu_whisper import CpuWhisper
 
+            close = getattr(self.asr, "close", None)
+            if close:
+                close()
             self.asr = CpuWhisper(self.root / "models/whisper/fast")
             self.using_npu = False
+            self.accelerated = False
             text = self.asr.transcribe(audio)
             if self.model_store:
                 self.model_store.invalidate()
             self._notify("backend", self.asr.name)
             self._notify(
                 "warning",
-                "NPU processing failed. This phrase was retried on local CPU; captions continue.",
+                "Accelerator processing failed. This phrase was retried on local CPU; captions continue.",
             )
             return text
 
@@ -496,5 +502,9 @@ class Pipeline:
                         "warning",
                         "Final transcript save failed. Earlier journal entries remain available for recovery.",
                     )
+        if not self.model_store:
+            close = getattr(self.asr, "close", None)
+            if close:
+                close()
         self.started = False
         log.info("Session stopped; all pipeline workers joined")

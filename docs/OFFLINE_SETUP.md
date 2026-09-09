@@ -1,5 +1,8 @@
 # Offline setup and recovery
 
+> **Intel/AMD Windows beta:** start with the [Windows beta guide](WINDOWS_BETA.md).
+> It covers the separate launcher, Fast profile, GPU and optional experimental NPU setup.
+
 Copy the complete `dist/LectureLive` folder to a second drive and launch it there before
 travel. The bundle contains Fast and Balanced NPU speech models, independent CPU
 speech recovery, translation, VAD, tokenisation assets and required libraries.

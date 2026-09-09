@@ -1,5 +1,8 @@
 # Your first lecture
 
+> **Intel/AMD Windows beta:** start with the [Windows beta guide](WINDOWS_BETA.md).
+> It covers the separate launcher, Fast profile, GPU and optional experimental NPU setup.
+
 LectureLive listens to English and displays English and Simplified Chinese captions.
 You do not need an account. Once setup is complete, speech and translation run on your computer.
 

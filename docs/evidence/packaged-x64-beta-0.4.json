@@ -1,0 +1,31 @@
+{
+  "version": "0.4.0b1",
+  "architecture": "x64",
+  "startup": {
+    "speech": true,
+    "translation": true,
+    "vad": true,
+    "npu": false,
+    "messages": [],
+    "accelerated": true,
+    "backend": "Windows GPU (DirectML) speech encoder + CPU decoder · Beta"
+  },
+  "speech": [
+    {
+      "profile": "cpu",
+      "english": "And so my fellow Americans ask not what your country can do for you, ask what you can do for your country.",
+      "seconds": 0.8672594999998182
+    },
+    {
+      "profile": "accelerated",
+      "backend": "Windows GPU (DirectML) speech encoder + CPU decoder · Beta",
+      "english": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country.",
+      "seconds": 0.5030421000001297
+    }
+  ],
+  "translation": {
+    "chinese": "中断服务程序应该尽快执行。",
+    "seconds": 0.12638829999968948
+  },
+  "passed": true
+}

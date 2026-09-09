@@ -29,3 +29,6 @@ docs/PROJECT_BRIEF.md
 *.wav
 *.mp3
 *.m4a
+
+# Intel/AMD beta private runtime
+runtime-x64/

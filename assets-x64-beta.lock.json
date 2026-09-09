@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "description": "Pinned artifacts verified on Snapdragon X Elite; setup networking only.",
+  "assets": [
+    {
+      "path": "models/whisper/fast/tokenizer.json",
+      "url": "https://huggingface.co/openai/whisper-base/resolve/e37978b90ca9030d5170a5c07aadb050351a65bb/tokenizer.json",
+      "bytes": 2480466,
+      "sha256": "27fc476bfe7f17299480be2273fc0608e4d5a99aba2ab5dec5374b4482d1a566"
+    },
+    {
+      "path": "models/whisper/fast/config.json",
+      "url": "https://huggingface.co/openai/whisper-base/resolve/e37978b90ca9030d5170a5c07aadb050351a65bb/config.json",
+      "bytes": 1983,
+      "sha256": "a153c53883a6799b6f056b4a8d1a515c9926d03994682ba88a7616618d7da0c1"
+    },
+    {
+      "path": "models/whisper/fast/preprocessor_config.json",
+      "url": "https://huggingface.co/openai/whisper-base/resolve/e37978b90ca9030d5170a5c07aadb050351a65bb/preprocessor_config.json",
+      "bytes": 184990,
+      "sha256": "9b5cd03a36fbb8a627c64d98a5b5b126ead95a77720723944487311f0110b666"
+    },
+    {
+      "path": "models/whisper/fast/generation_config.json",
+      "url": "https://huggingface.co/openai/whisper-base/resolve/e37978b90ca9030d5170a5c07aadb050351a65bb/generation_config.json",
+      "bytes": 3807,
+      "sha256": "444b3f636d2fff89dd9ecf549e2a085b61f7ff0fa0246d4628bac6a3b8cc9ba4"
+    },
+    {
+      "path": "models/translation/opus/config.json",
+      "url": "https://huggingface.co/onnx-community/opus-mt-en-zh/resolve/4dc37afc6deb160f4c9048260d48019ee497658e/config.json",
+      "bytes": 1520,
+      "sha256": "ed3129cecc03a7e8301def052c0f41a7ed709656dcfd68755b428ce4a0a60edc"
+    },
+    {
+      "path": "models/translation/opus/generation_config.json",
+      "url": "https://huggingface.co/onnx-community/opus-mt-en-zh/resolve/4dc37afc6deb160f4c9048260d48019ee497658e/generation_config.json",
+      "bytes": 288,
+      "sha256": "9af519fb778df0d27579991a3cc759e9ce1dacbd635d9e26833b010ddf67bd11"
+    },
+    {
+      "path": "models/translation/opus/tokenizer.json",
+      "url": "https://huggingface.co/onnx-community/opus-mt-en-zh/resolve/4dc37afc6deb160f4c9048260d48019ee497658e/tokenizer.json",
+      "bytes": 6380952,
+      "sha256": "d0c7da27056e8f42adce9e76d8e792e5daa64e15f5acd2e7aabf0121877dd4c1"
+    },
+    {
+      "path": "models/translation/opus/tokenizer_config.json",
+      "url": "https://huggingface.co/onnx-community/opus-mt-en-zh/resolve/4dc37afc6deb160f4c9048260d48019ee497658e/tokenizer_config.json",
+      "bytes": 849,
+      "sha256": "73b9b41c98292e8d9e516ae8737dfd2e0377e67b3a2c0303e985e112ad61cd87"
+    },
+    {
+      "path": "models/translation/opus/vocab.json",
+      "url": "https://huggingface.co/onnx-community/opus-mt-en-zh/resolve/4dc37afc6deb160f4c9048260d48019ee497658e/vocab.json",
+      "bytes": 1747795,
+      "sha256": "22c957348eed495ee925afc40a36da3e387c8a34a734c8486967c2dca271613e"
+    },
+    {
+      "path": "models/translation/opus/source.spm",
+      "url": "https://huggingface.co/onnx-community/opus-mt-en-zh/resolve/4dc37afc6deb160f4c9048260d48019ee497658e/source.spm",
+      "bytes": 806435,
+      "sha256": "5775ddc9e3ff2fae91554da56468ad35ff56edaba870fea74447bc7234bfdaa8"
+    },
+    {
+      "path": "models/translation/opus/target.spm",
+      "url": "https://huggingface.co/onnx-community/opus-mt-en-zh/resolve/4dc37afc6deb160f4c9048260d48019ee497658e/target.spm",
+      "bytes": 804600,
+      "sha256": "81dc94efa84e4025ef38d25d5d07429fe41e3eb29d44003f1db6fe98487b0052"
+    },
+    {
+      "path": "models/translation/opus/onnx/encoder_model_quantized.onnx",
+      "url": "https://huggingface.co/onnx-community/opus-mt-en-zh/resolve/4dc37afc6deb160f4c9048260d48019ee497658e/onnx/encoder_model_quantized.onnx",
+      "bytes": 52875078,
+      "sha256": "cb02c542d2ab3010766031f3ce04e9041ffb6bd2df15caa7c41f3aead7cfe6dc"
+    },
+    {
+      "path": "models/translation/opus/onnx/decoder_model_quantized.onnx",
+      "url": "https://huggingface.co/onnx-community/opus-mt-en-zh/resolve/4dc37afc6deb160f4c9048260d48019ee497658e/onnx/decoder_model_quantized.onnx",
+      "bytes": 192882669,
+      "sha256": "ddb2e3913bbdb0622545ad589cba0f05d8621cbc14096d13c6dc6cd17d61c13a"
+    },
+    {
+      "path": "models/translation/opus/onnx/decoder_with_past_model_quantized.onnx",
+      "url": "https://huggingface.co/onnx-community/opus-mt-en-zh/resolve/4dc37afc6deb160f4c9048260d48019ee497658e/onnx/decoder_with_past_model_quantized.onnx",
+      "bytes": 189596654,
+      "sha256": "9f9a43f032104e7bd744d7aafbb19e2a8bb4da529c52a5cdc132c7d6d43322e9"
+    },
+    {
+      "path": "models/translation/opus/README.md",
+      "url": "https://huggingface.co/onnx-community/opus-mt-en-zh/resolve/4dc37afc6deb160f4c9048260d48019ee497658e/README.md",
+      "bytes": 590,
+      "sha256": "035803d5c56c00cb7313c9e65f6e38a0167a88b392c59cbbfde958116cc4cb07"
+    },
+    {
+      "path": "models/whisper/fast/cpu/encoder_model_quantized.onnx",
+      "url": "https://huggingface.co/onnx-community/whisper-base/resolve/1846881b6b3a3024392c1eea3ad983695bc23925/onnx/encoder_model_quantized.onnx",
+      "bytes": 23201314,
+      "sha256": "5862993336bf33acd23736071aae2b32261d3b1b2f37780194460d4ef974dd46"
+    },
+    {
+      "path": "models/whisper/fast/cpu/decoder_model_quantized.onnx",
+      "url": "https://huggingface.co/onnx-community/whisper-base/resolve/1846881b6b3a3024392c1eea3ad983695bc23925/onnx/decoder_model_quantized.onnx",
+      "bytes": 53310178,
+      "sha256": "c859636f4463dd5a9ea752546c6c7badeb48ab3e22b340cafef08a15552fcb2e"
+    },
+    {
+      "path": "models/whisper/fast/cpu/decoder_with_past_model_quantized.onnx",
+      "url": "https://huggingface.co/onnx-community/whisper-base/resolve/1846881b6b3a3024392c1eea3ad983695bc23925/onnx/decoder_with_past_model_quantized.onnx",
+      "bytes": 50075136,
+      "sha256": "dd0d9ff1c066992aa8db6ff1944b5fd5660e95ecbbc86e0da158300c23e52232"
+    },
+    {
+      "path": "models/vad/silero_vad.onnx",
+      "url": "https://raw.githubusercontent.com/snakers4/silero-vad/867c2aa692646a1f1de3e94a15c9dd9f614c0acb/src/silero_vad/data/silero_vad.onnx",
+      "bytes": 2327524,
+      "sha256": "1a153a22f4509e292a94e67d6f9b85e8deb25b4988682b7e174c65279d8788e3"
+    },
+    {
+      "path": "models/vad/LICENSE",
+      "url": "https://raw.githubusercontent.com/snakers4/silero-vad/867c2aa692646a1f1de3e94a15c9dd9f614c0acb/LICENSE",
+      "bytes": 1075,
+      "sha256": "2e63e9a38b6e8fc0c7bc37ce174caca1862870856c6daf5697cfb785e925520b"
+    },
+    {
+      "path": "models/whisper/fast/accelerated/encoder_model.onnx",
+      "url": "https://huggingface.co/onnx-community/whisper-base/resolve/1846881b6b3a3024392c1eea3ad983695bc23925/onnx/encoder_model.onnx",
+      "bytes": 82468078,
+      "sha256": "a9f3b752833b49e880dec91ee5b6d936112be7c3ea07c221024ba493439f46fe"
+    }
+  ]
+}

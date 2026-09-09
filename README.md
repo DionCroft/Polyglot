@@ -16,15 +16,17 @@ transcripts is optional.
 
 You need:
 
-- **Windows 11 on a Snapdragon ARM64 PC.** The tested machine is a Snapdragon X Elite Surface.
-  Intel/AMD Windows PCs, Macs and Linux are not supported by this release.
+- **Windows 11.** The established ARM64 edition is tested on a Snapdragon X Elite Surface.
+  **Windows 11 Intel/AMD x64 PCs can now try the beta.** See the [Windows beta guide](docs/WINDOWS_BETA.md)
+  for GPU acceleration and experimental Intel/AMD NPU preparation. Macs and Linux are not supported.
 - **A microphone** — use the one you intend to teach with.
 - **Internet for the first setup** and at least **15 GB of free disk space** recommended.
   Keep the computer plugged in while setup downloads the models and builds the app.
 - A projector or second screen only if you want to show captions there.
 
 **Not sure which PC you have?** Open Windows **Settings → System → About**. Look for an
-ARM-based processor under **System type**, and a Snapdragon processor. You do **not** need to
+**System type**: an ARM-based Snapdragon PC uses ARM64; an x64-based Intel/AMD PC uses the beta.
+Setup chooses the edition automatically. You do **not** need to
 install Python, Git, CUDA or any developer tools yourself.
 
 ## Install from GitHub — no terminal commands needed
@@ -60,13 +62,15 @@ file in that folder. See the troubleshooting table below.
 If someone gives you the complete **LectureLive** application folder, extract/copy the whole
 folder and open **LectureLive.exe** inside it. Keep the adjacent **_internal** folder — it
 contains files the app needs. No setup or initial model download is needed for that complete copy.
+For a beta copy, open **LectureLive-x64-Beta.exe** inside the complete **LectureLive-x64-Beta** folder.
 The GitHub **Download ZIP** described above is source code and needs **Setup.cmd** first.
 
 ## Your first captions
 
 1. Open LectureLive and wait for **Ready**.
 2. Choose your microphone, select **Test microphone · 3 seconds**, and speak. Check that the meter moves.
-3. Leave **Bilingual** and **Balanced · recommended** selected. Lecture details and presets are optional.
+3. Leave **Bilingual** selected. Use **Balanced** on ARM64 or **Fast** and **Automatic** processing
+   on the x64 beta. Lecture details and presets are optional.
 4. Select **Start lecture** at the bottom. Speak a sentence and pause briefly. Captions appear in a floating panel.
 5. Select **Pause** for a break, **Resume** to continue, and **Stop lecture** when finished.
    Wait for the last caption to finish saving.
@@ -82,7 +86,7 @@ caption panel. Change them under **Overlay**.
 
 | What you see | What to do |
 |---|---|
-| “This release needs… ARM64” | Check your PC type. This installer cannot run the app on Intel/AMD Windows or macOS. |
+| Intel/AMD PC | Use the current Setup.cmd, or Setup-Beta.cmd. Read the [beta guide](docs/WINDOWS_BETA.md). |
 | Setup stops during a download | Check your connection and free disk space, then run Setup.cmd again in the same folder. Keep setup.log if you need help. |
 | “Close LectureLive…” during setup | Finish your lecture and close the app, then run setup again. |
 | No microphone or no moving meter | Connect/select the microphone, use the refresh button, then test again. Check Windows microphone permissions if access is denied. |
@@ -100,7 +104,7 @@ For more detail: [Quick start](docs/QUICK_START.md) · [User guide](docs/USER_GU
 To update from GitHub, download and extract the new source ZIP into a new folder and run its
 **Setup.cmd**. Keep your previous working copy until the new one works. The Start menu shortcut
 will point to the newly installed copy. Settings and transcripts stay in
-`%LOCALAPPDATA%\LectureLive`; back up important transcripts before updating.
+`%LOCALAPPDATA%\LectureLive` (ARM64) or `%LOCALAPPDATA%\LectureLive Beta` (x64); back up important transcripts before updating.
 
 To remove the app, close it and delete the extracted application/project folder and its Start menu
 shortcut. This leaves your settings and transcripts intact. Only remove
@@ -132,7 +136,7 @@ These details are also available under **About** in the application.
 
 The repository contains source, glossaries, pinned setup manifests, documentation and synthetic/public
 test evidence. Large models, runtimes, executables, recordings and private transcripts are excluded from Git.
-Use the private ARM64 runtime created by setup:
+Use the private ARM64 runtime created by setup (replace `runtime` with `runtime-x64` for beta development):
 
 ```powershell
 .\runtime\python.exe -m pytest -q

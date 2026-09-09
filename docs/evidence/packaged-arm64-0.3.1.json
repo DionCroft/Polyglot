@@ -1,0 +1,35 @@
+{
+  "version": "0.3.1",
+  "architecture": "ARM64",
+  "startup": {
+    "speech": true,
+    "translation": true,
+    "vad": true,
+    "npu": true,
+    "messages": [],
+    "accelerated": true,
+    "backend": "Qualcomm NPU · Whisper Small FP16"
+  },
+  "speech": [
+    {
+      "profile": "fast",
+      "english": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country.",
+      "seconds": 0.252111799999966
+    },
+    {
+      "profile": "balanced",
+      "english": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country.",
+      "seconds": 0.5492008999999598
+    },
+    {
+      "profile": "cpu",
+      "english": "And so my fellow Americans ask not what your country can do for you, ask what you can do for your country.",
+      "seconds": 0.5635424000001876
+    }
+  ],
+  "translation": {
+    "chinese": "中断服务程序应该尽快执行。",
+    "seconds": 0.059448299999985466
+  },
+  "passed": true
+}

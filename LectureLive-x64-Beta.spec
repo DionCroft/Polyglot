@@ -3,12 +3,14 @@ from PyInstaller.utils.hooks import collect_data_files
 from PyInstaller.utils.hooks import collect_dynamic_libs
 from PyInstaller.utils.hooks import collect_all
 
-datas = [('assets', 'assets'), ('glossaries', 'glossaries'), ('docs', 'docs'), ('models/whisper', 'models/whisper'), ('models/translation/opus', 'models/translation/opus'), ('models/vad', 'models/vad')]
+datas = [('assets', 'assets'), ('glossaries', 'glossaries'), ('docs', 'docs'), ('build/beta-assets/models', 'models')]
 binaries = []
 hiddenimports = []
 datas += collect_data_files('opencc')
 binaries += collect_dynamic_libs('onnxruntime')
-tmp_ret = collect_all('onnxruntime_qnn')
+tmp_ret = collect_all('winui3')
+datas += tmp_ret[0]; binaries += tmp_ret[1]; hiddenimports += tmp_ret[2]
+tmp_ret = collect_all('winrt')
 datas += tmp_ret[0]; binaries += tmp_ret[1]; hiddenimports += tmp_ret[2]
 
 
@@ -32,7 +34,7 @@ exe = EXE(
     a.scripts,
     [],
     exclude_binaries=True,
-    name='LectureLive',
+    name='LectureLive-x64-Beta',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -52,5 +54,5 @@ coll = COLLECT(
     strip=False,
     upx=True,
     upx_exclude=[],
-    name='LectureLive',
+    name='LectureLive-x64-Beta',
 )

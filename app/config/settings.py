@@ -2,11 +2,16 @@ import json, os
 from dataclasses import dataclass, asdict, fields
 from pathlib import Path
 
+from app.system.architecture import is_x64
+
 ROOT = Path(__file__).resolve().parents[2]
 DATA = Path(
     os.environ.get(
         "LECTURELIVE_DATA",
-        str(Path(os.environ.get("LOCALAPPDATA", str(ROOT))) / "LectureLive"),
+        str(
+            Path(os.environ.get("LOCALAPPDATA", str(ROOT)))
+            / ("LectureLive Beta" if is_x64() else "LectureLive")
+        ),
     )
 )
 
@@ -19,7 +24,8 @@ class Settings:
     pause_shortcut: str = "Ctrl+Alt+Space"
     microphone: str = ""
     mode: str = "Bilingual"
-    profile: str = "balanced"
+    profile: str = "fast" if is_x64() else "balanced"
+    accelerator: str = "auto"
     glossary: str = "embedded_systems"
     save_transcripts: bool = True
     font_size: int = 30
@@ -63,6 +69,10 @@ class Settings:
         cfg.y = int(cfg.y)
         if cfg.profile not in {"fast", "balanced"}:
             cfg.profile = "balanced"
+        if is_x64():
+            cfg.profile = "fast"
+        if cfg.accelerator not in {"auto", "cpu", "gpu", "intel_npu", "amd_npu"}:
+            cfg.accelerator = "auto"
         if cfg.mode not in {"Bilingual", "English", "Chinese"}:
             cfg.mode = "Bilingual"
         if cfg.placement not in {"Top", "Bottom", "Custom"}:

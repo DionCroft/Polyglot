@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "same_phrase_retried": "And so my fellow Americans ask not what your country can do for you, ask what you can do for your country.",
+  "actual": "Local CPU \u00b7 Whisper Base int8",
+  "worker_closed": true
+}

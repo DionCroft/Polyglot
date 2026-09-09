@@ -141,16 +141,25 @@ def main():
     parser.add_argument("--dependencies", action="store_true")
     parser.add_argument("--fixtures", action="store_true")
     parser.add_argument("--root", type=Path)
+    parser.add_argument("--architecture", choices=["ARM64", "x64"], default="ARM64")
     args = parser.parse_args()
     root = args.root or Path(__file__).resolve().parents[1]
     result = install(
         root
         / (
-            "dependencies.lock.json"
+            (
+                "dependencies-x64-beta.lock.json"
+                if args.architecture == "x64"
+                else "dependencies.lock.json"
+            )
             if args.dependencies
             else "fixtures.lock.json"
             if args.fixtures
-            else "assets.lock.json"
+            else (
+                "assets-x64-beta.lock.json"
+                if args.architecture == "x64"
+                else "assets.lock.json"
+            )
         ),
         root,
         args.verify,

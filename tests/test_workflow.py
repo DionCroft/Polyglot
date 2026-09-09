@@ -47,6 +47,7 @@ def test_equivalent_shortcuts_have_same_native_binding():
 
 def test_model_store_reuses_verified_bundle_and_reloads_profile(tmp_path):
     with (
+        patch("app.system.models.is_x64", return_value=False),
         patch("app.asr.qnn_whisper.QnnWhisper") as speech,
         patch("app.translation.opus_mt.OpusMT") as mt,
         patch("app.audio.vad.SileroVAD"),
