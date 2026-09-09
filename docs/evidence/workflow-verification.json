@@ -2,7 +2,7 @@
   "presets_roundtrip": true,
   "projector_preview": true,
   "configurable_hotkeys": true,
-  "microphone_check": "Microphone signal received. Input level looks usable.",
+  "microphone_check": "Input is very quiet. Speak and check the microphone position.",
   "compact_controls": true,
   "model_bundle_loads": 1,
   "graceful_stop": true,

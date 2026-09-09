@@ -3,7 +3,7 @@ from PyInstaller.utils.hooks import collect_data_files
 from PyInstaller.utils.hooks import collect_dynamic_libs
 from PyInstaller.utils.hooks import collect_all
 
-datas = [('models/whisper', 'models/whisper'), ('models/translation/opus', 'models/translation/opus'), ('models/vad', 'models/vad'), ('glossaries', 'glossaries'), ('docs', 'docs')]
+datas = [('assets', 'assets'), ('models/whisper', 'models/whisper'), ('models/translation/opus', 'models/translation/opus'), ('models/vad', 'models/vad'), ('glossaries', 'glossaries'), ('docs', 'docs')]
 binaries = []
 hiddenimports = []
 datas += collect_data_files('opencc')
@@ -43,6 +43,7 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
+    icon=['assets/lecturelive.ico'],
 )
 coll = COLLECT(
     exe,

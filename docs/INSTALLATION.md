@@ -5,9 +5,36 @@ its entire `_internal` directory. The existing Surface/Qualcomm driver supplies 
 NPU device runtime; no separate QAIRT SDK was needed on the tested machine.
 The build is unsigned and still requires classroom acceptance.
 
-## First setup from a Git clone
+## First installation: double-click setup
 
-Run the following in the project directory while internet access is available:
+The README included with the source download has the full beginner walkthrough. Download the
+source ZIP from GitHub, use **Extract All**, open the extracted folder, and double-click
+**Setup.cmd**. Keep the window open until **SETUP COMPLETE**, then use **Launch.cmd**
+or the **LectureLive** Start menu shortcut. No separate Python or Git installation is needed.
+
+Setup checks for Windows 11 ARM64, a writable extracted folder and a closed application.
+It keeps a **setup.log** in the project folder. A failed shortcut does not prevent you
+using Launch.cmd. Keep the project folder in place after setup.
+
+Use a Snapdragon ARM64 PC, a microphone, an internet connection for the initial download,
+and preferably at least 15 GB free disk space. First setup downloads several GB; time
+depends on your connection and computer. This is an unsigned preview build. Follow your
+organisation's software approval process if Windows or IT policy blocks it.
+
+If you already have a complete ready-to-run application folder, open **LectureLive.exe**
+inside that folder. Keep **_internal** beside it. The **READ_ME_FIRST.txt** file covers
+that distribution. Source ZIPs and ready-to-run copies are different downloads.
+
+## Repair or interrupted setup
+
+Close LectureLive, then run **Setup.cmd** again from the same folder. It reuses verified
+files and resumes downloads where the server supports it. Read **setup.log** if it fails.
+If you moved the folder, rerunning setup also refreshes the Start menu shortcut.
+Settings and text transcripts remain under `%LOCALAPPDATA%\LectureLive`.
+
+## Advanced setup commands
+
+For scripts or development, run this in the extracted project directory while internet access is available:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\setup.ps1 -Build

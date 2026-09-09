@@ -1,0 +1,32 @@
+{
+  "version": "0.3.0",
+  "startup": {
+    "speech": true,
+    "translation": true,
+    "vad": true,
+    "npu": true,
+    "messages": []
+  },
+  "speech": [
+    {
+      "profile": "fast",
+      "english": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country.",
+      "seconds": 0.21693219999997382
+    },
+    {
+      "profile": "balanced",
+      "english": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country.",
+      "seconds": 0.48640369999998256
+    },
+    {
+      "profile": "cpu",
+      "english": "And so my fellow Americans ask not what your country can do for you, ask what you can do for your country.",
+      "seconds": 0.5045969999999897
+    }
+  ],
+  "translation": {
+    "chinese": "中断服务程序应该尽快执行。",
+    "seconds": 0.0628442999999379
+  },
+  "passed": true
+}

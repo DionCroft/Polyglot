@@ -1,0 +1,12 @@
+{
+  "version": "0.3.0",
+  "archive_bytes": 1576236427,
+  "archive_sha256": "6e813ec512617689de58d4e1b830382805fb994c7d077186ff3dac6294899f90",
+  "files_verified": 735,
+  "new_folder_extraction": true,
+  "bundled_help_and_icon": true,
+  "recovered_setup_entry_preflight": true,
+  "relocated_executable_self_test": true,
+  "seconds": 28.52,
+  "passed": true
+}

@@ -9,6 +9,7 @@ files = []
 for folder in [
     "dist/LectureLive",
     "app",
+    "assets",
     "scripts",
     "docs",
     "glossaries",
@@ -23,6 +24,8 @@ files.extend(
     root / name
     for name in [
         "README.md",
+        "Setup.cmd",
+        "Launch.cmd",
         "STATUS.md",
         "requirements-lock.txt",
         "LectureLive.pyw",
@@ -57,3 +60,10 @@ with zipfile.ZipFile(archive) as z:
     if bad:
         raise RuntimeError("Recovery ZIP integrity failed: " + bad)
 print("Recovery ZIP CRC integrity verified", flush=True)
+
+with archive.open("rb") as stream:
+    archive_digest = hashlib.file_digest(stream, "sha256").hexdigest()
+archive.with_suffix(".zip.sha256").write_text(
+    archive_digest + "  " + archive.name + "\n", encoding="ascii"
+)
+print("Archive SHA-256:", archive_digest, flush=True)

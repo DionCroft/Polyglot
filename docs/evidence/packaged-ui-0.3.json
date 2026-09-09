@@ -1,0 +1,9 @@
+{
+  "version": "0.3.0",
+  "launch_cmd": true,
+  "ready": true,
+  "native_about_details_verified": true,
+  "native_quick_start_opened": true,
+  "custom_titlebar_icon": true,
+  "method": "Packaged executable launched via Launch.cmd; native Windows screenshot and accessibility inspection; no microphone session started."
+}

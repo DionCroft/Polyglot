@@ -1,7 +1,29 @@
-# LectureLive 0.2 — STATUS
+# LectureLive 0.3 — STATUS
 
 Updated 2026-09-09. Six-part improvement milestone implemented and native executable verified.
 Production classroom acceptance remains open.
+
+## Interface and installation polish (0.3)
+
+- Numbered microphone/caption/lecture sections; optional presets and vocabulary; keyboard
+  focus outlines, accessible input labels, smaller-window support and a custom app icon.
+- In-app quick-start, user and installation guides, readable without a Markdown editor.
+- About page and README include the professional details supplied by Dr Dion Miroy
+  Mariyanayagam, with selectable text, an email link and a copy-contact button.
+- Double-click Setup.cmd checks the PC/folder, runs pinned setup/build, writes setup.log,
+  and creates a Start menu shortcut. Launch.cmd starts the resulting application.
+- Beginner README distinguishes the GitHub source ZIP from a ready-to-run application
+  folder; includes requirements, first use, repair, updates and removal instructions.
+
+Verification: 49 regression tests pass (`pytest-0.3.txt`). Native layout/contact/help
+checks pass (`polish-0.3.json`); Setup.cmd completes with verified cached assets
+(`setup-0.3.json`), and unsupported-PC/incomplete-folder checks pass. The rebuilt
+executable passes NPU/CPU/translation self-tests and the native About/Quick start
+check (`packaged-self-test-0.3.json`, `packaged-ui-0.3.json`). Fresh online setup
+was not repeated; the pinned bootstrap has historical 0.2 evidence.
+
+The existing 0.2 inference and stress results are historical evidence. Physical
+classroom acceptance remains pending.
 
 ## Implemented improvements
 

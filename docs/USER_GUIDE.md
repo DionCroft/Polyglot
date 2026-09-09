@@ -1,6 +1,8 @@
-# Teaching with LectureLive 0.2
+# Teaching with LectureLive 0.3
 
-1. Open `LectureLive.exe` in `dist/LectureLive`, or the project launcher shortcut.
+New to the app? Use the **Quick start** button for the [short guide](QUICK_START.md).
+
+1. Open **Launch.cmd**, the Start menu shortcut, or `LectureLive.exe` in `dist/LectureLive`.
 2. Load a saved lecture preset, or select a microphone and subject glossary.
 3. Press **Test microphone · 3 seconds**, speak, and check the reported level. This
    creates no recording. A quiet-room result is not an accuracy test of your voice.
@@ -17,7 +19,7 @@ area. Captions automatically lock when a lecture starts.
 ## Pause, finish and reconnect
 
 **Pause** immediately hides captions and invalidates unfinished speech so private
-asides do not appear when you resume. **Finish lecture** stops accepting new audio,
+asides do not appear when you resume. **Stop lecture** stops accepting new audio,
 finishes speech already captured, drains recognition and translation, and closes
 transcripts. The final bilingual caption remains visible. Closing the app uses the
 same finishing sequence. A slow native inference call can delay completion; status

@@ -1,0 +1,11 @@
+{
+  "version": "0.3.0",
+  "native_ready": true,
+  "contact_details_present": true,
+  "minimum_window_controls_visible": true,
+  "offline_quick_start": true,
+  "relative_help_navigation": true,
+  "installation_help": true,
+  "missing_help_message": true,
+  "custom_icon": true
+}

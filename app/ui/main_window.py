@@ -1,7 +1,7 @@
 import json, logging, threading
 from pathlib import Path
 from PySide6.QtCore import Qt, QTimer, Signal, QObject, QUrl
-from PySide6.QtGui import QFont, QDesktopServices, QColor
+from PySide6.QtGui import QFont, QDesktopServices, QColor, QIcon
 from PySide6.QtWidgets import (
     QApplication,
     QMainWindow,
@@ -60,6 +60,14 @@ QTabWidget::pane { border:0; padding-top:12px; }
 QTabBar::tab { color:#97adb8; padding:12px 22px; border-bottom:2px solid transparent; }
 QTabBar::tab:selected { color:#8ce2c9; border-bottom:2px solid #8ce2c9; }
 QScrollArea { border:0; }
+QPushButton:focus, QComboBox:focus, QLineEdit:focus, QPlainTextEdit:focus { border:2px solid #8ce2c9; }
+QLabel#sectionTitle { font-size:22px; font-weight:600; }
+QLabel#authorName { font-size:23px; font-weight:600; color:#8ce2c9; }
+QTextBrowser { background:#18242d; border:1px solid #2c3d48; border-radius:8px; padding:18px; font-size:16px; }
+QScrollBar:vertical { background:#111a21; width:10px; margin:0; }
+QScrollBar::handle:vertical { background:#435967; border-radius:5px; min-height:28px; }
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical { height:0; }
+
 """
 
 
@@ -93,8 +101,9 @@ class MainWindow(QMainWindow):
         self.last_caption = None
         self.transcript_path = DATA / "transcripts"
         self.setWindowTitle("LectureLive")
-        self.resize(1060, 920)
-        self.setMinimumSize(860, 760)
+        self.resize(1060, 860)
+        self.setMinimumSize(860, 640)
+        self.setWindowIcon(QIcon(str(ROOT / "assets/lecturelive.png")))
         self.setStyleSheet(STYLE)
         self.overlay = Overlay(self.cfg)
         self.overlay.moved.connect(self.persist)
@@ -113,6 +122,10 @@ class MainWindow(QMainWindow):
         brand.addWidget(tagline)
         head.addLayout(brand)
         head.addStretch()
+        quick_start = QPushButton("Quick start")
+        quick_start.setToolTip("Read the guide inside LectureLive")
+        quick_start.clicked.connect(self.show_guide)
+        head.addWidget(quick_start, 0, Qt.AlignVCenter)
         self.status = QLabel("●  Ready")
         self.status.setObjectName("status")
         head.addWidget(self.status, 0, Qt.AlignVCenter)
@@ -123,6 +136,7 @@ class MainWindow(QMainWindow):
         self.warning.hide()
         layout.addWidget(self.warning)
         tabs = QTabWidget()
+        self.tabs = tabs
         layout.addWidget(tabs, 1)
         tabs.addTab(self.lecture_tab(), "Lecture")
         tabs.addTab(self.appearance_tab(), "Overlay")
@@ -424,6 +438,8 @@ class MainWindow(QMainWindow):
         preset_box, preset_form = self.group("LECTURE PRESET")
         preset_row = QHBoxLayout()
         self.preset_choice = QComboBox()
+        self.preset_choice.setPlaceholderText("No saved presets yet")
+        self.preset_choice.setAccessibleName("Saved lecture presets")
         try:
             self.preset_choice.addItems(sorted(self.presets.read()))
         except (OSError, ValueError):
@@ -433,18 +449,23 @@ class MainWindow(QMainWindow):
         preset_row.addWidget(self.preset_choice, 1)
         load_preset = QPushButton("Load")
         load_preset.clicked.connect(self.load_preset)
+        load_preset.setEnabled(self.preset_choice.count() > 0)
+        self.preset_choice.currentIndexChanged.connect(
+            lambda index: load_preset.setEnabled(index >= 0)
+        )
         save_preset = QPushButton("Save…")
         save_preset.clicked.connect(self.save_preset)
         preset_row.addWidget(load_preset)
         preset_row.addWidget(save_preset)
         preset_form.addLayout(preset_row)
-        left.addWidget(preset_box)
-        mic, form = self.group("MICROPHONE")
+        mic, form = self.group("1 · MICROPHONE")
         row = QHBoxLayout()
         self.microphone = QComboBox()
+        self.microphone.setAccessibleName("Microphone")
         row.addWidget(self.microphone, 1)
         refresh = QPushButton("↻")
         refresh.setToolTip("Refresh microphones")
+        refresh.setAccessibleName("Refresh microphones")
         refresh.setMaximumWidth(52)
         refresh.clicked.connect(self.refresh_microphones)
         row.addWidget(refresh)
@@ -453,7 +474,7 @@ class MainWindow(QMainWindow):
         self.meter.setRange(0, 100)
         self.meter.setTextVisible(False)
         form.addWidget(self.meter)
-        note = QLabel("Shared audio input · audio recording is off")
+        note = QLabel("Your voice stays on this computer. No audio file is saved.")
         note.setObjectName("muted")
         form.addWidget(note)
         self.mic_test_button = QPushButton("Test microphone · 3 seconds")
@@ -463,17 +484,20 @@ class MainWindow(QMainWindow):
         self.mic_test_result.setWordWrap(True)
         form.addWidget(self.mic_test_result)
         left.addWidget(mic)
-        captions, form = self.group("CAPTIONS")
+        captions, form = self.group("2 · CAPTIONS")
+        form.addWidget(QLabel("Caption languages"))
         self.mode = QComboBox()
+        self.mode.setAccessibleName("Caption languages")
         self.mode.addItems(["Bilingual", "English", "Chinese"])
         self.mode.setCurrentText(self.cfg.mode)
         self.mode.currentTextChanged.connect(self.set_mode)
         form.addWidget(self.mode)
+        form.addWidget(QLabel("Speech profile"))
         self.profile = QComboBox()
+        self.profile.setAccessibleName("Speech profile")
         for title, key in [
-            ("Fast · Whisper Base", "fast"),
-            ("Balanced · Whisper Small", "balanced"),
-            ("Accuracy · not installed", "accuracy"),
+            ("Fast · quicker captions", "fast"),
+            ("Balanced · recommended", "balanced"),
         ]:
             exists = (ROOT / "models/whisper" / key / "config.json").exists()
             self.profile.addItem(
@@ -485,12 +509,14 @@ class MainWindow(QMainWindow):
         self.profile.setCurrentIndex(max(0, idx))
         form.addWidget(self.profile)
         left.addWidget(captions)
-        topic, form = self.group("LECTURE")
+        topic, form = self.group("3 · LECTURE DETAILS · OPTIONAL")
         self.title = QLineEdit()
         self.title.setPlaceholderText("Lecture title (optional)")
         self.title.setText(self.cfg.lecture_title)
         form.addWidget(self.title)
+        form.addWidget(QLabel("Subject vocabulary"))
         self.glossary = QComboBox()
+        self.glossary.setAccessibleName("Subject vocabulary")
         for path in sorted((ROOT / "glossaries").glob("*.json")):
             self.glossary.addItem(path.stem.replace("_", " ").title(), path.stem)
         self.glossary.setCurrentIndex(max(0, self.glossary.findData(self.cfg.glossary)))
@@ -499,6 +525,8 @@ class MainWindow(QMainWindow):
         self.save.setChecked(self.cfg.save_transcripts)
         form.addWidget(self.save)
         left.addWidget(topic)
+        preset_box.setTitle("SAVED LECTURE PRESETS · OPTIONAL")
+        left.addWidget(preset_box)
         self.start_button = QPushButton("Start lecture")
         self.start_button.setObjectName("primary")
         self.start_button.clicked.connect(self.start_stop)
@@ -509,6 +537,15 @@ class MainWindow(QMainWindow):
         self.compact_button.clicked.connect(self.show_teaching)
         left.addStretch()
         right = QVBoxLayout()
+        welcome = QLabel("Get ready to teach")
+        welcome.setObjectName("sectionTitle")
+        right.addWidget(welcome)
+        steps = QLabel(
+            "Choose your microphone and test it. Keep the recommended caption settings, then select Start lecture below."
+        )
+        steps.setWordWrap(True)
+        steps.setObjectName("muted")
+        right.addWidget(steps)
         preview, form = self.group("CAPTION PREVIEW")
         self.preview_en = QLabel("Your words. Understood.")
         self.preview_en.setObjectName("previewEnglish")
@@ -533,7 +570,7 @@ class MainWindow(QMainWindow):
         row.addWidget(self.lock_button)
         form.addLayout(row)
         right.addWidget(preview)
-        terms, form = self.group("TODAY’S VOCABULARY")
+        terms, form = self.group("TODAY’S VOCABULARY · OPTIONAL")
         self.vocabulary = QPlainTextEdit()
         self.vocabulary.setPlaceholderText(
             "One term per line, for example:\nESP32\nFreeRTOS\ninterrupt service routine"
@@ -644,27 +681,100 @@ class MainWindow(QMainWindow):
         layout.addWidget(recover)
         return widget
 
+    def show_guide(self):
+        from app.ui.help import GuideDialog
+
+        if not getattr(self, "guide_dialog", None):
+            self.guide_dialog = GuideDialog(ROOT / "docs", self)
+        self.guide_dialog.show()
+        self.guide_dialog.raise_()
+        self.guide_dialog.activateWindow()
+
     def about_tab(self):
-        widget = QWidget()
-        layout = QVBoxLayout(widget)
-        title = QLabel("LectureLive 0.2 · Keep your data here.")
-        title.setFont(QFont("Segoe UI", 24))
-        title.setWordWrap(True)
+        from app import __version__
+        from app.author import (
+            NAME,
+            QUALIFICATIONS,
+            ROLE,
+            COURSES,
+            SCHOOL,
+            DEPARTMENT,
+            UNIVERSITY,
+            EMAIL,
+            CONTACT,
+        )
+
+        content = QWidget()
+        layout = QVBoxLayout(content)
+        layout.setContentsMargins(0, 0, 8, 0)
+        title = QLabel(f"LectureLive {__version__}")
+        title.setObjectName("sectionTitle")
         layout.addWidget(title)
+        intro = QLabel(
+            "English speech. Simplified Chinese captions. All processed on your computer."
+        )
+        intro.setWordWrap(True)
+        intro.setObjectName("muted")
+        layout.addWidget(intro)
+        card, form = self.group("PROJECT CONTACT")
+        for value, style in [
+            (NAME, "authorName"),
+            (QUALIFICATIONS, "muted"),
+            (ROLE, ""),
+        ]:
+            label = QLabel(value)
+            label.setWordWrap(True)
+            label.setTextInteractionFlags(
+                Qt.TextSelectableByMouse | Qt.TextSelectableByKeyboard
+            )
+            if style:
+                label.setObjectName(style)
+            form.addWidget(label)
+        courses = QLabel(
+            "Course Leader for:\n" + "\n".join("• " + course for course in COURSES)
+        )
+        courses.setWordWrap(True)
+        courses.setTextInteractionFlags(
+            Qt.TextSelectableByMouse | Qt.TextSelectableByKeyboard
+        )
+        form.addWidget(courses)
+        affiliation = QLabel("\n".join([SCHOOL, DEPARTMENT, UNIVERSITY]))
+        affiliation.setWordWrap(True)
+        affiliation.setTextInteractionFlags(
+            Qt.TextSelectableByMouse | Qt.TextSelectableByKeyboard
+        )
+        form.addWidget(affiliation)
+        email = QLabel(f'<a href="mailto:{EMAIL}" style="color:#8ce2c9">{EMAIL}</a>')
+        email.setTextInteractionFlags(Qt.TextBrowserInteraction)
+        email.setOpenExternalLinks(True)
+        email.setAccessibleName("Email " + EMAIL)
+        email.setToolTip("Open a draft in your email application")
+        form.addWidget(email)
+        copy = QPushButton("Copy contact details")
+        copy.clicked.connect(lambda: QApplication.clipboard().setText(CONTACT))
+        form.addWidget(copy)
+        layout.addWidget(card)
+        privacy, form = self.group("YOUR DATA STAYS LOCAL")
         text = QLabel(
-            "LectureLive runs speech recognition and English-to-Simplified-Chinese translation using model files on this computer. No account or cloud fallback is used.\n\nAudio recording is not implemented; microphone samples are held only briefly for captioning. Optional transcripts stay in your local LectureLive folder. Diagnostic logs omit caption text.\n\nPython networking is blocked in the runtime. Physical Airplane Mode and OS network-trace acceptance tests still need sign-off; see STATUS.md before relying on this development build in a lecture.\n\nWhisper: Qualcomm NPU, with native ARM64 CPU recovery. Translation: local OPUS-MT. Voice detection: local Silero VAD."
+            "No account or cloud translation service is needed. Microphone audio is not recorded. Optional transcripts and saved lecture settings stay on this computer."
         )
         text.setWordWrap(True)
-        layout.addWidget(text)
-        layout.addStretch()
-        b = QPushButton("Open user guide")
-        b.clicked.connect(
-            lambda: QDesktopServices.openUrl(
-                QUrl.fromLocalFile(str(ROOT / "docs/USER_GUIDE.md"))
-            )
+        form.addWidget(text)
+        note = QLabel(
+            "Preview release: check translations and rehearse with your microphone and projector before teaching. Full classroom acceptance is still pending."
         )
-        layout.addWidget(b)
-        return widget
+        note.setWordWrap(True)
+        note.setObjectName("muted")
+        form.addWidget(note)
+        guide = QPushButton("Open quick-start guide")
+        guide.clicked.connect(self.show_guide)
+        form.addWidget(guide)
+        layout.addWidget(privacy)
+        layout.addStretch()
+        scroll = QScrollArea()
+        scroll.setWidgetResizable(True)
+        scroll.setWidget(content)
+        return scroll
 
     def warn(self, message):
         self.warning.setText(message)

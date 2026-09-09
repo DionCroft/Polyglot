@@ -1,0 +1,10 @@
+{
+  "version": "0.3.0",
+  "entry": "Setup.cmd -Offline -NoShortcut",
+  "preflight": true,
+  "verified_cached_dependencies_and_models": true,
+  "build_succeeded": true,
+  "completion_message": true,
+  "seconds": 44.94,
+  "scope": "Setup launcher tested end-to-end with cached assets. Fresh online bootstrap has historical 0.2 evidence; no new network download claimed."
+}
