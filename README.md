@@ -2,137 +2,207 @@
 
 **Speak in English. Show English and Simplified Chinese captions.**
 
-LectureLive adds a floating caption panel to your Windows or Apple Silicon Mac desktop or projector while you teach.
-Speech recognition and translation run on your computer. Once setup is complete, everyday use
-needs no internet connection, account or API key. Microphone audio is not recorded; saving text
-transcripts is optional.
+LectureLive displays a floating caption panel over your slides, desktop or projector.
+It uses **Whisper** for speech recognition and translates on your computer. After installation,
+everyday use needs **no internet connection, account or API key**.
+
+You do not need programming experience. The Mac download is a ready-made app; Windows users
+double-click a setup file that prepares everything for them.
 
 ![LectureLive control panel](docs/evidence/control-panel-0.3.png)
 
-> **Preview release:** translations can make mistakes. Try it with your actual microphone and
-> projector before teaching. [Current testing and limitations](STATUS.md).
+> **Preview/beta software:** rehearse with your teaching microphone and projector before a lecture.
+> Captions and translations can contain mistakes. [What has been tested](STATUS.md).
 
-## Choose your computer
+## Start here: choose your computer
 
-- **Apple Silicon Mac (including M2 MacBook Air), macOS 14 or later:** use the
-  [Mac installation guide](docs/MACOS.md). Download the ready-made Mac app from the
-  [Mac beta release](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.5.0b1).
-  It includes the models and needs no Python or terminal commands. This beta is not notarised.
-- **Windows 11:** follow the instructions below. Snapdragon ARM64 and Intel/AMD x64 builds
-  are separate; Windows setup selects the right one for your PC.
+| Your computer | Where to start |
+|---|---|
+| **Windows 11, Snapdragon / ARM64** | [Install on Windows](#install-on-windows). Setup selects the Snapdragon edition. |
+| **Windows 11, Intel or AMD / x64** | [Install on Windows](#install-on-windows). Setup selects the Intel/AMD beta. |
+| **Apple Silicon Mac: M1 or newer, including M2 MacBook Air** | [Install on Mac](#install-on-mac). Requires **macOS 14 Sonoma or later**. |
 
-## Before you begin on Windows
+**Not sure which computer you have?** On Windows, open **Settings → System → About → System type**.
+On a Mac, open **Apple menu → About This Mac** and look for **Chip** and the macOS version.
+Intel Macs, Windows 10, 32-bit Windows and Linux are not supported by these builds.
 
-You need:
+Already installed? Go straight to [your first captions](#your-first-captions).
 
-- **Windows 11.** The established ARM64 edition is tested on a Snapdragon X Elite Surface.
-  **Windows 11 Intel/AMD x64 PCs can now try the beta.** See the [Windows beta guide](docs/WINDOWS_BETA.md)
-  for GPU acceleration and experimental Intel/AMD NPU preparation. For Macs, use the separate Apple Silicon build above. Linux is not supported.
-- **A microphone** — use the one you intend to teach with.
-- **Internet for the first setup** and at least **15 GB of free disk space** recommended.
-  Keep the computer plugged in while setup downloads the models and builds the app.
-- A projector or second screen only if you want to show captions there.
+## Install on Windows
 
-**Not sure which PC you have?** Open Windows **Settings → System → About**. Look for an
-**System type**: an ARM-based Snapdragon PC uses ARM64; an x64-based Intel/AMD PC uses the beta.
-Setup chooses the edition automatically. You do **not** need to
-install Python, Git, CUDA or any developer tools yourself.
-
-## Install on Windows from GitHub — no terminal commands needed
+**Before you start:** connect to the internet, plug in your computer and allow at least **15 GB of
+free disk space** for setup. Have your teaching microphone available. Setup downloads several GB;
+it may take several minutes or longer on a slow connection.
 
 1. Open [the Polyglot repository](https://github.com/DionCroft/Polyglot).
 2. Select the green **Code** button, then **Download ZIP**.
 3. Find the ZIP in Downloads. Right-click it and select **Extract All…**.
-4. Put the extracted folder somewhere you want to keep it, for example
+4. Keep the extracted folder somewhere permanent, such as
    `C:\Users\YourName\Documents\LectureLive`. Open the folder containing **Setup.cmd** and this README.
-   **Do not run setup inside the ZIP.**
-5. Double-click **Setup.cmd**. If Windows hides file extensions, it may appear as **Setup**,
-   with the type **Windows Command Script**.
-6. Keep the setup window open. It shows three stages: checking your computer, preparing the app,
-   and creating a launcher. The first run downloads several GB and may take several minutes or
-   longer on a slow connection. Wait for **SETUP COMPLETE**.
-7. Press a key to close the setup window. Double-click **Launch.cmd**, or find **LectureLive**
-   in the Windows Start menu.
+5. Double-click **Setup.cmd**. If file extensions are hidden, it may appear as **Setup** with
+   the type **Windows Command Script**. **Run it from the extracted folder, not inside the ZIP.**
+6. Keep the setup window open through all three stages. Wait for **SETUP COMPLETE**, then press a key
+   to close the window.
+7. Double-click **Launch.cmd** in the same folder. You can also use the Start menu shortcut:
+   **LectureLive** on Snapdragon, or **LectureLive-x64-Beta** on Intel/AMD.
+8. Continue to [your first captions](#your-first-captions).
 
-Setup installs its own private Python runtime and verified model files inside this folder.
-It does not replace your system Python or add itself to Windows startup. Keep the folder in place;
-the Start menu shortcut points to it.
+Setup automatically selects the correct edition and installs its own private Python runtime,
+speech models and translation files. You do **not** need to install Python, Git or CUDA yourself,
+or type terminal commands. Keep the extracted folder in place: the launcher and models live there.
 
-**If Windows or your university blocks scripts or unsigned apps:** follow your organisation’s
-software approval process. This build is unsigned. You do not need to disable antivirus or
-change permanent PowerShell settings. If you cannot run it, share the message with your IT team.
+**Download interrupted or setup stopped?** Run **Setup.cmd** again from the same folder. Verified
+downloads are reused and supported downloads resume. Keep **setup.log** from that folder if you need help.
 
-**Interrupted download?** Open the same folder and run **Setup.cmd** again. Verified files are
-reused and supported downloads resume. If setup stops, read the message and the **setup.log**
-file in that folder. See the troubleshooting table below.
+**Windows blocks setup or the app?** These builds are unsigned. Follow your organisation's software
+approval process or share the message with IT. Do not disable antivirus or change permanent
+PowerShell settings.
 
-## Already received a ready-to-run copy?
+GPU acceleration and Intel/AMD NPU options are covered in the [Windows beta guide](docs/WINDOWS_BETA.md).
+NPU preparation is optional and experimental; it is not needed to start using captions.
+Physical Intel/AMD GPU/NPU validation is still pending.
 
-If someone gives you the complete **LectureLive** application folder, extract/copy the whole
-folder and open **LectureLive.exe** inside it. Keep the adjacent **_internal** folder — it
-contains files the app needs. No setup or initial model download is needed for that complete copy.
-For a beta copy, open **LectureLive-x64-Beta.exe** inside the complete **LectureLive-x64-Beta** folder.
-The GitHub **Download ZIP** described above is source code and needs **Setup.cmd** first.
+### If someone gave you a complete Windows app folder
+
+Extract or copy the **whole folder**, then open **LectureLive.exe** (Snapdragon) or
+**LectureLive-x64-Beta.exe** (Intel/AMD). Keep the adjacent **_internal** folder: it contains the
+models and other files the app needs. A complete copy for your PC needs no initial setup download.
+The repository's **Code → Download ZIP** contains source code and needs **Setup.cmd** first.
+
+## Install on Mac
+
+Use an **Apple Silicon Mac running macOS 14 or later**. The current Mac beta is **0.5.0b1**.
+Internet is needed to download the app; the speech and translation models are included.
+
+1. [Download LectureLive for Apple Silicon — DMG, about 1.1 GB](https://github.com/DionCroft/Polyglot/releases/download/macos-v0.5.0b1/LectureLive-0.5.0b1-macOS-AppleSilicon.dmg).
+   Alternatively, open the [Mac beta release page](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.5.0b1)
+   and choose the **.dmg** under **Assets**. Do not choose **Source code**.
+2. Open the downloaded DMG. Drag **LectureLive** onto **Applications**, wait for copying to finish,
+   then eject the DMG.
+3. Open **Finder → Applications → LectureLive**.
+4. This beta is **not Apple notarised**. If macOS blocks it, open **System Settings → Privacy & Security**,
+   find the message about LectureLive and choose **Open Anyway**, then confirm **Open**.
+   Only approve the copy downloaded from this repository. A managed university Mac may need IT approval.
+5. Select your microphone and click **Test microphone · 3 seconds**. Choose **Allow** when macOS asks
+   to access the microphone.
+6. Continue to [your first captions](#your-first-captions).
+
+If microphone access was denied, open **System Settings → Privacy & Security → Microphone**,
+enable **LectureLive**, then quit and reopen the app. If **Open Anyway** is absent or the download
+is reported as damaged, see the [Mac installation and troubleshooting guide](docs/MACOS.md).
+
+The first speech-model preparation can take a few minutes. **Automatic** processing has a CPU
+fallback if acceleration fails. Native Apple Silicon build checks have passed; a physical M2
+classroom test with real microphones and projectors is still needed. The Mac guide explains
+performance choices, the ZIP alternative and current limitations.
 
 ## Your first captions
 
-1. Open LectureLive and wait for **Ready**.
-2. Choose your microphone, select **Test microphone · 3 seconds**, and speak. Check that the meter moves.
-3. Leave **Bilingual** selected. Use **Balanced** on ARM64 or **Fast** and **Automatic** processing
-   on the x64 beta. Lecture details and presets are optional.
-4. Select **Start lecture** at the bottom. Speak a sentence and pause briefly. Captions appear in a floating panel.
-5. Select **Pause** for a break, **Resume** to continue, and **Stop lecture** when finished.
-   Wait for the last caption to finish saving.
+1. **Open LectureLive** and wait for **Ready**. Connect the microphone you will teach with.
+2. **Select and test your microphone.** Click **Test microphone · 3 seconds** and speak.
+   Check that the meter moves and read the test result. If you connect a microphone after opening
+   the app, use the refresh button beside the microphone list.
+3. **Keep Bilingual and Standard selected.** Start with the speech profile below. Where
+   **Processing hardware** is shown, leave it on **Automatic**. Lecture details and presets are optional.
+4. **Choose whether to save text.** **Save text transcripts and subtitles** is on by default.
+   Untick it before starting if you do not want saved text. Microphone audio is not recorded.
+5. **Click Start lecture.** Speak a sentence and pause briefly. Try:
+   “The robot uses an ultrasonic sensor to estimate its distance from an obstacle.”
+   Captions appear in the floating panel; Chinese follows after translation finishes.
+6. **Pause or finish.** **Pause** hides captions and discards unfinished speech; **Resume** continues.
+   **Stop lecture** finishes captured speech and saves text if enabled. Wait for **Finishing…** to end
+   before closing the app.
 
-For a projector, use **Overlay → caption display → Preview captions on selected display** before
-starting. **Teaching controls** opens a small floating panel for use alongside your slides.
-The **Quick start** button opens help inside the app, even offline.
+| Computer | Speech profile for your first try |
+|---|---|
+| Windows Snapdragon | **Balanced** |
+| Windows Intel/AMD beta | **Fast** — this edition currently includes only Fast |
+| Apple Silicon Mac | **Fast** — particularly for an 8 GB MacBook Air |
 
-Default shortcuts: **Ctrl + Alt + Space** pauses/resumes; **Ctrl + Alt + C** locks/unlocks the
-caption panel. Change them under **Overlay**.
+**Next time:** use the Windows launcher/Start menu shortcut or **Applications → LectureLive** on Mac.
+You do not need to repeat installation. The **Quick start** button opens help inside the app, even offline.
 
-## If words are being missed
+## Show captions with your slides
 
-Keep **Standard** if it already works well for your voice. For another speaker, try **Balanced**
-(on Snapdragon or Apple Silicon), then the optional **Careful** recognition setting. A short list of relevant
-technical terms can be passed to the speech model by ticking **Use these terms to guide speech
-recognition**. These options can also worsen results, especially with the smaller Fast model;
-compare a short passage before teaching and save separate lecturer presets.
+1. Connect the projector or second display before your rehearsal.
+2. Open **Overlay**, choose the **caption display**, then click **Preview captions on selected display**.
+3. Adjust the text size and position so the back of the room can read it. Unlock the caption panel
+   to move it; lock it to click through to your slides. Starting a lecture locks it automatically.
+4. Use **Teaching controls** for a small floating Pause/Finish panel alongside your slides.
 
-[Speech recognition guide and measured results](docs/SPEECH_RECOGNITION.md) explains what changed,
-speed/memory trade-offs and the recordings needed to validate a particular speaker. All processing
-remains local, and no extra model downloads are required by this update.
+| Action | Windows shortcut | Mac shortcut |
+|---|---|---|
+| Pause / resume | **Ctrl + Alt + Space** | **Control + Option + Space** |
+| Lock / unlock captions | **Ctrl + Alt + C** | **Control + Option + C** |
 
-CO7000 teaching: [choose a weekly project-management vocabulary list](docs/CO7000_VOCABULARY.md)
-inside the app, then save it with your preferred recognition settings as a lecture preset.
+Change shortcuts under **Overlay** if another app uses them. On Mac, the settings use **Ctrl** for
+Control and **Alt** for Option; VoiceOver may use these combinations. The on-screen buttons also work.
+Test captions over your actual slide presentation, including full-screen mode, before teaching.
+
+## Improve missed words and use CO7000 vocabulary
+
+Keep **Standard** and vocabulary guidance off if recognition already works well for you.
+Try changes while the lecture is stopped, using a short passage and your usual microphone:
+
+1. On Snapdragon or Apple Silicon, try **Balanced** for the larger Whisper model.
+2. Try **Speech recognition → Careful**. It checks more possible word sequences and can be slower.
+3. For technical words, enter a short relevant list under **Today's vocabulary**, one term per line,
+   then tick **Use these terms to guide speech recognition**.
+4. For **CO7000**, choose the week and click **Use this week's terms**. This replaces the current list
+   and selects **Project Management**. Save any custom list as a preset first. Tick vocabulary guidance
+   separately if you want to use the terms as speech hints.
+5. Compare the captions, then save useful choices as a **lecture preset**. Each lecturer can have
+   their own preset. Return to Standard and untick guidance if a change makes recognition worse.
+
+Careful and vocabulary hints do not guarantee better accent recognition; results were mixed with
+the smaller Fast model. Balanced and Careful can increase memory use and caption delay.
+[Speech settings and measured results](docs/SPEECH_RECOGNITION.md) ·
+[CO7000 weekly vocabulary guide](docs/CO7000_VOCABULARY.md).
 
 ## Help with common problems
 
 | What you see | What to do |
 |---|---|
-| Intel/AMD PC | Use the current Setup.cmd, or Setup-Beta.cmd. Read the [beta guide](docs/WINDOWS_BETA.md). |
-| Setup stops during a download | Check your connection and free disk space, then run Setup.cmd again in the same folder. Keep setup.log if you need help. |
-| “Close LectureLive…” during setup | Finish your lecture and close the app, then run setup again. |
-| No microphone or no moving meter | Connect/select the microphone, use the refresh button, then test again. Check Windows microphone permissions if access is denied. |
-| English appears but Chinese does not | Check that Bilingual is selected. Read any warning; close the app and rerun Setup.cmd if translation files are missing. |
-| Captions are slow | Try Fast for the next session, close heavy applications, and pause briefly between sentences. |
-| Captions are on the wrong display | Open Overlay and select your projector or preferred caption display. |
-| Double-clicking Launch says the app is not ready | Run Setup.cmd and wait for SETUP COMPLETE. |
-| You want your saved text | Open Diagnostics → Open transcripts. |
+| Windows setup stops during a download | Check internet and disk space, close LectureLive, then rerun **Setup.cmd** in the same folder. Read **setup.log** if it stops again. |
+| Launch says the app is not ready | Run **Setup.cmd** and wait for **SETUP COMPLETE**. |
+| Windows microphone has no moving meter | Select the correct input, refresh and retest. Open **Settings → Privacy & security → Microphone** and enable microphone access, including access for desktop apps. |
+| Mac microphone is unavailable | Enable **System Settings → Privacy & Security → Microphone → LectureLive**, then quit and reopen the app. |
+| A microphone disconnects | Reconnect it and use **Reconnect / retry**. If needed, stop the lecture, refresh the microphone list and select it again. |
+| English appears but Chinese does not | Select **Bilingual** and read any warning. For missing files, close the app and rerun Windows setup, or reinstall the Mac app from the release download. |
+| Captions are slow | Try **Fast / Standard** for the next session, close heavy applications and pause naturally between sentences. |
+| An accelerator check fails or takes too long | On Mac or the Intel/AMD beta, stop the lecture and select **CPU** under Processing hardware. See the platform guide for details. |
+| Captions are on the wrong screen | Open **Overlay** and select the projector or preferred caption display. |
+| You want your saved text | Open **Diagnostics → Open transcripts**. Text is saved only when the transcript option is enabled. |
 
-For more detail: [Quick start](docs/QUICK_START.md) · [User guide](docs/USER_GUIDE.md) ·
-[Installation and repair](docs/INSTALLATION.md) · [Offline recovery](docs/OFFLINE_SETUP.md).
+More help: [Quick start](docs/QUICK_START.md) · [User guide](docs/USER_GUIDE.md) ·
+[Mac guide](docs/MACOS.md) · [Windows beta guide](docs/WINDOWS_BETA.md) ·
+[Windows installation and repair](docs/INSTALLATION.md) · [Windows offline recovery](docs/OFFLINE_SETUP.md).
 
-## Updates and removal
+## Updates, saved data and removal
 
-To update from GitHub, download and extract the new source ZIP into a new folder and run its
-**Setup.cmd**. Keep your previous working copy until the new one works. The Start menu shortcut
-will point to the newly installed copy. Settings and transcripts stay in
-`%LOCALAPPDATA%\LectureLive` (ARM64) or `%LOCALAPPDATA%\LectureLive Beta` (x64); back up important transcripts before updating.
+**Update Windows:** close LectureLive, download and extract the new source ZIP into a new folder,
+then run its **Setup.cmd**. Keep your previous working copy until the new one works. The Start menu
+shortcut will point to the new copy.
 
-To remove the app, close it and delete the extracted application/project folder and its Start menu
-shortcut. This leaves your settings and transcripts intact. Only remove
-`%LOCALAPPDATA%\LectureLive` separately if you also want to delete that personal data.
+**Update Mac:** quit LectureLive, download the new Mac installer and replace LectureLive in
+**Applications**. Keep your previous installer until the update works.
+
+Settings, presets and saved text are stored separately from the app. Back up important transcripts
+before updating. **Diagnostics → Open transcripts** is the easiest way to find saved text.
+
+| Edition | Personal data folder |
+|---|---|
+| Windows Snapdragon | `%LOCALAPPDATA%\LectureLive` |
+| Windows Intel/AMD beta | `%LOCALAPPDATA%\LectureLive Beta` |
+| Mac | `~/Library/Application Support/LectureLive` |
+
+To open a Windows path, press **Windows + R**, paste the path and press Enter. On Mac, use
+**Finder → Go → Go to Folder…** and paste the path.
+
+**Remove Windows:** close the app, delete its extracted application/setup folder and remove its
+Start menu shortcut. **Remove Mac:** quit the app and move LectureLive from Applications to the Bin.
+These steps leave personal data intact. Only delete the matching data folder above if you also
+want to permanently remove settings, presets and transcripts.
 
 ## Project contact
 
@@ -158,14 +228,19 @@ These details are also available under **About** in the application.
 
 ## For developers
 
-The repository contains source, glossaries, pinned setup manifests, documentation and synthetic/public
-test evidence. Large models, runtimes, executables, recordings and private transcripts are excluded from Git.
-Use the private ARM64 runtime created by setup (replace `runtime` with `runtime-x64` for beta development):
+The sections above cover normal installation and teaching. The repository also contains source,
+glossaries, pinned setup manifests, documentation and synthetic/public test evidence. Large models,
+runtimes, executables, recordings and private transcripts are excluded from Git.
+
+For Windows development, use the private ARM64 runtime created by setup (replace `runtime` with
+`runtime-x64` for the Intel/AMD beta):
 
 ```powershell
 .\runtime\python.exe -m pytest -q
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\setup.ps1 -VerifyOnly
 ```
+
+For Mac development and packaging, follow [Build from source](docs/MACOS.md#build-from-source-optional-for-maintainers).
 
 [Architecture](docs/ARCHITECTURE.md) · [Model licences](docs/MODEL_LICENSES.md) ·
 [Translation evaluation](docs/TRANSLATION_EVALUATION.md) · [Acceptance checklist](docs/ACCEPTANCE_TESTS.md).
