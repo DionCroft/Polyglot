@@ -580,22 +580,32 @@ class MainWindow(QMainWindow):
         form.addWidget(self.recognition_mode)
         self.accelerator = QComboBox()
         self.accelerator.setAccessibleName("Processing hardware")
-        for label, key in [
-            ("Automatic · checked before captions", "auto"),
-            ("CPU · compatibility mode", "cpu"),
-            ("GPU · DirectML beta", "gpu"),
-            ("Intel NPU · experimental", "intel_npu"),
-            ("AMD NPU · experimental", "amd_npu"),
-        ]:
+        for label, key in (
+            [
+                ("Automatic · Core ML with CPU fallback", "auto"),
+                ("CPU · compatibility mode", "cpu"),
+                ("Apple Core ML · beta", "coreml"),
+            ]
+            if is_macos()
+            else [
+                ("Automatic · checked before captions", "auto"),
+                ("CPU · compatibility mode", "cpu"),
+                ("GPU · DirectML beta", "gpu"),
+                ("Intel NPU · experimental", "intel_npu"),
+                ("AMD NPU · experimental", "amd_npu"),
+            ]
+        ):
             self.accelerator.addItem(label, key)
         self.accelerator.setCurrentIndex(
             max(0, self.accelerator.findData(self.cfg.accelerator))
         )
-        if is_x64():
+        if is_x64() or is_macos():
             form.addWidget(QLabel("Processing hardware"))
             form.addWidget(self.accelerator)
             hint = QLabel(
-                "GPU/NPU accelerates speech encoding. Decoding and Chinese translation use CPU.\nFor NPU setup, read the Windows beta guide."
+                "Core ML accelerates speech encoding where supported. macOS chooses the compute device.\nDecoding and Chinese translation use CPU. First use can take several minutes."
+                if is_macos()
+                else "GPU/NPU accelerates speech encoding. Decoding and Chinese translation use CPU.\nFor NPU setup, read the Windows beta guide."
             )
             hint.setWordWrap(True)
             form.addWidget(hint)

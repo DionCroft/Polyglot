@@ -1,0 +1,46 @@
+from unittest.mock import patch
+import pytest
+from app.asr.macos_encoder import verify_trace, PROVIDER
+from app.system.models import ModelStore
+
+
+def test_coreml_proof_requires_executed_nodes_not_just_registration():
+    with pytest.raises(RuntimeError):
+        verify_trace([{"cat": "Node", "args": {"provider": "CPUExecutionProvider"}}])
+    assert verify_trace([{"cat": "Node", "args": {"provider": PROVIDER}}]) == [PROVIDER]
+    with pytest.raises(RuntimeError):
+        verify_trace([{"cat": "Session", "args": {"provider": PROVIDER}}])
+
+
+@pytest.mark.parametrize("selection", ["cpu", "coreml"])
+def test_mac_unavailable_accelerator_preserves_profile_and_cpu_choice(
+    tmp_path, selection
+):
+    with (
+        patch("app.system.models.is_macos", return_value=True),
+        patch("app.system.models.is_x64", return_value=False),
+        patch("app.system.models.cpu_profile", return_value="balanced"),
+        patch(
+            "app.asr.macos_encoder.MacEncoder", side_effect=TimeoutError("timeout")
+        ) as worker,
+        patch("app.asr.cpu_whisper.CpuWhisper") as cpu,
+        patch("app.translation.opus_mt.OpusMT"),
+        patch("app.audio.vad.SileroVAD"),
+    ):
+        bundle = ModelStore(tmp_path).load("balanced", accelerator=selection)
+        cpu.assert_called_once_with(tmp_path / "models/whisper/balanced")
+        assert not bundle.accelerated and not bundle.npu
+        assert worker.call_count == (selection == "coreml")
+
+
+def test_coreml_does_not_claim_verified_ane_execution(tmp_path):
+    with (
+        patch("app.system.models.is_macos", return_value=True),
+        patch("app.system.models.is_x64", return_value=False),
+        patch("app.asr.macos_encoder.MacEncoder"),
+        patch("app.asr.cpu_whisper.CpuWhisper"),
+        patch("app.translation.opus_mt.OpusMT"),
+        patch("app.audio.vad.SileroVAD"),
+    ):
+        bundle = ModelStore(tmp_path).load("fast")
+        assert bundle.accelerated and not bundle.npu

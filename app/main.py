@@ -11,6 +11,15 @@ def main():
 
         index = sys.argv.index("--encoder-worker")
         return run_worker(*sys.argv[index + 1 : index + 4])
+    if "--mac-encoder-worker" in sys.argv:
+        from app.asr.macos_encoder import run_worker
+
+        index = sys.argv.index("--mac-encoder-worker")
+        return run_worker(*sys.argv[index + 1 : index + 4])
+    if "--mac-ui-test" in sys.argv:
+        from app.system.macos_ui_test import run
+
+        return run(sys.argv[sys.argv.index("--mac-ui-test") + 1])
     from app.config.settings import DATA
     from app.utils.logging import configure
 

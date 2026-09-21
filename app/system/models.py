@@ -91,14 +91,31 @@ class ModelStore:
                     if asr is None:
                         raise RuntimeError("Using local CPU")
                 elif is_macos():
-                    raise RuntimeError("Using native Apple Silicon CPU")
+                    if accelerator == "cpu":
+                        raise RuntimeError("Local CPU selected")
+                    from app.asr.macos_encoder import MacEncoder
+
+                    try:
+                        worker = MacEncoder(self.root / "models/whisper" / profile)
+                        asr = CpuWhisper(
+                            self.root / "models/whisper" / profile, encoder=worker
+                        )
+                        asr.transcribe(np.zeros(16000, np.float32))
+                        asr.name = "Apple Core ML encoder + CPU decoder · " + (
+                            "Whisper Small" if profile == "balanced" else "Whisper Base"
+                        )
+                        accelerated = True
+                    except Exception as exc:
+                        logging.exception("Core ML unavailable; using CPU")
+                        messages.append("Core ML unavailable: " + str(exc))
+                        raise
                 else:
                     asr = QnnWhisper(self.root / "models/whisper" / profile)
                     asr.name = "Qualcomm NPU · Whisper " + (
                         "Small FP16" if profile == "balanced" else "Base FP16"
                     )
                 # Verify both encoder and decoder, not merely encoder loading.
-                if not is_x64():
+                if not is_x64() and not is_macos():
                     asr.transcribe(np.zeros(16000, np.float32))
                     npu = True
                     accelerated = True

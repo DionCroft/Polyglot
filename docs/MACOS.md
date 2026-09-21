@@ -1,0 +1,39 @@
+# LectureLive for Apple Silicon — beta 0.5.0b1
+
+Requires an Apple Silicon Mac (M1 or newer, including M2 MacBook Air) running **macOS 14 Sonoma or later**. Intel Macs and Rosetta are not supported by this build. Native M2 classroom validation is still required. The Windows builds remain available separately.
+
+## Install the ready-made app
+
+1. Download the Mac DMG or ZIP from the successful **macOS Apple Silicon** workflow in the repository's **Actions** tab. Open its **LectureLive-0.5.0b1-macOS-AppleSilicon** artifact; GitHub may ask you to sign in. Extract that artifact first. Do not download **Source code** when you want the ready-made application.
+2. Open the DMG and drag **LectureLive** onto **Applications**. Alternatively, double-click the inner application ZIP and move **LectureLive.app** to **Applications**. Eject the DMG before starting the installed app.
+3. Open **Applications → LectureLive**. This beta is ad-hoc signed and is **not Apple notarised**. If macOS blocks this downloaded beta, open **System Settings → Privacy & Security**, find the message about LectureLive, choose **Open Anyway**, and confirm **Open**. Only approve the copy you obtained from this repository. Your organisation may require IT approval.
+4. Choose your microphone and click **Test microphone**. Choose **Allow** when macOS asks for microphone access. If access was denied, turn on **System Settings → Privacy & Security → Microphone → LectureLive**, then quit and reopen LectureLive.
+5. Choose **Fast**, leave recognition on **Standard**, and click **Start lecture**. Select **Careful** and try **Balanced** if recognition needs improvement. Use the lecture vocabulary box, subject glossary and CO7000 week lists for technical terms. Save a preset to reuse these choices.
+6. Position the caption overlay on your screen or projector, then lock it. Pause with **Control + Option + Space**; lock/unlock with **Control + Option + C**. The screen buttons also work. In shortcut settings, **Ctrl** means Control and **Alt** means Option; Cmd/Command is supported. Change conflicting shortcuts, especially when VoiceOver is enabled.
+
+All speech models, Chinese translation, voice detection, glossaries and course lists are included. Normal use needs no account, Python installation or internet connection. Audio is processed locally. Transcripts are saved only if you enable that option. Settings, presets, logs, transcripts and Core ML caches live in `~/Library/Application Support/LectureLive`.
+
+## Processing choices and limits
+
+**Automatic** tries Apple Core ML for the speech encoder and falls back to CPU if loading, verification or inference fails. **CPU** avoids the accelerator. Both choices retain the selected Fast/Base or Balanced/Small model, vocabulary prompts and Careful decoding. Decoding, translation and voice detection use CPU in both modes. Core ML can partition work across CPU, GPU and Neural Engine; the app verifies Core ML execution but does not claim a particular physical device was used. Initial compilation may take up to three minutes; later launches reuse a local cache. A timed-out inference switches to CPU and retries the phrase.
+
+Balanced uses larger models and more memory. Careful checks more candidate words and can increase caption delay. The fanless M2 Air may slow down during sustained work. Use Fast/Standard first on an 8 GB Mac; close memory-heavy applications. This is guidance, not a measured M2 performance guarantee. Existing accent improvements are retained; the new backend still needs recordings from both lecturers to establish accent accuracy on this hardware.
+
+External microphones, Bluetooth sample-rate conversion, permission denial/recovery, hotkey delivery while another app has focus, full-screen slide overlays, multiple displays, battery use and thermal performance require a physical Mac classroom test. Hosted Apple Silicon CI checks are recorded separately in validation reports; they are not M2 hardware certification. Do not rely on captions for safety-critical communication.
+
+## Build from source (optional, for maintainers)
+
+Install native ARM64 Python 3.11 from python.org on macOS 14+, clone this repository, then run `bash Setup-Mac.command` from Terminal inside the repository. Setup downloads hash-verified dependencies and models; this step needs internet. The resulting `dist/LectureLive.app` runs offline. Allow several GB of free disk space for dependencies, caches and packaging.
+
+To repeat validation and create both distribution formats:
+
+```sh
+.venv-macos/bin/python -m scripts.setup_assets --fixtures
+.venv-macos/bin/python -m pytest -q
+LECTURELIVE_DATA="$PWD/tests/macos-ci-data" .venv-macos/bin/python -m app.main --self-test tests/fixtures/jfk.wav tests/macos-source.json
+.venv-macos/bin/python -m scripts.package_macos
+```
+
+The packages are written to `dist/macos-release`, with SHA-256 checksums. `ditto` preserves app framework links and executable permissions; do not repackage the app on Windows. Build on macOS: Windows cannot produce or verify the native app.
+
+For a public notarised release, configure a Developer ID Application certificate in the Mac build keychain and set `LECTURELIVE_CODESIGN_IDENTITY` before building. Configure an Apple `notarytool` keychain profile and set `LECTURELIVE_NOTARY_PROFILE` before packaging. The packaging script submits and staples the signed app when that profile is present. These credentials are not included in this repository; the normal CI beta remains ad-hoc signed. Managed Macs may prevent installation of an unnotarised beta.

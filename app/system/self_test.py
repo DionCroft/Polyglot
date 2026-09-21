@@ -9,6 +9,12 @@ from app.system.architecture import is_x64
 
 
 def run(root, wav_path, report_path):
+    from app.system.architecture import is_macos
+
+    if is_macos():
+        from app.system.macos_self_test import run as run_mac
+
+        return run_mac(root, wav_path, report_path)
     from app import __version__
 
     result = {
