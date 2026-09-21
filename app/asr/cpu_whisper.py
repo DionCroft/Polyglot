@@ -8,6 +8,9 @@ class CpuWhisper(QnnWhisper):
 
     def __init__(self, folder, encoder=None):
         self.load_assets(folder)
+        self.name = "Local CPU · Whisper " + (
+            "Small int8" if self.cfg["d_model"] == 768 else "Base int8"
+        )
         self.encoder = (
             encoder
             if encoder is not None

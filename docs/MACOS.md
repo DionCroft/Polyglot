@@ -43,3 +43,11 @@ LECTURELIVE_DATA="$PWD/tests/macos-ci-data" .venv-macos/bin/python -m app.main -
 The packages are written to `dist/macos-release`, with SHA-256 checksums. `ditto` preserves app framework links and executable permissions; do not repackage the app on Windows. Build on macOS: Windows cannot produce or verify the native app.
 
 For a public notarised release, configure a Developer ID Application certificate in the Mac build keychain and set `LECTURELIVE_CODESIGN_IDENTITY` before building. Configure an Apple `notarytool` keychain profile and set `LECTURELIVE_NOTARY_PROFILE` before packaging. The packaging script submits and staples the signed app when that profile is present. These credentials are not included in this repository; the normal CI beta remains ad-hoc signed. Managed Macs may prevent installation of an unnotarised beta.
+
+
+## Sources for platform behaviour
+
+- [Apple: opening downloaded applications](https://support.apple.com/en-us/102445).
+- [ONNX Runtime: Core ML provider and its compute choices](https://onnxruntime.ai/docs/execution-providers/CoreML-ExecutionProvider.html).
+- [GitHub: hosted Apple Silicon runner specifications](https://docs.github.com/en/actions/reference/runners/github-hosted-runners).
+- [Qt: microphone permissions](https://doc.qt.io/qtforpython-6/PySide6/QtCore/QMicrophonePermission.html).

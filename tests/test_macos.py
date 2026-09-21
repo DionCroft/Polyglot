@@ -69,3 +69,93 @@ def test_mac_cpu_fallback_uses_selected_small_profile(tmp_path):
         cpu.assert_called_once_with(tmp_path / "models/whisper/balanced")
         qnn.assert_not_called()
         assert not bundle.npu
+
+
+def test_permission_denied_never_starts_capture_and_pending_request_is_not_duplicated():
+    from types import SimpleNamespace
+    from PySide6.QtCore import Qt
+    from app.system.permissions import microphone_permission
+
+    window = SimpleNamespace(warn=Mock(), closing=False)
+    resume = Mock()
+    with (
+        patch("app.system.permissions.is_macos", return_value=True),
+        patch("PySide6.QtWidgets.QApplication.instance") as instance,
+    ):
+        app = instance.return_value
+        app.checkPermission.return_value = Qt.PermissionStatus.Denied
+        assert not microphone_permission(window, resume)
+        app.requestPermission.assert_not_called()
+        resume.assert_not_called()
+        assert "Microphone" in window.warn.call_args.args[0]
+        app.checkPermission.return_value = Qt.PermissionStatus.Undetermined
+        assert not microphone_permission(window, resume)
+        assert not microphone_permission(window, resume)
+        app.requestPermission.assert_called_once()
+        callback = app.requestPermission.call_args.args[2]
+        denied = Mock()
+        denied.status.return_value = Qt.PermissionStatus.Denied
+        callback(denied)
+        assert not window.microphone_permission_pending
+        resume.assert_not_called()
+
+
+def test_permission_grant_resumes_once_and_late_grant_cannot_reopen_closed_window():
+    from types import SimpleNamespace
+    from PySide6.QtCore import Qt
+    from app.system.permissions import microphone_permission
+
+    window = SimpleNamespace(warn=Mock(), closing=False)
+    resume = Mock()
+    with (
+        patch("app.system.permissions.is_macos", return_value=True),
+        patch("PySide6.QtWidgets.QApplication.instance") as instance,
+        patch(
+            "PySide6.QtCore.QTimer.singleShot",
+            side_effect=lambda delay, action: action(),
+        ),
+    ):
+        app = instance.return_value
+        app.checkPermission.return_value = Qt.PermissionStatus.Undetermined
+        assert not microphone_permission(window, resume)
+        callback = app.requestPermission.call_args.args[2]
+        granted = Mock()
+        granted.status.return_value = Qt.PermissionStatus.Granted
+        callback(granted)
+        resume.assert_called_once()
+        resume.reset_mock()
+        window.closing = True
+        callback(granted)
+        resume.assert_not_called()
+
+
+def test_mac_runtime_fallback_keeps_small_careful_and_vocabulary(tmp_path):
+    import numpy as np
+    from app.pipeline import Pipeline
+    from app.config.settings import ROOT, Settings
+
+    settings = Settings(
+        profile="balanced",
+        recognition_mode="careful",
+        vocabulary_guidance=True,
+        vocabulary="NPV\nTCPI",
+        glossary="project_management",
+    )
+    pipeline = Pipeline(
+        ROOT, tmp_path, settings, lambda *event: None, vocabulary=settings.vocabulary
+    )
+    pipeline.accelerated = True
+    pipeline.asr = Mock()
+    pipeline.asr.transcribe.side_effect = TimeoutError("Core ML stalled")
+    audio = np.zeros(16000, np.float32)
+    with (
+        patch("app.system.architecture.is_macos", return_value=True),
+        patch("app.asr.cpu_whisper.CpuWhisper") as cpu,
+    ):
+        cpu.return_value.transcribe.return_value = "NPV and TCPI"
+        assert pipeline._transcribe(audio, final=False) == "NPV and TCPI"
+        cpu.assert_called_once_with(ROOT / "models/whisper/balanced")
+        mode, vocabulary = cpu.return_value.configure_recognition.call_args.args
+        assert mode == "careful" and "NPV" in vocabulary
+        assert cpu.return_value.final_pass is False
+        assert cpu.return_value.transcribe.call_args.args[0] is audio
