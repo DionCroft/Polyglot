@@ -1,0 +1,52 @@
+{
+  "version": "0.3.2",
+  "architecture": "ARM64",
+  "startup": {
+    "speech": true,
+    "translation": true,
+    "vad": true,
+    "npu": true,
+    "messages": [],
+    "accelerated": true,
+    "backend": "Qualcomm NPU · Whisper Small FP16"
+  },
+  "speech": [
+    {
+      "profile": "fast",
+      "english": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country.",
+      "seconds": 0.20239679999940563
+    },
+    {
+      "profile": "fast-guided",
+      "english": "and so my fellow Americans ask not what your country can do for you, ask what you can do for your country."
+    },
+    {
+      "profile": "balanced",
+      "english": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country.",
+      "seconds": 0.6421547999998438
+    },
+    {
+      "profile": "balanced-guided",
+      "english": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country."
+    },
+    {
+      "profile": "cpu",
+      "english": "And so my fellow Americans ask not what your country can do for you, ask what you can do for your country.",
+      "seconds": 1.1026974999986123
+    },
+    {
+      "profile": "cpu-guided",
+      "english": "and so my fellow Americans ask not what your country can do for you, ask what you can do for your country"
+    }
+  ],
+  "course_vocabulary": {
+    "weeks": 12,
+    "glossary_terms": 92,
+    "passed": true
+  },
+  "translation": {
+    "chinese": "中断服务程序应该尽快执行。",
+    "seconds": 0.1341208000012557
+  },
+  "passed": true
+}

@@ -4,7 +4,7 @@ Requires an Apple Silicon Mac (M1 or newer, including M2 MacBook Air) running **
 
 ## Install the ready-made app
 
-1. Download the Mac DMG or ZIP from the successful **macOS Apple Silicon** workflow in the repository's **Actions** tab. Open its **LectureLive-0.5.0b1-macOS-AppleSilicon** artifact; GitHub may ask you to sign in. Extract that artifact first. Do not download **Source code** when you want the ready-made application.
+1. Open the [Mac beta download page](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.5.0b1). Under **Assets**, choose **LectureLive-0.5.0b1-macOS-AppleSilicon.dmg** (recommended) or the application ZIP. Do not choose **Source code**. Developer builds are also available from successful **macOS Apple Silicon** runs in **Actions**; those require extracting an outer artifact ZIP and may require signing into GitHub.
 2. Open the DMG and drag **LectureLive** onto **Applications**. Alternatively, double-click the inner application ZIP and move **LectureLive.app** to **Applications**. Eject the DMG before starting the installed app.
 3. Open **Applications → LectureLive**. This beta is ad-hoc signed and is **not Apple notarised**. If macOS blocks this downloaded beta, open **System Settings → Privacy & Security**, find the message about LectureLive, choose **Open Anyway**, and confirm **Open**. Only approve the copy you obtained from this repository. Your organisation may require IT approval.
 4. Choose your microphone and click **Test microphone**. Choose **Allow** when macOS asks for microphone access. If access was denied, turn on **System Settings → Privacy & Security → Microphone → LectureLive**, then quit and reopen LectureLive.

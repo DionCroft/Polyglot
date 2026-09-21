@@ -15,8 +15,8 @@ transcripts is optional.
 ## Choose your computer
 
 - **Apple Silicon Mac (including M2 MacBook Air), macOS 14 or later:** use the
-  [Mac installation guide](docs/MACOS.md). Download the ready-made Mac app from a successful
-  [macOS Apple Silicon build](https://github.com/DionCroft/Polyglot/actions/workflows/macos.yml).
+  [Mac installation guide](docs/MACOS.md). Download the ready-made Mac app from the
+  [Mac beta release](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.5.0b1).
   It includes the models and needs no Python or terminal commands. This beta is not notarised.
 - **Windows 11:** follow the instructions below. Snapdragon ARM64 and Intel/AMD x64 builds
   are separate; Windows setup selects the right one for your PC.

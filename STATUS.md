@@ -1,7 +1,15 @@
 # LectureLive — STATUS
 
-Updated 2026-09-21. Optional speech-recognition improvements implemented.
+Updated 2026-09-22. Native Apple Silicon beta implemented and packaged.
 Production classroom acceptance remains open.
+
+## macOS Apple Silicon beta 0.5.0b1
+
+- Native ARM64 `.app`, DMG and ZIP for macOS 14+, with bundled offline models and the existing recognition, translation, presets and CO7000 support.
+- Core Audio, user-initiated microphone permissions, Carbon shortcuts and Cocoa overlays. Core ML Fast encoder with CPU fallback; Balanced Automatic uses CPU after Small compilation timed out on native CI.
+- 83 tests pass on native macOS; packaged inference, Cocoa UI, static microphone permission integration, signing and architecture checks pass. Windows: 81 tests pass per runtime, both rebuilt executables and UI regressions pass.
+- Physical M2 classroom tests and both lecturers' accent recordings remain outstanding. Ad-hoc signed; no Developer ID/notarisation credentials were available. Core ML execution was verified, individual GPU/Neural Engine execution was not.
+- [Install the Mac beta](docs/MACOS.md) · [Native measurements and evidence](docs/evidence/macos-2026-09-21.md) · [Platform review and remaining M2 checks](docs/MACOS_PORT.md).
 
 ## Optional speech recognition (ARM64 0.3.2 / x64 beta 0.4.0b2)
 
