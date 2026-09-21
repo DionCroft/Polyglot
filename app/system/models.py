@@ -91,7 +91,11 @@ class ModelStore:
                     if asr is None:
                         raise RuntimeError("Using local CPU")
                 elif is_macos():
-                    if accelerator == "cpu":
+                    if accelerator == "cpu" or (
+                        accelerator == "auto" and profile == "balanced"
+                    ):
+                        # Small Core ML exceeded the compilation limit on native CI.
+                        # Keep it opt-in until physical Apple Silicon validation.
                         raise RuntimeError("Local CPU selected")
                     from app.asr.macos_encoder import MacEncoder
 

@@ -603,7 +603,7 @@ class MainWindow(QMainWindow):
             form.addWidget(QLabel("Processing hardware"))
             form.addWidget(self.accelerator)
             hint = QLabel(
-                "Core ML accelerates speech encoding where supported. macOS chooses the compute device.\nDecoding and Chinese translation use CPU. First use can take several minutes."
+                "Automatic uses Core ML for Fast and CPU for Balanced. Core ML with Balanced is experimental.\nDecoding and Chinese translation use CPU. First Core ML use can take several minutes."
                 if is_macos()
                 else "GPU/NPU accelerates speech encoding. Decoding and Chinese translation use CPU.\nFor NPU setup, read the Windows beta guide."
             )
@@ -654,12 +654,16 @@ class MainWindow(QMainWindow):
         self.preview_en = QLabel("Your words. Understood.")
         self.preview_en.setObjectName("previewEnglish")
         self.preview_en.setWordWrap(True)
-        self.preview_en.setFont(QFont("Segoe UI", 22))
+        self.preview_en.setFont(
+            QFont("Helvetica Neue" if is_macos() else "Segoe UI", 22)
+        )
         form.addWidget(self.preview_en)
         self.preview_zh = QLabel("让每一句话，都被听懂。")
         self.preview_zh.setObjectName("previewChinese")
         self.preview_zh.setWordWrap(True)
-        self.preview_zh.setFont(QFont("Microsoft YaHei UI", 20))
+        self.preview_zh.setFont(
+            QFont("PingFang SC" if is_macos() else "Microsoft YaHei UI", 20)
+        )
         form.addWidget(self.preview_zh)
         self.preview_hint = QLabel("Stable English and Chinese appear together.")
         self.preview_hint.setObjectName("muted")

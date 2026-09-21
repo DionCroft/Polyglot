@@ -15,6 +15,8 @@ The macOS beta is a native ARM64 Python/Qt Cocoa application. The `.app` include
 | Preferences/cache | LOCALAPPDATA | User Library/Application Support/LectureLive; no writes into the signed bundle |
 | Packaging | Windows PyInstaller EXE/folder | Native macOS PyInstaller ARM64 BUNDLE; ad-hoc or Developer ID signing; ditto ZIP and hdiutil DMG |
 
+Automatic selects Core ML for Fast and CPU for Balanced, following the native CI result in which Small Core ML compilation timed out. Explicit Core ML remains available for Small as an experimental option.
+
 Core ML must execute encoder nodes during a traced warm-up before the app labels it active. The trace may include CPU partitions. It cannot establish that the Neural Engine or GPU performed any particular work; Apple chooses the compute device. Encoder startup has a 180-second limit and each inference a 30-second limit. CPU fallback retains Base/Small selection, Careful mode, vocabulary prompts and the same audio phrase. Python runtime networking remains disabled in the parent and child; the worker does not open sockets or write microphone audio.
 
 The Mac build adds portable ONNX Small weights alongside Base. It reuses the original OpenAI tokenizer and preprocessing assets, including the existing mel filter bank. Translation, segmentation, caption stabilisation, transcript exports, 12 CO7000 lists and the 92-term project-management glossary use shared application code. The optional recognition improvements are unchanged. All model downloads are a setup/build step and are verified by byte count and SHA-256; ordinary launches use bundled models.

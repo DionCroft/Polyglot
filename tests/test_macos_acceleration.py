@@ -12,7 +12,7 @@ def test_coreml_proof_requires_executed_nodes_not_just_registration():
         verify_trace([{"cat": "Session", "args": {"provider": PROVIDER}}])
 
 
-@pytest.mark.parametrize("selection", ["cpu", "coreml"])
+@pytest.mark.parametrize("selection", ["cpu", "auto", "coreml"])
 def test_mac_unavailable_accelerator_preserves_profile_and_cpu_choice(
     tmp_path, selection
 ):
