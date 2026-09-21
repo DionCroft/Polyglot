@@ -11,7 +11,7 @@ Requires an Apple Silicon Mac (M1 or newer, including M2 MacBook Air) running **
 5. Choose **Fast**, leave recognition on **Standard**, and click **Start lecture**. Select **Careful** and try **Balanced** if recognition needs improvement. Use the lecture vocabulary box, subject glossary and CO7000 week lists for technical terms. Save a preset to reuse these choices.
 6. Position the caption overlay on your screen or projector, then lock it. Pause with **Control + Option + Space**; lock/unlock with **Control + Option + C**. The screen buttons also work. In shortcut settings, **Ctrl** means Control and **Alt** means Option; Cmd/Command is supported. Change conflicting shortcuts, especially when VoiceOver is enabled.
 
-All speech models, Chinese translation, voice detection, glossaries and course lists are included. Normal use needs no account, Python installation or internet connection. Audio is processed locally. Transcripts are saved only if you enable that option. Settings, presets, logs, transcripts and Core ML caches live in `~/Library/Application Support/LectureLive`.
+All speech models, Chinese translation, voice detection, glossaries and course lists are included. Normal use needs no account, Python installation or internet connection. Audio is processed locally. Text transcripts are saved when **Save transcripts** is selected (on by default); turn it off if you do not want saved text. Microphone audio is not recorded. Settings, presets, logs, transcripts and Core ML caches live in `~/Library/Application Support/LectureLive`.
 
 ## Processing choices and limits
 
@@ -19,7 +19,13 @@ All speech models, Chinese translation, voice detection, glossaries and course l
 
 Balanced uses larger models and more memory. Careful checks more candidate words and can increase caption delay. The fanless M2 Air may slow down during sustained work. Use Fast/Standard first on an 8 GB Mac; close memory-heavy applications. This is guidance, not a measured M2 performance guarantee. Existing accent improvements are retained; the new backend still needs recordings from both lecturers to establish accent accuracy on this hardware.
 
-External microphones, Bluetooth sample-rate conversion, permission denial/recovery, hotkey delivery while another app has focus, full-screen slide overlays, multiple displays, battery use and thermal performance require a physical Mac classroom test. Hosted Apple Silicon CI checks are recorded separately in validation reports; they are not M2 hardware certification. Do not rely on captions for safety-critical communication.
+External microphones, Bluetooth sample-rate conversion, permission denial/recovery, hotkey delivery while another app has focus, full-screen slide overlays, multiple displays, battery use and thermal performance require a physical Mac classroom test. Hosted Apple Silicon CI checks are recorded separately in validation reports; they are not M2 hardware certification.
+
+## Updating or removing the Mac app
+
+Quit LectureLive before replacing the copy in Applications. Keep your previous installer until the update works. Your settings and transcripts stay in your user Library. To remove the app, move LectureLive from Applications to the Bin; this leaves your saved data intact. Only delete `~/Library/Application Support/LectureLive` separately if you also want to remove those settings and transcripts.
+
+If **Open Anyway** is absent or the app is reported as damaged, verify the download against the supplied `SHA256SUMS.txt` or download it again; ask your university IT team if their policy blocks it. Do not disable Gatekeeper globally. If you see **Core ML unavailable**, captions can continue on CPU. Select CPU explicitly if you prefer to skip Core ML compilation. Use **Diagnostics → Open transcripts** to find saved text.
 
 ## Build from source (optional, for maintainers)
 

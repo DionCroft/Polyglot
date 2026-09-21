@@ -2,7 +2,7 @@
 
 **Speak in English. Show English and Simplified Chinese captions.**
 
-LectureLive adds a floating caption panel to your Windows desktop or projector while you teach.
+LectureLive adds a floating caption panel to your Windows or Apple Silicon Mac desktop or projector while you teach.
 Speech recognition and translation run on your computer. Once setup is complete, everyday use
 needs no internet connection, account or API key. Microphone audio is not recorded; saving text
 transcripts is optional.
@@ -12,13 +12,22 @@ transcripts is optional.
 > **Preview release:** translations can make mistakes. Try it with your actual microphone and
 > projector before teaching. [Current testing and limitations](STATUS.md).
 
-## Before you begin
+## Choose your computer
+
+- **Apple Silicon Mac (including M2 MacBook Air), macOS 14 or later:** use the
+  [Mac installation guide](docs/MACOS.md). Download the ready-made Mac app from a successful
+  [macOS Apple Silicon build](https://github.com/DionCroft/Polyglot/actions/workflows/macos.yml).
+  It includes the models and needs no Python or terminal commands. This beta is not notarised.
+- **Windows 11:** follow the instructions below. Snapdragon ARM64 and Intel/AMD x64 builds
+  are separate; Windows setup selects the right one for your PC.
+
+## Before you begin on Windows
 
 You need:
 
 - **Windows 11.** The established ARM64 edition is tested on a Snapdragon X Elite Surface.
   **Windows 11 Intel/AMD x64 PCs can now try the beta.** See the [Windows beta guide](docs/WINDOWS_BETA.md)
-  for GPU acceleration and experimental Intel/AMD NPU preparation. Macs and Linux are not supported.
+  for GPU acceleration and experimental Intel/AMD NPU preparation. For Macs, use the separate Apple Silicon build above. Linux is not supported.
 - **A microphone** — use the one you intend to teach with.
 - **Internet for the first setup** and at least **15 GB of free disk space** recommended.
   Keep the computer plugged in while setup downloads the models and builds the app.
@@ -29,7 +38,7 @@ You need:
 Setup chooses the edition automatically. You do **not** need to
 install Python, Git, CUDA or any developer tools yourself.
 
-## Install from GitHub — no terminal commands needed
+## Install on Windows from GitHub — no terminal commands needed
 
 1. Open [the Polyglot repository](https://github.com/DionCroft/Polyglot).
 2. Select the green **Code** button, then **Download ZIP**.
@@ -85,7 +94,7 @@ caption panel. Change them under **Overlay**.
 ## If words are being missed
 
 Keep **Standard** if it already works well for your voice. For another speaker, try **Balanced**
-(on Snapdragon), then the optional **Careful** recognition setting. A short list of relevant
+(on Snapdragon or Apple Silicon), then the optional **Careful** recognition setting. A short list of relevant
 technical terms can be passed to the speech model by ticking **Use these terms to guide speech
 recognition**. These options can also worsen results, especially with the smaller Fast model;
 compare a short passage before teaching and save separate lecturer presets.

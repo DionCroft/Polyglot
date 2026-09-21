@@ -13,6 +13,10 @@ class GuideDialog(QDialog):
         self.resize(780, 640)
         layout = QVBoxLayout(self)
         self.pages = QComboBox()
+        from app.system.architecture import is_macos
+
+        if is_macos():
+            self.pages.addItem("Mac installation and first captions", "MACOS.md")
         for label, filename in [
             ("Quick start", "QUICK_START.md"),
             ("Full user guide", "USER_GUIDE.md"),

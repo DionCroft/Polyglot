@@ -42,7 +42,10 @@ def transfer(fd, size, deadline, data=None):
             output.extend(chunk)
             offset += len(chunk)
         else:
-            offset += os.write(fd, data[offset : offset + 4096])
+            try:
+                offset += os.write(fd, data[offset : offset + 4096])
+            except BlockingIOError:
+                continue
     return bytes(output)
 
 
@@ -83,6 +86,7 @@ class MacEncoder:
         read_fd, child_write = os.pipe()
         child_read, write_fd = os.pipe()
         self.read_fd, self.write_fd = read_fd, write_fd
+        os.set_blocking(write_fd, False)
         command = [sys.executable]
         if not getattr(sys, "frozen", False):
             command += ["-m", "app.main"]
@@ -216,6 +220,7 @@ def create_encoder(folder):
 
 def run_worker(folder, read_fd, write_fd):
     read_fd, write_fd = int(read_fd), int(write_fd)
+    os.set_blocking(write_fd, False)
     try:
         try:
             encoder, details = create_encoder(Path(folder))

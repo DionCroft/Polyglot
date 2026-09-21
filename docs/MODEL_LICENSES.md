@@ -4,6 +4,8 @@ The app uses local weights; using Whisper does not use an OpenAI API.
 
 | Component | Source / stated license |
 |---|---|
+| macOS Base/Small ONNX exports | onnx-community/whisper-base and whisper-small; pinned revisions in assets-macos.lock.json; derived from original OpenAI Whisper MIT weights |
+| PyObjC / macOS ONNX Runtime | MIT; exact wheel notices collected in the Mac bundle |
 | Original Whisper weights/code | OpenAI Whisper, MIT |
 | Qualcomm Whisper Base/Small exports | Qualcomm Hugging Face cards identify Apache-2.0 and link the Transformers Apache license; preserve their source notice and original Whisper MIT notice |
 | OPUS-MT EN–ZH | Helsinki-NLP card: Apache-2.0; ONNX conversion by onnx-community |

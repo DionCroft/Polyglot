@@ -33,6 +33,24 @@ def main():
                 os.link(source, target)
             except OSError:
                 shutil.copy2(source, target)
+    # Preserve notices shipped in the exact wheels used to produce this bundle.
+    import importlib.metadata
+    import hashlib
+
+    notices = ROOT / "build/macos-licenses"
+    notices.mkdir(parents=True, exist_ok=True)
+    for distribution in importlib.metadata.distributions():
+        for file in distribution.files or []:
+            if any(
+                word in file.name.lower() for word in ("license", "copying", "notice")
+            ):
+                source = Path(distribution.locate_file(file))
+                if source.is_file():
+                    suffix = hashlib.sha256(str(file).encode()).hexdigest()[:8]
+                    target = notices / (
+                        distribution.metadata["Name"] + "-" + suffix + "-" + file.name
+                    )
+                    shutil.copy2(source, target)
     icons = ROOT / "build/LectureLive.iconset"
     icons.mkdir(parents=True, exist_ok=True)
     for size in (16, 32, 128, 256, 512):

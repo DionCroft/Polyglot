@@ -4,7 +4,7 @@ from PyInstaller.utils.hooks import collect_data_files, collect_dynamic_libs
 
 identity = os.environ.get("LECTURELIVE_CODESIGN_IDENTITY") or None
 datas = [('assets', 'assets'), ('glossaries', 'glossaries'), ('docs', 'docs'),
-         ('build/macos-assets/models', 'models')]
+         ('build/macos-assets/models', 'models'), ('build/macos-licenses', 'docs/licenses/macos-wheels')]
 datas += collect_data_files('opencc')
 a = Analysis(
     ['LectureLive.pyw'], pathex=[], datas=datas,
