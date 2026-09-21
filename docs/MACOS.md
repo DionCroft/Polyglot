@@ -45,6 +45,8 @@ The packages are written to `dist/macos-release`, with SHA-256 checksums. `ditto
 For a public notarised release, configure a Developer ID Application certificate in the Mac build keychain and set `LECTURELIVE_CODESIGN_IDENTITY` before building. Configure an Apple `notarytool` keychain profile and set `LECTURELIVE_NOTARY_PROFILE` before packaging. The packaging script submits and staples the signed app when that profile is present. These credentials are not included in this repository; the normal CI beta remains ad-hoc signed. Managed Macs may prevent installation of an unnotarised beta.
 
 
+[Implementation notes and physical M2 acceptance checklist](MACOS_PORT.md).
+
 ## Sources for platform behaviour
 
 - [Apple: opening downloaded applications](https://support.apple.com/en-us/102445).
