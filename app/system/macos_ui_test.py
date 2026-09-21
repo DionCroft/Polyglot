@@ -8,7 +8,7 @@ from unittest.mock import patch
 
 
 def run(report_path):
-    from PySide6.QtCore import QMicrophonePermission
+    from PySide6.QtCore import QMicrophonePermission, QPluginLoader
     from PySide6.QtWidgets import QApplication
     from app.config.settings import Settings
 
@@ -69,6 +69,15 @@ def run(report_path):
         result["shortcuts_registered"] = len(window.hotkeys.registered)
         result["shortcut_conflicts"] = window.hotkeys.errors
         assert len(window.hotkeys.registered) == 2, window.hotkeys.errors
+        # PySide imports Darwin permission plugins statically into QtCore.
+        plugins = [
+            item.metaObject().className() for item in QPluginLoader.staticInstances()
+        ]
+        result["static_permission_plugins"] = plugins
+        assert any("MicrophonePermission" in name for name in plugins), plugins
+        handler = objc.lookUpClass("QDarwinMicrophonePermissionHandler")
+        assert handler.instancesRespondToSelector_(b"requestPermission:withCallback:")
+        result["microphone_request_handler_linked"] = True
         result["microphone_permission_status"] = str(
             app.checkPermission(QMicrophonePermission())
         )

@@ -59,7 +59,7 @@ jobs:
           dist/LectureLive.app/Contents/MacOS/LectureLive --self-test tests/fixtures/jfk.wav tests/artifacts/macos-packaged.json
           dist/LectureLive.app/Contents/MacOS/LectureLive --mac-ui-test tests/artifacts/macos-ui.json
           codesign --verify --deep --strict dist/LectureLive.app
-          test -n "$(find dist/LectureLive.app -iname '*permission*' -print -quit)"
+          /usr/libexec/PlistBuddy -c "Print :NSMicrophoneUsageDescription" dist/LectureLive.app/Contents/Info.plist
       - name: Create DMG and ZIP
         run: python -m scripts.package_macos
       - name: Upload installable beta
