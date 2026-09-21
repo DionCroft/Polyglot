@@ -18,6 +18,8 @@ class GuideDialog(QDialog):
             ("Full user guide", "USER_GUIDE.md"),
             ("Installation help", "INSTALLATION.md"),
             ("Windows Intel/AMD beta", "WINDOWS_BETA.md"),
+            ("Improving speech recognition", "SPEECH_RECOGNITION.md"),
+            ("CO7000 project-management vocabulary", "CO7000_VOCABULARY.md"),
         ]:
             self.pages.addItem(label, filename)
         self.pages.setAccessibleName("Help topic")

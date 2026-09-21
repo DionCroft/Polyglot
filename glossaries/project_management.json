@@ -1,0 +1,493 @@
+{
+  "work breakdown structure": {
+    "english": "work breakdown structure",
+    "chinese": "工作分解结构",
+    "asr_aliases": [
+      "work break down structure",
+      "work-breakdown structure"
+    ]
+  },
+  "project lifecycle": {
+    "english": "project lifecycle",
+    "chinese": "项目生命周期",
+    "asr_aliases": [
+      "project life cycle"
+    ]
+  },
+  "resource levelling": {
+    "english": "resource levelling",
+    "chinese": "资源平衡",
+    "asr_aliases": [
+      "resource leveling"
+    ]
+  },
+  "stakeholders": {
+    "english": "stakeholders",
+    "chinese": "利益相关方",
+    "asr_aliases": [
+      "stake holders"
+    ]
+  },
+  "stakeholder": {
+    "english": "stakeholder",
+    "chinese": "利益相关方",
+    "asr_aliases": [
+      "stake holder"
+    ]
+  },
+  "Gantt chart": {
+    "english": "Gantt chart",
+    "chinese": "甘特图",
+    "asr_aliases": [
+      "Gant chart",
+      "Gantt-chart"
+    ]
+  },
+  "Gantt charts": {
+    "english": "Gantt charts",
+    "chinese": "甘特图",
+    "asr_aliases": [
+      "Gant charts"
+    ]
+  },
+  "PRINCE2": {
+    "english": "PRINCE2",
+    "chinese": "PRINCE2项目管理方法",
+    "asr_aliases": [
+      "PRINCE 2",
+      "Prince two"
+    ]
+  },
+  "RACI": {
+    "english": "RACI",
+    "chinese": "职责分配矩阵",
+    "asr_aliases": [
+      "R A C I",
+      "R.A.C.I."
+    ]
+  },
+  "PERT": {
+    "english": "programme evaluation and review technique",
+    "chinese": "计划评审技术",
+    "asr_aliases": [
+      "P E R T",
+      "P.E.R.T."
+    ]
+  },
+  "TCPI": {
+    "english": "to-complete performance index",
+    "chinese": "完工尚需绩效指数",
+    "asr_aliases": [
+      "T C P I",
+      "T.C.P.I."
+    ]
+  },
+  "SDGs": {
+    "english": "Sustainable Development Goals",
+    "chinese": "可持续发展目标",
+    "asr_aliases": [
+      "S D Gs",
+      "S D G s"
+    ]
+  },
+  "NPV": {
+    "english": "net present value",
+    "chinese": "净现值",
+    "asr_aliases": [
+      "N P V",
+      "N.P.V."
+    ]
+  },
+  "IRR": {
+    "english": "internal rate of return",
+    "chinese": "内部收益率",
+    "asr_aliases": [
+      "I R R",
+      "I.R.R."
+    ]
+  },
+  "ROI": {
+    "english": "return on investment",
+    "chinese": "投资回报率",
+    "asr_aliases": [
+      "R O I",
+      "R.O.I."
+    ]
+  },
+  "BCR": {
+    "english": "benefit-cost ratio",
+    "chinese": "效益成本比",
+    "asr_aliases": [
+      "B C R",
+      "B.C.R."
+    ]
+  },
+  "Kanban": {
+    "english": "Kanban",
+    "chinese": "看板",
+    "asr_aliases": [
+      "kanban"
+    ]
+  },
+  "WBS": {
+    "english": "work breakdown structure",
+    "chinese": "工作分解结构",
+    "asr_aliases": [
+      "W B S",
+      "W.B.S."
+    ]
+  },
+  "CPM": {
+    "english": "critical path method",
+    "chinese": "关键路径法",
+    "asr_aliases": [
+      "C P M",
+      "C.P.M."
+    ]
+  },
+  "EVM": {
+    "english": "earned value management",
+    "chinese": "挣值管理",
+    "asr_aliases": [
+      "E V M",
+      "E.V.M."
+    ]
+  },
+  "CPI": {
+    "english": "cost performance index",
+    "chinese": "成本绩效指数",
+    "asr_aliases": [
+      "C P I",
+      "C.P.I."
+    ]
+  },
+  "SPI": {
+    "english": "schedule performance index",
+    "chinese": "进度绩效指数",
+    "asr_aliases": [
+      "S P I",
+      "S.P.I."
+    ]
+  },
+  "EAC": {
+    "english": "estimate at completion",
+    "chinese": "完工估算",
+    "asr_aliases": [
+      "E A C",
+      "E.A.C."
+    ]
+  },
+  "ETC": {
+    "english": "estimate to complete",
+    "chinese": "完工尚需估算",
+    "asr_aliases": [
+      "E T C",
+      "E.T.C."
+    ],
+    "case_sensitive_acronym": true
+  },
+  "VAC": {
+    "english": "variance at completion",
+    "chinese": "完工偏差",
+    "asr_aliases": [
+      "V A C",
+      "V.A.C."
+    ]
+  },
+  "Scrum": {
+    "english": "Scrum",
+    "chinese": "Scrum框架",
+    "asr_aliases": [
+      "scrum"
+    ]
+  },
+  "PV": {
+    "english": "planned value",
+    "chinese": "计划价值",
+    "asr_aliases": [
+      "P V",
+      "P.V."
+    ],
+    "case_sensitive_acronym": true
+  },
+  "EV": {
+    "english": "earned value",
+    "chinese": "挣值",
+    "asr_aliases": [
+      "E V",
+      "E.V."
+    ],
+    "case_sensitive_acronym": true
+  },
+  "AC": {
+    "english": "actual cost",
+    "chinese": "实际成本",
+    "asr_aliases": [
+      "A C",
+      "A.C."
+    ],
+    "case_sensitive_acronym": true
+  },
+  "CV": {
+    "english": "cost variance",
+    "chinese": "成本偏差",
+    "asr_aliases": [
+      "C V",
+      "C.V."
+    ],
+    "case_sensitive_acronym": true
+  },
+  "SV": {
+    "english": "schedule variance",
+    "chinese": "进度偏差",
+    "asr_aliases": [
+      "S V",
+      "S.V."
+    ],
+    "case_sensitive_acronym": true
+  },
+  "project management": {
+    "english": "project management",
+    "chinese": "项目管理"
+  },
+  "project success": {
+    "english": "project success",
+    "chinese": "项目成功"
+  },
+  "deliverables": {
+    "english": "deliverables",
+    "chinese": "交付物"
+  },
+  "outputs": {
+    "english": "outputs",
+    "chinese": "产出"
+  },
+  "outcomes": {
+    "english": "outcomes",
+    "chinese": "结果"
+  },
+  "benefits": {
+    "english": "benefits",
+    "chinese": "效益"
+  },
+  "strategic alignment": {
+    "english": "strategic alignment",
+    "chinese": "战略一致性"
+  },
+  "programmes": {
+    "english": "programmes",
+    "chinese": "项目集"
+  },
+  "project portfolios": {
+    "english": "project portfolios",
+    "chinese": "项目组合"
+  },
+  "opportunity cost": {
+    "english": "opportunity cost",
+    "chinese": "机会成本"
+  },
+  "sensitivity analysis": {
+    "english": "sensitivity analysis",
+    "chinese": "敏感性分析"
+  },
+  "project charter": {
+    "english": "project charter",
+    "chinese": "项目章程"
+  },
+  "inception": {
+    "english": "inception",
+    "chinese": "启动"
+  },
+  "progressive elaboration": {
+    "english": "progressive elaboration",
+    "chinese": "渐进明细"
+  },
+  "decision gates": {
+    "english": "decision gates",
+    "chinese": "决策关口"
+  },
+  "feasibility": {
+    "english": "feasibility",
+    "chinese": "可行性"
+  },
+  "business case": {
+    "english": "business case",
+    "chinese": "商业论证"
+  },
+  "Five Case Model": {
+    "english": "Five Case Model",
+    "chinese": "五维商业论证模型"
+  },
+  "counterfactual": {
+    "english": "counterfactual",
+    "chinese": "反事实"
+  },
+  "optimism bias": {
+    "english": "optimism bias",
+    "chinese": "乐观偏差"
+  },
+  "payback": {
+    "english": "payback",
+    "chinese": "投资回收期"
+  },
+  "discount rate": {
+    "english": "discount rate",
+    "chinese": "折现率"
+  },
+  "cash flow": {
+    "english": "cash flow",
+    "chinese": "现金流"
+  },
+  "whole-life cost": {
+    "english": "whole-life cost",
+    "chinese": "全生命周期成本"
+  },
+  "sunk cost": {
+    "english": "sunk cost",
+    "chinese": "沉没成本"
+  },
+  "incremental cost": {
+    "english": "incremental cost",
+    "chinese": "增量成本"
+  },
+  "predictive": {
+    "english": "predictive",
+    "chinese": "预测型"
+  },
+  "iterative": {
+    "english": "iterative",
+    "chinese": "迭代型"
+  },
+  "incremental": {
+    "english": "incremental",
+    "chinese": "增量型"
+  },
+  "adaptive": {
+    "english": "adaptive",
+    "chinese": "自适应型"
+  },
+  "hybrid": {
+    "english": "hybrid",
+    "chinese": "混合型"
+  },
+  "project governance": {
+    "english": "project governance",
+    "chinese": "项目治理"
+  },
+  "accountability": {
+    "english": "accountability",
+    "chinese": "问责"
+  },
+  "assurance": {
+    "english": "assurance",
+    "chinese": "保证"
+  },
+  "conflicts of interest": {
+    "english": "conflicts of interest",
+    "chinese": "利益冲突"
+  },
+  "delegated authority": {
+    "english": "delegated authority",
+    "chinese": "授权权限"
+  },
+  "agency theory": {
+    "english": "agency theory",
+    "chinese": "代理理论"
+  },
+  "stewardship theory": {
+    "english": "stewardship theory",
+    "chinese": "管家理论"
+  },
+  "psychological safety": {
+    "english": "psychological safety",
+    "chinese": "心理安全感"
+  },
+  "distributed leadership": {
+    "english": "distributed leadership",
+    "chinese": "分布式领导"
+  },
+  "inclusion": {
+    "english": "inclusion",
+    "chinese": "包容性"
+  },
+  "equity": {
+    "english": "equity",
+    "chinese": "公平"
+  },
+  "stakeholder salience": {
+    "english": "stakeholder salience",
+    "chinese": "利益相关方显著性"
+  },
+  "stakeholder engagement": {
+    "english": "stakeholder engagement",
+    "chinese": "利益相关方参与"
+  },
+  "risk appetite": {
+    "english": "risk appetite",
+    "chinese": "风险偏好"
+  },
+  "risk register": {
+    "english": "risk register",
+    "chinese": "风险登记册"
+  },
+  "residual risk": {
+    "english": "residual risk",
+    "chinese": "剩余风险"
+  },
+  "contingency": {
+    "english": "contingency",
+    "chinese": "应急措施"
+  },
+  "uncertainty": {
+    "english": "uncertainty",
+    "chinese": "不确定性"
+  },
+  "critical path": {
+    "english": "critical path",
+    "chinese": "关键路径"
+  },
+  "resource smoothing": {
+    "english": "resource smoothing",
+    "chinese": "资源平滑"
+  },
+  "total float": {
+    "english": "total float",
+    "chinese": "总时差"
+  },
+  "milestone": {
+    "english": "milestone",
+    "chinese": "里程碑"
+  },
+  "earned value": {
+    "english": "earned value",
+    "chinese": "挣值"
+  },
+  "earned value management": {
+    "english": "earned value management",
+    "chinese": "挣值管理"
+  },
+  "change control": {
+    "english": "change control",
+    "chinese": "变更控制"
+  },
+  "rebaselining": {
+    "english": "rebaselining",
+    "chinese": "重新设定基准"
+  },
+  "sustainable procurement": {
+    "english": "sustainable procurement",
+    "chinese": "可持续采购"
+  },
+  "supply chain": {
+    "english": "supply chain",
+    "chinese": "供应链"
+  },
+  "lifecycle value": {
+    "english": "lifecycle value",
+    "chinese": "全生命周期价值"
+  },
+  "greenwashing": {
+    "english": "greenwashing",
+    "chinese": "漂绿"
+  }
+}

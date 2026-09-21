@@ -1,0 +1,491 @@
+{
+  "course": "CO7000 Project Management Principles",
+  "description": "Short weekly vocabulary selected from supplied lecture materials. Guidance is optional and accent-neutral.",
+  "lists": [
+    {
+      "id": "co7000-week-01",
+      "week": 1,
+      "title": "CO7000 · Week 1: Foundations",
+      "glossary": "project_management",
+      "terms": [
+        "project management",
+        "project success",
+        "outputs",
+        "outcomes",
+        "benefits"
+      ],
+      "source": "CO7000_Week_1_Lecture_Principles_and_Foundations_of_Project_Management.pptx",
+      "slides": {
+        "project management": [
+          1,
+          2,
+          6
+        ],
+        "project success": [
+          4,
+          14,
+          16
+        ],
+        "outputs": [
+          4,
+          6,
+          7
+        ],
+        "outcomes": [
+          3,
+          4,
+          6
+        ],
+        "benefits": [
+          3,
+          4,
+          6
+        ]
+      },
+      "note_source": "CO7000_Week_01_WebLearn_EN.html"
+    },
+    {
+      "id": "co7000-week-02",
+      "week": 2,
+      "title": "CO7000 · Week 2: Strategy and portfolios",
+      "glossary": "project_management",
+      "terms": [
+        "strategic alignment",
+        "programmes",
+        "project portfolios",
+        "opportunity cost",
+        "sensitivity analysis"
+      ],
+      "source": "CO7000_Week_2_Lecture_Organisational_Strategy_Programmes_and_Project_Portfolios.pptx",
+      "slides": {
+        "strategic alignment": [
+          2,
+          3,
+          4
+        ],
+        "programmes": [
+          1,
+          2,
+          6
+        ],
+        "project portfolios": [
+          1
+        ],
+        "opportunity cost": [
+          2,
+          3,
+          5
+        ],
+        "sensitivity analysis": [
+          9,
+          16
+        ]
+      },
+      "note_source": "CO7000_Week_02_WebLearn_EN.html"
+    },
+    {
+      "id": "co7000-week-03",
+      "week": 3,
+      "title": "CO7000 · Week 3: Lifecycle and charter",
+      "glossary": "project_management",
+      "terms": [
+        "project lifecycle",
+        "project charter",
+        "inception",
+        "progressive elaboration",
+        "decision gates"
+      ],
+      "source": "CO7000_Week_3_Lecture_The_Project_Lifecycle_Inception_Definition_and_Planning.pptx",
+      "slides": {
+        "project lifecycle": [
+          1,
+          6,
+          16
+        ],
+        "project charter": [
+          5,
+          12,
+          16
+        ],
+        "inception": [
+          1
+        ],
+        "progressive elaboration": [
+          2,
+          3,
+          7
+        ],
+        "decision gates": [
+          2,
+          3,
+          6
+        ]
+      },
+      "note_source": "CO7000_Week_03_WebLearn_EN.html"
+    },
+    {
+      "id": "co7000-week-04",
+      "week": 4,
+      "title": "CO7000 · Week 4: Feasibility and business case",
+      "glossary": "project_management",
+      "terms": [
+        "feasibility",
+        "business case",
+        "Five Case Model",
+        "counterfactual",
+        "optimism bias"
+      ],
+      "source": "CO7000_Week_4_Lecture_Project_Feasibility_and_the_Business_Case.pptx",
+      "slides": {
+        "feasibility": [
+          1,
+          2,
+          3
+        ],
+        "business case": [
+          1,
+          2,
+          4
+        ],
+        "Five Case Model": [
+          2,
+          8,
+          11
+        ],
+        "counterfactual": [
+          2,
+          3,
+          4
+        ],
+        "optimism bias": [
+          7
+        ]
+      },
+      "note_source": "CO7000_Week_04_WebLearn_EN.html"
+    },
+    {
+      "id": "co7000-week-05",
+      "week": 5,
+      "title": "CO7000 · Week 5: Investment and finance",
+      "glossary": "project_management",
+      "terms": [
+        "NPV",
+        "net present value",
+        "IRR",
+        "ROI",
+        "payback",
+        "discount rate"
+      ],
+      "source": "CO7000_Week_5_Lecture_Project_Economics_Investment_and_Finance.pptx",
+      "slides": {
+        "NPV": [
+          2,
+          5,
+          7
+        ],
+        "net present value": [],
+        "IRR": [
+          2,
+          8,
+          11
+        ],
+        "ROI": [
+          2,
+          5,
+          8
+        ],
+        "payback": [
+          2,
+          5,
+          8
+        ],
+        "discount rate": [
+          6,
+          7,
+          8
+        ]
+      },
+      "note_source": "CO7000_Week_05_WebLearn_EN.html"
+    },
+    {
+      "id": "co7000-week-06",
+      "week": 6,
+      "title": "CO7000 · Week 6: Methods and delivery",
+      "glossary": "project_management",
+      "terms": [
+        "PRINCE2",
+        "Scrum",
+        "Kanban",
+        "predictive",
+        "iterative",
+        "hybrid"
+      ],
+      "source": "CO7000_Week_6_Lecture_Project_Management_Methodologies_and_Delivery_Strategies.pptx",
+      "slides": {
+        "PRINCE2": [
+          6,
+          8,
+          18
+        ],
+        "Scrum": [
+          5,
+          6,
+          8
+        ],
+        "Kanban": [
+          6
+        ],
+        "predictive": [
+          2,
+          6,
+          8
+        ],
+        "iterative": [
+          2,
+          6,
+          8
+        ],
+        "hybrid": [
+          2,
+          5,
+          6
+        ]
+      },
+      "note_source": "CO7000_Week_06_WebLearn_EN.html"
+    },
+    {
+      "id": "co7000-week-07",
+      "week": 7,
+      "title": "CO7000 · Week 7: Governance and ethics",
+      "glossary": "project_management",
+      "terms": [
+        "project governance",
+        "accountability",
+        "assurance",
+        "conflicts of interest",
+        "RACI"
+      ],
+      "source": "CO7000_Week_7_Lecture_Project_Governance_Professional_Practice_and_Ethics.pptx",
+      "slides": {
+        "project governance": [
+          1,
+          8,
+          11
+        ],
+        "accountability": [
+          1,
+          2,
+          3
+        ],
+        "assurance": [
+          2,
+          3,
+          4
+        ],
+        "conflicts of interest": [
+          6
+        ],
+        "RACI": [
+          15
+        ]
+      },
+      "note_source": "CO7000_Week_07_WebLearn_EN.html"
+    },
+    {
+      "id": "co7000-week-08",
+      "week": 8,
+      "title": "CO7000 · Week 8: Leadership and teams",
+      "glossary": "project_management",
+      "terms": [
+        "Tuckman",
+        "Hackman",
+        "psychological safety",
+        "distributed leadership",
+        "inclusion"
+      ],
+      "source": "CO7000_Week_8_Lecture_Project_Leadership_Teams_and_Inclusive_Management.pptx",
+      "slides": {
+        "Tuckman": [
+          7,
+          12,
+          15
+        ],
+        "Hackman": [
+          7,
+          12,
+          18
+        ],
+        "psychological safety": [
+          2,
+          6,
+          7
+        ],
+        "distributed leadership": [
+          7,
+          9,
+          12
+        ],
+        "inclusion": [
+          2,
+          4,
+          5
+        ]
+      },
+      "note_source": "CO7000_Week_08_WebLearn_EN.html"
+    },
+    {
+      "id": "co7000-week-09",
+      "week": 9,
+      "title": "CO7000 · Week 9: Stakeholders and risk",
+      "glossary": "project_management",
+      "terms": [
+        "stakeholder salience",
+        "risk appetite",
+        "risk register",
+        "residual risk",
+        "contingency"
+      ],
+      "source": "CO7000_Week_9_Lecture_Stakeholder_Risk_and_Uncertainty_Management.pptx",
+      "slides": {
+        "stakeholder salience": [
+          7
+        ],
+        "risk appetite": [
+          9,
+          12
+        ],
+        "risk register": [
+          5,
+          6
+        ],
+        "residual risk": [
+          9
+        ],
+        "contingency": [
+          6,
+          8,
+          10
+        ]
+      },
+      "note_source": "CO7000_Week_09_WebLearn_EN.html"
+    },
+    {
+      "id": "co7000-week-10",
+      "week": 10,
+      "title": "CO7000 · Week 10: Planning and scheduling",
+      "glossary": "project_management",
+      "terms": [
+        "work breakdown structure",
+        "Gantt chart",
+        "critical path",
+        "PERT",
+        "resource levelling"
+      ],
+      "source": "CO7000_Week_10_Lecture_Project_Planning_Scheduling_and_Resource_Management.pptx",
+      "slides": {
+        "work breakdown structure": [
+          2,
+          6,
+          9
+        ],
+        "Gantt chart": [
+          2,
+          3,
+          5
+        ],
+        "critical path": [
+          2,
+          4,
+          6
+        ],
+        "PERT": [
+          7
+        ],
+        "resource levelling": [
+          7,
+          18
+        ]
+      },
+      "note_source": "CO7000_Week_10_WebLearn_EN.html"
+    },
+    {
+      "id": "co7000-week-11",
+      "week": 11,
+      "title": "CO7000 · Week 11: Performance and control",
+      "glossary": "project_management",
+      "terms": [
+        "earned value",
+        "CPI",
+        "SPI",
+        "EAC",
+        "ETC",
+        "TCPI"
+      ],
+      "source": "CO7000_Week_11_Lecture_Monitoring_Control_Change_and_Project_Performance.pptx",
+      "slides": {
+        "earned value": [
+          2,
+          5,
+          7
+        ],
+        "CPI": [
+          7,
+          11
+        ],
+        "SPI": [
+          7,
+          11
+        ],
+        "EAC": [
+          1,
+          2,
+          7
+        ],
+        "ETC": [
+          7,
+          11
+        ],
+        "TCPI": [
+          7,
+          11
+        ]
+      },
+      "note_source": "CO7000_Week_11_WebLearn_EN.html"
+    },
+    {
+      "id": "co7000-week-12",
+      "week": 12,
+      "title": "CO7000 · Week 12: Sustainable projects",
+      "glossary": "project_management",
+      "terms": [
+        "sustainable procurement",
+        "supply chain",
+        "lifecycle value",
+        "greenwashing",
+        "SDGs"
+      ],
+      "source": "CO7000_Week_12_Lecture_Sustainable_Global_and_Responsible_Project_Management.pptx",
+      "slides": {
+        "sustainable procurement": [
+          18
+        ],
+        "supply chain": [
+          7,
+          14
+        ],
+        "lifecycle value": [
+          2,
+          7
+        ],
+        "greenwashing": [
+          9
+        ],
+        "SDGs": [
+          7,
+          9
+        ]
+      },
+      "note_source": "CO7000_Week_12_WebLearn_EN.html"
+    }
+  ]
+}

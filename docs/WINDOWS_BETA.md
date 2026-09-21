@@ -1,6 +1,6 @@
 # Windows Intel/AMD beta
 
-LectureLive 0.4.0 beta 1 adds a Windows x64 edition. You can try it on Intel or AMD PCs.
+LectureLive 0.4.0 beta 2 adds a Windows x64 edition. You can try it on Intel or AMD PCs.
 The existing Snapdragon ARM64 edition remains available. macOS, Linux and 32-bit Windows
 are outside this release.
 
@@ -37,6 +37,12 @@ compare caption speed on your own PC. This beta uses the **Fast / Whisper Base**
 A complete ready-to-run beta folder contains **LectureLive-x64-Beta.exe** and **_internal**.
 Keep both together. Copying that whole folder needs no Python installation or initial model
 download for CPU/GPU use. The source ZIP from GitHub needs setup first.
+
+## Improving speech recognition
+
+See [Improving speech recognition](SPEECH_RECOGNITION.md) for the optional Careful mode,
+vocabulary guidance and the measured limitations of these options on Whisper Base.
+Standard remains the default. No new model downloads are required.
 
 ## Optional Intel/AMD NPU preparation
 

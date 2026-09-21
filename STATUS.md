@@ -1,9 +1,28 @@
 # LectureLive — STATUS
 
-Updated 2026-09-09. Six-part improvement milestone implemented and native executable verified.
+Updated 2026-09-21. Optional speech-recognition improvements implemented.
 Production classroom acceptance remains open.
 
-## Windows x64 beta (0.4.0b1), ARM64 maintenance (0.3.1)
+## Optional speech recognition (ARM64 0.3.2 / x64 beta 0.4.0b2)
+
+- Standard with vocabulary guidance off retains the previous decoder and reproduced all
+  48 baseline transcripts on each of three backends. Both new options default to off.
+- Careful compares up to three paths for finished phrases; explicit vocabulary can now
+  guide recognition using the existing local tokenizer. Settings are saved in presets and
+  preserved when acceleration fails and the same phrase is retried on CPU.
+- On a small public sample, Small/Balanced Careful reduced Indian-English WER from
+  4.23% to 3.17% and Scottish-English WER from 2.70% to 1.62%. Base results were mixed;
+  irrelevant vocabulary sometimes worsened recognition. Neither lecturer was recorded.
+- 69 unit tests pass on both Windows runtimes. Native UI and rebuilt executable self-tests
+  pass, including guided CPU/QNN/GPU speech and bundled course vocabulary. No new model,
+  package or hardware requirement was introduced. Physical Intel/AMD tests remain open.
+- CO7000 includes 12 short weekly hint lists, a 92-term project-management glossary,
+  conservative acronym/spelling corrections and an in-app course selector. A synthetic
+  six-clip check corrected PRINCE2 with Week 6 hints; lecturer validation is still pending.
+- Beginner [speech guide](docs/SPEECH_RECOGNITION.md),
+  [full comparison and limits](docs/evidence/speech-recognition-2026-09-21.md).
+
+## Previous Windows x64 beta (0.4.0b1), ARM64 maintenance (0.3.1)
 
 - Separate x64 runtime, immutable model/dependency manifests, installer selection, launcher,
   preferences and portable package. Source setup automatically selects the Windows architecture.

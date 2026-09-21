@@ -54,3 +54,8 @@ For missing files, close LectureLive and run **Setup.cmd** again from the origin
 
 This is a preview release. Review translations and rehearse with your actual microphone and
 projector before relying on it in class. Read the [full user guide](USER_GUIDE.md) for more help.
+
+## Words being missed?
+
+Keep Standard if it works well for you. Try the optional Careful setting and relevant vocabulary
+guidance separately before teaching. See [Improving speech recognition](SPEECH_RECOGNITION.md).

@@ -1,0 +1,171 @@
+{
+  "standard": {
+    "backend": "balanced",
+    "mode": "standard",
+    "vocabulary": "",
+    "case_vocabulary": false,
+    "summary": {
+      "synthetic-course": {
+        "clips": 6,
+        "errors": 4,
+        "words": 67,
+        "wer": 0.05970149253731343,
+        "rtf": 0.0626192280702408
+      }
+    },
+    "rows": [
+      {
+        "id": "co7000-05",
+        "speaker": "synthetic-course",
+        "reference": "Net present value and the discount rate inform the investment decision.",
+        "text": "Net present value and the discount rate inform the investment decision.",
+        "errors": 0,
+        "words": 11,
+        "seconds": 0.4061135000010836,
+        "audio_seconds": 5.46
+      },
+      {
+        "id": "co7000-06",
+        "speaker": "synthetic-course",
+        "reference": "Our project uses PRINCE2 for governance and Scrum for iterative delivery.",
+        "text": "Our project uses prints 2 for governance and scrum for iterative delivery.",
+        "errors": 2,
+        "words": 11,
+        "seconds": 0.3756515999994008,
+        "audio_seconds": 5.86
+      },
+      {
+        "id": "co7000-08",
+        "speaker": "synthetic-course",
+        "reference": "Tuckman and Hackman offer different perspectives on psychological safety and team performance.",
+        "text": "Tuckman and Hackman offer different perspectives on psychological safety and team performance.",
+        "errors": 0,
+        "words": 12,
+        "seconds": 0.3989434000031906,
+        "audio_seconds": 7.105
+      },
+      {
+        "id": "co7000-09",
+        "speaker": "synthetic-course",
+        "reference": "The stakeholder register records risk appetite, residual risk, and contingency.",
+        "text": "The stakeholder register records risk appetite, residual risk, and contingency.",
+        "errors": 0,
+        "words": 10,
+        "seconds": 0.37503429999924265,
+        "audio_seconds": 6.845
+      },
+      {
+        "id": "co7000-10",
+        "speaker": "synthetic-course",
+        "reference": "The Gantt chart shows the critical path and the work breakdown structure.",
+        "text": "The Gantt chart shows the critical path and the work breakdown structure.",
+        "errors": 0,
+        "words": 12,
+        "seconds": 0.3774604999998701,
+        "audio_seconds": 5.48
+      },
+      {
+        "id": "co7000-11",
+        "speaker": "synthetic-course",
+        "reference": "We compare earned value, CPI, SPI, and the estimate at completion.",
+        "text": "We compare earned value, CPI, SPI, and the estimated completion.",
+        "errors": 2,
+        "words": 11,
+        "seconds": 0.3868390999996336,
+        "audio_seconds": 6.3
+      }
+    ]
+  },
+  "hints": {
+    "backend": "balanced",
+    "mode": "standard",
+    "vocabulary": "",
+    "case_vocabulary": true,
+    "summary": {
+      "synthetic-course": {
+        "clips": 6,
+        "errors": 2,
+        "words": 67,
+        "wer": 0.029850746268656716,
+        "rtf": 0.09081285560057266
+      }
+    },
+    "rows": [
+      {
+        "id": "co7000-05",
+        "speaker": "synthetic-course",
+        "reference": "Net present value and the discount rate inform the investment decision.",
+        "text": "net present value and the discount rate inform the investment decision",
+        "errors": 0,
+        "words": 11,
+        "seconds": 0.5511448999968707,
+        "audio_seconds": 5.46
+      },
+      {
+        "id": "co7000-06",
+        "speaker": "synthetic-course",
+        "reference": "Our project uses PRINCE2 for governance and Scrum for iterative delivery.",
+        "text": "Our project uses PRINCE2 for governance and Scrum for iterative delivery",
+        "errors": 0,
+        "words": 11,
+        "seconds": 0.589669100001629,
+        "audio_seconds": 5.86
+      },
+      {
+        "id": "co7000-08",
+        "speaker": "synthetic-course",
+        "reference": "Tuckman and Hackman offer different perspectives on psychological safety and team performance.",
+        "text": "Tuckman and Hackman offer different perspectives on psychological safety and team performance",
+        "errors": 0,
+        "words": 12,
+        "seconds": 0.5365718000030029,
+        "audio_seconds": 7.105
+      },
+      {
+        "id": "co7000-09",
+        "speaker": "synthetic-course",
+        "reference": "The stakeholder register records risk appetite, residual risk, and contingency.",
+        "text": "The stakeholder register records risk appetite, residual risk, and contingency",
+        "errors": 0,
+        "words": 10,
+        "seconds": 0.5386829999988549,
+        "audio_seconds": 6.845
+      },
+      {
+        "id": "co7000-10",
+        "speaker": "synthetic-course",
+        "reference": "The Gantt chart shows the critical path and the work breakdown structure.",
+        "text": "The Gantt chart shows the critical path and the work breakdown structure",
+        "errors": 0,
+        "words": 12,
+        "seconds": 0.5826088000030722,
+        "audio_seconds": 5.48
+      },
+      {
+        "id": "co7000-11",
+        "speaker": "synthetic-course",
+        "reference": "We compare earned value, CPI, SPI, and the estimate at completion.",
+        "text": "We compare earned value, CPI, SPI, and the estimated completion",
+        "errors": 2,
+        "words": 11,
+        "seconds": 0.5659386999977869,
+        "audio_seconds": 6.3
+      }
+    ]
+  },
+  "voice": {
+    "culture": "en-GB",
+    "voice": "Microsoft Hazel Desktop",
+    "synthetic": true,
+    "generated": [
+      "co7000-05",
+      "co7000-06",
+      "co7000-08",
+      "co7000-09",
+      "co7000-10",
+      "co7000-11"
+    ],
+    "live_microphone": false
+  },
+  "limitations": "Six synthetic en-GB Microsoft Hazel clips; not a human speaker/accent benchmark. Hints selected from weekly materials, not reference sentences. No lecturer audio was supplied."
+}

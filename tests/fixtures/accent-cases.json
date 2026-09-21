@@ -1,0 +1,709 @@
+{
+  "description": "20 consecutive rows (100-119) per public speaker selected before model comparison; 8 existing synthetic technical clips. Neither speaker is a user or colleague. Read speech, limited proxy only.",
+  "cases": [
+    {
+      "id": "ksp-100",
+      "speaker": "ksp",
+      "accent": "Indian English (public KSP speaker)",
+      "reference": "You, you would not keep the truth from me.",
+      "path": "tests/fixtures/accent-public/ksp-100.wav",
+      "sha256": "0ae0adefd6a218946ee2d2aeda60f4cbbac69f1cccd41a7ba20f7db426415cc8",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "ksp",
+        "row": 100,
+        "file": "ksp-a0101.wav"
+      }
+    },
+    {
+      "id": "ksp-101",
+      "speaker": "ksp",
+      "accent": "Indian English (public KSP speaker)",
+      "reference": "He will follow us soon.",
+      "path": "tests/fixtures/accent-public/ksp-101.wav",
+      "sha256": "71a725e0b01d857ddb1a745931527611c9d1e6323389caf27eb7a058c18d266d",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "ksp",
+        "row": 101,
+        "file": "ksp-a0102.wav"
+      }
+    },
+    {
+      "id": "ksp-102",
+      "speaker": "ksp",
+      "accent": "Indian English (public KSP speaker)",
+      "reference": "But there came no promise from the bow of the canoe.",
+      "path": "tests/fixtures/accent-public/ksp-102.wav",
+      "sha256": "cdf8ab4fc256b803f7ff0322074c39137d7622af8064ffb4f033234017ce9e00",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "ksp",
+        "row": 102,
+        "file": "ksp-a0103.wav"
+      }
+    },
+    {
+      "id": "ksp-103",
+      "speaker": "ksp",
+      "accent": "Indian English (public KSP speaker)",
+      "reference": "She was sleeping under his protection as sweetly as a child.",
+      "path": "tests/fixtures/accent-public/ksp-103.wav",
+      "sha256": "82022063e01a7f19543c115231529eb2f06395e62135a1afc0292af62d18e9a1",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "ksp",
+        "row": 103,
+        "file": "ksp-a0104.wav"
+      }
+    },
+    {
+      "id": "ksp-104",
+      "speaker": "ksp",
+      "accent": "Indian English (public KSP speaker)",
+      "reference": "Only, it is so wonderful, so almost impossible to believe.",
+      "path": "tests/fixtures/accent-public/ksp-104.wav",
+      "sha256": "07b0b6680c25c99d4f63926a4552f220d3582a19ad3233e21c116f64ae602790",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "ksp",
+        "row": 104,
+        "file": "ksp-a0105.wav"
+      }
+    },
+    {
+      "id": "ksp-105",
+      "speaker": "ksp",
+      "accent": "Indian English (public KSP speaker)",
+      "reference": "The emotion which she had suppressed burst forth now in a choking sob.",
+      "path": "tests/fixtures/accent-public/ksp-105.wav",
+      "sha256": "0d0e753978c583bdc24ed0fbc7efeab9a76f5da9de2f16c883ceb2f1f6225476",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "ksp",
+        "row": 105,
+        "file": "ksp-a0106.wav"
+      }
+    },
+    {
+      "id": "ksp-106",
+      "speaker": "ksp",
+      "accent": "Indian English (public KSP speaker)",
+      "reference": "If you only could know how I thank you.",
+      "path": "tests/fixtures/accent-public/ksp-106.wav",
+      "sha256": "d094c66c95384cbd761436d725f47b2987f25483c9e6f7fa24fc21669b5b13d2",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "ksp",
+        "row": 106,
+        "file": "ksp-a0107.wav"
+      }
+    },
+    {
+      "id": "ksp-107",
+      "speaker": "ksp",
+      "accent": "Indian English (public KSP speaker)",
+      "reference": "He waded into the edge of the water and began scrubbing himself.",
+      "path": "tests/fixtures/accent-public/ksp-107.wav",
+      "sha256": "9fc54f016f6c862fcac2820045a19f7be1e574317cab942b3fd6dac37ec2d078",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "ksp",
+        "row": 107,
+        "file": "ksp-a0108.wav"
+      }
+    },
+    {
+      "id": "ksp-108",
+      "speaker": "ksp",
+      "accent": "Indian English (public KSP speaker)",
+      "reference": "Do you know that you are shaking my confidence in you.",
+      "path": "tests/fixtures/accent-public/ksp-108.wav",
+      "sha256": "8770b4e7656dd8de50386b83216a8e37dba90aeb053ed3c0f7a3810dd3c5597b",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "ksp",
+        "row": 108,
+        "file": "ksp-a0109.wav"
+      }
+    },
+    {
+      "id": "ksp-109",
+      "speaker": "ksp",
+      "accent": "Indian English (public KSP speaker)",
+      "reference": "Much, replied Jeanne, as tersely.",
+      "path": "tests/fixtures/accent-public/ksp-109.wav",
+      "sha256": "1164e6e1766ca12e2807a22415bc65162e9c1fe155a0006ea508d9fc5d36a902",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "ksp",
+        "row": 109,
+        "file": "ksp-a0110.wav"
+      }
+    },
+    {
+      "id": "ksp-110",
+      "speaker": "ksp",
+      "accent": "Indian English (public KSP speaker)",
+      "reference": "Instead, he joined her; and they ate like two hungry children.",
+      "path": "tests/fixtures/accent-public/ksp-110.wav",
+      "sha256": "de2de747b45c7f4930a7c4ce3b4a8d2e4a49abb4f9d63e295a174d7f4bc91c1d",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "ksp",
+        "row": 110,
+        "file": "ksp-a0111.wav"
+      }
+    },
+    {
+      "id": "ksp-111",
+      "speaker": "ksp",
+      "accent": "Indian English (public KSP speaker)",
+      "reference": "He was wounded in the arm.",
+      "path": "tests/fixtures/accent-public/ksp-111.wav",
+      "sha256": "2ab9c4bf0d87df1291910db4d275eea1549869676da9b6ffdc3913e11b1f15be",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "ksp",
+        "row": 111,
+        "file": "ksp-a0112.wav"
+      }
+    },
+    {
+      "id": "ksp-112",
+      "speaker": "ksp",
+      "accent": "Indian English (public KSP speaker)",
+      "reference": "I suppose you picked that lingo up among the Indians.",
+      "path": "tests/fixtures/accent-public/ksp-112.wav",
+      "sha256": "8bb9885a7dbd1b684494ca882d451ff146fa5faccf9d81911b7f4b12b0bda4eb",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "ksp",
+        "row": 112,
+        "file": "ksp-a0113.wav"
+      }
+    },
+    {
+      "id": "ksp-113",
+      "speaker": "ksp",
+      "accent": "Indian English (public KSP speaker)",
+      "reference": "Her words sent a strange chill through Philip.",
+      "path": "tests/fixtures/accent-public/ksp-113.wav",
+      "sha256": "81ec639b8af6eb2951cd6b05230f94c64efa13c5535b9d114807834415076648",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "ksp",
+        "row": 113,
+        "file": "ksp-a0114.wav"
+      }
+    },
+    {
+      "id": "ksp-114",
+      "speaker": "ksp",
+      "accent": "Indian English (public KSP speaker)",
+      "reference": "He had no excuse for the feelings which were aroused in him.",
+      "path": "tests/fixtures/accent-public/ksp-114.wav",
+      "sha256": "11701ab32a4678a10500673b8bc4024f4c3c3d004b87da86dd5499181fb1cec2",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "ksp",
+        "row": 114,
+        "file": "ksp-a0115.wav"
+      }
+    },
+    {
+      "id": "ksp-115",
+      "speaker": "ksp",
+      "accent": "Indian English (public KSP speaker)",
+      "reference": "Was it the rendezvous of those who were striving to work his ruin.",
+      "path": "tests/fixtures/accent-public/ksp-115.wav",
+      "sha256": "63683eecc020dc238b42932d02429958a0317c5e1cf25e8e35cecf1ff5484c36",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "ksp",
+        "row": 115,
+        "file": "ksp-a0116.wav"
+      }
+    },
+    {
+      "id": "ksp-116",
+      "speaker": "ksp",
+      "accent": "Indian English (public KSP speaker)",
+      "reference": "She added, with genuine sympathy in her face and voice.",
+      "path": "tests/fixtures/accent-public/ksp-116.wav",
+      "sha256": "a30ac6be90d575223d77181b7709480bbb8033749015c4734b30a2952d98cd2c",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "ksp",
+        "row": 116,
+        "file": "ksp-a0117.wav"
+      }
+    },
+    {
+      "id": "ksp-117",
+      "speaker": "ksp",
+      "accent": "Indian English (public KSP speaker)",
+      "reference": "Pierre obeys me when we are together.",
+      "path": "tests/fixtures/accent-public/ksp-117.wav",
+      "sha256": "80e3e0a6c8bd0f979e2f091de790ce4a15d353e819d3a02935c70d83e7e5c54c",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "ksp",
+        "row": 117,
+        "file": "ksp-a0118.wav"
+      }
+    },
+    {
+      "id": "ksp-118",
+      "speaker": "ksp",
+      "accent": "Indian English (public KSP speaker)",
+      "reference": "Jeanne was turning the bow shoreward.",
+      "path": "tests/fixtures/accent-public/ksp-118.wav",
+      "sha256": "d754c4af8c0fed0a49840571fab505b8b3103f8af0a62a8985f7981c0d4df89f",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "ksp",
+        "row": 118,
+        "file": "ksp-a0119.wav"
+      }
+    },
+    {
+      "id": "ksp-119",
+      "speaker": "ksp",
+      "accent": "Indian English (public KSP speaker)",
+      "reference": "My right foot feels like that of a Chinese debutante.",
+      "path": "tests/fixtures/accent-public/ksp-119.wav",
+      "sha256": "862113c3486d5db90d42017138e9bfb3b104609ff214c6a0fe5e870b6df27e20",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "ksp",
+        "row": 119,
+        "file": "ksp-a0120.wav"
+      }
+    },
+    {
+      "id": "awb-100",
+      "speaker": "awb",
+      "accent": "Scottish English (public AWB speaker)",
+      "reference": "A maddening joy pounded in his brain.",
+      "path": "tests/fixtures/accent-public/awb-100.wav",
+      "sha256": "dc8b62a6c27edd73c681c4ed591a60a9051cd8a9a1156bb26c395235b7126376",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "awb",
+        "row": 100,
+        "file": "awb-a0101.wav"
+      }
+    },
+    {
+      "id": "awb-101",
+      "speaker": "awb",
+      "accent": "Scottish English (public AWB speaker)",
+      "reference": "You must sleep, he urged.",
+      "path": "tests/fixtures/accent-public/awb-101.wav",
+      "sha256": "7f1f742f7b77e480dc8d21fc775d2c7df1d821aa33e60bc5eff3969181a6e341",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "awb",
+        "row": 101,
+        "file": "awb-a0102.wav"
+      }
+    },
+    {
+      "id": "awb-102",
+      "speaker": "awb",
+      "accent": "Scottish English (public AWB speaker)",
+      "reference": "You, you would not--keep the truth from me.",
+      "path": "tests/fixtures/accent-public/awb-102.wav",
+      "sha256": "38d1b372f6216ac6d4a8063ef3163689b63ed6aa9b8b2be06eebaeb58fdb3e7a",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "awb",
+        "row": 102,
+        "file": "awb-a0103.wav"
+      }
+    },
+    {
+      "id": "awb-103",
+      "speaker": "awb",
+      "accent": "Scottish English (public AWB speaker)",
+      "reference": "He will follow us soon.",
+      "path": "tests/fixtures/accent-public/awb-103.wav",
+      "sha256": "5f11ae7c3a3b6f4f7049a6c2e982ad7f420d8bd4a7da2651f14a4056c9ea7a68",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "awb",
+        "row": 103,
+        "file": "awb-a0104.wav"
+      }
+    },
+    {
+      "id": "awb-104",
+      "speaker": "awb",
+      "accent": "Scottish English (public AWB speaker)",
+      "reference": "But there came no promise from the bow of the canoe.",
+      "path": "tests/fixtures/accent-public/awb-104.wav",
+      "sha256": "7b032ef1e234f3ec4969c052a6ca60f8e38f619438010858e0ef2270b0e2e090",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "awb",
+        "row": 104,
+        "file": "awb-a0105.wav"
+      }
+    },
+    {
+      "id": "awb-105",
+      "speaker": "awb",
+      "accent": "Scottish English (public AWB speaker)",
+      "reference": "She was sleeping under his protection as sweetly as a child.",
+      "path": "tests/fixtures/accent-public/awb-105.wav",
+      "sha256": "5208ccce4f844053bbd93f1b8f52b1b6fc9f9522df6b450cc637777c9f9ad49d",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "awb",
+        "row": 105,
+        "file": "awb-a0106.wav"
+      }
+    },
+    {
+      "id": "awb-106",
+      "speaker": "awb",
+      "accent": "Scottish English (public AWB speaker)",
+      "reference": "Only, it is so wonderful, so almost IMPOSSIBLE to believe.",
+      "path": "tests/fixtures/accent-public/awb-106.wav",
+      "sha256": "0d14dd05e92b74b725d77b87af4cba74f9e9529b129aa692d401b014e6d4e1e3",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "awb",
+        "row": 106,
+        "file": "awb-a0107.wav"
+      }
+    },
+    {
+      "id": "awb-107",
+      "speaker": "awb",
+      "accent": "Scottish English (public AWB speaker)",
+      "reference": "The emotion which she had suppressed burst forth now in a choking sob.",
+      "path": "tests/fixtures/accent-public/awb-107.wav",
+      "sha256": "24f139d0a79809dddcb4839dfa9d0c7d9286d687d4d5864ba5317e8173eda36a",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "awb",
+        "row": 107,
+        "file": "awb-a0108.wav"
+      }
+    },
+    {
+      "id": "awb-108",
+      "speaker": "awb",
+      "accent": "Scottish English (public AWB speaker)",
+      "reference": "If you only could know how I thank you.",
+      "path": "tests/fixtures/accent-public/awb-108.wav",
+      "sha256": "9fda8f68f33ed9865544f4ca3f301915bd4e6a38f6f2d0997545c1d6a6357060",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "awb",
+        "row": 108,
+        "file": "awb-a0109.wav"
+      }
+    },
+    {
+      "id": "awb-109",
+      "speaker": "awb",
+      "accent": "Scottish English (public AWB speaker)",
+      "reference": "He waded into the edge of the water and began scrubbing himself.",
+      "path": "tests/fixtures/accent-public/awb-109.wav",
+      "sha256": "6011b46183a475d108b83626429476db07c5c4d1db0a3d2899d2804465782f9f",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "awb",
+        "row": 109,
+        "file": "awb-a0110.wav"
+      }
+    },
+    {
+      "id": "awb-110",
+      "speaker": "awb",
+      "accent": "Scottish English (public AWB speaker)",
+      "reference": "Do you know that you are shaking my confidence in you.",
+      "path": "tests/fixtures/accent-public/awb-110.wav",
+      "sha256": "a773bfbb7fb6cc4c70fca916e39c009bad2399eb61a6505a3bf20845d01eb98a",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "awb",
+        "row": 110,
+        "file": "awb-a0111.wav"
+      }
+    },
+    {
+      "id": "awb-111",
+      "speaker": "awb",
+      "accent": "Scottish English (public AWB speaker)",
+      "reference": "Much, replied Jeanne, as tersely.",
+      "path": "tests/fixtures/accent-public/awb-111.wav",
+      "sha256": "9762f479d620656c3cb49cb31086467aa29ffdc32aa6e22a772a7e9e4e1137ba",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "awb",
+        "row": 111,
+        "file": "awb-a0112.wav"
+      }
+    },
+    {
+      "id": "awb-112",
+      "speaker": "awb",
+      "accent": "Scottish English (public AWB speaker)",
+      "reference": "Instead, he joined her; and they ate like two hungry children.",
+      "path": "tests/fixtures/accent-public/awb-112.wav",
+      "sha256": "c30c7c7cfb54395f16d13660d4eab9b77cb78c03e32ee2e4859d215177fed368",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "awb",
+        "row": 112,
+        "file": "awb-a0113.wav"
+      }
+    },
+    {
+      "id": "awb-113",
+      "speaker": "awb",
+      "accent": "Scottish English (public AWB speaker)",
+      "reference": "He was wounded in the arm.",
+      "path": "tests/fixtures/accent-public/awb-113.wav",
+      "sha256": "77940331b6f3e2fb70a8e7617f16a2cae4fe85a13745056dcaf1ee0b40e54b4d",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "awb",
+        "row": 113,
+        "file": "awb-a0114.wav"
+      }
+    },
+    {
+      "id": "awb-114",
+      "speaker": "awb",
+      "accent": "Scottish English (public AWB speaker)",
+      "reference": "I suppose you picked that lingo up among the Indians.",
+      "path": "tests/fixtures/accent-public/awb-114.wav",
+      "sha256": "fb3f0531d51eb07965d0c0ea028c4f8e3aa72b3457368a1d215425dd3e65b6a8",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "awb",
+        "row": 114,
+        "file": "awb-a0115.wav"
+      }
+    },
+    {
+      "id": "awb-115",
+      "speaker": "awb",
+      "accent": "Scottish English (public AWB speaker)",
+      "reference": "Her words sent a strange chill through Philip.",
+      "path": "tests/fixtures/accent-public/awb-115.wav",
+      "sha256": "a22b203a21c74de93496b3d9a972f31c7498d98967c3ec30a0e5fd5e7cc7db6d",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "awb",
+        "row": 115,
+        "file": "awb-a0116.wav"
+      }
+    },
+    {
+      "id": "awb-116",
+      "speaker": "awb",
+      "accent": "Scottish English (public AWB speaker)",
+      "reference": "He had no excuse for the feelings which were aroused in him.",
+      "path": "tests/fixtures/accent-public/awb-116.wav",
+      "sha256": "5119773a4dc6e0ca8f142923941cd9d1cbb27babc20be488fee369c8da2fef62",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "awb",
+        "row": 116,
+        "file": "awb-a0117.wav"
+      }
+    },
+    {
+      "id": "awb-117",
+      "speaker": "awb",
+      "accent": "Scottish English (public AWB speaker)",
+      "reference": "Was it the rendezvous of those who were striving to work his ruin.",
+      "path": "tests/fixtures/accent-public/awb-117.wav",
+      "sha256": "746252d47cca4495584d61029944ccd5097fdd4e73da5bb117f721b141e12f4e",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "awb",
+        "row": 117,
+        "file": "awb-a0118.wav"
+      }
+    },
+    {
+      "id": "awb-118",
+      "speaker": "awb",
+      "accent": "Scottish English (public AWB speaker)",
+      "reference": "She added, with genuine sympathy in her face and voice:",
+      "path": "tests/fixtures/accent-public/awb-118.wav",
+      "sha256": "d4dc3b9bb91af575ca31cb1114ff107af3297b940fc9012006636c1043f5de76",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "awb",
+        "row": 118,
+        "file": "awb-a0119.wav"
+      }
+    },
+    {
+      "id": "awb-119",
+      "speaker": "awb",
+      "accent": "Scottish English (public AWB speaker)",
+      "reference": "Pierre obeys me when we are together.",
+      "path": "tests/fixtures/accent-public/awb-119.wav",
+      "sha256": "044e614e2f8a675641a7aa15f2030f2868b84dbf0bef830f8979a316021b6cfb",
+      "source": {
+        "dataset": "MikhailT/cmu-arctic",
+        "revision": "b88ad416e092c4dfdffc6071f4b8e2d057a160f9",
+        "config": "default",
+        "split": "awb",
+        "row": 119,
+        "file": "awb-a0120.wav"
+      }
+    },
+    {
+      "id": "technical-0",
+      "speaker": "synthetic",
+      "accent": "Synthetic Windows voice; not accent evidence",
+      "reference": "The ESP32 communicates with the sensor using the I-squared-C protocol.",
+      "path": "tests/fixtures/technical-0.wav",
+      "sha256": "25ccab9deb40c5b2750964ac39fc109aceb86186cf57dca77706df985cab8e4a"
+    },
+    {
+      "id": "technical-1",
+      "speaker": "synthetic",
+      "accent": "Synthetic Windows voice; not accent evidence",
+      "reference": "Pulse-width modulation changes the average voltage applied to the motor.",
+      "path": "tests/fixtures/technical-1.wav",
+      "sha256": "cca882e333ec0b52be4f2ba452e2d3bba4925e257515d5c2f7d21a73a46ac1b2"
+    },
+    {
+      "id": "technical-2",
+      "speaker": "synthetic",
+      "accent": "Synthetic Windows voice; not accent evidence",
+      "reference": "An interrupt service routine should execute as quickly as possible.",
+      "path": "tests/fixtures/technical-2.wav",
+      "sha256": "0ea38cf0b3a33fad7fd91825899bb0a82c476f31187481b38b39f00c896d9c5d"
+    },
+    {
+      "id": "technical-3",
+      "speaker": "synthetic",
+      "accent": "Synthetic Windows voice; not accent evidence",
+      "reference": "The FreeRTOS scheduler performs a context switch between tasks.",
+      "path": "tests/fixtures/technical-3.wav",
+      "sha256": "9b77f8f53d4c5371ccd900e473d901c7f49408c068a7dc67f09a66910a44100a"
+    },
+    {
+      "id": "technical-4",
+      "speaker": "synthetic",
+      "accent": "Synthetic Windows voice; not accent evidence",
+      "reference": "The FPGA design is written in VHDL and synthesised into logic resources.",
+      "path": "tests/fixtures/technical-4.wav",
+      "sha256": "4884351f6fd4a7b9836459aa15972e7d1d0ba31b97206545b77d5266086af50b"
+    },
+    {
+      "id": "technical-5",
+      "speaker": "synthetic",
+      "accent": "Synthetic Windows voice; not accent evidence",
+      "reference": "The MOSFET is being driven using a pulse-width-modulated signal.",
+      "path": "tests/fixtures/technical-5.wav",
+      "sha256": "1b405bc910914601eb72b5f78f9298a94dc50f5f04db366b935073c01f69557e"
+    },
+    {
+      "id": "technical-6",
+      "speaker": "synthetic",
+      "accent": "Synthetic Windows voice; not accent evidence",
+      "reference": "The robot uses an ultrasonic sensor to estimate its distance from an obstacle.",
+      "path": "tests/fixtures/technical-6.wav",
+      "sha256": "464c2bca46b0528e27cb58298ac18e89d5f9b501c589042d4053c65ba5278b56"
+    },
+    {
+      "id": "technical-7",
+      "speaker": "synthetic",
+      "accent": "Synthetic Windows voice; not accent evidence",
+      "reference": "A convolutional neural network can perform image classification at the edge.",
+      "path": "tests/fixtures/technical-7.wav",
+      "sha256": "e1afb755a89d34696f652accbfd642eef6f453941194e4016d9129a50e6535be"
+    }
+  ]
+}

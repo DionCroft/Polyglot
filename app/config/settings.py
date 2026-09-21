@@ -26,6 +26,8 @@ class Settings:
     mode: str = "Bilingual"
     profile: str = "fast" if is_x64() else "balanced"
     accelerator: str = "auto"
+    recognition_mode: str = "standard"
+    vocabulary_guidance: bool = False
     glossary: str = "embedded_systems"
     save_transcripts: bool = True
     font_size: int = 30
@@ -73,6 +75,8 @@ class Settings:
             cfg.profile = "fast"
         if cfg.accelerator not in {"auto", "cpu", "gpu", "intel_npu", "amd_npu"}:
             cfg.accelerator = "auto"
+        if cfg.recognition_mode not in {"standard", "careful"}:
+            cfg.recognition_mode = "standard"
         if cfg.mode not in {"Bilingual", "English", "Chinese"}:
             cfg.mode = "Bilingual"
         if cfg.placement not in {"Top", "Bottom", "Custom"}:

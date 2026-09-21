@@ -1,0 +1,44 @@
+{
+  "version": "0.4.0b2",
+  "architecture": "x64",
+  "startup": {
+    "speech": true,
+    "translation": true,
+    "vad": true,
+    "npu": false,
+    "messages": [],
+    "accelerated": true,
+    "backend": "Windows GPU (DirectML) speech encoder + CPU decoder · Beta"
+  },
+  "speech": [
+    {
+      "profile": "cpu",
+      "english": "And so my fellow Americans ask not what your country can do for you, ask what you can do for your country.",
+      "seconds": 0.7850516000034986
+    },
+    {
+      "profile": "cpu-guided",
+      "english": "and so my fellow Americans ask not what your country can do for you, ask what you can do for your country"
+    },
+    {
+      "profile": "accelerated",
+      "backend": "Windows GPU (DirectML) speech encoder + CPU decoder · Beta",
+      "english": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country.",
+      "seconds": 0.43446279999625403
+    },
+    {
+      "profile": "accelerated-guided",
+      "english": "and so my fellow Americans ask not what your country can do for you, ask what you can do for your country"
+    }
+  ],
+  "course_vocabulary": {
+    "weeks": 12,
+    "glossary_terms": 92,
+    "passed": true
+  },
+  "translation": {
+    "chinese": "中断服务程序应该尽快执行。",
+    "seconds": 0.11307590000069467
+  },
+  "passed": true
+}

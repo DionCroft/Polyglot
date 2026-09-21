@@ -26,3 +26,7 @@ School of Computing and Digital Media
 Department of Communications Technology and Mathematics
 London Metropolitan University
 Email: d.mariyanayagam@londonmet.ac.uk
+
+WORDS BEING MISSED?
+Use Quick start > Improving speech recognition. Standard preserves previous
+behaviour; Careful and vocabulary guidance are optional and speaker-dependent.

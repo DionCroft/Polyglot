@@ -33,6 +33,11 @@ class Glossary:
                 entry.get("english", canonical),
                 *entry.get("aliases", []),
             ]
+            sensitive = entry.get("case_sensitive_acronym", False)
+            if sensitive and not re.search(
+                r"(?<![\w])" + re.escape(canonical) + r"(?![\w])", english
+            ):
+                terms = [term for term in terms if term != canonical]
             if not any(self.pattern(t).search(english) for t in terms):
                 continue
             if any(english.strip(" .!?").casefold() == t.casefold() for t in terms):
@@ -40,7 +45,12 @@ class Glossary:
             for target in entry.get("target_aliases", []):
                 chinese = chinese.replace(target, entry["chinese"])
             if canonical.isupper():
-                chinese = self.pattern(canonical).sub(
+                target_pattern = (
+                    re.compile(r"(?<![\w])" + re.escape(canonical) + r"(?![\w])")
+                    if sensitive
+                    else self.pattern(canonical)
+                )
+                chinese = target_pattern.sub(
                     lambda _: entry["chinese"] + f" ({canonical})", chinese
                 )
         return chinese

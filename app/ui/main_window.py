@@ -229,6 +229,19 @@ class MainWindow(QMainWindow):
         )
         self.persist()
 
+    def apply_course_vocabulary(self):
+        if self.pipeline:
+            self.warn("Finish the lecture before changing vocabulary.")
+            return
+        selected = self.course_vocabulary.currentData()
+        if selected is None:
+            return
+        entry = self.course_lists[selected]
+        self.vocabulary.setPlainText("\n".join(entry["terms"]))
+        self.glossary.setCurrentIndex(self.glossary.findData(entry["glossary"]))
+        self.cfg.glossary = entry["glossary"]
+        self.persist()
+
     def capture_preset_settings(self):
         from dataclasses import replace
 
@@ -239,6 +252,8 @@ class MainWindow(QMainWindow):
             microphone=self.microphone.currentText(),
             profile=self.profile.currentData(),
             accelerator=self.accelerator.currentData(),
+            recognition_mode=self.recognition_mode.currentData(),
+            vocabulary_guidance=self.vocabulary_guidance.isChecked(),
             glossary=self.glossary.currentData(),
             save_transcripts=self.save.isChecked(),
         )
@@ -274,10 +289,18 @@ class MainWindow(QMainWindow):
             self.title.setText(cfg.lecture_title)
             self.vocabulary.setPlainText(cfg.vocabulary)
             self.profile.setCurrentIndex(max(0, self.profile.findData(cfg.profile)))
-            self.accelerator.setCurrentIndex(
-                max(0, self.accelerator.findData(cfg.accelerator))
-            )
+            self.accelerator.blockSignals(True)
+            try:
+                self.accelerator.setCurrentIndex(
+                    max(0, self.accelerator.findData(cfg.accelerator))
+                )
+            finally:
+                self.accelerator.blockSignals(False)
             self.glossary.setCurrentIndex(max(0, self.glossary.findData(cfg.glossary)))
+            self.recognition_mode.setCurrentIndex(
+                max(0, self.recognition_mode.findData(cfg.recognition_mode))
+            )
+            self.vocabulary_guidance.setChecked(cfg.vocabulary_guidance)
             self.save.setChecked(cfg.save_transcripts)
             for key, spin in self.appearance_spins.items():
                 spin.blockSignals(True)
@@ -526,6 +549,22 @@ class MainWindow(QMainWindow):
         idx = self.profile.findData(self.cfg.profile)
         self.profile.setCurrentIndex(max(0, idx))
         form.addWidget(self.profile)
+        form.addWidget(QLabel("Speech recognition"))
+        self.recognition_mode = QComboBox()
+        self.recognition_mode.setAccessibleName("Speech recognition")
+        self.recognition_mode.addItem(
+            "Standard · existing speed and behaviour", "standard"
+        )
+        self.recognition_mode.addItem(
+            "Careful · slower; test before teaching", "careful"
+        )
+        self.recognition_mode.setCurrentIndex(
+            max(0, self.recognition_mode.findData(self.cfg.recognition_mode))
+        )
+        self.recognition_mode.setToolTip(
+            "Careful spends more time checking finished phrases. Try it when words are being missed, with any accent."
+        )
+        form.addWidget(self.recognition_mode)
         self.accelerator = QComboBox()
         self.accelerator.setAccessibleName("Processing hardware")
         for label, key in [
@@ -613,6 +652,25 @@ class MainWindow(QMainWindow):
         form.addLayout(row)
         right.addWidget(preview)
         terms, form = self.group("TODAY’S VOCABULARY · OPTIONAL")
+        self.course_lists = json.loads(
+            (ROOT / "assets/co7000-vocabulary.json").read_text(encoding="utf-8")
+        )["lists"]
+        self.course_vocabulary = QComboBox()
+        self.course_vocabulary.setAccessibleName("Course vocabulary list")
+        self.course_vocabulary.addItem("Choose a CO7000 week…", None)
+        for index, entry in enumerate(self.course_lists):
+            self.course_vocabulary.addItem(entry["title"], index)
+        self.course_vocabulary.setSizeAdjustPolicy(
+            QComboBox.AdjustToMinimumContentsLengthWithIcon
+        )
+        self.course_vocabulary.setMinimumContentsLength(20)
+        form.addWidget(self.course_vocabulary)
+        self.use_course_vocabulary = QPushButton("Use this week's terms")
+        self.use_course_vocabulary.setToolTip(
+            "Replaces Today's vocabulary and selects Project Management. Recognition mode and guidance stay as you set them."
+        )
+        self.use_course_vocabulary.clicked.connect(self.apply_course_vocabulary)
+        form.addWidget(self.use_course_vocabulary)
         self.vocabulary = QPlainTextEdit()
         self.vocabulary.setPlaceholderText(
             "One term per line, for example:\nESP32\nFreeRTOS\ninterrupt service routine"
@@ -620,8 +678,21 @@ class MainWindow(QMainWindow):
         self.vocabulary.setPlainText(self.cfg.vocabulary)
         self.vocabulary.setMaximumHeight(140)
         form.addWidget(self.vocabulary)
+        self.vocabulary_guidance = QCheckBox(
+            "Use these terms to guide speech recognition"
+        )
+        self.vocabulary_guidance.setChecked(self.cfg.vocabulary_guidance)
+        self.vocabulary_guidance.setToolTip(
+            "Enter a short, relevant list, most important terms first. Hints can help technical words but may also bias captions."
+        )
+        form.addWidget(self.vocabulary_guidance)
+        guidance_help = QLabel(
+            "Put a few relevant technical terms above, one per line. Try Careful recognition if words are missed."
+        )
+        guidance_help.setWordWrap(True)
+        form.addWidget(guidance_help)
         label = QLabel(
-            "Add names and technical terms to preserve their spelling when recognised. Save them in a lecture preset."
+            "Vocabulary guidance is optional. Use only terms relevant to this lecture; save them in a lecture preset."
         )
         label.setWordWrap(True)
         label.setObjectName("muted")
@@ -921,6 +992,10 @@ class MainWindow(QMainWindow):
     def persist(self):
         if hasattr(self, "title"):
             self.cfg.lecture_title = self.title.text()
+        if hasattr(self, "recognition_mode"):
+            self.cfg.recognition_mode = self.recognition_mode.currentData()
+        if hasattr(self, "vocabulary_guidance"):
+            self.cfg.vocabulary_guidance = self.vocabulary_guidance.isChecked()
         if hasattr(self, "vocabulary"):
             self.cfg.vocabulary = self.vocabulary.toPlainText()
         try:
@@ -1008,6 +1083,8 @@ class MainWindow(QMainWindow):
         self.cfg.microphone = self.microphone.currentText()
         self.cfg.profile = self.profile.currentData()
         self.cfg.accelerator = self.accelerator.currentData()
+        self.cfg.recognition_mode = self.recognition_mode.currentData()
+        self.cfg.vocabulary_guidance = self.vocabulary_guidance.isChecked()
         self.cfg.glossary = self.glossary.currentData()
         self.cfg.save_transcripts = self.save.isChecked()
         self.persist()
@@ -1036,6 +1113,10 @@ class MainWindow(QMainWindow):
             self.microphone,
             self.profile,
             self.accelerator,
+            self.recognition_mode,
+            self.vocabulary_guidance,
+            self.course_vocabulary,
+            self.use_course_vocabulary,
             self.glossary,
             self.save,
             self.vocabulary,
@@ -1131,6 +1212,10 @@ class MainWindow(QMainWindow):
                 self.microphone,
                 self.profile,
                 self.accelerator,
+                self.recognition_mode,
+                self.vocabulary_guidance,
+                self.course_vocabulary,
+                self.use_course_vocabulary,
                 self.glossary,
                 self.save,
                 self.vocabulary,

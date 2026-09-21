@@ -33,11 +33,11 @@ files.extend(
         "assets.lock.json",
         "fixtures.lock.json",
         "dependencies.lock.json",
-        "tests/fixtures/translation-corpus.json",
         "offline_dependencies/python-3.11.9-embed-arm64.zip",
     ]
 )
 files.extend((root / "tests").glob("test_*.py"))
+files.extend((root / "tests/fixtures").glob("*.json"))
 manifest = {}
 with zipfile.ZipFile(
     archive, "w", zipfile.ZIP_DEFLATED, compresslevel=1, allowZip64=True

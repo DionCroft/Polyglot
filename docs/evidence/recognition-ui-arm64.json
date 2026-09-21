@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "architecture": "arm64",
+  "preset_roundtrip": true,
+  "course_list_apply": true,
+  "synthetic_lecture": "The ESP32 communicates with the sensor using the I2C protocol",
+  "minimum_controls_visible": true
+}

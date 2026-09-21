@@ -128,6 +128,7 @@ class Pipeline:
                 self.settings.profile, self.force_cpu, self.settings.accelerator
             )
             self.asr, self.mt = bundle.asr, bundle.mt
+            self._configure_speech()
             self.using_npu = bundle.npu
             self.accelerated = bundle.accelerated
             for message in bundle.messages:
@@ -302,19 +303,34 @@ class Pipeline:
                     "Transcript saving stopped: check disk space or folder access. Live captions continue; earlier journal entries can be recovered.",
                 )
 
-    def _transcribe(self, audio):
+    def _configure_speech(self):
+        configure = getattr(self.asr, "configure_recognition", None)
+        if configure:
+            configure(
+                self.settings.recognition_mode,
+                "\n".join(self.glossary.vocabulary)
+                if self.settings.vocabulary_guidance
+                else "",
+            )
+
+    def _transcribe(self, audio, final=True):
         try:
+            self.asr.final_pass = final
             return self.asr.transcribe(audio)
         except Exception:
             if not (self.using_npu or self.accelerated):
                 raise
-            log.exception("Accelerator failed during lecture; retrying this phrase on CPU")
+            log.exception(
+                "Accelerator failed during lecture; retrying this phrase on CPU"
+            )
             from app.asr.cpu_whisper import CpuWhisper
 
             close = getattr(self.asr, "close", None)
             if close:
                 close()
             self.asr = CpuWhisper(self.root / "models/whisper/fast")
+            self._configure_speech()
+            self.asr.final_pass = final
             self.using_npu = False
             self.accelerated = False
             text = self.asr.transcribe(audio)
@@ -343,7 +359,7 @@ class Pipeline:
                 continue
             try:
                 start = time.monotonic()
-                text = self._transcribe(phrase.audio)
+                text = self._transcribe(phrase.audio, final=phrase.final)
                 elapsed = time.monotonic() - start
                 self.metrics.update(
                     asr_seconds=elapsed,
@@ -453,6 +469,8 @@ class Pipeline:
                     True,
                 )
         return {
+            "recognition_mode": self.settings.recognition_mode,
+            "vocabulary_guidance": self.settings.vocabulary_guidance,
             **self.metrics,
             **{
                 f"{key}_p95_seconds": round(float(np.percentile(values, 95)), 3)

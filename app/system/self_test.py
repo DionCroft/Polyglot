@@ -17,6 +17,22 @@ def run(root, wav_path, report_path):
         "startup": check(root, "fast" if is_x64() else "balanced"),
         "speech": [],
     }
+    from app.captions.glossary import Glossary
+
+    course = json.loads(
+        (root / "assets/co7000-vocabulary.json").read_text(encoding="utf-8")
+    )
+    glossary = Glossary(root / "glossaries/project_management.json")
+    if (
+        len(course["lists"]) != 12
+        or glossary.english("N P V and T C P I") != "NPV and TCPI"
+    ):
+        raise RuntimeError("Packaged course vocabulary verification failed")
+    result["course_vocabulary"] = {
+        "weeks": 12,
+        "glossary_terms": len(glossary.entries),
+        "passed": True,
+    }
     with wave.open(str(wav_path)) as f:
         if f.getframerate() != 16000 or f.getsampwidth() != 2 or f.getnchannels() != 1:
             raise ValueError("Self-test requires mono 16 kHz 16-bit PCM WAV")
@@ -43,6 +59,11 @@ def run(root, wav_path, report_path):
         )
         if not text:
             raise RuntimeError("No speech output")
+        model.configure_recognition("careful", "country\nAmericans")
+        guided = model.transcribe(audio)
+        if not guided or model.transcribe(np.zeros(16000, np.float32)):
+            raise RuntimeError("Guided speech or silence verification failed")
+        result["speech"].append({"profile": profile + "-guided", "english": guided})
         del model
     if is_x64() and result["startup"].get("accelerated"):
         from app.system.models import ModelStore
@@ -63,6 +84,13 @@ def run(root, wav_path, report_path):
                     "english": text,
                     "seconds": time.perf_counter() - t,
                 }
+            )
+            bundle.asr.configure_recognition("careful", "country\nAmericans")
+            guided = bundle.asr.transcribe(audio)
+            if not guided:
+                raise RuntimeError("Guided accelerator verification failed")
+            result["speech"].append(
+                {"profile": "accelerated-guided", "english": guided}
             )
         finally:
             store.close()

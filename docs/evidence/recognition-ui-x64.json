@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "architecture": "x64",
+  "preset_roundtrip": true,
+  "course_list_apply": true,
+  "synthetic_lecture": "the ESP32 communicates with the sensor using the iSquadC protocol.",
+  "minimum_controls_visible": true
+}

@@ -82,6 +82,21 @@ The **Quick start** button opens help inside the app, even offline.
 Default shortcuts: **Ctrl + Alt + Space** pauses/resumes; **Ctrl + Alt + C** locks/unlocks the
 caption panel. Change them under **Overlay**.
 
+## If words are being missed
+
+Keep **Standard** if it already works well for your voice. For another speaker, try **Balanced**
+(on Snapdragon), then the optional **Careful** recognition setting. A short list of relevant
+technical terms can be passed to the speech model by ticking **Use these terms to guide speech
+recognition**. These options can also worsen results, especially with the smaller Fast model;
+compare a short passage before teaching and save separate lecturer presets.
+
+[Speech recognition guide and measured results](docs/SPEECH_RECOGNITION.md) explains what changed,
+speed/memory trade-offs and the recordings needed to validate a particular speaker. All processing
+remains local, and no extra model downloads are required by this update.
+
+CO7000 teaching: [choose a weekly project-management vocabulary list](docs/CO7000_VOCABULARY.md)
+inside the app, then save it with your preferred recognition settings as a lecture preset.
+
 ## Help with common problems
 
 | What you see | What to do |

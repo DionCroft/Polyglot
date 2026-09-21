@@ -1,4 +1,4 @@
-LectureLive - Windows x64 Beta 0.4.0b1
+LectureLive - Windows x64 Beta 0.4.0b2
 
 1. Keep this entire folder together, including _internal.
 2. Open LectureLive-x64-Beta.exe.
@@ -19,3 +19,7 @@ Use your actual classroom microphone and projector for a practice run first.
 
 Preferences and transcripts: %LOCALAPPDATA%\LectureLive Beta
 Contact: Dr Dion Miroy Mariyanayagam, d.mariyanayagam@londonmet.ac.uk
+
+Words being missed? Open Quick start > Improving speech recognition.
+Standard recognition keeps the previous behaviour. Careful and vocabulary hints
+are optional and should be tested with each speaker before teaching.

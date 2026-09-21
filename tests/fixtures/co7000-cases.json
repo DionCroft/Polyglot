@@ -1,0 +1,53 @@
+{
+  "description": "Newly authored synthetic course-term checks. Not an Indian or British human voice benchmark. Prepared with the default Windows System.Speech voice; see local preparation report.",
+  "cases": [
+    {
+      "id": "co7000-05",
+      "speaker": "synthetic-course",
+      "week": 5,
+      "reference": "Net present value and the discount rate inform the investment decision.",
+      "path": "tests/fixtures/co7000-05.wav",
+      "vocabulary": "NPV\nnet present value\nIRR\nROI\npayback\ndiscount rate"
+    },
+    {
+      "id": "co7000-06",
+      "speaker": "synthetic-course",
+      "week": 6,
+      "reference": "Our project uses PRINCE2 for governance and Scrum for iterative delivery.",
+      "path": "tests/fixtures/co7000-06.wav",
+      "vocabulary": "PRINCE2\nScrum\nKanban\npredictive\niterative\nhybrid"
+    },
+    {
+      "id": "co7000-08",
+      "speaker": "synthetic-course",
+      "week": 8,
+      "reference": "Tuckman and Hackman offer different perspectives on psychological safety and team performance.",
+      "path": "tests/fixtures/co7000-08.wav",
+      "vocabulary": "Tuckman\nHackman\npsychological safety\ndistributed leadership\ninclusion"
+    },
+    {
+      "id": "co7000-09",
+      "speaker": "synthetic-course",
+      "week": 9,
+      "reference": "The stakeholder register records risk appetite, residual risk, and contingency.",
+      "path": "tests/fixtures/co7000-09.wav",
+      "vocabulary": "stakeholder salience\nrisk appetite\nrisk register\nresidual risk\ncontingency"
+    },
+    {
+      "id": "co7000-10",
+      "speaker": "synthetic-course",
+      "week": 10,
+      "reference": "The Gantt chart shows the critical path and the work breakdown structure.",
+      "path": "tests/fixtures/co7000-10.wav",
+      "vocabulary": "work breakdown structure\nGantt chart\ncritical path\nPERT\nresource levelling"
+    },
+    {
+      "id": "co7000-11",
+      "speaker": "synthetic-course",
+      "week": 11,
+      "reference": "We compare earned value, CPI, SPI, and the estimate at completion.",
+      "path": "tests/fixtures/co7000-11.wav",
+      "vocabulary": "earned value\nCPI\nSPI\nEAC\nETC\nTCPI"
+    }
+  ]
+}

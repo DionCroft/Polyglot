@@ -11,7 +11,7 @@ if not (source / "LectureLive-x64-Beta.exe").is_file():
     raise RuntimeError("Build the beta first")
 out = root / "recovery"
 out.mkdir(exist_ok=True)
-archive = out / "LectureLive-Windows-x64-Beta-0.4.0b1.zip"
+archive = out / "LectureLive-Windows-x64-Beta-0.4.0b2.zip"
 partial = archive.with_suffix(".zip.partial")
 manifest = {}
 with zipfile.ZipFile(
