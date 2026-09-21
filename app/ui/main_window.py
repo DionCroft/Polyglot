@@ -26,11 +26,12 @@ from PySide6.QtWidgets import (
     QInputDialog,
 )
 from app.config.settings import ROOT, DATA, Settings
-from app.system.architecture import is_x64
+from app.system.architecture import is_x64, is_macos
 from app.audio.capture import microphones
 from app.pipeline import Pipeline
 from app.ui.overlay import Overlay
-from app.system.windows import Hotkeys
+from app.system.desktop import Hotkeys
+from app.system.permissions import microphone_permission
 
 STYLE = """
 QWidget { background:#111a21; color:#e8f0f3; font-family:'Segoe UI'; font-size:14px; }
@@ -102,12 +103,22 @@ class MainWindow(QMainWindow):
         self.last_caption = None
         self.transcript_path = DATA / "transcripts"
         self.setWindowTitle(
-            "LectureLive · Windows x64 Beta" if is_x64() else "LectureLive"
+            "LectureLive · Apple Silicon Beta"
+            if is_macos()
+            else "LectureLive · Windows x64 Beta"
+            if is_x64()
+            else "LectureLive"
         )
         self.resize(1060, 860)
         self.setMinimumSize(860, 640)
         self.setWindowIcon(QIcon(str(ROOT / "assets/lecturelive.png")))
-        self.setStyleSheet(STYLE)
+        self.setStyleSheet(
+            STYLE.replace("Segoe UI", "Helvetica Neue").replace(
+                "Microsoft YaHei UI", "PingFang SC"
+            )
+            if is_macos()
+            else STYLE
+        )
         self.overlay = Overlay(self.cfg)
         self.overlay.moved.connect(self.persist)
         host = QWidget()
@@ -117,7 +128,7 @@ class MainWindow(QMainWindow):
         layout.setSpacing(16)
         head = QHBoxLayout()
         brand = QVBoxLayout()
-        name = QLabel("LectureLive · Beta" if is_x64() else "LectureLive")
+        name = QLabel("LectureLive · Beta" if is_x64() or is_macos() else "LectureLive")
         name.setObjectName("brand")
         brand.addWidget(name)
         tagline = QLabel("Offline bilingual live captions for teaching")
@@ -324,6 +335,8 @@ class MainWindow(QMainWindow):
         if self.microphone.currentData() is None:
             self.warn("Connect and select a microphone first.")
             return
+        if not microphone_permission(self, self.test_microphone):
+            return
         from app.audio.check import check_microphone
 
         self.microphone_cancel.clear()
@@ -404,7 +417,7 @@ class MainWindow(QMainWindow):
         self.hide()
 
     def apply_shortcuts(self):
-        from app.system.shortcuts import parse_shortcut
+        from app.system.desktop import parse_shortcut
 
         lock = self.lock_shortcut_edit.text().strip()
         pause = self.pause_shortcut_edit.text().strip()
@@ -924,7 +937,11 @@ class MainWindow(QMainWindow):
                 )
         except Exception:
             self.warn(
-                "Could not list microphones. Check Windows microphone permissions."
+                (
+                    "Could not list microphones. Check macOS System Settings → Privacy & Security → Microphone."
+                    if is_macos()
+                    else "Could not list microphones. Check Windows microphone permissions."
+                )
             )
 
     def refresh_displays(self, *args):
@@ -1075,6 +1092,8 @@ class MainWindow(QMainWindow):
             return
         if self.pipeline:
             self.stop()
+            return
+        if not self.wav and not microphone_permission(self, self.start_stop):
             return
         self.warning.hide()
         self.retry_button.hide()

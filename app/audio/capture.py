@@ -2,6 +2,7 @@ import threading, time, wave
 from pathlib import Path
 import numpy as np
 import sounddevice as sd
+from app.system.architecture import is_macos
 
 RATE = 16000
 BLOCK = 512
@@ -14,7 +15,9 @@ def microphones():
     for index, d in enumerate(devices):
         if d["max_input_channels"] > 0:
             host = hosts[d["hostapi"]]["name"]
-            if host not in {"Windows WASAPI", "MME"}:
+            if host not in (
+                {"Core Audio"} if is_macos() else {"Windows WASAPI", "MME"}
+            ):
                 continue
             if "Mapper" in d["name"]:
                 continue
@@ -50,6 +53,10 @@ class Microphone:
             extra = (
                 sd.WasapiSettings(auto_convert=True)
                 if host == "Windows WASAPI"
+                else sd.CoreAudioSettings(
+                    change_device_parameters=False, fail_if_conversion_required=False
+                )
+                if host == "Core Audio"
                 else None
             )
             self.stream = sd.InputStream(
@@ -65,7 +72,11 @@ class Microphone:
         except Exception as e:
             self.close()
             raise RuntimeError(
-                "Microphone unavailable. Select another input device and try again."
+                (
+                    "Microphone unavailable. Check System Settings → Privacy & Security → Microphone and select another input device."
+                    if is_macos()
+                    else "Microphone unavailable. Select another input device and try again."
+                )
             ) from e
 
     def close(self):

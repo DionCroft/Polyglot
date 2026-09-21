@@ -328,7 +328,11 @@ class Pipeline:
             close = getattr(self.asr, "close", None)
             if close:
                 close()
-            self.asr = CpuWhisper(self.root / "models/whisper/fast")
+            from app.system.architecture import cpu_profile
+
+            self.asr = CpuWhisper(
+                self.root / "models/whisper" / cpu_profile(self.settings.profile)
+            )
             self._configure_speech()
             self.asr.final_pass = final
             self.using_npu = False

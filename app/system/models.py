@@ -4,7 +4,7 @@ from dataclasses import dataclass
 import logging
 import threading
 import numpy as np
-from app.system.architecture import is_x64
+from app.system.architecture import is_x64, is_macos, cpu_profile
 
 
 @dataclass
@@ -90,6 +90,8 @@ class ModelStore:
                             )
                     if asr is None:
                         raise RuntimeError("Using local CPU")
+                elif is_macos():
+                    raise RuntimeError("Using native Apple Silicon CPU")
                 else:
                     asr = QnnWhisper(self.root / "models/whisper" / profile)
                     asr.name = "Qualcomm NPU · Whisper " + (
@@ -101,15 +103,19 @@ class ModelStore:
                     npu = True
                     accelerated = True
             except Exception:
-                if not force_cpu and not is_x64():
+                if not force_cpu and not is_x64() and not is_macos():
                     logging.exception("NPU check failed; using CPU")
                 if worker is not None:
                     worker.close()
                 npu = accelerated = False
-                asr = CpuWhisper(self.root / "models/whisper/fast")
+                asr = CpuWhisper(self.root / "models/whisper" / cpu_profile(profile))
+                if is_macos():
+                    asr.name = "Apple Silicon CPU · Whisper " + (
+                        "Small int8" if profile == "balanced" else "Base int8"
+                    )
                 asr.transcribe(np.zeros(16000, np.float32))
                 messages.append(
-                    "Using local CPU Whisper Base; no internet is required."
+                    "Using local CPU speech recognition; no internet is required."
                 )
             try:
                 mt = OpusMT(self.root / "models/translation/opus")

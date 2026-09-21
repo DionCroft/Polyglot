@@ -2,7 +2,8 @@ import html
 from PySide6.QtCore import Qt, QRectF, Signal, QTimer
 from PySide6.QtGui import QColor, QPainter, QTextDocument, QFont
 from PySide6.QtWidgets import QWidget, QApplication
-from app.system.windows import overlay_input
+from app.system.desktop import overlay_input
+from app.system.architecture import is_macos
 from app.captions.display import CaptionDisplay
 
 
@@ -85,7 +86,9 @@ class Overlay(QWidget):
             self.display.partial and not self.display.pair and not self.display.pending
         )
         doc = QTextDocument()
-        doc.setDefaultFont(QFont("Microsoft YaHei UI", point_size))
+        doc.setDefaultFont(
+            QFont("PingFang SC" if is_macos() else "Microsoft YaHei UI", point_size)
+        )
         doc.setTextWidth((width or self.width()) - 64)
         lines = []
         if self.settings.mode != "Chinese":

@@ -2,18 +2,10 @@ import json, os
 from dataclasses import dataclass, asdict, fields
 from pathlib import Path
 
-from app.system.architecture import is_x64
+from app.system.architecture import is_x64, is_macos, data_directory, default_profile
 
 ROOT = Path(__file__).resolve().parents[2]
-DATA = Path(
-    os.environ.get(
-        "LECTURELIVE_DATA",
-        str(
-            Path(os.environ.get("LOCALAPPDATA", str(ROOT)))
-            / ("LectureLive Beta" if is_x64() else "LectureLive")
-        ),
-    )
-)
+DATA = data_directory()
 
 
 @dataclass
@@ -24,7 +16,7 @@ class Settings:
     pause_shortcut: str = "Ctrl+Alt+Space"
     microphone: str = ""
     mode: str = "Bilingual"
-    profile: str = "fast" if is_x64() else "balanced"
+    profile: str = default_profile()
     accelerator: str = "auto"
     recognition_mode: str = "standard"
     vocabulary_guidance: bool = False
@@ -73,7 +65,11 @@ class Settings:
             cfg.profile = "balanced"
         if is_x64():
             cfg.profile = "fast"
-        if cfg.accelerator not in {"auto", "cpu", "gpu", "intel_npu", "amd_npu"}:
+        if cfg.accelerator not in (
+            {"auto", "cpu", "coreml"}
+            if is_macos()
+            else {"auto", "cpu", "gpu", "intel_npu", "amd_npu"}
+        ):
             cfg.accelerator = "auto"
         if cfg.recognition_mode not in {"standard", "careful"}:
             cfg.recognition_mode = "standard"
