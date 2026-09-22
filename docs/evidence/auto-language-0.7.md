@@ -207,3 +207,10 @@ of the development set.
 [Native Auto UI](auto-0.7-macos-auto-ui.json) ·
 [Mac language evaluation](auto-0.7-macos-auto-evaluation.json) ·
 [CPU/Core ML inference and recovery](auto-0.7-macos-packaged.json).
+
+The [published Mac release](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.7.0b1)
+contains the tested DMG (1,219,867,845 bytes) and ZIP (1,172,743,075 bytes), plus
+installation instructions and SHA-256 sums. The release tag resolves to tested commit
+`0d82033`; GitHub's asset digests match the supplied checksums. The publishing workflow
+also rehashed both native artifacts before upload. [Release verification](auto-0.7-macos-release.json).
+The beta remains ad-hoc signed and unnotarised; macOS 14+ Apple Silicon is required.

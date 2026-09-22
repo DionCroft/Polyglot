@@ -1,0 +1,22 @@
+{
+  "published": true,
+  "release": "https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.7.0b1",
+  "tested_commit": "0d82033480605302dc537acd3a56cbbd7ebd424f",
+  "native_build_run": 35760909426,
+  "publish_run": 35763361831,
+  "github_asset_digests_match": true,
+  "assets": [
+    {
+      "name": "LectureLive-0.7.0b1-macOS-AppleSilicon.dmg",
+      "bytes": 1219867845,
+      "sha256": "fc7bde144b576c14cb71b3de0a39b3ce64c87a1fd300fe71417385573b999dae",
+      "url": "https://github.com/DionCroft/Polyglot/releases/download/macos-v0.7.0b1/LectureLive-0.7.0b1-macOS-AppleSilicon.dmg"
+    },
+    {
+      "name": "LectureLive-0.7.0b1-macOS-AppleSilicon.zip",
+      "bytes": 1172743075,
+      "sha256": "2c140a53f3a75b6682690cfa2cbc0108af5e69f11ac977a217750aed01b0bf50",
+      "url": "https://github.com/DionCroft/Polyglot/releases/download/macos-v0.7.0b1/LectureLive-0.7.0b1-macOS-AppleSilicon.zip"
+    }
+  ]
+}
