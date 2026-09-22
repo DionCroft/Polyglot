@@ -1,0 +1,36 @@
+{
+  "version": "0.6.0b1",
+  "application_commit": "2370b0507e84e1d7a7734dd961668826e374dd4e",
+  "native_macos_build": "https://github.com/DionCroft/Polyglot/actions/runs/35744753297",
+  "macos_publication": "https://github.com/DionCroft/Polyglot/actions/runs/35746510015",
+  "windows": [
+    {
+      "archive": "recovery/LectureLive-Windows-ARM64-Beta-0.6.0b1.zip",
+      "bytes": 1526351003,
+      "files": 530,
+      "sha256": "f15328c49fe9a789a03584fbcc9263462843e5b2fbdadc6c08480ed9e0d158e1",
+      "verified": true
+    },
+    {
+      "archive": "recovery/LectureLive-Windows-x64-Beta-0.6.0b1.zip",
+      "bytes": 747513708,
+      "files": 1307,
+      "sha256": "a55b9c84a7c9838e062c03dd46a135c3536703cedda7012f90d2a027720371da",
+      "verified": true
+    }
+  ],
+  "macos": [
+    {
+      "name": "LectureLive-0.6.0b1-macOS-AppleSilicon.dmg",
+      "bytes": 1220030579,
+      "sha256": "8472c5cf307fbddee2fbcd5f915501202b921aa2c6b84b5dcd05224ea0513839",
+      "url": "https://github.com/DionCroft/Polyglot/releases/download/macos-v0.6.0b1/LectureLive-0.6.0b1-macOS-AppleSilicon.dmg"
+    },
+    {
+      "name": "LectureLive-0.6.0b1-macOS-AppleSilicon.zip",
+      "bytes": 1172642186,
+      "sha256": "dc5c2bbb26998ee9f36d4ee47f2d8ed0106c73301197a620a80eb097f887c782",
+      "url": "https://github.com/DionCroft/Polyglot/releases/download/macos-v0.6.0b1/LectureLive-0.6.0b1-macOS-AppleSilicon.zip"
+    }
+  ]
+}

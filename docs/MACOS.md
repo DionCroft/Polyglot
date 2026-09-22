@@ -4,7 +4,7 @@ Requires an Apple Silicon Mac (M1 or newer, including M2 MacBook Air) running **
 
 ## Install the ready-made app
 
-1. Open the [Mac beta download page](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.6.0b1). Under **Assets**, choose **LectureLive-0.6.0b1-macOS-AppleSilicon.dmg** (recommended) or the application ZIP. Do not choose **Source code**. Developer builds are also available from successful **macOS Apple Silicon** runs in **Actions**; those require extracting an outer artifact ZIP and may require signing into GitHub.
+1. Open the [Mac beta download page](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.6.0b1). Under **Assets**, choose **LectureLive-0.6.0b1-macOS-AppleSilicon.dmg** (about 1.22 GB; recommended) or the application ZIP (about 1.17 GB). Do not choose **Source code**. Developer builds are also available from successful **macOS Apple Silicon** runs in **Actions**; those require extracting an outer artifact ZIP and may require signing into GitHub.
 2. Open the DMG and drag **LectureLive** onto **Applications**. Alternatively, double-click the inner application ZIP and move **LectureLive.app** to **Applications**. Eject the DMG before starting the installed app.
 3. Open **Applications → LectureLive**. This beta is ad-hoc signed and is **not Apple notarised**. If macOS blocks this downloaded beta, open **System Settings → Privacy & Security**, find the message about LectureLive, choose **Open Anyway**, and confirm **Open**. Only approve the copy you obtained from this repository. Your organisation may require IT approval.
 4. Choose your microphone and click **Test microphone**. Choose **Allow** when macOS asks for microphone access. If access was denied, turn on **System Settings → Privacy & Security → Microphone → LectureLive**, then quit and reopen LectureLive.
@@ -29,6 +29,15 @@ are preserved for English turns and are not applied to Mandarin. Automatic langu
 is not included. [Full conversation guide and limitations](CONVERSATIONS.md).
 
 ## Processing choices and limits
+
+The 0.6 conversation app passed **94 tests** and packaged English/Mandarin, switching,
+transcript and native UI checks on macOS 14.8.9 ARM64. See the
+[conversation evidence](evidence/conversations-0.6.md) for raw reports and accuracy limits.
+On that hosted Mac, the extra reverse model used about **516 MiB** of RAM and took
+**1.27 s** to load/warm; eight short translations took **0.19–0.38 s** each afterwards.
+Speech processing and phrase boundaries add further delay. CPU speech was faster than
+Core ML on the three Mandarin samples, so try **CPU** if Automatic feels slower.
+These are hosted-runner measurements, not an M2 MacBook Air classroom benchmark.
 
 **Automatic** tries Apple Core ML for the Fast speech encoder and falls back to CPU if loading, verification or inference fails. Balanced uses CPU in Automatic mode: Small Core ML compilation exceeded the three-minute limit on the hosted Mac. You can explicitly select **Apple Core ML · beta** to try Small acceleration on your Mac; it retains the same timeout and CPU fallback. **CPU** avoids the accelerator. Both choices retain the selected Fast/Base or Balanced/Small model, vocabulary prompts and Careful decoding. Decoding, translation and voice detection use CPU in both modes. Core ML can partition work across CPU, GPU and Neural Engine; the app verifies Core ML execution but does not claim a particular physical device was used. Initial compilation may take up to three minutes; later launches reuse a local cache. A timed-out inference switches to CPU and retries the phrase.
 

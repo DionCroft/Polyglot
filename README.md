@@ -76,7 +76,7 @@ The repository's **Code → Download ZIP** contains source code and needs **Setu
 ## Install on Mac
 
 Use an **Apple Silicon Mac running macOS 14 or later**. The conversation Mac beta is **0.6.0b1**.
-Internet is needed to download the app; the speech and translation models are included.
+The DMG download is about **1.22 GB** (ZIP alternative: **1.17 GB**). The speech and both translation models are included; the app runs offline after downloading.
 
 1. [Download LectureLive for Apple Silicon — DMG](https://github.com/DionCroft/Polyglot/releases/download/macos-v0.6.0b1/LectureLive-0.6.0b1-macOS-AppleSilicon.dmg).
    Alternatively, open the [Mac beta release page](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.6.0b1)

@@ -67,7 +67,36 @@ Both Windows executables were rebuilt from `2370b05`. Packaged English inference
 Mandarin/reverse translation, native UI switching and transcript checks passed on ARM64
 and under x64 emulation. All 42 ARM64 and 29 x64 bundled model files matched their pinned
 hashes; each includes the eight reverse-translation assets. Portable ZIPs are prepared
-with per-file SHA-256 verification. Native Apple Silicon CI results follow when completed.
+with per-file SHA-256 verification.
+
+Native Apple Silicon [build 35744753297](https://github.com/DionCroft/Polyglot/actions/runs/35744753297)
+passed on **macOS 14.8.9 ARM64**, using the same `2370b05` application code. **94 tests passed**
+with no skips. The packaged `.app` passed English CPU/Core ML inference, the nine Mandarin
+speech cases, reverse translation, English language round trips, native Cocoa controls,
+live/paused switching, mixed transcript saving, CO7000 presets, overlay click-through flags,
+shortcut registration, linked microphone permission handling, architecture and signature checks.
+Microphone permission delivery and global shortcut delivery to a real lecturer were not tested.
+
+| Hosted Apple Silicon backend | Character edits / reference characters | Inference time per complete Mandarin clip |
+|---|---|---|
+| Whisper Base CPU | 7 / 81 | 1.215–1.301 s |
+| Whisper Base Core ML encoder + CPU decoder | 10 / 81 | 1.541–1.855 s |
+| Whisper Small CPU | 14 / 81 | 2.843–3.368 s |
+
+Core ML Fast executed successfully, but was slower than CPU on these complete clips.
+Explicit Small Core ML again exceeded the three-minute worker limit and recovered on CPU;
+Balanced Automatic already uses CPU. These hosted-runner results do not predict M2 classroom
+performance or identify whether Core ML ran on a GPU or Neural Engine.
+The reverse-model load/warm-up took **1.274 s** and added **541,409,280 bytes / 516.3 MiB**
+to process RSS. Eight warmed translations took **0.189–0.380 s**. Native-speaker review
+remains pending; the nine non-empty Chinese outputs are functional checks, not accuracy passes.
+
+Native evidence: [94-test report](macos-0.6-macos-pytest.xml),
+[English and acceleration](macos-0.6-macos-packaged.json),
+[Mandarin and reverse translation](macos-0.6-macos-conversations.json),
+[conversation controls/exports](macos-0.6-macos-conversation-ui.json),
+[Cocoa integration](macos-0.6-macos-ui.json).
+
 Physical M2 microphone/permissions, projector/full-screen delivery, global shortcut delivery,
 thermal/battery behaviour and physical Intel/AMD GPU/NPU acceptance remain pending.
 OS-level network checks for native libraries and long classroom sessions remain pending.
@@ -81,6 +110,29 @@ Raw evidence: [exact English before/after](conversations-0.6-english-regression.
 [bundled model hashes](packaged-models-0.6.json).
 The [overlay screenshot](conversation-overlay-0.6.png) uses an explicit UI text fixture;
 it is a layout check, not an audio accuracy result.
+
+## Installable builds
+
+| Package | Bytes | Availability |
+|---|---|---|
+| Windows ARM64 portable ZIP | 1,526,351,003 | `recovery/LectureLive-Windows-ARM64-Beta-0.6.0b1.zip` in the maintainer workspace |
+| Windows x64 portable ZIP | 747,513,708 | `recovery/LectureLive-Windows-x64-Beta-0.6.0b1.zip` in the maintainer workspace |
+| Apple Silicon DMG | 1,220,030,579 | [Public Mac beta release](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.6.0b1) |
+| Apple Silicon ZIP | 1,172,642,186 | Same public release |
+
+The [package record](conversations-0.6-packages.json) contains exact SHA-256 hashes.
+Windows packaging verified each archived member against its source hash (530 ARM64 files,
+1,307 x64 files). Both executables were tested before packaging. Their documentation was
+refreshed after native Mac validation; executable code is unchanged from `2370b05`.
+Windows archives are local deliverables, not GitHub release assets; colleagues can use
+the beginner `Setup.cmd` route or receive a complete portable ZIP from the maintainer.
+
+The [Mac publisher](https://github.com/DionCroft/Polyglot/actions/runs/35746510015)
+verified both native artifact checksums before publication; the public GitHub asset digests
+match `SHA256SUMS.txt`. Release tag `macos-v0.6.0b1` points to tested commit `2370b05`.
+Minimum macOS is 14, Apple Silicon only. The app is ad-hoc signed, not notarised.
+Physical M2 hardware, native-speaker classroom recordings, physical Intel/AMD acceleration
+and application-scoped OS network tracing remain outstanding as described above.
 
 ## Reproduce
 

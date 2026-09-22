@@ -67,6 +67,12 @@ each to translate after warm-up. These are translation-only timings, not microph
 latency or Mac/Intel/AMD promises. Segmentation, speech recognition and any queued work add delay.
 [Detailed verification and limits](evidence/conversations-0.6.md).
 
+On the hosted Apple Silicon test runner, reverse-model load/warm-up took **1.27 s**,
+added about **516 MiB** of RAM, and warmed translations took **0.19–0.38 s**.
+CPU recognition was faster than Core ML on these three short test recordings;
+try **Processing hardware → CPU** if Automatic feels slower on your Mac.
+This is not a physical M2 benchmark. The English recognition settings are unchanged.
+
 ## Saved conversations
 
 **Save text transcripts and subtitles** is on by default. Open **Diagnostics → Open transcripts**.
