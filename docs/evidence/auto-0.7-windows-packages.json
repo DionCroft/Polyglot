@@ -1,0 +1,19 @@
+{
+  "application_commit": "0d82033480605302dc537acd3a56cbbd7ebd424f",
+  "packages": [
+    {
+      "archive": "LectureLive-Windows-ARM64-Beta-0.7.0b1.zip",
+      "bytes": 1526632481,
+      "files": 557,
+      "sha256": "11fc3b4f5b08324092bccba2a92e2039165e3036f2c7579ae82f8def9f17db24",
+      "verified": true
+    },
+    {
+      "archive": "LectureLive-Windows-x64-Beta-0.7.0b1.zip",
+      "bytes": 747794782,
+      "files": 1334,
+      "sha256": "54d33401a88081302599650a3d5981e70424bc60e2f48733a7b35803d696c57b",
+      "verified": true
+    }
+  ]
+}

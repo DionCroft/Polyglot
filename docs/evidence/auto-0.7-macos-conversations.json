@@ -1,0 +1,184 @@
+{
+  "version": "0.7.0b1",
+  "platform": "macOS-14.8.9-arm64-arm-64bit",
+  "speech": [
+    {
+      "profile": "fast",
+      "requested": "cpu",
+      "backend": "Apple Silicon CPU · Whisper Base int8",
+      "accelerated": false,
+      "case": "fleurs-cmn-1",
+      "reference": "“这并不是告别。这是一个篇章的结束，也是新篇章的开始。”",
+      "text": "这并不是告别,这是一个偏章的结束,也是新偏章的开始",
+      "seconds": 0.8622803330000579,
+      "audio_seconds": 10.38,
+      "character_errors": 2,
+      "reference_characters": 23
+    },
+    {
+      "profile": "fast",
+      "requested": "cpu",
+      "backend": "Apple Silicon CPU · Whisper Base int8",
+      "accelerated": false,
+      "case": "fleurs-cmn-2",
+      "reference": "钙、钾等元素属于金属，银和金等元素当然也是金属。",
+      "text": "概加等元素属于金属,银和金等元素当然也是金属。",
+      "seconds": 1.1040834159999804,
+      "audio_seconds": 8.28,
+      "character_errors": 2,
+      "reference_characters": 21
+    },
+    {
+      "profile": "fast",
+      "requested": "cpu",
+      "backend": "Apple Silicon CPU · Whisper Base int8",
+      "accelerated": false,
+      "case": "fleurs-cmn-3",
+      "reference": "桥下垂直净空 15 米。该项目于 2011 年 8 月完工，但直到 2017 年 3 月才开始通车。",
+      "text": "敲下垂直进空15米 该项目于2021年8月完工但直到2017年3月才开始通车",
+      "seconds": 1.0220536250000123,
+      "audio_seconds": 13.86,
+      "character_errors": 3,
+      "reference_characters": 37,
+      "careful_first_sample": "这并不是告别这是一个偏章的结束也是新偏章的开始"
+    },
+    {
+      "profile": "fast",
+      "requested": "auto",
+      "backend": "Apple Core ML encoder + CPU decoder · Whisper Base",
+      "accelerated": true,
+      "case": "fleurs-cmn-1",
+      "reference": "“这并不是告别。这是一个篇章的结束，也是新篇章的开始。”",
+      "text": "这并不是告别,这是一个偏章的结束也是新偏章的开始",
+      "seconds": 1.5703386669999873,
+      "audio_seconds": 10.38,
+      "character_errors": 2,
+      "reference_characters": 23
+    },
+    {
+      "profile": "fast",
+      "requested": "auto",
+      "backend": "Apple Core ML encoder + CPU decoder · Whisper Base",
+      "accelerated": true,
+      "case": "fleurs-cmn-2",
+      "reference": "钙、钾等元素属于金属，银和金等元素当然也是金属。",
+      "text": "盖夹等元素属于金属,银和金等元素当然也是金属。",
+      "seconds": 1.672649209000042,
+      "audio_seconds": 8.28,
+      "character_errors": 2,
+      "reference_characters": 21
+    },
+    {
+      "profile": "fast",
+      "requested": "auto",
+      "backend": "Apple Core ML encoder + CPU decoder · Whisper Base",
+      "accelerated": true,
+      "case": "fleurs-cmn-3",
+      "reference": "桥下垂直净空 15 米。该项目于 2011 年 8 月完工，但直到 2017 年 3 月才开始通车。",
+      "text": "乔夏锤子进空15米 该项目于2021年8月完工但直到2017年3月才开始通车",
+      "seconds": 1.7365093329999581,
+      "audio_seconds": 13.86,
+      "character_errors": 6,
+      "reference_characters": 37,
+      "careful_first_sample": "这并不是告别这是一个偏章的结束也是新偏章的开始"
+    },
+    {
+      "profile": "balanced",
+      "requested": "auto",
+      "backend": "Apple Silicon CPU · Whisper Small int8",
+      "accelerated": false,
+      "case": "fleurs-cmn-1",
+      "reference": "“这并不是告别。这是一个篇章的结束，也是新篇章的开始。”",
+      "text": "这并不是告别,这是一个偏张的结束,也是新偏张的开始。",
+      "seconds": 2.2844437090000156,
+      "audio_seconds": 10.38,
+      "character_errors": 4,
+      "reference_characters": 23
+    },
+    {
+      "profile": "balanced",
+      "requested": "auto",
+      "backend": "Apple Silicon CPU · Whisper Small int8",
+      "accelerated": false,
+      "case": "fleurs-cmn-2",
+      "reference": "钙、钾等元素属于金属，银和金等元素当然也是金属。",
+      "text": "盖甲等元素属于金属银河金等元素当然也是金属",
+      "seconds": 2.2441166250000606,
+      "audio_seconds": 8.28,
+      "character_errors": 3,
+      "reference_characters": 21
+    },
+    {
+      "profile": "balanced",
+      "requested": "auto",
+      "backend": "Apple Silicon CPU · Whisper Small int8",
+      "accelerated": false,
+      "case": "fleurs-cmn-3",
+      "reference": "桥下垂直净空 15 米。该项目于 2011 年 8 月完工，但直到 2017 年 3 月才开始通车。",
+      "text": "乔夏垂直进空十五米 该项目于2011年8月晚供但直到2017年3月才开始通车",
+      "seconds": 2.9964337909999585,
+      "audio_seconds": 13.86,
+      "character_errors": 7,
+      "reference_characters": 37,
+      "careful_first_sample": "这并不是告别这是一个偏张的结束也是新偏张的开始"
+    }
+  ],
+  "translation": [
+    {
+      "chinese": "请再解释一次。",
+      "english": "Please explain again.",
+      "seconds": 0.1896279999999706,
+      "human_review": "pending"
+    },
+    {
+      "chinese": "我们应该如何管理项目风险？",
+      "english": "How should we manage project risks?",
+      "seconds": 0.3287839580000309,
+      "human_review": "pending"
+    },
+    {
+      "chinese": "这个项目的关键路径是什么？",
+      "english": "What is the key route of this project?",
+      "seconds": 0.36964054199995644,
+      "human_review": "pending"
+    },
+    {
+      "chinese": "机器人为什么停止了？",
+      "english": "Why did the robot stop?",
+      "seconds": 0.16585925000003954,
+      "human_review": "pending"
+    },
+    {
+      "chinese": "我们不应该忽略安全问题。",
+      "english": "We should not lose sight of security issues.",
+      "seconds": 0.2529911249999941,
+      "human_review": "pending"
+    },
+    {
+      "chinese": "截止日期是星期五。",
+      "english": "The deadline is Friday.",
+      "seconds": 0.25236241700008577,
+      "human_review": "pending"
+    },
+    {
+      "chinese": "这个电路的电压是五伏。",
+      "english": "The voltage of this circuit is five volts.",
+      "seconds": 0.3448547079999571,
+      "human_review": "pending"
+    },
+    {
+      "chinese": "请问这个公式是什么意思？",
+      "english": "What does this formula mean?",
+      "seconds": 0.2534239170000774,
+      "human_review": "pending"
+    }
+  ],
+  "physical_microphone_tested": false,
+  "native_speaker_review": false,
+  "passed": true,
+  "reverse_model": {
+    "load_and_warmup_seconds": 1.3558935419999898,
+    "rss_before_bytes": 1904115712,
+    "rss_after_bytes": 2461941760
+  }
+}

@@ -83,7 +83,7 @@ single-language modes, manual override, paused selection and controls at minimum
 [ARM64 Auto replay](auto-0.7-arm64-auto.json) · [x64 Auto replay](auto-0.7-x64-auto.json) ·
 [ARM64 UI](auto-0.7-arm64-auto-ui.json) · [x64 UI](auto-0.7-x64-auto-ui.json).
 
-Native macOS results are recorded below as they complete. Windows x64 testing on this machine uses emulation on Snapdragon;
+Native macOS results are recorded below. Windows x64 testing on this machine uses emulation on Snapdragon;
 physical Intel/AMD GPU/NPU and physical M2 classroom tests remain outstanding.
 
 ## Sustained alternating-speaker replay
@@ -159,3 +159,51 @@ microphone distance and room conditions. A bilingual reviewer should measure wro
 choices, withheld phrases, word/character errors and preserved meaning independently.
 Rehearse a full lecture on the intended hardware, including external microphone, projector,
 pause/reconnect, offline startup, sleep/resume and thermal/battery behaviour.
+
+## Windows downloads/builds
+
+The main application code is commit `0d82033`; subsequent commits add verification
+reports and documentation. The rebuilt app folders are `dist/LectureLive` (Snapdragon)
+and `dist/LectureLive-x64-Beta` (Intel/AMD edition, tested here under emulation).
+
+Local portable ZIPs in `recovery` include the models and updated offline guides:
+
+| Archive | Bytes | Files verified |
+|---|---:|---:|
+| LectureLive-Windows-ARM64-Beta-0.7.0b1.zip | 1,526,632,481 | 557 |
+| LectureLive-Windows-x64-Beta-0.7.0b1.zip | 747,794,782 | 1,334 |
+
+Every ZIP member is hashed against its source file; the ZIP contains `SHA256.json`
+and has an adjacent `.zip.sha256` receipt. [Archive receipts](auto-0.7-windows-packages.json).
+These large Windows archives are local deliverables, not Git-tracked binaries.
+The public Windows installation route remains the main-branch source ZIP and **Setup.cmd**.
+The offline guides reflect the evidence available at packaging; this repository report
+also records later native Mac and release verification.
+
+## Native Apple Silicon verification
+
+[Native build 35760909426](https://github.com/DionCroft/Polyglot/actions/runs/35760909426)
+passed on **macOS 14.8.9 ARM64**, using application commit `0d82033`. All **109 tests**
+passed with no skips. The packaged app passed English/CO7000 inference, manual Mandarin
+inference and switching, Auto CPU replay, native Cocoa UI, Auto presets and compact
+controls, labels and single-language modes, pause/manual override and transcript recovery.
+The app signature and microphone-purpose string were verified before DMG/ZIP packaging.
+
+The Auto CPU replay completed seven translated pairs and three uncertain phrases with
+no queue drops/skips; bilingual p95 latency was 4.336 s on the hosted runner. The native
+Auto UI used the Core ML encoder with CPU decoding and completed eight pairs/two notices.
+Core ML Fast executed successfully; Small Core ML preparation timed out and recovered
+to CPU, as in the existing Mac edition. This does not identify which physical Apple GPU
+or Neural Engine unit was used and is not an M2 Air thermal/battery or classroom test.
+
+The Mac detection evaluation used 24 public recordings (six per language), 120 variants:
+12/12 supported clean clips accepted, 4/12 one-second, 11/12 two-second, 12/12 at 20 dB,
+and 11/12 at 10 dB. No wrong accepted choices; all unsupported examples were rejected.
+Again, withholding is not successful captioning and these clips are not independent
+of the development set.
+
+[109-test report](auto-0.7-macos-pytest.xml) ·
+[CPU Auto replay](auto-0.7-macos-auto.json) ·
+[Native Auto UI](auto-0.7-macos-auto-ui.json) ·
+[Mac language evaluation](auto-0.7-macos-auto-evaluation.json) ·
+[CPU/Core ML inference and recovery](auto-0.7-macos-packaged.json).

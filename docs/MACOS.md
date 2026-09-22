@@ -36,9 +36,12 @@ is needed beyond the included models. [Auto help](AUTO_LANGUAGE.md) ·
 
 ## Processing choices and limits
 
-The 0.7 Auto verification and native build results are recorded in the
-[Auto evidence report](evidence/auto-language-0.7.md). Auto is available in the main app;
-physical M2 microphone, projector and full-lecture testing remains outstanding.
+The 0.7 app passed **109 tests** and packaged manual/Auto, transcript and native UI
+checks on macOS 14.8.9 ARM64. Auto CPU replay and the Core ML Auto interface both
+completed English → Mandarin → English turns, with explicit notices for uncertain
+short phrases. [Detailed results and limits](evidence/auto-language-0.7.md). Auto is
+available in the main app; physical M2 microphone, projector and full-lecture testing
+remains outstanding.
 
 The 0.6 conversation app passed **94 tests** and packaged English/Mandarin, switching,
 transcript and native UI checks on macOS 14.8.9 ARM64. See the
