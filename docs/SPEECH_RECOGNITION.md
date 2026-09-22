@@ -5,12 +5,19 @@ If LectureLive already works well for you, keep **Speech recognition: Standard**
 The update adds options you can try for another speaker; it does not switch everyone to a new
 recognition model or automatically guess anyone's accent.
 
+Start with the [five-minute check with your colleague](ACCENT_CHECK.md), including
+shared CO7000/electronics practice passages and a separate validation passage.
+When investigating wrong English words, select **English → Simplified Chinese**
+first. Auto's language decision and Whisper's choice of words are different checks.
+
 ## Try one change at a time
 
 1. Select the teaching microphone and use **Test microphone**. Resolve a very quiet signal or
    clipping first. Use the same microphone, distance and room when comparing settings.
-2. On a supported Snapdragon PC, choose **Balanced**. It uses the larger Whisper Small model.
-   The Intel/AMD x64 beta currently uses Whisper Base in its Fast profile.
+2. On Snapdragon or Apple Silicon, try **Balanced**. It uses the larger Whisper Small model.
+   The local accent measurements below used the Snapdragon NPU. Mac Balanced can use
+   CPU fallback and needs a timing check on the teaching Mac. The Intel/AMD x64 beta
+   currently uses Whisper Base in its Fast profile.
 3. Try **Speech recognition → Careful** on a short, representative lecture passage. It compares
    alternative word sequences for finished phrases; live partial captions remain a single decoding
    path. Compare the actual words, not just whether the sentence sounds plausible.
@@ -107,10 +114,35 @@ and validates the recorded file checksums. It is separate from ordinary installa
 
 Use `runtime-x64` and `--backend cpu` on the x64 beta. The evaluator accepts `--manifest` for a
 local JSON file containing a `cases` list; each case has `id`, `speaker`, `reference`, and `path`
-(absolute or relative to the project). `sha256` is optional for your private files. Use `--vocabulary "ESP32|FreeRTOS|I2C"` to test one fixed vocabulary list; do not supply the reference transcript
+(absolute or relative to the project). Use unique IDs and nonempty English references; split
+audio into clips of at most **30 seconds** with matching transcripts. `sha256` is optional for your private files. Use `--vocabulary "ESP32|FreeRTOS|I2C"` to test one fixed vocabulary list; do not supply the reference transcript
 as the prompt. WER is aggregated by speaker using substitutions, insertions and deletions over
 reference word counts. Raw WER retains spelling/tokenisation differences such as “synthesised”
 versus “synthesized” and “I-squared-C” versus “I2C”; it is not a semantic accuracy score.
+
+### Expanded multi-speaker check
+
+The optional VCTK developer fixtures add 120 clips from two Indian-English and two
+English speakers from England. Preparation needs internet access and FFmpeg on PATH
+to decode the source FLAC files. **Ordinary users do not need FFmpeg or these fixtures.**
+Prepared WAVs and evaluation run locally; nothing is uploaded. Source attribution,
+revision, hashes and conversion are recorded in the manifest and
+[VCTK notice](licenses/vctk-NOTICE.md).
+
+```powershell
+.\runtime\python.exe -X utf8 -s -m scripts.prepare_vctk_fixtures
+.\runtime\python.exe -X utf8 -s -m scripts.evaluate_speech --manifest tests/fixtures/vctk-accent-cases.json --backend balanced --mode standard --language-check --output tests/artifacts/vctk-standard.json
+.\runtime\python.exe -X utf8 -s -m scripts.evaluate_speech --manifest tests/fixtures/vctk-accent-cases.json --backend balanced --mode careful --output tests/artifacts/vctk-careful.json
+```
+
+Repeat with `--backend fast` or `--backend cpu` for the installed Base models.
+`--variant noise-20dB`, `noise-10dB` or `quiet-12dB` applies a reproducible artificial
+stress condition. Use the same variant for both settings. Noise is seeded per clip,
+so rearranging the manifest does not change the comparison. These conditions do not
+simulate room echoes or other people speaking. `--language-check` reports Auto's
+accepted/withheld/wrong decisions separately; WER always covers **all** manual-English
+clips. Timing is full-clip speech inference, not live caption latency. The manifest
+hash is included in each report to identify the exact comparison set.
 
 ## Sources
 

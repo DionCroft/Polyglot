@@ -189,7 +189,8 @@ The older Mac **0.5.0b1** does not have conversation support.
 Keep **Standard** and vocabulary guidance off if recognition already works well for you.
 Try changes while the lecture is stopped, using a short passage and your usual microphone:
 
-1. On Snapdragon or Apple Silicon, try **Balanced** for the larger Whisper model.
+1. Choose **English → Simplified Chinese** when comparing English words, and test your microphone.
+   On Snapdragon or Apple Silicon, try **Balanced** for the larger Whisper model.
 2. Try **Speech recognition → Careful**. It checks more possible word sequences and can be slower.
 3. For technical words, enter a short relevant list under **Today's vocabulary**, one term per line,
    then tick **Use these terms to guide speech recognition**.
@@ -202,6 +203,7 @@ Try changes while the lecture is stopped, using a short passage and your usual m
 Careful and vocabulary hints do not guarantee better accent recognition; results were mixed with
 the smaller Fast model. Balanced and Careful can increase memory use and caption delay.
 [Speech settings and measured results](docs/SPEECH_RECOGNITION.md) ·
+[Five-minute check with your colleague](docs/ACCENT_CHECK.md) ·
 [CO7000 weekly vocabulary guide](docs/CO7000_VOCABULARY.md).
 
 English vocabulary, glossary corrections and CO7000 hints are preserved when switching, but are

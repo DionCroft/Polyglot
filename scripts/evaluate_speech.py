@@ -47,7 +47,9 @@ def main():
     )
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument(
-        "--backend", choices=["cpu", "fast", "balanced"], default="balanced"
+        "--backend",
+        choices=["cpu", "cpu-small", "fast", "balanced"],
+        default="balanced",
     )
     parser.add_argument("--mode", choices=["standard", "careful"], default="standard")
     parser.add_argument(
@@ -79,8 +81,12 @@ def main():
     if any(case.get("language", "en") != "en" for case in manifest["cases"]):
         raise ValueError("This WER evaluator is for English speech")
     model = (
-        CpuWhisper(root / "models/whisper/fast")
-        if args.backend == "cpu"
+        CpuWhisper(
+            root
+            / "models/whisper"
+            / ("balanced" if args.backend == "cpu-small" else "fast")
+        )
+        if args.backend in {"cpu", "cpu-small"}
         else QnnWhisper(root / "models/whisper" / args.backend)
     )
     if hasattr(model, "configure_recognition"):
