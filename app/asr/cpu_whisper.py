@@ -46,6 +46,19 @@ class CpuWhisper(QnnWhisper):
                 cache[info.name.replace("present.", "past_key_values.")] = value
         return self.decode(result)
 
+    def detect_language(self, audio):
+        from app.asr.language_detection import language_scores
+
+        hidden = self.encoder.run(None, {"input_features": self.features(audio)})[0]
+        feed = {
+            "input_ids": np.array([[self.cfg["decoder_start_token_id"]]], np.int64),
+            "encoder_hidden_states": hidden,
+        }
+        logits = self.decoder.run(
+            None, {i.name: feed[i.name] for i in self.decoder.get_inputs()}
+        )[0][0, -1]
+        return language_scores(logits, self.recognition.generation["lang_to_id"])
+
     def _transcribe_guided(self, audio):
         from app.asr.decoding import search
 

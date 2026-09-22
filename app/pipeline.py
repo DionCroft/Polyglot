@@ -9,6 +9,7 @@ from app.audio.vad import Segmenter
 from app.captions.stabiliser import CaptionStabiliser
 from app.captions.glossary import Glossary
 from app.export.transcript import Transcript
+from app.asr.language_detection import PhraseLanguage, UncertainTurn
 
 log = logging.getLogger(__name__)
 
@@ -127,6 +128,13 @@ class Pipeline:
         self.capture_lock = threading.RLock()
         self.switch_lock = threading.Lock()
         self._store = model_store
+        self.active_language = (
+            settings.speaking_language if settings.speaking_language != "auto" else "en"
+        )
+        self.auto_language = PhraseLanguage()
+        self.translators = {}
+        self.auto_waiting = None
+        self.metrics["uncertain_language_phrases"] = 0
         from opencc import OpenCC
 
         self.simplify = OpenCC("t2s")
@@ -145,8 +153,13 @@ class Pipeline:
                 self.settings.profile, self.force_cpu, self.settings.accelerator
             )
             self.asr, self.mt = bundle.asr, bundle.mt
-            if self.settings.speaking_language == "zh":
-                self.mt = self._store.translation_for("zh")
+            self.translators = {"en": self.mt}
+            if self.settings.speaking_language in {"zh", "auto"}:
+                self.translators["zh"] = self._store.translation_for("zh")
+                if self.settings.speaking_language == "auto":
+                    self.translators["en"] = self._store.translation_for("en")
+                else:
+                    self.mt = self.translators["zh"]
             self._configure_speech()
             self.using_npu = bundle.npu
             self.accelerated = bundle.accelerated
@@ -335,26 +348,29 @@ class Pipeline:
                     "Transcript saving stopped: check disk space or folder access. Live captions continue; earlier journal entries can be recovered.",
                 )
 
-    def _configure_speech(self):
+    def _configure_speech(self, language=None):
+        if language is not None:
+            self.active_language = language
+        elif self.settings.speaking_language != "auto":
+            self.active_language = self.settings.speaking_language
         configure = getattr(self.asr, "configure_recognition", None)
         if configure:
             args = (
                 self.settings.recognition_mode,
                 "\n".join(self.glossary.vocabulary)
-                if self.settings.vocabulary_guidance
-                and self.settings.speaking_language == "en"
+                if self.settings.vocabulary_guidance and self.active_language == "en"
                 else "",
             )
-            if self.settings.speaking_language == "en":
+            if self.active_language == "en":
                 configure(*args)
             else:
-                configure(*args, language="zh")
+                configure(*args, language=self.active_language)
 
     def switch_language(self, language):
         """Run off the GUI thread. Preserve one transcript and the microphone clock."""
-        from app.languages import validate_language
+        from app.languages import validate_selection
 
-        validate_language(language)
+        validate_selection(language)
         with self.switch_lock:
             if not self.started or self.loading or self.stop_event.is_set():
                 raise RuntimeError(
@@ -384,7 +400,14 @@ class Pipeline:
                     raise RuntimeError(
                         "Speech input failed. Stop and reconnect before switching."
                     )
-                translator = self._store.translation_for(language)
+                if language == "auto":
+                    translators = {
+                        key: self._store.translation_for(key) for key in ("en", "zh")
+                    }
+                    translator = translators[self.active_language]
+                else:
+                    translator = self._store.translation_for(language)
+                    translators = {**self.translators, language: translator}
                 if self.stop_event.is_set():
                     return
                 previous = self.settings
@@ -396,6 +419,9 @@ class Pipeline:
                     self._configure_speech()
                     raise
                 self.mt = translator
+                self.translators = translators
+                self.auto_language = PhraseLanguage()
+                self.auto_waiting = None
                 self.segmenter.reset()
                 self.stabiliser.reset()
                 self.epoch += 1
@@ -407,39 +433,91 @@ class Pipeline:
                         "state", "Paused" if self.paused.is_set() else "Listening"
                     )
 
+    def _recover_cpu(self):
+        if not (self.using_npu or self.accelerated):
+            return False
+        from app.asr.cpu_whisper import CpuWhisper
+        from app.system.architecture import cpu_profile
+
+        close = getattr(self.asr, "close", None)
+        if close:
+            close()
+        self.asr = CpuWhisper(
+            self.root / "models/whisper" / cpu_profile(self.settings.profile)
+        )
+        self._configure_speech()
+        self.using_npu = self.accelerated = False
+        if self.model_store:
+            self.model_store.invalidate()
+        self._notify("backend", self.asr.name)
+        self._notify(
+            "warning",
+            "Accelerator processing failed. This phrase was retried on local CPU; captions continue.",
+        )
+        return True
+
     def _transcribe(self, audio, final=True):
         try:
             self.asr.final_pass = final
             return self.asr.transcribe(audio)
         except Exception:
-            if not (self.using_npu or self.accelerated):
+            log.exception("Speech inference failed; checking CPU recovery")
+            if not self._recover_cpu():
                 raise
-            log.exception(
-                "Accelerator failed during lecture; retrying this phrase on CPU"
-            )
-            from app.asr.cpu_whisper import CpuWhisper
-
-            close = getattr(self.asr, "close", None)
-            if close:
-                close()
-            from app.system.architecture import cpu_profile
-
-            self.asr = CpuWhisper(
-                self.root / "models/whisper" / cpu_profile(self.settings.profile)
-            )
-            self._configure_speech()
             self.asr.final_pass = final
-            self.using_npu = False
-            self.accelerated = False
-            text = self.asr.transcribe(audio)
-            if self.model_store:
-                self.model_store.invalidate()
-            self._notify("backend", self.asr.name)
+            return self.asr.transcribe(audio)
+
+    def _detect_language(self, audio):
+        try:
+            return self.asr.detect_language(audio)
+        except Exception:
+            log.exception("Language detection failed; checking CPU recovery")
+            if not self._recover_cpu():
+                raise
+            return self.asr.detect_language(audio)
+
+    def _automatic_language(self, phrase, epoch):
+        key = (epoch, phrase.identifier)
+        voiced = (
+            phrase.voiced_seconds
+            if phrase.voiced_seconds is not None
+            else len(phrase.audio) / 16000
+        )
+        if self.auto_waiting != key:
+            self.auto_waiting = key
             self._notify(
-                "warning",
-                "Accelerator processing failed. This phrase was retried on local CPU; captions continue.",
+                "language-detection", {"epoch": epoch, "language": None, "final": False}
             )
-            return text
+        if (
+            not phrase.final
+            and self.auto_language.key == key
+            and self.auto_language.locked
+        ):
+            return self.auto_language.locked
+        scores = (
+            self._detect_language(phrase.audio)
+            if voiced >= (0.32 if phrase.final else 1.2)
+            else {}
+        )
+        language = self.auto_language.decide(
+            key, scores, voiced, len(phrase.audio), phrase.final
+        )
+        if epoch != self.epoch or self.paused.is_set():
+            return None
+        if language:
+            self._configure_speech(language)
+            self._notify(
+                "language-detection",
+                {"epoch": epoch, "language": language, "final": phrase.final},
+            )
+        elif phrase.final:
+            self.metrics["uncertain_language_phrases"] += 1
+            notice = UncertainTurn(phrase.identifier, phrase.start, phrase.end, epoch)
+            self._save("uncertain", notice)
+            self._notify(
+                "language-detection", {"epoch": epoch, "language": None, "final": True}
+            )
+        return language
 
     def _recognize(self):
         try:
@@ -460,6 +538,11 @@ class Pipeline:
                 continue
             try:
                 start = time.monotonic()
+                language = self.settings.speaking_language
+                if language == "auto":
+                    language = self._automatic_language(phrase, epoch)
+                    if language is None:
+                        continue
                 text = self._transcribe(phrase.audio, final=phrase.final)
                 elapsed = time.monotonic() - start
                 self.metrics.update(
@@ -473,10 +556,10 @@ class Pipeline:
                 caption = self.stabiliser.accept(
                     phrase,
                     self.glossary.english(text)
-                    if self.settings.speaking_language == "en"
+                    if language == "en"
                     else self.simplify.convert(text),
                     epoch,
-                    self.settings.speaking_language,
+                    language,
                 )
                 if not caption:
                     continue
@@ -529,15 +612,19 @@ class Pipeline:
             if isinstance(caption, TurnBoundary):
                 caption.done.set()
                 continue
+            if isinstance(caption, UncertainTurn):
+                self._save("uncertain", caption)
+                continue
             try:
                 start = time.monotonic()
+                translator = self.translators.get(caption.source_language, self.mt)
                 text = (
                     self.glossary.chinese(
-                        caption.english, self.mt.translate(caption.english)
+                        caption.english, translator.translate(caption.english)
                     )
-                    if self.mt and caption.source_language == "en"
-                    else self.mt.translate(caption.chinese)
-                    if self.mt
+                    if translator and caption.source_language == "en"
+                    else translator.translate(caption.chinese)
+                    if translator
                     else ""
                 )
                 self.metrics["translation_seconds"] = time.monotonic() - start
@@ -585,6 +672,9 @@ class Pipeline:
                 )
         return {
             "speaking_language": self.settings.speaking_language,
+            "detected_language": self.active_language
+            if self.settings.speaking_language == "auto"
+            else None,
             "switching_language": self.switching.is_set(),
             "recognition_mode": self.settings.recognition_mode,
             "vocabulary_guidance": self.settings.vocabulary_guidance,

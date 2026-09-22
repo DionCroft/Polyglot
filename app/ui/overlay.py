@@ -93,7 +93,10 @@ class Overlay(QWidget):
         lines = []
         from app.languages import caption_labels
 
-        language = self.settings.speaking_language
+        primary = self.display.primary(self.settings.mode)
+        language = (
+            primary.source_language if primary else self.settings.speaking_language
+        )
         en_label, zh_label = caption_labels(language)
         if self.settings.mode != "Chinese":
             lines.append(
@@ -109,6 +112,11 @@ class Overlay(QWidget):
         ):
             lines.append(
                 f'<p style="font-size:{max(14, int(point_size * 0.65))}pt;color:#b3c5cb;margin-top:12px;">{html.escape(upcoming)} …</p>'
+            )
+        notice = getattr(self, "language_notice", "")
+        if self.settings.speaking_language == "auto" and notice:
+            lines.append(
+                f'<p style="font-size:12pt;color:#b3c5cb;">{html.escape(notice)}</p>'
             )
         doc.setHtml("".join(lines))
         return doc

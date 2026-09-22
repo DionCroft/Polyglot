@@ -24,6 +24,17 @@ def main():
     from app.utils.logging import configure
 
     configure(DATA / "logs")
+    if "--auto-self-test" in sys.argv or "--auto-ui-test" in sys.argv:
+        from app.system.auto_self_test import run, run_ui
+        from app.config.settings import ROOT
+
+        flag = "--auto-ui-test" if "--auto-ui-test" in sys.argv else "--auto-self-test"
+        index = sys.argv.index(flag)
+        return (
+            run_ui(sys.argv[index + 1], sys.argv[index + 2])
+            if flag == "--auto-ui-test"
+            else run(ROOT, sys.argv[index + 1], sys.argv[index + 2])
+        )
     if "--conversation-ui-test" in sys.argv:
         from app.system.conversation_ui_test import run
 

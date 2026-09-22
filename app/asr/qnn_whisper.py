@@ -132,6 +132,34 @@ class QnnWhisper:
         width = 3 if self.recognition.mode == "careful" and self.final_pass else 1
         return self.decode(search(step, self.recognition, length - 1, width))
 
+    def detect_language(self, audio):
+        from app.asr.language_detection import language_scores
+
+        cross = self.encoder.run(
+            None,
+            {
+                self.encoder.get_inputs()[0].name: self.features(audio).astype(
+                    np.float16
+                )
+            },
+        )
+        inputs = self.decoder.get_inputs()
+        dtype = {
+            "tensor(float)": np.float32,
+            "tensor(float16)": np.float16,
+            "tensor(int32)": np.int32,
+            "tensor(int64)": np.int64,
+        }
+        feed = {i.name: np.zeros(i.shape, dtype[i.type]) for i in inputs}
+        layers = self.cfg["decoder_layers"]
+        for info, value in zip(inputs[2 + layers * 2 : -1], cross, strict=True):
+            feed[info.name] = value
+        feed[inputs[1].name].fill(-100)
+        feed[inputs[1].name][..., -1] = 0
+        feed[inputs[0].name].fill(self.cfg["decoder_start_token_id"])
+        logits = self.decoder.run(None, feed)[0]
+        return language_scores(logits, self.recognition.generation["lang_to_id"])
+
     def decode(self, result):
         chars = "".join(self.vocab.get(t, "") for t in result if t < 50257)
         return (

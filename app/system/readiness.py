@@ -16,7 +16,14 @@ def check(root, profile, store=None, accelerator="auto", language="en"):
     store = store or ModelStore(root)
     try:
         bundle = store.load(profile, accelerator=accelerator)
-        translation = bundle.mt if language == "en" else store.translation_for(language)
+        if language == "auto":
+            translation = all(
+                store.translation_for(key) is not None for key in ("en", "zh")
+            )
+        else:
+            translation = (
+                bundle.mt if language == "en" else store.translation_for(language)
+            )
         result.update(
             speech=True,
             translation=translation is not None,

@@ -11,6 +11,7 @@ class AudioPhrase:
     end: float
     audio: np.ndarray
     final: bool
+    voiced_seconds: float | None = None
 
 
 class SileroVAD:
@@ -101,6 +102,7 @@ class Segmenter:
             self.last_voice_end if final else end,
             np.concatenate(self.frames),
             final,
+            self.voiced * 0.032,
         )
 
     def finish(self, end):

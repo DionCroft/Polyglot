@@ -25,6 +25,7 @@ class TeachingControls(QDialog):
         self.language.setAccessibleName("Speaking language")
         self.language.addItem("English → 简体中文", "en")
         self.language.addItem("Mandarin 普通话 → English", "zh")
+        self.language.addItem("Auto · English ↔ Mandarin", "auto")
         self.language.setCurrentIndex(
             self.language.findData(owner.cfg.speaking_language)
         )
@@ -35,6 +36,10 @@ class TeachingControls(QDialog):
         )
         self.language.setEnabled(owner.speaking_language.isEnabled())
         layout.addWidget(self.language)
+        self.language_status = QLabel(owner.language_status.text())
+        self.language_status.setWordWrap(True)
+        self.language_status.setVisible(owner.cfg.speaking_language == "auto")
+        layout.addWidget(self.language_status)
         self.meter = QProgressBar()
         self.meter.setRange(0, 100)
         self.meter.setTextVisible(False)
@@ -51,7 +56,7 @@ class TeachingControls(QDialog):
         show.clicked.connect(self.close)
         layout.addWidget(show)
         self.note = QLabel(
-            "Switch between speakers. Wait for Listening before speaking again. Captions stay on the selected display."
+            "Choose Auto for conversation, or select the speaking language manually. Pause briefly between speakers. Captions stay on the selected display."
         )
         self.note.setWordWrap(True)
         layout.addWidget(self.note)

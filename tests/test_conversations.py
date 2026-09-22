@@ -232,7 +232,7 @@ def test_chinese_partial_prefix_uses_characters_without_inventing_spaces():
 
 def test_language_and_old_defaults_roundtrip_in_presets(tmp_path):
     assert Settings.from_dict({}).speaking_language == "en"
-    assert Settings.from_dict({"speaking_language": "auto"}).speaking_language == "en"
+    assert Settings.from_dict({"speaking_language": "unknown"}).speaking_language == "en"
     presets = Presets(tmp_path / "presets.json")
     cfg = Settings(
         speaking_language="zh", vocabulary="PRINCE2", vocabulary_guidance=True

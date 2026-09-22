@@ -252,7 +252,21 @@ class MainWindow(QMainWindow):
             widget.blockSignals(True)
             widget.setCurrentIndex(widget.findData(self.cfg.speaking_language))
             widget.blockSignals(False)
-        en, zh = caption_labels(self.cfg.speaking_language)
+        primary = self.overlay.display.primary(self.cfg.mode)
+        language = primary.source_language if primary else self.cfg.speaking_language
+        en, zh = caption_labels(language)
+        automatic = self.cfg.speaking_language == "auto"
+        self.language_status.setVisible(automatic)
+        self.language_status.setText("Auto · waiting for speech")
+        self.language_hint.setText(
+            "Auto chooses each phrase. Pause briefly between speakers; use manual selection if unclear."
+            if automatic
+            else "Switch between speakers. Wait for Listening before speaking again."
+        )
+        self.overlay.language_notice = ""
+        if self.teaching:
+            self.teaching.language_status.setVisible(automatic)
+            self.teaching.language_status.setText(self.language_status.text())
         self.preview_en_label.setText(en)
         self.preview_zh_label.setText(zh)
         self.direction_label.setText(
@@ -616,6 +630,7 @@ class MainWindow(QMainWindow):
         self.speaking_language.setAccessibleName("Speaking language")
         self.speaking_language.addItem("English → 简体中文", "en")
         self.speaking_language.addItem("Mandarin 普通话 → English", "zh")
+        self.speaking_language.addItem("Auto · English ↔ Mandarin", "auto")
         self.speaking_language.setCurrentIndex(
             max(0, self.speaking_language.findData(self.cfg.speaking_language))
         )
@@ -626,6 +641,10 @@ class MainWindow(QMainWindow):
         )
         self.language_hint.setWordWrap(True)
         form.addWidget(self.language_hint)
+        self.language_status = QLabel("Auto detects each phrase. Speak one at a time.")
+        self.language_status.setWordWrap(True)
+        self.language_status.setAccessibleName("Detected speaking language")
+        form.addWidget(self.language_status)
         form.addWidget(QLabel("Caption languages"))
         self.mode = QComboBox()
         self.mode.setAccessibleName("Caption languages")
@@ -1372,6 +1391,29 @@ class MainWindow(QMainWindow):
                 self.close()
             elif self.restart_requested:
                 QTimer.singleShot(100, self.restart_after_failure)
+        elif kind == "language-detection":
+            if (
+                not self.pipeline
+                or value["epoch"] != self.pipeline.epoch
+                or self.pipeline.paused.is_set()
+                or self.cfg.speaking_language != "auto"
+            ):
+                return
+            language = value["language"]
+            message = (
+                ("Detected: " + ("English" if language == "en" else "Mandarin"))
+                if language
+                else (
+                    "Language unclear — select English or Mandarin and repeat."
+                    if value["final"]
+                    else "Detecting speaking language…"
+                )
+            )
+            self.language_status.setText(message)
+            self.overlay.language_notice = message
+            self.overlay.update()
+            if self.teaching:
+                self.teaching.language_status.setText(message)
         elif kind == "language":
             self.cfg.speaking_language = value
             self.overlay.reset()
@@ -1429,6 +1471,15 @@ class MainWindow(QMainWindow):
                 return
             self.overlay.set_caption(value)
             en, zh, upcoming = self.overlay.display.contents(self.cfg.mode)
+            primary = self.overlay.display.primary(self.cfg.mode)
+            language = (
+                primary.source_language if primary else self.cfg.speaking_language
+            )
+            from app.languages import caption_labels
+
+            en_label, zh_label = caption_labels(language)
+            self.preview_en_label.setText(en_label)
+            self.preview_zh_label.setText(zh_label)
             if value.final and (value.translated_text or self.last_caption is None):
                 self.last_caption = value
             unavailable = (
@@ -1440,7 +1491,7 @@ class MainWindow(QMainWindow):
                 or (
                     "Translation unavailable" if unavailable else "Translation pending…"
                 )
-                if self.cfg.speaking_language == "zh"
+                if language == "zh"
                 else en
             )
             self.preview_zh.setText(
@@ -1450,7 +1501,7 @@ class MainWindow(QMainWindow):
                     if self.overlay.display.pair
                     and self.overlay.display.pair.translation_status == "unavailable"
                     else "Translation pending…"
-                    if self.cfg.speaking_language == "en"
+                    if language == "en"
                     else ""
                 )
             )

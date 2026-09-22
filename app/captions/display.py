@@ -59,3 +59,9 @@ class CaptionDisplay:
             else ""
         )
         return en, zh, extra
+
+    def primary(self, mode="Bilingual"):
+        """The caption whose text is currently visible, even while another turn loads."""
+        if mode == "English":
+            return self.partial or self.pending or self.pair
+        return self.pair or self.pending or self.partial

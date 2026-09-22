@@ -2,6 +2,7 @@ import json, re, threading
 from collections import OrderedDict
 from datetime import datetime
 from pathlib import Path
+from app.asr.language_detection import UncertainTurn
 
 
 def timestamp(seconds, vtt=False):
@@ -84,6 +85,20 @@ class Transcript:
             self.ready[c.identifier] = c
             self._flush_pairs()
 
+    def uncertain(self, turn):
+        """Journal an explicit gap without assigning an invented source language."""
+        with self.lock:
+            if self.closed:
+                return
+            self._write(
+                "events.jsonl",
+                json.dumps({"type": "uncertain", **turn.__dict__}, ensure_ascii=False)
+                + "\n",
+            )
+            self.pending[turn.identifier] = turn
+            self.ready[turn.identifier] = turn
+            self._flush_pairs()
+
     def _flush_pairs(self):
         while self.pending:
             identifier = next(iter(self.pending))
@@ -91,6 +106,16 @@ class Transcript:
                 break
             c = self.ready.pop(identifier)
             self.pending.pop(identifier)
+            if isinstance(c, UncertainTurn):
+                message = "[Not transcribed] " + c.reason
+                self._write(
+                    "Bilingual Transcript.txt", f"[{timestamp(c.start)}] {message}\n\n"
+                )
+                self._write(
+                    "Bilingual.vtt",
+                    f"{c.identifier}\n{timestamp(c.start, True)} --> {timestamp(c.end, True)}\n{message}\n\n",
+                )
+                continue
             from app.languages import caption_labels
 
             en_label, zh_label = caption_labels(c.source_language)
@@ -149,6 +174,10 @@ def recover_journal(journal, destination):
                 if not isinstance(event, dict):
                     raise ValueError("Invalid journal record")
                 kind = event.pop("type")
+                if kind == "uncertain":
+                    turn = UncertainTurn(**event)
+                    english[turn.identifier] = turn
+                    continue
                 caption = Caption(**event)
                 if kind in {"english", "source"}:
                     english[caption.identifier] = caption
@@ -162,6 +191,9 @@ def recover_journal(journal, destination):
     try:
         for identifier in sorted(english):
             caption = english[identifier]
+            if isinstance(caption, UncertainTurn):
+                recovered.uncertain(caption)
+                continue
             recovered.english(caption)
             recovered.pair(pairs.get(identifier, caption))
     finally:
