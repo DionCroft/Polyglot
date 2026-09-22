@@ -76,6 +76,43 @@ translation and live queueing. Careful's extra paths need more decoder work and
 cache memory; memory was not re-profiled in this round. Retain the previous
 platform/model memory guidance and rehearse on the actual teaching computer.
 
+## Native Apple Silicon CPU comparison
+
+The same 120 recordings were evaluated on a hosted **macOS 14.8.9 ARM64** machine,
+using the shipped int8 CPU Base and Small models: **480 additional transcriptions**.
+Both the original and converted audio checksums were verified during preparation.
+JSON file hashes differ between Windows CRLF and Mac LF checkouts; normalising
+line endings matches the manifest hash, and every case ID/reference/error count
+was independently checked. [All Mac outputs](indian-macos-2026-09-23.json) ·
+[Successful native evaluation](https://github.com/DionCroft/Polyglot/actions/runs/35767292729).
+
+| CPU model / mode | Indian errors / 882 words | English errors / 874 words | ASR p50 / p95 |
+|---|---:|---:|---:|
+| Base Standard | 65 / 7.37% | 37 / 4.23% | 0.762 / 0.970 s |
+| Base Careful | 59 / 6.69% | 30 / 3.43% | 1.116 / 1.686 s |
+| Small Standard | 41 / 4.65% | 25 / 2.86% | 1.821 / 2.196 s |
+| Small Careful | 43 / 4.88% | 21 / 2.40% | 2.493 / 3.518 s |
+
+Small Standard improved both Indian-English speakers (14 → 10 and 51 → 31
+errors) and both English controls (24 → 16 and 13 → 9) compared with Base Standard.
+Small Careful worsened the combined Indian-English score while helping the English
+controls. The larger model's median inference time was about 2.4 times Base's on
+this host. These are full-clip CPU times, not live caption latency or an M2 Air
+thermal/battery test. Core ML was checked separately in the app regression workflow;
+it was not used in this accent comparison.
+
+Auto final decisions accepted 50/60 Indian-English clips with Base and 55/60 with
+Small, and 52/60 and 57/60 English controls. The remaining turns were withheld;
+none were incorrectly accepted as Mandarin. Standard/Careful detection results
+were identical within each model, as expected because detection does not use
+recognition prompts. The repeated modes are not independent detection evidence.
+
+An initial native attempt stopped during public-fixture setup after an HTTP 429
+rate limit, before any speech evaluation. The preparer now batches metadata rows
+and retries transient service failures with bounded waits; it still rejects
+changed metadata/checksums and access-denied responses. The subsequent complete
+run passed. This is developer fixture setup only, not an online lecture dependency.
+
 ## Quieter and noisier speech
 
 Same 120 recordings, fixed per-clip noise seed, unchanged references. Gaussian
@@ -169,6 +206,14 @@ WAVs only, never the microphone. No settings in a lecturer's saved preset are ch
 - Fixture acquisition/conversion is tested for duration, passband/alias rejection,
   checksums and bounded network retries. Noise is paired deterministically per
   case. Both Windows suites and focused lint checks passed.
+- Native Apple Silicon: **114 passed, no skips**, plus packaged CPU/Core ML
+  inference, manual/Auto conversations, transcript checks, Cocoa UI and signature
+  verification. DMG/ZIP creation also completed, without publishing a new release.
+  [Native JUnit](indian-macos-pytest.xml) · [Native app evidence](indian-macos-app-checks.json) ·
+  [Successful build/check run](https://github.com/DionCroft/Polyglot/actions/runs/35767292257).
+- The updated speech, paired-check and CO7000 source guides open in the existing
+  offline Qt help browser; [help check](indian-help-check.json). The already
+  published installers' documents were not replaced.
 
 ## Auto remains a separate check
 

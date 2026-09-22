@@ -2,7 +2,7 @@
 
 If LectureLive already works well for you, keep **Speech recognition: Standard** and leave
 **Use these terms to guide speech recognition** unticked. These are the existing defaults.
-The update adds options you can try for another speaker; it does not switch everyone to a new
+The app includes options you can try for another speaker; it does not switch everyone to a new
 recognition model or automatically guess anyone's accent.
 
 Start with the [five-minute check with your colleague](ACCENT_CHECK.md), including
@@ -18,6 +18,8 @@ first. Auto's language decision and Whisper's choice of words are different chec
    The local accent measurements below used the Snapdragon NPU. Mac Balanced can use
    CPU fallback and needs a timing check on the teaching Mac. The Intel/AMD x64 beta
    currently uses Whisper Base in its Fast profile.
+   Check **Diagnostics** for the active model: Windows CPU fallback uses Base even
+   when Balanced was requested; Mac Balanced retains Small on CPU.
 3. Try **Speech recognition → Careful** on a short, representative lecture passage. It compares
    alternative word sequences for finished phrases; live partial captions remain a single decoding
    path. Compare the actual words, not just whether the sentence sounds plausible.
@@ -53,6 +55,12 @@ Indian-English word errors from **60 to 42 out of 882 words**, compared with
 Fast / Whisper Base: **6.80% → 4.76% WER**. Both Indian-English speakers improved.
 The English controls also improved, from **35 to 23 errors out of 874 words**
 (4.00% → 2.63%). This supports trying the larger model first where available.
+
+The same recordings on native Apple Silicon CPU showed Indian-English errors
+falling from **65 to 41** with Small Standard (7.37% → 4.65%); the English controls
+also improved. Small's median full-clip inference took 1.82 seconds versus Base's
+0.76 seconds on that hosted Mac. Test caption delay on your teaching Mac. Careful
+with Small worsened the combined Indian-English score there (41 → 43 errors).
 
 **Careful is still a comparison option, not an automatic recommendation.** On Small,
 the Indian-English total changed only from 42 to 41 errors. One speaker improved
@@ -149,6 +157,11 @@ revision, hashes and conversion are recorded in the manifest and
 ```
 
 Repeat with `--backend fast` or `--backend cpu` for the installed Base models.
+On a prepared Mac, use `.venv-macos/bin/python -m scripts.evaluate_speech` with
+`--backend cpu` (Base) or `--backend cpu-small` (Small); the latter needs the
+Balanced CPU assets included by Mac setup. The Windows installers do not include
+Small CPU assets. The optional `accent-evaluation.yml` workflow repeats all four
+native Mac CPU/model/mode comparisons with pinned assets.
 `--variant noise-20dB`, `noise-10dB` or `quiet-12dB` applies a reproducible artificial
 stress condition. Use the same variant for both settings. Noise is seeded per clip,
 so rearranging the manifest does not change the comparison. These conditions do not

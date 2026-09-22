@@ -1,0 +1,383 @@
+{
+  "run_url": "https://github.com/DionCroft/Polyglot/actions/runs/35767292257",
+  "head_sha": "01a540ad17efdb9db78eea83d3411313dad24b42",
+  "pytest_passed": 114,
+  "pytest_skipped": 0,
+  "packaging": "DMG and ZIP workflow completed; no new release published",
+  "physical_microphone_tested": false,
+  "reports": {
+    "macos-packaged": {
+      "version": "0.7.0b1",
+      "platform": "macOS-14.8.9-arm64-arm-64bit",
+      "machine": "arm64",
+      "course_vocabulary": {
+        "weeks": 12,
+        "terms": 92
+      },
+      "speech": [
+        {
+          "profile": "fast",
+          "requested": "cpu",
+          "backend": "Apple Silicon CPU · Whisper Base int8",
+          "accelerated": false,
+          "messages": [
+            "Using local CPU speech recognition; no internet is required."
+          ],
+          "warmup_seconds": 5.332286374999967,
+          "standard_seconds": 2.4310827080000763,
+          "careful_seconds": 2.4869084590000057,
+          "english": "And so my fellow Americans ask not what your country can do for you, ask what you can do for your country.",
+          "guided": "and so my fellow Americans ask not what your country can do for you, ask what you can do for your country",
+          "chinese": "欢迎收听演讲"
+        },
+        {
+          "profile": "fast",
+          "requested": "coreml",
+          "backend": "Apple Core ML encoder + CPU decoder · Whisper Base",
+          "accelerated": true,
+          "messages": [],
+          "warmup_seconds": 54.856817999999976,
+          "standard_seconds": 3.946031416999972,
+          "careful_seconds": 3.6159293749999506,
+          "english": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country.",
+          "guided": "and so my fellow Americans ask not what your country can do for you, ask what you can do for your country",
+          "chinese": "欢迎收听演讲",
+          "coreml": {
+            "ready": true,
+            "providers": [
+              "CoreMLExecutionProvider"
+            ],
+            "runtime": "1.29.0",
+            "compute_units": "ALL",
+            "device": "Selected by macOS; GPU/ANE not individually verified"
+          }
+        },
+        {
+          "profile": "balanced",
+          "requested": "cpu",
+          "backend": "Apple Silicon CPU · Whisper Small int8",
+          "accelerated": false,
+          "messages": [
+            "Using local CPU speech recognition; no internet is required."
+          ],
+          "warmup_seconds": 10.542036875000008,
+          "standard_seconds": 5.882697041999904,
+          "careful_seconds": 6.010027834000084,
+          "english": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country.",
+          "guided": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country.",
+          "chinese": "欢迎收听演讲"
+        },
+        {
+          "profile": "balanced",
+          "requested": "coreml",
+          "backend": "Apple Silicon CPU · Whisper Small int8",
+          "accelerated": false,
+          "messages": [
+            "Core ML unavailable: Core ML worker timed out; switching to CPU",
+            "Using local CPU speech recognition; no internet is required."
+          ],
+          "warmup_seconds": 189.882461917,
+          "standard_seconds": 4.797036167000101,
+          "careful_seconds": 6.3243339590000005,
+          "english": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country.",
+          "guided": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country.",
+          "chinese": "欢迎收听演讲"
+        }
+      ],
+      "physical_microphone_tested": false,
+      "m2_tested": false,
+      "passed": true,
+      "parent_peak_rss_bytes": 3216867328,
+      "child_peak_rss_bytes": 2597371904
+    },
+    "macos-ui": {
+      "passed": true,
+      "physical_microphone_tested": false,
+      "overlay_native_flags": 257,
+      "shortcuts_registered": 2,
+      "shortcut_conflicts": [],
+      "static_permission_plugins": [
+        "QDarwinBluetoothPermissionPlugin",
+        "QDarwinCalendarPermissionPlugin",
+        "QDarwinCameraPermissionPlugin",
+        "QDarwinContactsPermissionPlugin",
+        "QDarwinMicrophonePermissionPlugin"
+      ],
+      "microphone_request_handler_linked": true,
+      "microphone_permission_status": "PermissionStatus.Granted",
+      "wav_caption": "And so my fellow Americans",
+      "presets": true,
+      "co7000": true,
+      "overlay_lock": true,
+      "minimum_controls_visible": true
+    },
+    "macos-conversations": {
+      "version": "0.7.0b1",
+      "platform": "macOS-14.8.9-arm64-arm-64bit",
+      "speech": [
+        {
+          "profile": "fast",
+          "requested": "cpu",
+          "backend": "Apple Silicon CPU · Whisper Base int8",
+          "accelerated": false,
+          "case": "fleurs-cmn-1",
+          "reference": "“这并不是告别。这是一个篇章的结束，也是新篇章的开始。”",
+          "text": "这并不是告别,这是一个偏章的结束,也是新偏章的开始",
+          "seconds": 1.330462042000022,
+          "audio_seconds": 10.38,
+          "character_errors": 2,
+          "reference_characters": 23
+        },
+        {
+          "profile": "fast",
+          "requested": "cpu",
+          "backend": "Apple Silicon CPU · Whisper Base int8",
+          "accelerated": false,
+          "case": "fleurs-cmn-2",
+          "reference": "钙、钾等元素属于金属，银和金等元素当然也是金属。",
+          "text": "概加等元素属于金属,银和金等元素当然也是金属。",
+          "seconds": 1.6347320830000172,
+          "audio_seconds": 8.28,
+          "character_errors": 2,
+          "reference_characters": 21
+        },
+        {
+          "profile": "fast",
+          "requested": "cpu",
+          "backend": "Apple Silicon CPU · Whisper Base int8",
+          "accelerated": false,
+          "case": "fleurs-cmn-3",
+          "reference": "桥下垂直净空 15 米。该项目于 2011 年 8 月完工，但直到 2017 年 3 月才开始通车。",
+          "text": "敲下垂直进空15米 该项目于2021年8月完工但直到2017年3月才开始通车",
+          "seconds": 2.132645000000025,
+          "audio_seconds": 13.86,
+          "character_errors": 3,
+          "reference_characters": 37,
+          "careful_first_sample": "这并不是告别这是一个偏章的结束也是新偏章的开始"
+        },
+        {
+          "profile": "fast",
+          "requested": "auto",
+          "backend": "Apple Core ML encoder + CPU decoder · Whisper Base",
+          "accelerated": true,
+          "case": "fleurs-cmn-1",
+          "reference": "“这并不是告别。这是一个篇章的结束，也是新篇章的开始。”",
+          "text": "这并不是告别,这是一个偏章的结束也是新偏章的开始",
+          "seconds": 2.7515708329999597,
+          "audio_seconds": 10.38,
+          "character_errors": 2,
+          "reference_characters": 23
+        },
+        {
+          "profile": "fast",
+          "requested": "auto",
+          "backend": "Apple Core ML encoder + CPU decoder · Whisper Base",
+          "accelerated": true,
+          "case": "fleurs-cmn-2",
+          "reference": "钙、钾等元素属于金属，银和金等元素当然也是金属。",
+          "text": "盖夹等元素属于金属,银和金等元素当然也是金属。",
+          "seconds": 3.63752774999989,
+          "audio_seconds": 8.28,
+          "character_errors": 2,
+          "reference_characters": 21
+        },
+        {
+          "profile": "fast",
+          "requested": "auto",
+          "backend": "Apple Core ML encoder + CPU decoder · Whisper Base",
+          "accelerated": true,
+          "case": "fleurs-cmn-3",
+          "reference": "桥下垂直净空 15 米。该项目于 2011 年 8 月完工，但直到 2017 年 3 月才开始通车。",
+          "text": "乔夏锤子进空15米 该项目于2021年8月完工但直到2017年3月才开始通车",
+          "seconds": 3.7470282499998575,
+          "audio_seconds": 13.86,
+          "character_errors": 6,
+          "reference_characters": 37,
+          "careful_first_sample": "这并不是告别这是一个偏章的结束也是新偏章的开始"
+        },
+        {
+          "profile": "balanced",
+          "requested": "auto",
+          "backend": "Apple Silicon CPU · Whisper Small int8",
+          "accelerated": false,
+          "case": "fleurs-cmn-1",
+          "reference": "“这并不是告别。这是一个篇章的结束，也是新篇章的开始。”",
+          "text": "这并不是告别,这是一个偏张的结束,也是新偏张的开始。",
+          "seconds": 4.6751477919999616,
+          "audio_seconds": 10.38,
+          "character_errors": 4,
+          "reference_characters": 23
+        },
+        {
+          "profile": "balanced",
+          "requested": "auto",
+          "backend": "Apple Silicon CPU · Whisper Small int8",
+          "accelerated": false,
+          "case": "fleurs-cmn-2",
+          "reference": "钙、钾等元素属于金属，银和金等元素当然也是金属。",
+          "text": "盖甲等元素属于金属银河金等元素当然也是金属",
+          "seconds": 4.118225749999965,
+          "audio_seconds": 8.28,
+          "character_errors": 3,
+          "reference_characters": 21
+        },
+        {
+          "profile": "balanced",
+          "requested": "auto",
+          "backend": "Apple Silicon CPU · Whisper Small int8",
+          "accelerated": false,
+          "case": "fleurs-cmn-3",
+          "reference": "桥下垂直净空 15 米。该项目于 2011 年 8 月完工，但直到 2017 年 3 月才开始通车。",
+          "text": "乔夏垂直进空十五米 该项目于2011年8月晚供但直到2017年3月才开始通车",
+          "seconds": 3.7111266250001336,
+          "audio_seconds": 13.86,
+          "character_errors": 7,
+          "reference_characters": 37,
+          "careful_first_sample": "这并不是告别这是一个偏张的结束也是新偏张的开始"
+        }
+      ],
+      "translation": [
+        {
+          "chinese": "请再解释一次。",
+          "english": "Please explain again.",
+          "seconds": 0.2003707089999125,
+          "human_review": "pending"
+        },
+        {
+          "chinese": "我们应该如何管理项目风险？",
+          "english": "How should we manage project risks?",
+          "seconds": 0.35639816700006577,
+          "human_review": "pending"
+        },
+        {
+          "chinese": "这个项目的关键路径是什么？",
+          "english": "What is the key route of this project?",
+          "seconds": 0.3329301659999828,
+          "human_review": "pending"
+        },
+        {
+          "chinese": "机器人为什么停止了？",
+          "english": "Why did the robot stop?",
+          "seconds": 0.2421954999999798,
+          "human_review": "pending"
+        },
+        {
+          "chinese": "我们不应该忽略安全问题。",
+          "english": "We should not lose sight of security issues.",
+          "seconds": 0.41659858399998484,
+          "human_review": "pending"
+        },
+        {
+          "chinese": "截止日期是星期五。",
+          "english": "The deadline is Friday.",
+          "seconds": 0.4467880420000938,
+          "human_review": "pending"
+        },
+        {
+          "chinese": "这个电路的电压是五伏。",
+          "english": "The voltage of this circuit is five volts.",
+          "seconds": 0.5628795420000188,
+          "human_review": "pending"
+        },
+        {
+          "chinese": "请问这个公式是什么意思？",
+          "english": "What does this formula mean?",
+          "seconds": 0.2963254590000588,
+          "human_review": "pending"
+        }
+      ],
+      "physical_microphone_tested": false,
+      "native_speaker_review": false,
+      "passed": true,
+      "reverse_model": {
+        "load_and_warmup_seconds": 1.270654874999991,
+        "rss_before_bytes": 1899233280,
+        "rss_after_bytes": 2445967360
+      }
+    },
+    "macos-conversation-ui": {
+      "passed": true,
+      "physical_microphone_tested": false,
+      "mandarin_wav_caption": {
+        "identifier": 2,
+        "start": 3.936,
+        "end": 7.392,
+        "english": "This is the end of the page and the beginning of the new page.",
+        "chinese": "这是一个偏章的结束也是新偏章的开始",
+        "final": true,
+        "epoch": 0,
+        "translation_status": "complete",
+        "source_language": "zh"
+      },
+      "language_preset": true,
+      "compact_selector": true,
+      "live_switch": true,
+      "paused_switch": true,
+      "one_transcript_folder": true,
+      "labels_verified": true,
+      "minimum_controls_visible": true,
+      "mandarin_audio_pipeline": true,
+      "overlay_text_test": "explicit UI fixture; speech accuracy evaluated separately"
+    },
+    "macos-auto": {
+      "passed": true,
+      "version": "0.7.0b1",
+      "physical_microphone_tested": false,
+      "classroom_validated": false,
+      "audio_seconds": 35.38,
+      "directions": [
+        "en",
+        "zh",
+        "en"
+      ],
+      "completed_pairs": 7,
+      "uncertain_phrases": 3,
+      "journal_recovery": true,
+      "backend": "Apple Silicon CPU · Whisper Base int8",
+      "metrics": {
+        "speaking_language": "auto",
+        "detected_language": "en",
+        "switching_language": false,
+        "recognition_mode": "standard",
+        "vocabulary_guidance": false,
+        "dropped_audio_chunks": 0,
+        "dropped_phrases": 0,
+        "translation_skips": 0,
+        "asr_seconds": 1.8136548330001006,
+        "translation_seconds": 0.10971866600016256,
+        "rtf": 0.5397782241071728,
+        "english_latency": 3.4142770839998136,
+        "bilingual_latency": 3.5243259589998885,
+        "uncertain_language_phrases": 3,
+        "english_p95_seconds": 3.777,
+        "bilingual_p95_seconds": 4.555,
+        "audio_queue": 0,
+        "asr_queue": 0,
+        "translation_queue": 0
+      },
+      "warnings": [
+        "Using local CPU speech recognition; no internet is required.",
+        "WAV replay finished. Captions remain visible; stop to finish the session."
+      ]
+    },
+    "macos-auto-ui": {
+      "passed": true,
+      "physical_microphone_tested": false,
+      "directions": [
+        "en",
+        "zh",
+        "en"
+      ],
+      "completed_pairs": 8,
+      "uncertain_phrases": 2,
+      "journal_recovery": true,
+      "auto_preset": true,
+      "compact_selector": true,
+      "detected_labels": true,
+      "single_language_modes": true,
+      "manual_override": true,
+      "paused_auto": true,
+      "minimum_controls_visible": true
+    }
+  }
+}

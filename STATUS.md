@@ -17,6 +17,11 @@ Production classroom acceptance remains open.
   These functional checks do not establish classroom or lecturer-specific accuracy.
 - Both Windows runtimes pass 112 tests (two POSIX-only skips each). A fresh run
   exactly preserves the existing 36 English speech and 40 translation outputs.
+- Native Apple Silicon adds 480 full-clip comparisons on the same recordings.
+  Small Standard reduced Indian-English WER from 7.37% to 4.65% versus CPU Base;
+  Careful on Small worsened it to 4.88%. The hosted Mac passes 114 tests without
+  skips and the packaged app/UI/signature/DMG/ZIP checks. Physical M2 Air testing
+  remains open.
 - App inference code, models and defaults remain unchanged. Updated beginner
   guidance and reproducible test tools are on main; the release remains 0.7.0b1.
 - [Complete evidence and limits](docs/evidence/indian-english-2026-09-23.md) ·

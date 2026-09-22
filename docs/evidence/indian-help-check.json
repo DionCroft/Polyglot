@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "scope": "Source documentation through the existing Qt help browser, Windows ARM64 offscreen; released installer documents were not replaced",
+  "speech_guide": true,
+  "linked_accent_check": true,
+  "co7000_guide": true,
+  "live_microphone_used": false
+}
