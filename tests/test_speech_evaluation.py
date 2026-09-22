@@ -1,13 +1,15 @@
 import io
 import json
 import wave
+import urllib.error
 from pathlib import Path
+from unittest.mock import patch
 
 import numpy as np
 import pytest
 
 from scripts.evaluate_speech import audio_variant, errors
-from scripts.prepare_vctk_fixtures import downsample
+from scripts.prepare_vctk_fixtures import downsample, fetch
 
 
 def test_word_error_metric_counts_substitutions_insertions_and_deletions():
@@ -82,3 +84,30 @@ def test_new_corpus_contains_four_separate_speakers_with_no_duplicate_mics():
         )
         assert len({x["source"]["file"] for x in subset}) == 30
         assert all(len(x["sha256"]) == len(x["source"]["sha256"]) == 64 for x in subset)
+
+
+def test_fixture_fetch_retries_throttling_but_not_access_errors():
+    url = "https://example.org/public-audio"
+    throttled = urllib.error.HTTPError(
+        url, 429, "rate limit", {"Retry-After": "2"}, None
+    )
+    with (
+        patch("scripts.prepare_vctk_fixtures.urllib.request.urlopen") as request,
+        patch("scripts.prepare_vctk_fixtures.time.sleep") as sleep,
+    ):
+        response = request.return_value
+        response.__enter__.return_value.read.return_value = b"audio"
+        request.side_effect = [throttled, response]
+        assert fetch(url) == b"audio"
+        sleep.assert_called_once_with(2)
+    denied = urllib.error.HTTPError(url, 403, "forbidden", {}, None)
+    with (
+        patch(
+            "scripts.prepare_vctk_fixtures.urllib.request.urlopen", side_effect=denied
+        ) as request,
+        patch("scripts.prepare_vctk_fixtures.time.sleep") as sleep,
+    ):
+        with pytest.raises(urllib.error.HTTPError):
+            fetch(url)
+        assert request.call_count == 1
+        sleep.assert_not_called()

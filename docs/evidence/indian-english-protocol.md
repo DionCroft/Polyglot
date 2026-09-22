@@ -35,3 +35,15 @@ latency. Host load and cold starts affect it; report ratios as observations.
 The actual lecturers' spontaneous speech, CO7000/electronics terminology and
 classroom conditions still need consented representative recordings. No public
 speaker should be presented as either lecturer.
+
+## Additional exploratory vocabulary check
+
+After inspecting the first clean Small outputs, compare the same 120 clips with
+the fixed short list **rainbow, refraction, reflection, Aristotle** in both Standard
+and Careful. These are topic hints for the shared science passage (IDs 006–024).
+Apply the same list to the other clips too, retaining out-of-topic groceries/news
+as controls for unintended bias. Report both groups and every changed output.
+This is explicitly **exploratory**, not independent confirmation: the list was
+chosen after seeing some errors. It tests the existing prompting feature, not
+an accent-specific correction or new trained model. It does not validate CO7000
+pronunciation by either lecturer.

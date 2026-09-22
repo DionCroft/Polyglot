@@ -5,6 +5,8 @@ import io
 import json
 import shutil
 import subprocess
+import time
+import urllib.error
 import urllib.parse
 import urllib.request
 import wave
@@ -79,20 +81,48 @@ def downsample(data):
     return output.getvalue()
 
 
-def download(case):
-    source = case["source"]
+def fetch(url):
+    """Bound transient service failures; never retry changed metadata/checksums."""
+    for attempt in range(4):
+        try:
+            with urllib.request.urlopen(url, timeout=45) as response:
+                return response.read()
+        except (urllib.error.URLError, TimeoutError) as error:
+            if isinstance(error, urllib.error.HTTPError) and error.code not in {
+                429,
+                500,
+                502,
+                503,
+                504,
+            }:
+                raise
+            if attempt == 3:
+                raise
+            delay = 2 ** (attempt + 1)
+            if isinstance(error, urllib.error.HTTPError) and error.code == 429:
+                header = error.headers.get("Retry-After", "30")
+                delay = min(30, max(delay, int(header) if header.isdigit() else 30))
+            time.sleep(delay)
+
+
+def source_rows(source, length=1):
     params = dict(
         dataset=source["dataset"],
         config="default",
         split="train",
         offset=source["row"],
-        length=1,
+        length=length,
     )
-    with urllib.request.urlopen(
-        "https://datasets-server.huggingface.co/rows?" + urllib.parse.urlencode(params),
-        timeout=45,
-    ) as response:
-        row = json.load(response)["rows"][0]["row"]
+    data = fetch(
+        "https://datasets-server.huggingface.co/rows?" + urllib.parse.urlencode(params)
+    )
+    return {item["row_idx"]: item["row"] for item in json.loads(data)["rows"]}
+
+
+def download(case, row=None):
+    source = case["source"]
+    if row is None:
+        row = source_rows(source)[source["row"]]
     if (row["speaker_id"], row["text"], row["file"].split("/")[-1], row["accent"]) != (
         case["speaker"],
         case["reference"],
@@ -103,8 +133,7 @@ def download(case):
     url = row["audio"][0]["src"]
     if "/" + source["revision"] + "/" not in url:
         raise ValueError("Dataset Viewer revision changed; refusing a different test")
-    with urllib.request.urlopen(url, timeout=45) as response:
-        raw = response.read()
+    raw = fetch(url)
     if hashlib.sha256(raw).hexdigest() != source["sha256"]:
         raise ValueError("Source audio checksum mismatch")
     converted = downsample(raw)
@@ -118,6 +147,7 @@ def main():
     manifest = json.loads(
         (root / "tests/fixtures/vctk-accent-cases.json").read_text(encoding="utf-8")
     )
+    cached_rows = {}
     for case in manifest["cases"]:
         path = safe_path(root, case["path"])
         if (
@@ -125,7 +155,16 @@ def main():
             and hashlib.sha256(path.read_bytes()).hexdigest() == case["sha256"]
         ):
             continue
-        data = download(case)
+        source = case["source"]
+        key = (source["dataset"], source["row"])
+        if key not in cached_rows:
+            cached_rows.update(
+                {
+                    (source["dataset"], index): row
+                    for index, row in source_rows(source, 100).items()
+                }
+            )
+        data = download(case, cached_rows[key])
         path.parent.mkdir(parents=True, exist_ok=True)
         temporary = path.with_suffix(".wav.partial")
         temporary.write_bytes(data)
