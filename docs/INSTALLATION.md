@@ -8,7 +8,7 @@ its entire `_internal` directory. The existing Surface/Qualcomm driver supplies 
 NPU device runtime; no separate QAIRT SDK was needed on the tested machine.
 The build is unsigned and still requires classroom acceptance.
 
-## English and Mandarin support in 0.6.0b1
+## English, Mandarin and Auto support in 0.7.0b1
 
 The current setup includes both offline translation directions, adding 172.7 MB of verified
 Mandarin → English assets. Close older copies and run the current **Setup.cmd** to update.
@@ -17,7 +17,9 @@ Mac users should use the [Mac installer](MACOS.md), which includes the same tran
 
 After setup, choose **English → 简体中文** or **Mandarin 普通话 → English** under **Who is
 speaking?**. When switching during a lecture, wait for **Listening** before the next speaker starts.
-See [conversations](CONVERSATIONS.md) for examples, saved text and vocabulary limitations.
+Choose **Auto · English ↔ Mandarin** to detect each phrase and switch automatically.
+Pause between speakers; use manual selection and repeat if **Language unclear** appears.
+See [Auto](AUTO_LANGUAGE.md) and [conversations](CONVERSATIONS.md) for examples and limits.
 
 ## First installation: double-click setup
 

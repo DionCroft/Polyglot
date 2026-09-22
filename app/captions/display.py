@@ -56,10 +56,13 @@ class CaptionDisplay:
         return True
 
     def contents(self, mode="Bilingual"):
-        latest = self.pending or self.pair or self.partial
-        if mode == "English":
-            latest = self.partial or latest
-            return (latest.english if latest else "", "", "")
+        if mode in {"English", "Chinese"}:
+            latest = self.primary(mode)
+            return (
+                latest.english if latest and mode == "English" else "",
+                latest.chinese if latest and mode == "Chinese" else "",
+                "",
+            )
         primary = self.pair or self.pending or self.partial
         en = primary.english if primary else ""
         zh = primary.chinese if primary else ""
@@ -73,6 +76,14 @@ class CaptionDisplay:
 
     def primary(self, mode="Bilingual"):
         """The caption whose text is currently visible, even while another turn loads."""
-        if mode == "English":
-            return self.partial or self.pending or self.pair
+        if mode in {"English", "Chinese"}:
+            field = "english" if mode == "English" else "chinese"
+            return next(
+                (
+                    caption
+                    for caption in (self.partial, self.pending, self.pair)
+                    if caption and getattr(caption, field)
+                ),
+                None,
+            )
         return self.pair or self.pending or self.partial

@@ -160,6 +160,17 @@ def run_ui(fixtures, report_path):
         assert window.teaching.language.currentData() == "auto"
         document = window.overlay._caption_document(26).toPlainText()
         assert "English · translation" in document and "简体中文 · spoken" in document
+        window.mode.setCurrentText("English")
+        document = window.overlay._caption_document(26).toPlainText()
+        assert (
+            "English · translation" in document and "简体中文 · spoken" not in document
+        )
+        window.mode.setCurrentText("Chinese")
+        document = window.overlay._caption_document(26).toPlainText()
+        assert (
+            "简体中文 · spoken" in document and "English · translation" not in document
+        )
+        window.mode.setCurrentText("Bilingual")
         window.resize(1060, 860)
         app.processEvents()
         window.grab().save(str(report.with_suffix(".png")))
@@ -202,6 +213,7 @@ def run_ui(fixtures, report_path):
             auto_preset=True,
             compact_selector=True,
             detected_labels=True,
+            single_language_modes=True,
             manual_override=True,
             paused_auto=True,
             minimum_controls_visible=True,

@@ -1,8 +1,8 @@
 # Windows Intel/AMD beta
 
-LectureLive 0.6.0 beta 1 includes a Windows x64 edition with English and Mandarin conversations. You can try it on Intel or AMD PCs.
-The existing Snapdragon ARM64 edition remains available. macOS, Linux and 32-bit Windows
-are outside this release.
+LectureLive 0.7.0 beta 1 includes a Windows x64 edition with English and Mandarin conversations. You can try it on Intel or AMD PCs.
+The existing Snapdragon ARM64 edition remains available. Apple Silicon Macs have a [separate build](MACOS.md); Linux and 32-bit Windows
+are not supported.
 
 ## What is ready to try?
 
@@ -43,11 +43,17 @@ download for CPU/GPU use. The source ZIP from GitHub needs setup first.
 The current setup includes the additional **172.7 MB** Mandarin → English model. Update by
 closing the app and running the current **Setup.cmd** or **Setup-Beta.cmd**. CPU and GPU
 speech paths use the same Whisper Base model for both languages. NPU hardware support remains
-experimental. The reverse translator runs on CPU and loads on the first Mandarin turn.
+experimental. The reverse translator runs on CPU and loads on the first Mandarin turn, or when Auto prepares both directions.
 
 Use **Who is speaking? → Mandarin 普通话 → English**, wait for **Listening**, then let the
 student speak. Return to **English → 简体中文** to answer. English-only CO7000/vocabulary
 hints are retained but not applied to Mandarin. [Conversation guide](CONVERSATIONS.md).
+
+Choose **Auto · English ↔ Mandarin** in the same selector for automatic turns. Pause
+between speakers. If **Language unclear** appears, select the language manually and
+repeat the complete sentence. Short replies may be withheld. Auto adds processing and
+prepares both translators; no additional models beyond the conversation bundle are needed.
+[Auto guide](AUTO_LANGUAGE.md) · [Test results and physical hardware limits](evidence/auto-language-0.7.md).
 
 ## Improving speech recognition
 

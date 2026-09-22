@@ -276,6 +276,31 @@ def test_uncertain_final_retracts_provisional_text_but_retains_previous_pair():
     assert display.accept(replace(partial, identifier=2, epoch=1))
 
 
+def test_single_language_display_keeps_translation_while_other_language_arrives():
+    display = CaptionDisplay()
+    display.accept(
+        Caption(1, 0, 1, "Hello", "你好", True, translation_status="complete")
+    )
+    question = Caption(2, 2, 3, "", "请解释", False, source_language="zh")
+    display.accept(question)
+    assert display.contents("English") == ("Hello", "", "")
+    assert display.primary("English").source_language == "en"
+    assert display.contents("Chinese") == ("", "请解释", "")
+    assert display.primary("Chinese").source_language == "zh"
+    display.accept(
+        replace(
+            question,
+            final=True,
+            english="Please explain",
+            translation_status="complete",
+        )
+    )
+    display.accept(Caption(3, 4, 5, "The answer", final=False))
+    assert display.contents("Chinese") == ("", "请解释", "")
+    assert display.primary("Chinese").source_language == "zh"
+    assert display.contents("English") == ("The answer", "", "")
+
+
 def test_auto_readiness_checks_concrete_translation_languages(tmp_path):
     store = Mock()
     store.load.return_value = Mock(

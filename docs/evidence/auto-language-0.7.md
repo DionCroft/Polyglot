@@ -41,7 +41,7 @@ variants are not independent samples; model scores are not calibrated probabilit
 
 ## Application checks
 
-- 106 regression tests pass on the Windows ARM64 runtime (two POSIX-only skips).
+- 107 regression tests pass on both Windows runtimes (two POSIX-only skips).
 - Manual English output exactly matches the pre-conversation baseline for 36 speech
   cases across CPU Base/QNN Base/QNN Small and Standard/Careful, plus 40 translations.
 - Auto tests cover slow translations while speakers alternate, direction-specific
