@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "edition": "x64",
+  "checks": {
+    "legacy": {
+      "passed": true,
+      "seconds": 52.71900000000096
+    },
+    "auto": {
+      "passed": true,
+      "seconds": 58.79699999999866
+    },
+    "auto-ui": {
+      "passed": true,
+      "seconds": 60.01499999999942
+    },
+    "manual": {
+      "passed": true,
+      "seconds": 44.73500000000058
+    },
+    "manual-ui": {
+      "passed": true,
+      "seconds": 39.53099999999904
+    }
+  },
+  "model_files_verified": 29,
+  "version": "0.7.0b1",
+  "physical_microphone_tested": false
+}

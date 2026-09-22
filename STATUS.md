@@ -7,7 +7,8 @@ Production classroom acceptance remains open.
 
 - **Auto · English ↔ Mandarin** is an optional choice in the main app and Teaching controls. Existing English/manual settings remain unchanged. Whisper detects each phrase offline; both translation directions are prepared before Auto starts.
 - Uncertain phrases are withheld, with an on-screen repeat instruction and a bilingual transcript marker. Provisional text is retracted if the final language check disagrees. Manual override remains available.
-- Expanded development checks include 148 recordings, shortened speech, controlled noise, unsupported-language examples, concurrent translation, pause/override, recovery and native UI. This does not certify classroom word/translation accuracy.
+- 107 regression tests pass per Windows runtime (two POSIX-only skips). Both rebuilt Windows editions pass manual/Auto inference, UI, exports and model-integrity checks. Manual English exactly preserves 36 speech and 40 translation outputs.
+- Expanded checks use 148 recordings with short/noisy variants. A level-adjusted 10-minute QNN replay completed 133 translated pairs and 34 automatic switches with no queue drops, but withheld 34 short phrases. Failed uneven-level/noise and overloaded emulated-CPU checks are also recorded. These results do not certify classroom word/translation accuracy.
 - [Using Auto](docs/AUTO_LANGUAGE.md) · [Current test/build evidence and remaining checks](docs/evidence/auto-language-0.7.md).
 
 ## Previous conversation beta 0.6.0b1

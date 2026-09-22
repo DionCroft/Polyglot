@@ -6,7 +6,9 @@ speaking-language choice; choose Auto when you want hands-free conversation.
 
 ## Start a conversation
 
-1. Select and test the microphone. Both speakers must be audible through that microphone.
+1. Select and test the microphone. Both speakers must be clearly audible through that microphone.
+   Pass a shared microphone to the student, or rehearse with the intended room microphone;
+   a microphone close to the lecturer may not pick up a distant student over room noise.
 2. Choose **Who is speaking? → Auto · English ↔ Mandarin** and leave **Bilingual** selected.
 3. Click **Start lecture**. Speak English normally. When a student asks a Mandarin question,
    pause between speakers and let one person speak at a time.
@@ -52,3 +54,8 @@ Expanded public-recording, noise, short-speech, native UI and transcript checks 
 in the [test report](evidence/auto-language-0.7.md). They are development evidence, not classroom certification.
 A rehearsal with your actual microphone, room and consented lecturer/student recordings is
 still needed, especially for distant questions, technical vocabulary, names and numbers.
+
+In the expanded public Indian-English check, Fast/CPU withheld 10 of 20 complete clips,
+while Snapdragon Balanced withheld 4 of 20. Manual English keeps the existing speech
+recognition behaviour and can be more dependable for short replies or frequent Auto gaps.
+These recordings are not your colleague’s voice; rehearse with each actual speaker.

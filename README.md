@@ -10,7 +10,7 @@ everyday use needs **no internet connection, account or API key**.
 You do not need programming experience. The Mac download is a ready-made app; Windows users
 double-click a setup file that prepares everything for them.
 
-![LectureLive captions showing Mandarin speech and its English translation](docs/evidence/conversation-overlay-0.6.png)
+![LectureLive captions showing Mandarin speech and its English translation](docs/evidence/auto-overlay-0.7.png)
 
 **New in 0.7.0b1, included in the main application:** choose **Auto · English ↔ Mandarin**
 to change direction as speakers take turns. Manual selection remains available and English

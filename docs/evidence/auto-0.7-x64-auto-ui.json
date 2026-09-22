@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "physical_microphone_tested": false,
+  "directions": [
+    "en",
+    "zh",
+    "en"
+  ],
+  "completed_pairs": 8,
+  "uncertain_phrases": 2,
+  "journal_recovery": true,
+  "auto_preset": true,
+  "compact_selector": true,
+  "detected_labels": true,
+  "single_language_modes": true,
+  "manual_override": true,
+  "paused_auto": true,
+  "minimum_controls_visible": true
+}
