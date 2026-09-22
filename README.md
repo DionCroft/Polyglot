@@ -10,7 +10,7 @@ everyday use needs **no internet connection, account or API key**.
 You do not need programming experience. The Mac download is a ready-made app; Windows users
 double-click a setup file that prepares everything for them.
 
-![LectureLive control panel](docs/evidence/control-panel-0.3.png)
+![LectureLive captions showing Mandarin speech and its English translation](docs/evidence/conversation-overlay-0.6.png)
 
 **New in conversation beta 0.6.0b1:** a manual speaking-language selector, labelled captions,
 and one saved transcript for lecturer–student conversations. [Conversation guide](docs/CONVERSATIONS.md).

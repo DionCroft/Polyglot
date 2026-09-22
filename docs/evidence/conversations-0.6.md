@@ -63,12 +63,24 @@ Model sessions remain cached; different hosts and memory pressure may change the
 
 ## Platform and release status
 
-Source verification is complete on the available Windows ARM64 host and x64 emulation.
-Packaged Windows verification and native Apple Silicon CI are recorded below when completed.
+Both Windows executables were rebuilt from `2370b05`. Packaged English inference,
+Mandarin/reverse translation, native UI switching and transcript checks passed on ARM64
+and under x64 emulation. All 42 ARM64 and 29 x64 bundled model files matched their pinned
+hashes; each includes the eight reverse-translation assets. Portable ZIPs are prepared
+with per-file SHA-256 verification. Native Apple Silicon CI results follow when completed.
 Physical M2 microphone/permissions, projector/full-screen delivery, global shortcut delivery,
 thermal/battery behaviour and physical Intel/AMD GPU/NPU acceptance remain pending.
 OS-level network checks for native libraries and long classroom sessions remain pending.
 Python runtime socket creation stays blocked during every app/self-test launch.
+
+Raw evidence: [exact English before/after](conversations-0.6-english-regression.json),
+[ARM64 model checks](packaged-arm64-conversations-0.6.json),
+[ARM64 controls and exports](packaged-arm64-conversation-ui-0.6.json),
+[x64 model checks](packaged-x64-conversations-0.6.json),
+[x64 controls and exports](packaged-x64-conversation-ui-0.6.json),
+[bundled model hashes](packaged-models-0.6.json).
+The [overlay screenshot](conversation-overlay-0.6.png) uses an explicit UI text fixture;
+it is a layout check, not an audio accuracy result.
 
 ## Reproduce
 

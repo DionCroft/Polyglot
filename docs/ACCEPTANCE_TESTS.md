@@ -1,10 +1,30 @@
-# Acceptance ledger — LectureLive 0.2
+# Acceptance ledger — LectureLive
 
 Implementation checks and classroom acceptance are separate. The intended teaching
 setup is assumed to have a microphone. Tests using the built-in microphone verify
 capture here; they do not stand in for a rehearsal with the actual lecture microphone.
 
-## Automated and local checks
+## Conversation beta 0.6.0b1
+
+See [conversation verification](evidence/conversations-0.6.md) for current platform results.
+The historical checks below remain useful; they are not new Mandarin accuracy evidence.
+
+For a classroom rehearsal, use consented English and Mandarin speakers and:
+
+1. Teach a short English passage with the existing settings and CO7000 week selected.
+2. Finish the sentence, switch **Who is speaking?** to Mandarin, and wait for **Listening**.
+3. Ask a Mandarin question with a technical term, a number and a negative statement.
+   Check the recognised Chinese against the recording and have a bilingual reviewer check
+   the English meaning. English CO7000 corrections do not apply to this direction.
+4. Switch back to English and answer. Repeat in the compact Teaching controls and while paused.
+   Check the microphone and selected profile have stayed the same, and pause remains paused.
+5. Finish and open the saved transcript. Verify both speakers, language labels, timestamps,
+   source-language text after a translation failure, and the SRT/VTT files.
+6. Repeat with airplane mode enabled, your projector and normal question distances.
+   Include very short questions, names, dates and mixed English/Chinese speech. Record errors
+   and caption delay separately; the automatic tests do not establish language accuracy.
+
+## Earlier automated and local checks
 
 | Area | Evidence |
 |---|---|

@@ -11,7 +11,7 @@ Requires an Apple Silicon Mac (M1 or newer, including M2 MacBook Air) running **
 5. Choose **Fast**, leave recognition on **Standard**, and click **Start lecture**. Select **Careful** and try **Balanced** if recognition needs improvement. Use the lecture vocabulary box, subject glossary and CO7000 week lists for technical terms. Save a preset to reuse these choices.
 6. Position the caption overlay on your screen or projector, then lock it. Pause with **Control + Option + Space**; lock/unlock with **Control + Option + C**. The screen buttons also work. In shortcut settings, **Ctrl** means Control and **Alt** means Option; Cmd/Command is supported. Change conflicting shortcuts, especially when VoiceOver is enabled.
 
-All speech models, Chinese translation, voice detection, glossaries and course lists are included. Normal use needs no account, Python installation or internet connection. Audio is processed locally. Text transcripts are saved when **Save transcripts** is selected (on by default); turn it off if you do not want saved text. Microphone audio is not recorded. Settings, presets, logs, transcripts and Core ML caches live in `~/Library/Application Support/LectureLive`.
+All speech models, translation in both directions, voice detection, glossaries and course lists are included. Normal use needs no account, Python installation or internet connection. Audio is processed locally. Text transcripts are saved when **Save transcripts** is selected (on by default); turn it off if you do not want saved text. Microphone audio is not recorded. Settings, presets, logs, transcripts and Core ML caches live in `~/Library/Application Support/LectureLive`.
 
 ## Lecturer–student conversations
 

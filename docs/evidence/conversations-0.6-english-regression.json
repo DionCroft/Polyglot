@@ -1,0 +1,851 @@
+{
+  "baseline_commit": "be7d66a",
+  "implementation_commit": "f82e818",
+  "english_speech_cases": 36,
+  "english_translation_cases": 40,
+  "all_outputs_exact": true,
+  "before": {
+    "speech": [
+      {
+        "backend": "cpu",
+        "mode": "standard",
+        "case": "ksp-100",
+        "text": "You, you would not keep the truth from me."
+      },
+      {
+        "backend": "cpu",
+        "mode": "standard",
+        "case": "ksp-101",
+        "text": "He will follow us soon."
+      },
+      {
+        "backend": "cpu",
+        "mode": "standard",
+        "case": "awb-100",
+        "text": "A maddening joy pounded in his brain."
+      },
+      {
+        "backend": "cpu",
+        "mode": "standard",
+        "case": "awb-101",
+        "text": "You must sleep, he urged."
+      },
+      {
+        "backend": "cpu",
+        "mode": "standard",
+        "case": "technical-6",
+        "text": "The robot uses an ultrasonic sensor to estimate its distance from an obstacle."
+      },
+      {
+        "backend": "cpu",
+        "mode": "standard",
+        "case": "technical-7",
+        "text": "A convolutional neural network can perform image classification at the edge."
+      },
+      {
+        "backend": "cpu",
+        "mode": "careful",
+        "case": "ksp-100",
+        "text": "You, you would not keep the truth from me."
+      },
+      {
+        "backend": "cpu",
+        "mode": "careful",
+        "case": "ksp-101",
+        "text": "He will follow soon."
+      },
+      {
+        "backend": "cpu",
+        "mode": "careful",
+        "case": "awb-100",
+        "text": "A maddening joy pounded in his brain."
+      },
+      {
+        "backend": "cpu",
+        "mode": "careful",
+        "case": "awb-101",
+        "text": "You must sleep he urged."
+      },
+      {
+        "backend": "cpu",
+        "mode": "careful",
+        "case": "technical-6",
+        "text": "The robot uses an ultrasonic sensor to estimate its distance from an obstacle."
+      },
+      {
+        "backend": "cpu",
+        "mode": "careful",
+        "case": "technical-7",
+        "text": "A convolutional neural network can perform image classification at the edge."
+      },
+      {
+        "backend": "fast",
+        "mode": "standard",
+        "case": "ksp-100",
+        "text": "you, you would not keep the truth from me."
+      },
+      {
+        "backend": "fast",
+        "mode": "standard",
+        "case": "ksp-101",
+        "text": "He will follow soon."
+      },
+      {
+        "backend": "fast",
+        "mode": "standard",
+        "case": "awb-100",
+        "text": "A maddening joy pounded in his brain."
+      },
+      {
+        "backend": "fast",
+        "mode": "standard",
+        "case": "awb-101",
+        "text": "You must sleep he urged."
+      },
+      {
+        "backend": "fast",
+        "mode": "standard",
+        "case": "technical-6",
+        "text": "The robot uses an ultrasonic sensor to estimate its distance from an obstacle."
+      },
+      {
+        "backend": "fast",
+        "mode": "standard",
+        "case": "technical-7",
+        "text": "A convolutional neural network can perform image classification at the edge."
+      },
+      {
+        "backend": "fast",
+        "mode": "careful",
+        "case": "ksp-100",
+        "text": "you, you would not keep the truth from me."
+      },
+      {
+        "backend": "fast",
+        "mode": "careful",
+        "case": "ksp-101",
+        "text": "He will follow soon."
+      },
+      {
+        "backend": "fast",
+        "mode": "careful",
+        "case": "awb-100",
+        "text": "A maddening joy pounded in his brain."
+      },
+      {
+        "backend": "fast",
+        "mode": "careful",
+        "case": "awb-101",
+        "text": "You must sleep he urged."
+      },
+      {
+        "backend": "fast",
+        "mode": "careful",
+        "case": "technical-6",
+        "text": "The robot uses an ultrasonic sensor to estimate its distance from an obstacle."
+      },
+      {
+        "backend": "fast",
+        "mode": "careful",
+        "case": "technical-7",
+        "text": "A convolutional neural network can perform image classification at the edge."
+      },
+      {
+        "backend": "balanced",
+        "mode": "standard",
+        "case": "ksp-100",
+        "text": "You, you would not keep the truth from me."
+      },
+      {
+        "backend": "balanced",
+        "mode": "standard",
+        "case": "ksp-101",
+        "text": "He will follow us soon."
+      },
+      {
+        "backend": "balanced",
+        "mode": "standard",
+        "case": "awb-100",
+        "text": "A maddening joy pounded in his brain."
+      },
+      {
+        "backend": "balanced",
+        "mode": "standard",
+        "case": "awb-101",
+        "text": "\"You must sleep,\" he urged."
+      },
+      {
+        "backend": "balanced",
+        "mode": "standard",
+        "case": "technical-6",
+        "text": "The robot uses an ultrasonic sensor to estimate its distance from an obstacle."
+      },
+      {
+        "backend": "balanced",
+        "mode": "standard",
+        "case": "technical-7",
+        "text": "A convolutional neural network can perform image classification at the edge."
+      },
+      {
+        "backend": "balanced",
+        "mode": "careful",
+        "case": "ksp-100",
+        "text": "you, you would not keep the truth from me."
+      },
+      {
+        "backend": "balanced",
+        "mode": "careful",
+        "case": "ksp-101",
+        "text": "He will follow us soon."
+      },
+      {
+        "backend": "balanced",
+        "mode": "careful",
+        "case": "awb-100",
+        "text": "A maddening joy pounded in his brain."
+      },
+      {
+        "backend": "balanced",
+        "mode": "careful",
+        "case": "awb-101",
+        "text": "You must sleep, he urged."
+      },
+      {
+        "backend": "balanced",
+        "mode": "careful",
+        "case": "technical-6",
+        "text": "The robot uses an ultrasonic sensor to estimate its distance from an obstacle."
+      },
+      {
+        "backend": "balanced",
+        "mode": "careful",
+        "case": "technical-7",
+        "text": "A convolutional neural network can perform image classification at the edge."
+      }
+    ],
+    "translation": [
+      {
+        "case": "technical-01",
+        "raw": "机器人使用超声波传感器 来估计它距离障碍物的距离",
+        "caption": "机器人使用超声波传感器 来估计它距离障碍物的距离"
+      },
+      {
+        "case": "technical-02",
+        "raw": "机器人不能移动 当一个人在安全区。",
+        "caption": "机器人不能移动 当一个人在安全区。"
+      },
+      {
+        "case": "technical-03",
+        "raw": "左轮旋转比右轮更快。",
+        "caption": "左轮旋转比右轮更快。"
+      },
+      {
+        "case": "technical-04",
+        "raw": "感应器测量距离,而不是速度。",
+        "caption": "感应器测量距离,而不是速度。"
+      },
+      {
+        "case": "technical-05",
+        "raw": "较低的比例收益可以减少振动。",
+        "caption": "较低的比例增益可以减少振动。"
+      },
+      {
+        "case": "technical-06",
+        "raw": "所测量的位置与目标位置不同。",
+        "caption": "所测量的位置与目标位置不同。"
+      },
+      {
+        "case": "technical-07",
+        "raw": "在解开编码器之前先停机",
+        "caption": "在解开编码器之前先停机"
+      },
+      {
+        "case": "technical-08",
+        "raw": "机器人背后的一个障碍 是在前传感器外的视野。",
+        "caption": "机器人背后的一个障碍 是在前传感器外的视野。"
+      },
+      {
+        "case": "technical-09",
+        "raw": "ESP32 使用 I2C 协议与传感器通信。",
+        "caption": "ESP32 使用 集成电路互连总线 (I2C) 协议与传感器通信。"
+      },
+      {
+        "case": "technical-10",
+        "raw": "脉冲宽度调制改变发动机的平均电压。",
+        "caption": "脉宽调制改变电机的平均电压。"
+      },
+      {
+        "case": "technical-11",
+        "raw": "中断服务程序应尽快执行。",
+        "caption": "中断服务程序应尽快执行。"
+      },
+      {
+        "case": "technical-12",
+        "raw": "FreeRTOS 调度器执行任务之间的上下文切换 。",
+        "caption": "FreeRTOS 调度器执行任务之间的上下文切换 。"
+      },
+      {
+        "case": "technical-13",
+        "raw": "FPGA设计用VHDL编写,并合成逻辑资源。",
+        "caption": "FPGA设计用VHDL编写,并合成逻辑资源。"
+      },
+      {
+        "case": "technical-14",
+        "raw": "MOSFET是由脉冲宽度调制信号驱动的。",
+        "caption": "MOSFET是由脉冲宽度调制信号驱动的。"
+      },
+      {
+        "case": "technical-15",
+        "raw": "在初始化完成之前不启用中断 。",
+        "caption": "在初始化完成之前不启用中断 。"
+      },
+      {
+        "case": "technical-16",
+        "raw": "任务在等待消息时被屏蔽 。",
+        "caption": "任务在等待消息时被屏蔽 。"
+      },
+      {
+        "case": "technical-17",
+        "raw": "供应电压为3.3伏,而不是5伏。",
+        "caption": "供应电压为3.3伏,而不是5伏。"
+      },
+      {
+        "case": "technical-18",
+        "raw": "10千兆赫的阻力控制了水流",
+        "caption": "10千欧姆的电阻控制了电流"
+      },
+      {
+        "case": "technical-19",
+        "raw": "电容器仓库充电,而不是生产能量。",
+        "caption": "电容器储存电荷,而不是生产能量。"
+      },
+      {
+        "case": "technical-20",
+        "raw": "当电压保持恒定时,抗药性增加会降低电流。",
+        "caption": "当电压保持恒定时,电阻增加会降低电流。"
+      },
+      {
+        "case": "technical-21",
+        "raw": "输出频率是20千赫",
+        "caption": "输出频率是20千赫"
+      },
+      {
+        "case": "technical-22",
+        "raw": "工作周期从25%改为75%。",
+        "caption": "工作周期从25%改为75%。"
+      },
+      {
+        "case": "technical-23",
+        "raw": "相对于参考节点测量负电压。",
+        "caption": "相对于参考节点测量负电压。"
+      },
+      {
+        "case": "technical-24",
+        "raw": "二极管只向一个方向运行流线。",
+        "caption": "二极管只向一个方向运行电流。"
+      },
+      {
+        "case": "technical-25",
+        "raw": "进化神经网络可以在边缘进行图像分类。",
+        "caption": "卷积神经网络可以在边缘进行图像分类。"
+      },
+      {
+        "case": "technical-26",
+        "raw": "验证数据必须与培训数据分开。",
+        "caption": "验证数据必须与训练数据分开。"
+      },
+      {
+        "case": "technical-27",
+        "raw": "高精确度并不能保证对无形数据的良好性能。",
+        "caption": "高精确度并不能保证对无形数据的良好性能。"
+      },
+      {
+        "case": "technical-28",
+        "raw": "该模式已经超出了培训范例的范围。",
+        "caption": "该模式已经超出了训练样本的范围。"
+      },
+      {
+        "case": "technical-29",
+        "raw": "量化可以减少内存使用,但可能会改变数字精确度。",
+        "caption": "量化可以减少内存使用,但可能会改变数字精确度。"
+      },
+      {
+        "case": "technical-30",
+        "raw": "推论在不向服务器发送数据的情况下在本地运行 。",
+        "caption": "推论在不向服务器发送数据的情况下在本地运行 。"
+      },
+      {
+        "case": "technical-31",
+        "raw": "只有在温度超过30摄氏度时, 设备才会发出消息 。",
+        "caption": "只有在温度超过30摄氏度时, 设备才会发出消息 。"
+      },
+      {
+        "case": "technical-32",
+        "raw": "丢失的包并不总意味着连接失败 。",
+        "caption": "丢失的包并不总意味着连接失败 。"
+      },
+      {
+        "case": "technical-33",
+        "raw": "电池应至少持续12小时。",
+        "caption": "电池应至少持续12小时。"
+      },
+      {
+        "case": "technical-34",
+        "raw": "传感器每500毫秒就醒过来",
+        "caption": "传感器每500毫秒就醒过来"
+      },
+      {
+        "case": "technical-35",
+        "raw": "首先读取数值,然后计算平均值。",
+        "caption": "首先读取数值,然后计算平均值。"
+      },
+      {
+        "case": "technical-36",
+        "raw": "如果值为零, 请跳过此步 。",
+        "caption": "如果值为零, 请跳过此步 。"
+      },
+      {
+        "case": "technical-37",
+        "raw": "测量结果约为预测值的2.5倍。",
+        "caption": "测量结果约为预测值的2.5倍。"
+      },
+      {
+        "case": "technical-38",
+        "raw": "这个例子解释了早先的假设为何不正确。",
+        "caption": "这个例子解释了早先的假设为何不正确。"
+      },
+      {
+        "case": "technical-39",
+        "raw": "第一个实验成功,但第二个试验失败。",
+        "caption": "第一个实验成功,但第二个试验失败。"
+      },
+      {
+        "case": "technical-40",
+        "raw": "休息后,我们将比较这两种方法。",
+        "caption": "休息后,我们将比较这两种方法。"
+      }
+    ]
+  },
+  "after": {
+    "speech": [
+      {
+        "backend": "cpu",
+        "mode": "standard",
+        "case": "ksp-100",
+        "text": "You, you would not keep the truth from me."
+      },
+      {
+        "backend": "cpu",
+        "mode": "standard",
+        "case": "ksp-101",
+        "text": "He will follow us soon."
+      },
+      {
+        "backend": "cpu",
+        "mode": "standard",
+        "case": "awb-100",
+        "text": "A maddening joy pounded in his brain."
+      },
+      {
+        "backend": "cpu",
+        "mode": "standard",
+        "case": "awb-101",
+        "text": "You must sleep, he urged."
+      },
+      {
+        "backend": "cpu",
+        "mode": "standard",
+        "case": "technical-6",
+        "text": "The robot uses an ultrasonic sensor to estimate its distance from an obstacle."
+      },
+      {
+        "backend": "cpu",
+        "mode": "standard",
+        "case": "technical-7",
+        "text": "A convolutional neural network can perform image classification at the edge."
+      },
+      {
+        "backend": "cpu",
+        "mode": "careful",
+        "case": "ksp-100",
+        "text": "You, you would not keep the truth from me."
+      },
+      {
+        "backend": "cpu",
+        "mode": "careful",
+        "case": "ksp-101",
+        "text": "He will follow soon."
+      },
+      {
+        "backend": "cpu",
+        "mode": "careful",
+        "case": "awb-100",
+        "text": "A maddening joy pounded in his brain."
+      },
+      {
+        "backend": "cpu",
+        "mode": "careful",
+        "case": "awb-101",
+        "text": "You must sleep he urged."
+      },
+      {
+        "backend": "cpu",
+        "mode": "careful",
+        "case": "technical-6",
+        "text": "The robot uses an ultrasonic sensor to estimate its distance from an obstacle."
+      },
+      {
+        "backend": "cpu",
+        "mode": "careful",
+        "case": "technical-7",
+        "text": "A convolutional neural network can perform image classification at the edge."
+      },
+      {
+        "backend": "fast",
+        "mode": "standard",
+        "case": "ksp-100",
+        "text": "you, you would not keep the truth from me."
+      },
+      {
+        "backend": "fast",
+        "mode": "standard",
+        "case": "ksp-101",
+        "text": "He will follow soon."
+      },
+      {
+        "backend": "fast",
+        "mode": "standard",
+        "case": "awb-100",
+        "text": "A maddening joy pounded in his brain."
+      },
+      {
+        "backend": "fast",
+        "mode": "standard",
+        "case": "awb-101",
+        "text": "You must sleep he urged."
+      },
+      {
+        "backend": "fast",
+        "mode": "standard",
+        "case": "technical-6",
+        "text": "The robot uses an ultrasonic sensor to estimate its distance from an obstacle."
+      },
+      {
+        "backend": "fast",
+        "mode": "standard",
+        "case": "technical-7",
+        "text": "A convolutional neural network can perform image classification at the edge."
+      },
+      {
+        "backend": "fast",
+        "mode": "careful",
+        "case": "ksp-100",
+        "text": "you, you would not keep the truth from me."
+      },
+      {
+        "backend": "fast",
+        "mode": "careful",
+        "case": "ksp-101",
+        "text": "He will follow soon."
+      },
+      {
+        "backend": "fast",
+        "mode": "careful",
+        "case": "awb-100",
+        "text": "A maddening joy pounded in his brain."
+      },
+      {
+        "backend": "fast",
+        "mode": "careful",
+        "case": "awb-101",
+        "text": "You must sleep he urged."
+      },
+      {
+        "backend": "fast",
+        "mode": "careful",
+        "case": "technical-6",
+        "text": "The robot uses an ultrasonic sensor to estimate its distance from an obstacle."
+      },
+      {
+        "backend": "fast",
+        "mode": "careful",
+        "case": "technical-7",
+        "text": "A convolutional neural network can perform image classification at the edge."
+      },
+      {
+        "backend": "balanced",
+        "mode": "standard",
+        "case": "ksp-100",
+        "text": "You, you would not keep the truth from me."
+      },
+      {
+        "backend": "balanced",
+        "mode": "standard",
+        "case": "ksp-101",
+        "text": "He will follow us soon."
+      },
+      {
+        "backend": "balanced",
+        "mode": "standard",
+        "case": "awb-100",
+        "text": "A maddening joy pounded in his brain."
+      },
+      {
+        "backend": "balanced",
+        "mode": "standard",
+        "case": "awb-101",
+        "text": "\"You must sleep,\" he urged."
+      },
+      {
+        "backend": "balanced",
+        "mode": "standard",
+        "case": "technical-6",
+        "text": "The robot uses an ultrasonic sensor to estimate its distance from an obstacle."
+      },
+      {
+        "backend": "balanced",
+        "mode": "standard",
+        "case": "technical-7",
+        "text": "A convolutional neural network can perform image classification at the edge."
+      },
+      {
+        "backend": "balanced",
+        "mode": "careful",
+        "case": "ksp-100",
+        "text": "you, you would not keep the truth from me."
+      },
+      {
+        "backend": "balanced",
+        "mode": "careful",
+        "case": "ksp-101",
+        "text": "He will follow us soon."
+      },
+      {
+        "backend": "balanced",
+        "mode": "careful",
+        "case": "awb-100",
+        "text": "A maddening joy pounded in his brain."
+      },
+      {
+        "backend": "balanced",
+        "mode": "careful",
+        "case": "awb-101",
+        "text": "You must sleep, he urged."
+      },
+      {
+        "backend": "balanced",
+        "mode": "careful",
+        "case": "technical-6",
+        "text": "The robot uses an ultrasonic sensor to estimate its distance from an obstacle."
+      },
+      {
+        "backend": "balanced",
+        "mode": "careful",
+        "case": "technical-7",
+        "text": "A convolutional neural network can perform image classification at the edge."
+      }
+    ],
+    "translation": [
+      {
+        "case": "technical-01",
+        "raw": "机器人使用超声波传感器 来估计它距离障碍物的距离",
+        "caption": "机器人使用超声波传感器 来估计它距离障碍物的距离"
+      },
+      {
+        "case": "technical-02",
+        "raw": "机器人不能移动 当一个人在安全区。",
+        "caption": "机器人不能移动 当一个人在安全区。"
+      },
+      {
+        "case": "technical-03",
+        "raw": "左轮旋转比右轮更快。",
+        "caption": "左轮旋转比右轮更快。"
+      },
+      {
+        "case": "technical-04",
+        "raw": "感应器测量距离,而不是速度。",
+        "caption": "感应器测量距离,而不是速度。"
+      },
+      {
+        "case": "technical-05",
+        "raw": "较低的比例收益可以减少振动。",
+        "caption": "较低的比例增益可以减少振动。"
+      },
+      {
+        "case": "technical-06",
+        "raw": "所测量的位置与目标位置不同。",
+        "caption": "所测量的位置与目标位置不同。"
+      },
+      {
+        "case": "technical-07",
+        "raw": "在解开编码器之前先停机",
+        "caption": "在解开编码器之前先停机"
+      },
+      {
+        "case": "technical-08",
+        "raw": "机器人背后的一个障碍 是在前传感器外的视野。",
+        "caption": "机器人背后的一个障碍 是在前传感器外的视野。"
+      },
+      {
+        "case": "technical-09",
+        "raw": "ESP32 使用 I2C 协议与传感器通信。",
+        "caption": "ESP32 使用 集成电路互连总线 (I2C) 协议与传感器通信。"
+      },
+      {
+        "case": "technical-10",
+        "raw": "脉冲宽度调制改变发动机的平均电压。",
+        "caption": "脉宽调制改变电机的平均电压。"
+      },
+      {
+        "case": "technical-11",
+        "raw": "中断服务程序应尽快执行。",
+        "caption": "中断服务程序应尽快执行。"
+      },
+      {
+        "case": "technical-12",
+        "raw": "FreeRTOS 调度器执行任务之间的上下文切换 。",
+        "caption": "FreeRTOS 调度器执行任务之间的上下文切换 。"
+      },
+      {
+        "case": "technical-13",
+        "raw": "FPGA设计用VHDL编写,并合成逻辑资源。",
+        "caption": "FPGA设计用VHDL编写,并合成逻辑资源。"
+      },
+      {
+        "case": "technical-14",
+        "raw": "MOSFET是由脉冲宽度调制信号驱动的。",
+        "caption": "MOSFET是由脉冲宽度调制信号驱动的。"
+      },
+      {
+        "case": "technical-15",
+        "raw": "在初始化完成之前不启用中断 。",
+        "caption": "在初始化完成之前不启用中断 。"
+      },
+      {
+        "case": "technical-16",
+        "raw": "任务在等待消息时被屏蔽 。",
+        "caption": "任务在等待消息时被屏蔽 。"
+      },
+      {
+        "case": "technical-17",
+        "raw": "供应电压为3.3伏,而不是5伏。",
+        "caption": "供应电压为3.3伏,而不是5伏。"
+      },
+      {
+        "case": "technical-18",
+        "raw": "10千兆赫的阻力控制了水流",
+        "caption": "10千欧姆的电阻控制了电流"
+      },
+      {
+        "case": "technical-19",
+        "raw": "电容器仓库充电,而不是生产能量。",
+        "caption": "电容器储存电荷,而不是生产能量。"
+      },
+      {
+        "case": "technical-20",
+        "raw": "当电压保持恒定时,抗药性增加会降低电流。",
+        "caption": "当电压保持恒定时,电阻增加会降低电流。"
+      },
+      {
+        "case": "technical-21",
+        "raw": "输出频率是20千赫",
+        "caption": "输出频率是20千赫"
+      },
+      {
+        "case": "technical-22",
+        "raw": "工作周期从25%改为75%。",
+        "caption": "工作周期从25%改为75%。"
+      },
+      {
+        "case": "technical-23",
+        "raw": "相对于参考节点测量负电压。",
+        "caption": "相对于参考节点测量负电压。"
+      },
+      {
+        "case": "technical-24",
+        "raw": "二极管只向一个方向运行流线。",
+        "caption": "二极管只向一个方向运行电流。"
+      },
+      {
+        "case": "technical-25",
+        "raw": "进化神经网络可以在边缘进行图像分类。",
+        "caption": "卷积神经网络可以在边缘进行图像分类。"
+      },
+      {
+        "case": "technical-26",
+        "raw": "验证数据必须与培训数据分开。",
+        "caption": "验证数据必须与训练数据分开。"
+      },
+      {
+        "case": "technical-27",
+        "raw": "高精确度并不能保证对无形数据的良好性能。",
+        "caption": "高精确度并不能保证对无形数据的良好性能。"
+      },
+      {
+        "case": "technical-28",
+        "raw": "该模式已经超出了培训范例的范围。",
+        "caption": "该模式已经超出了训练样本的范围。"
+      },
+      {
+        "case": "technical-29",
+        "raw": "量化可以减少内存使用,但可能会改变数字精确度。",
+        "caption": "量化可以减少内存使用,但可能会改变数字精确度。"
+      },
+      {
+        "case": "technical-30",
+        "raw": "推论在不向服务器发送数据的情况下在本地运行 。",
+        "caption": "推论在不向服务器发送数据的情况下在本地运行 。"
+      },
+      {
+        "case": "technical-31",
+        "raw": "只有在温度超过30摄氏度时, 设备才会发出消息 。",
+        "caption": "只有在温度超过30摄氏度时, 设备才会发出消息 。"
+      },
+      {
+        "case": "technical-32",
+        "raw": "丢失的包并不总意味着连接失败 。",
+        "caption": "丢失的包并不总意味着连接失败 。"
+      },
+      {
+        "case": "technical-33",
+        "raw": "电池应至少持续12小时。",
+        "caption": "电池应至少持续12小时。"
+      },
+      {
+        "case": "technical-34",
+        "raw": "传感器每500毫秒就醒过来",
+        "caption": "传感器每500毫秒就醒过来"
+      },
+      {
+        "case": "technical-35",
+        "raw": "首先读取数值,然后计算平均值。",
+        "caption": "首先读取数值,然后计算平均值。"
+      },
+      {
+        "case": "technical-36",
+        "raw": "如果值为零, 请跳过此步 。",
+        "caption": "如果值为零, 请跳过此步 。"
+      },
+      {
+        "case": "technical-37",
+        "raw": "测量结果约为预测值的2.5倍。",
+        "caption": "测量结果约为预测值的2.5倍。"
+      },
+      {
+        "case": "technical-38",
+        "raw": "这个例子解释了早先的假设为何不正确。",
+        "caption": "这个例子解释了早先的假设为何不正确。"
+      },
+      {
+        "case": "technical-39",
+        "raw": "第一个实验成功,但第二个试验失败。",
+        "caption": "第一个实验成功,但第二个试验失败。"
+      },
+      {
+        "case": "technical-40",
+        "raw": "休息后,我们将比较这两种方法。",
+        "caption": "休息后,我们将比较这两种方法。"
+      }
+    ]
+  }
+}

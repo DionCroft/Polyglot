@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "physical_microphone_tested": false,
+  "mandarin_wav_caption": {
+    "identifier": 2,
+    "start": 3.936,
+    "end": 7.392,
+    "english": "It's the end of the page and the beginning of the new page.",
+    "chinese": "\u8fd9\u662f\u4e00\u4e2a\u504f\u7ae0\u7684\u7ed3\u675f\u4e5f\u662f\u65b0\u504f\u7ae0\u7684\u5f00\u59cb",
+    "final": true,
+    "epoch": 0,
+    "translation_status": "complete",
+    "source_language": "zh"
+  },
+  "language_preset": true,
+  "compact_selector": true,
+  "live_switch": true,
+  "paused_switch": true,
+  "one_transcript_folder": true,
+  "labels_verified": true,
+  "minimum_controls_visible": true,
+  "mandarin_audio_pipeline": true,
+  "overlay_text_test": "explicit UI fixture; speech accuracy evaluated separately"
+}
