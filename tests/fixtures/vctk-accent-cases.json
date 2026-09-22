@@ -1,0 +1,2288 @@
+{
+  "description": "First 30 available mic1 recordings, in source row order, for p248 and p251 (Indian), p225 and p226 (English). Selected before inference. Existing Standard/Careful settings evaluated unchanged; no tuning on these clips. Neither these speakers nor KSP/AWB are the lecturers. Public read speech, not classroom validation.",
+  "licence": "CC-BY-4.0",
+  "attribution": "docs/licenses/vctk-NOTICE.md",
+  "conversion": "97-tap Hamming-windowed sinc, normalised cutoff 0.15 cycles/sample; 48 kHz -> 16 kHz; rounded PCM16; no gain normalisation",
+  "cases": [
+    {
+      "id": "vctk-p248-001",
+      "speaker": "p248",
+      "accent": "Indian",
+      "region": "",
+      "gender": "F",
+      "language": "en",
+      "reference": "Please call Stella.",
+      "path": "tests/fixtures/vctk-public/vctk-p248-001.wav",
+      "sha256": "f0c9130c99b20d033d308252f2f7eb3c614d4a1463c2158b8928684b30f8ceb7",
+      "audio_seconds": 1.9218125,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 16462,
+        "file": "p248_001_mic1.flac",
+        "sha256": "538d7eefc44fbc4e9c8c2874d49f31ba61bf34d5fd7239db4e5ab3f2985472c9"
+      }
+    },
+    {
+      "id": "vctk-p248-002",
+      "speaker": "p248",
+      "accent": "Indian",
+      "region": "",
+      "gender": "F",
+      "language": "en",
+      "reference": "Ask her to bring these things with her from the store.",
+      "path": "tests/fixtures/vctk-public/vctk-p248-002.wav",
+      "sha256": "4eb73c30e8139b0896a522bb2d5b8c9a5e6b84c432f4494a46642a8bc5e84d2d",
+      "audio_seconds": 4.538875,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 16464,
+        "file": "p248_002_mic1.flac",
+        "sha256": "acfb4c5c03d24653f47e4bed1901e1e97f48b6a044b2ee90aa9e3529ec04f76d"
+      }
+    },
+    {
+      "id": "vctk-p248-003",
+      "speaker": "p248",
+      "accent": "Indian",
+      "region": "",
+      "gender": "F",
+      "language": "en",
+      "reference": "Six spoons of fresh snow peas, five thick slabs of blue cheese, and maybe a snack for her brother Bob.",
+      "path": "tests/fixtures/vctk-public/vctk-p248-003.wav",
+      "sha256": "39575cdef3668f349fa28bb83cd8368f37c4e504d9bc900aa7ac446e0ca4b3b1",
+      "audio_seconds": 9.383375,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 16466,
+        "file": "p248_003_mic1.flac",
+        "sha256": "9483455d6c9a4f7856ad8bd5d3e04317846d67c7c38ea0c1bc6a9b317ab873a7"
+      }
+    },
+    {
+      "id": "vctk-p248-004",
+      "speaker": "p248",
+      "accent": "Indian",
+      "region": "",
+      "gender": "F",
+      "language": "en",
+      "reference": "We also need a small plastic snake and a big toy frog for the kids.",
+      "path": "tests/fixtures/vctk-public/vctk-p248-004.wav",
+      "sha256": "9d0d81c10b48805954cc0251672749e5614550aedf5afff7f7d584a5e875825c",
+      "audio_seconds": 5.69775,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 16468,
+        "file": "p248_004_mic1.flac",
+        "sha256": "0991f0e369f57d852855a1c3881a38620db0a34f20533d9247f89471d2df95d9"
+      }
+    },
+    {
+      "id": "vctk-p248-005",
+      "speaker": "p248",
+      "accent": "Indian",
+      "region": "",
+      "gender": "F",
+      "language": "en",
+      "reference": "She can scoop these things into three red bags, and we will go meet her Wednesday at the train station.",
+      "path": "tests/fixtures/vctk-public/vctk-p248-005.wav",
+      "sha256": "17f0d6b1fb7e00f8f79031b83fafcd43e0b383af9a3ca9551df869b697e2963d",
+      "audio_seconds": 8.494125,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 16470,
+        "file": "p248_005_mic1.flac",
+        "sha256": "d2fbfcf48b783d89235cd2333b92a277b35e34491319a3b7fbf535d50c293b4a"
+      }
+    },
+    {
+      "id": "vctk-p248-006",
+      "speaker": "p248",
+      "accent": "Indian",
+      "region": "",
+      "gender": "F",
+      "language": "en",
+      "reference": "When the sunlight strikes raindrops in the air, they act as a prism and form a rainbow.",
+      "path": "tests/fixtures/vctk-public/vctk-p248-006.wav",
+      "sha256": "1464fd74908449ada63a670c5f649d064430b9c9fd9f4a53e9067d32dedeac0b",
+      "audio_seconds": 7.3015,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 16472,
+        "file": "p248_006_mic1.flac",
+        "sha256": "cfb9739fac6e3986ee02b6a713d28692d22f07052805efd124edcb34abf773b0"
+      }
+    },
+    {
+      "id": "vctk-p248-007",
+      "speaker": "p248",
+      "accent": "Indian",
+      "region": "",
+      "gender": "F",
+      "language": "en",
+      "reference": "The rainbow is a division of white light into many beautiful colors.",
+      "path": "tests/fixtures/vctk-public/vctk-p248-007.wav",
+      "sha256": "5a205af4f96f9523a39d1a92dd135025eee00bf2ff5e5f37fdb9e46a7379583f",
+      "audio_seconds": 5.517,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 16474,
+        "file": "p248_007_mic1.flac",
+        "sha256": "15cf83a90aa0323c57f3646cf58e910169b24e3834d29b3d1a70c1199bad7c53"
+      }
+    },
+    {
+      "id": "vctk-p248-008",
+      "speaker": "p248",
+      "accent": "Indian",
+      "region": "",
+      "gender": "F",
+      "language": "en",
+      "reference": "These take the shape of a long round arch, with its path high above, and its two ends apparently beyond the horizon.",
+      "path": "tests/fixtures/vctk-public/vctk-p248-008.wav",
+      "sha256": "f712722f0863baf69ab71da9fea663708056d9e1137b209c57a0c8a994a897eb",
+      "audio_seconds": 9.4911875,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 16476,
+        "file": "p248_008_mic1.flac",
+        "sha256": "cec6169900f2e9e3005afb7267dc5bb743e53af36b3064e9209279dacb231cad"
+      }
+    },
+    {
+      "id": "vctk-p248-009",
+      "speaker": "p248",
+      "accent": "Indian",
+      "region": "",
+      "gender": "F",
+      "language": "en",
+      "reference": "There is , according to legend, a boiling pot of gold at one end.",
+      "path": "tests/fixtures/vctk-public/vctk-p248-009.wav",
+      "sha256": "5c910a2d0254359cb6109bc5e9caf28154bf96d6dd2baae7c62738f0e089960f",
+      "audio_seconds": 6.1171875,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 16478,
+        "file": "p248_009_mic1.flac",
+        "sha256": "c3edac00f370e7d853550d28f621c5c4bebeb1f3ebed30d2c77d5987e9b5019e"
+      }
+    },
+    {
+      "id": "vctk-p248-010",
+      "speaker": "p248",
+      "accent": "Indian",
+      "region": "",
+      "gender": "F",
+      "language": "en",
+      "reference": "People look, but no one ever finds it.",
+      "path": "tests/fixtures/vctk-public/vctk-p248-010.wav",
+      "sha256": "22e082e5d56db03533e8c269dc824b5d0a91ac0bdf8b83812acb4dcb71dbe82d",
+      "audio_seconds": 3.5659375,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 16480,
+        "file": "p248_010_mic1.flac",
+        "sha256": "16c5384dfac68f3a634ca8cc8fa2f0aa66004a4b37e34a417137e93d0e5c9426"
+      }
+    },
+    {
+      "id": "vctk-p248-011",
+      "speaker": "p248",
+      "accent": "Indian",
+      "region": "",
+      "gender": "F",
+      "language": "en",
+      "reference": "When a man looks for something beyond his reach, his friends say he is looking for the pot of gold at the end of the rainbow.",
+      "path": "tests/fixtures/vctk-public/vctk-p248-011.wav",
+      "sha256": "0e9a6bc5230ed424d6f8d098df03d4e6fac1d65518f03c6774b9646a3ecf2811",
+      "audio_seconds": 9.3326875,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 16482,
+        "file": "p248_011_mic1.flac",
+        "sha256": "86c963530fd3ba45a74551ddcd0080c5a06fcfd83a0c1b7fe5a02011e3638128"
+      }
+    },
+    {
+      "id": "vctk-p248-012",
+      "speaker": "p248",
+      "accent": "Indian",
+      "region": "",
+      "gender": "F",
+      "language": "en",
+      "reference": "Throughout the centuries people have explained the rainbow in various ways.",
+      "path": "tests/fixtures/vctk-public/vctk-p248-012.wav",
+      "sha256": "c01376cd0985b41bad2d352c29df6c0a99c40d86a8ae4e613bd24c72d4174860",
+      "audio_seconds": 6.42875,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 16484,
+        "file": "p248_012_mic1.flac",
+        "sha256": "22987449407c460a0683eba18e09d69848b55caa989b056f31c88942dc921bfd"
+      }
+    },
+    {
+      "id": "vctk-p248-013",
+      "speaker": "p248",
+      "accent": "Indian",
+      "region": "",
+      "gender": "F",
+      "language": "en",
+      "reference": "Some have accepted it as a miracle without physical explanation.",
+      "path": "tests/fixtures/vctk-public/vctk-p248-013.wav",
+      "sha256": "166b1914bfb0303bf53c56e8890118d85e766aa78cbed7f16e8fdff823bd6fde",
+      "audio_seconds": 5.4430625,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 16486,
+        "file": "p248_013_mic1.flac",
+        "sha256": "4b4e9c12008333bbb875f5ea1a61d8c77f8adf2323fcf874d0eed30cfbdf3f13"
+      }
+    },
+    {
+      "id": "vctk-p248-014",
+      "speaker": "p248",
+      "accent": "Indian",
+      "region": "",
+      "gender": "F",
+      "language": "en",
+      "reference": "To the Hebrews it was a token that there would be no more universal floods.",
+      "path": "tests/fixtures/vctk-public/vctk-p248-014.wav",
+      "sha256": "117f0c572d607551746614e882598a05453176b57c4bd4d7a76024bdf7cc28de",
+      "audio_seconds": 6.2468125,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 16488,
+        "file": "p248_014_mic1.flac",
+        "sha256": "12e3d5a76d09f66f7953fde2b4116f2548cd703f366ab3424318b32bfd94b64b"
+      }
+    },
+    {
+      "id": "vctk-p248-015",
+      "speaker": "p248",
+      "accent": "Indian",
+      "region": "",
+      "gender": "F",
+      "language": "en",
+      "reference": "The Greeks used to imagine that it was a sign from the gods to foretell war or heavy rain.",
+      "path": "tests/fixtures/vctk-public/vctk-p248-015.wav",
+      "sha256": "e3a0ab5c9d1f87da3b148c8429cc8871d9f43d1ead417c989edd3f791a5ceb78",
+      "audio_seconds": 7.5450625,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 16490,
+        "file": "p248_015_mic1.flac",
+        "sha256": "b3578c7b2bdfef7d4aa487a79f3e3a0a54f0447bd84e97db2c6cb0a23b1aeddb"
+      }
+    },
+    {
+      "id": "vctk-p248-016",
+      "speaker": "p248",
+      "accent": "Indian",
+      "region": "",
+      "gender": "F",
+      "language": "en",
+      "reference": "The Norsemen considered the rainbow as a bridge over which the gods passed from earth to their home in the sky.",
+      "path": "tests/fixtures/vctk-public/vctk-p248-016.wav",
+      "sha256": "772fee03429baaf9d6857210e6fc0b5bf859242936774622d558f67d11859e65",
+      "audio_seconds": 8.8403125,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 16492,
+        "file": "p248_016_mic1.flac",
+        "sha256": "54d1ef7ad302d40ce2eb5952c5b1bb85fc6758bc0c3c7e80611dc8e2129a860b"
+      }
+    },
+    {
+      "id": "vctk-p248-017",
+      "speaker": "p248",
+      "accent": "Indian",
+      "region": "",
+      "gender": "F",
+      "language": "en",
+      "reference": "Others have tried to explain the phenomenon physically.",
+      "path": "tests/fixtures/vctk-public/vctk-p248-017.wav",
+      "sha256": "4758c72d7c1784d90a95d64f10041b57fa4f4713f6220caef999d311f42e6e4e",
+      "audio_seconds": 4.3894375,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 16494,
+        "file": "p248_017_mic1.flac",
+        "sha256": "45305e64d7052a26e0a1ecdd48fb396ea9bf039a13f6b964e923987f776ee55f"
+      }
+    },
+    {
+      "id": "vctk-p248-018",
+      "speaker": "p248",
+      "accent": "Indian",
+      "region": "",
+      "gender": "F",
+      "language": "en",
+      "reference": "Aristotle thought that the rainbow was caused by reflection of the sun's rays by the rain.",
+      "path": "tests/fixtures/vctk-public/vctk-p248-018.wav",
+      "sha256": "8d3fd54bff7f92dd2817b0ef5e10c5f06ec3a9dee2c05852983bcc7b59738e80",
+      "audio_seconds": 6.487125,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 16496,
+        "file": "p248_018_mic1.flac",
+        "sha256": "c05215957c803c90b6dcc441383ab606f1d1df40ba3590deff2b834ec34efc79"
+      }
+    },
+    {
+      "id": "vctk-p248-019",
+      "speaker": "p248",
+      "accent": "Indian",
+      "region": "",
+      "gender": "F",
+      "language": "en",
+      "reference": "Since then physicists have found that it is not reflection, but refraction by the raindrops which causes the rainbows.",
+      "path": "tests/fixtures/vctk-public/vctk-p248-019.wav",
+      "sha256": "3badb829f3794ba3da8cc9aba95316fdf39b2a83f19ca0a851ac504ab0934a42",
+      "audio_seconds": 8.666,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 16498,
+        "file": "p248_019_mic1.flac",
+        "sha256": "ed844a7109f9dc9a9cb80357a83029d9837746ce79343d33f8107f9571d892ad"
+      }
+    },
+    {
+      "id": "vctk-p248-020",
+      "speaker": "p248",
+      "accent": "Indian",
+      "region": "",
+      "gender": "F",
+      "language": "en",
+      "reference": "Many complicated ideas about the rainbow have been formed.",
+      "path": "tests/fixtures/vctk-public/vctk-p248-020.wav",
+      "sha256": "c13456bdcca1ea96e3b0681870ea3b9ca8426b22a1b3256148716fd9236f14e5",
+      "audio_seconds": 4.602375,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 16500,
+        "file": "p248_020_mic1.flac",
+        "sha256": "1a0a715e4a9b19cd11af46b43d513afffc1f61e1ce0da3ce86bc1be49886ed03"
+      }
+    },
+    {
+      "id": "vctk-p248-021",
+      "speaker": "p248",
+      "accent": "Indian",
+      "region": "",
+      "gender": "F",
+      "language": "en",
+      "reference": "The difference in the rainbow depends considerably upon the size of the drops, and the width of the colored band increases as the size of the drops increases.",
+      "path": "tests/fixtures/vctk-public/vctk-p248-021.wav",
+      "sha256": "ec68b0f28c7428711eee981ef6df40f40faabecbe224410f5be9f0e8e1315961",
+      "audio_seconds": 11.093625,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 16502,
+        "file": "p248_021_mic1.flac",
+        "sha256": "38764a3111900800060f0fe62e595903f28990e997bc4705c136e97edc9706d4"
+      }
+    },
+    {
+      "id": "vctk-p248-022",
+      "speaker": "p248",
+      "accent": "Indian",
+      "region": "",
+      "gender": "F",
+      "language": "en",
+      "reference": "The actual primary rainbow observed is said to be the effect of super-imposition of a number of bows.",
+      "path": "tests/fixtures/vctk-public/vctk-p248-022.wav",
+      "sha256": "20030ae4a5d1251a82f3a1fc5beeaf87be72bed986ecd5377594fcdf2b95a08e",
+      "audio_seconds": 7.7091875,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 16504,
+        "file": "p248_022_mic1.flac",
+        "sha256": "1c57c9962a49eb0756b4643f31ba8ce5b81ac5cdab9274246b9564cf5b8cee93"
+      }
+    },
+    {
+      "id": "vctk-p248-023",
+      "speaker": "p248",
+      "accent": "Indian",
+      "region": "",
+      "gender": "F",
+      "language": "en",
+      "reference": "If the red of the second bow falls upon the green of the first, the result is to give a bow with an abnormally wide yellow band, since red and green light when mixed form yellow.",
+      "path": "tests/fixtures/vctk-public/vctk-p248-023.wav",
+      "sha256": "fa0926e51568f616550ea41bd1d86d099e54648f69a5b6c72113fa54a629dd2c",
+      "audio_seconds": 13.3665625,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 16506,
+        "file": "p248_023_mic1.flac",
+        "sha256": "181876d3df7c7b460c15c2b32759dd7de421141b73ff3ef05bb5ba04155b251f"
+      }
+    },
+    {
+      "id": "vctk-p248-024",
+      "speaker": "p248",
+      "accent": "Indian",
+      "region": "",
+      "gender": "F",
+      "language": "en",
+      "reference": "This is a very common type of bow, one showing mainly red and yellow, with little or no green or blue.",
+      "path": "tests/fixtures/vctk-public/vctk-p248-024.wav",
+      "sha256": "c39d086d25839528e031c26978273c3cf471c4e213571d21e3cc8a54bbdc52da",
+      "audio_seconds": 7.6848125,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 16508,
+        "file": "p248_024_mic1.flac",
+        "sha256": "044ac8a0742212b0e3919a8d96b587a7371efd5b96e0f0596355024081fa95e2"
+      }
+    },
+    {
+      "id": "vctk-p248-025",
+      "speaker": "p248",
+      "accent": "Indian",
+      "region": "",
+      "gender": "F",
+      "language": "en",
+      "reference": "She is given a new deputy minister for transport and planning.",
+      "path": "tests/fixtures/vctk-public/vctk-p248-025.wav",
+      "sha256": "b61b179629d08cfdee4114b4dbee34c4be9710dd661be82b0a8d6edddcb0c932",
+      "audio_seconds": 4.817,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 16510,
+        "file": "p248_025_mic1.flac",
+        "sha256": "05a0f48c1d7315abc13f9271c822280d825a020f2f127ca261b1d50b06bd0e98"
+      }
+    },
+    {
+      "id": "vctk-p248-026",
+      "speaker": "p248",
+      "accent": "Indian",
+      "region": "",
+      "gender": "F",
+      "language": "en",
+      "reference": "It's a relief that a decision has finally been made.",
+      "path": "tests/fixtures/vctk-public/vctk-p248-026.wav",
+      "sha256": "8498ec787e7254b3bc96a37df69233458507c2647be1067896addf6245c2789f",
+      "audio_seconds": 4.3161875,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 16512,
+        "file": "p248_026_mic1.flac",
+        "sha256": "1ed6d57e02599bdc02ca6d90028475e0c95aa7d5ad3b416defca0e1ebc2ea43e"
+      }
+    },
+    {
+      "id": "vctk-p248-027",
+      "speaker": "p248",
+      "accent": "Indian",
+      "region": "",
+      "gender": "F",
+      "language": "en",
+      "reference": "But it failed.",
+      "path": "tests/fixtures/vctk-public/vctk-p248-027.wav",
+      "sha256": "5ef38ae41233db4025f5ea35ec95f24cf86bd8596af0569ca40214f7dc7976b2",
+      "audio_seconds": 2.0744375,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 16514,
+        "file": "p248_027_mic1.flac",
+        "sha256": "92e81dc1288a00838139cdb0307c69ba854bfe8bb5581240ffa9f51c0fc3cdce"
+      }
+    },
+    {
+      "id": "vctk-p248-028",
+      "speaker": "p248",
+      "accent": "Indian",
+      "region": "",
+      "gender": "F",
+      "language": "en",
+      "reference": "That's no bad thing.",
+      "path": "tests/fixtures/vctk-public/vctk-p248-028.wav",
+      "sha256": "af7e4dd1493c00d4330d6a081e581b4b3b223119d4c0d260ff18333514ea184b",
+      "audio_seconds": 2.980875,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 16516,
+        "file": "p248_028_mic1.flac",
+        "sha256": "05f4eb9a9275de71d5b91ad59a3f1cae83480d84b2e184814e1bcfae569c51fb"
+      }
+    },
+    {
+      "id": "vctk-p248-029",
+      "speaker": "p248",
+      "accent": "Indian",
+      "region": "",
+      "gender": "F",
+      "language": "en",
+      "reference": "The main concern is that it could interfere with air traffic.",
+      "path": "tests/fixtures/vctk-public/vctk-p248-029.wav",
+      "sha256": "100b0562b81af3c6d83457fd55096ee0723b907694de06afd00f8c3265f1ba51",
+      "audio_seconds": 4.8216875,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 16518,
+        "file": "p248_029_mic1.flac",
+        "sha256": "a10d21ccfd45ed547701fb9d2cb5548b0ba8b96f06ead53bf6eb6a47df748f51"
+      }
+    },
+    {
+      "id": "vctk-p248-030",
+      "speaker": "p248",
+      "accent": "Indian",
+      "region": "",
+      "gender": "F",
+      "language": "en",
+      "reference": "I have a theory.",
+      "path": "tests/fixtures/vctk-public/vctk-p248-030.wav",
+      "sha256": "cf5ddaa6a8f60702a0b721d750a1329ccfda84a5d382fa6ab64dc2f77d5468bb",
+      "audio_seconds": 2.562,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 16520,
+        "file": "p248_030_mic1.flac",
+        "sha256": "ea7264eedf7211af926bcfd1a77c6de6c451d15bf4616162dfbcdeb560c052d0"
+      }
+    },
+    {
+      "id": "vctk-p251-001",
+      "speaker": "p251",
+      "accent": "Indian",
+      "region": "",
+      "gender": "M",
+      "language": "en",
+      "reference": "Please call Stella.",
+      "path": "tests/fixtures/vctk-public/vctk-p251-001.wav",
+      "sha256": "338160fe012978c0511a1f073803b1682e66ab5c95c81d5cdf2203518e97bf7c",
+      "audio_seconds": 2.083625,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 18846,
+        "file": "p251_001_mic1.flac",
+        "sha256": "4157e799c529194492cdbe169feb6f4b889769942fc1170e0e886c23a1f1514b"
+      }
+    },
+    {
+      "id": "vctk-p251-002",
+      "speaker": "p251",
+      "accent": "Indian",
+      "region": "",
+      "gender": "M",
+      "language": "en",
+      "reference": "Ask her to bring these things with her from the store.",
+      "path": "tests/fixtures/vctk-public/vctk-p251-002.wav",
+      "sha256": "eb5691636c003c8e0f7d03db3fd6300b276fb56f6c9fba885bc9687a05841e3a",
+      "audio_seconds": 4.1495,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 18848,
+        "file": "p251_002_mic1.flac",
+        "sha256": "74c753aae73ec30330afb16d58993fe8cb93482918c315af5ab35c0a8e30bf36"
+      }
+    },
+    {
+      "id": "vctk-p251-003",
+      "speaker": "p251",
+      "accent": "Indian",
+      "region": "",
+      "gender": "M",
+      "language": "en",
+      "reference": "Six spoons of fresh snow peas, five thick slabs of blue cheese, and maybe a snack for her brother Bob.",
+      "path": "tests/fixtures/vctk-public/vctk-p251-003.wav",
+      "sha256": "ce25526d6a2e1733b8ed9b370281ae1ac20e7310f546dcdd5768b413e727faf3",
+      "audio_seconds": 7.406625,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 18850,
+        "file": "p251_003_mic1.flac",
+        "sha256": "ed03599843cfe187382c64e02878134749f33e95c3fe38f9caa8e83d606d2efb"
+      }
+    },
+    {
+      "id": "vctk-p251-004",
+      "speaker": "p251",
+      "accent": "Indian",
+      "region": "",
+      "gender": "M",
+      "language": "en",
+      "reference": "We also need a small plastic snake and a big toy frog for the kids.",
+      "path": "tests/fixtures/vctk-public/vctk-p251-004.wav",
+      "sha256": "3d1c24c2362c85e3f647f4ecd005c4d5e1fc0eb90d8a0a0bb599189165602a5f",
+      "audio_seconds": 4.7056875,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 18852,
+        "file": "p251_004_mic1.flac",
+        "sha256": "d078a57f68c25b752f9c05e94231c93f4e4b3e18f1d775cf53428aa788ab4ece"
+      }
+    },
+    {
+      "id": "vctk-p251-005",
+      "speaker": "p251",
+      "accent": "Indian",
+      "region": "",
+      "gender": "M",
+      "language": "en",
+      "reference": "She can scoop these things into three red bags, and we will go meet her Wednesday at the train station.",
+      "path": "tests/fixtures/vctk-public/vctk-p251-005.wav",
+      "sha256": "b3fc79448ed2ada514e672d55e44da7925187188ff81700570cf94c363a9bff5",
+      "audio_seconds": 6.1359375,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 18854,
+        "file": "p251_005_mic1.flac",
+        "sha256": "80d36cef0616b3942916dc9f3aad29265fa2c8e28559d066290c4c06574b8fcd"
+      }
+    },
+    {
+      "id": "vctk-p251-006",
+      "speaker": "p251",
+      "accent": "Indian",
+      "region": "",
+      "gender": "M",
+      "language": "en",
+      "reference": "When the sunlight strikes raindrops in the air, they act as a prism and form a rainbow.",
+      "path": "tests/fixtures/vctk-public/vctk-p251-006.wav",
+      "sha256": "52d76b27294e0bc2c4e7e61c6ae27d18974cb70e96507f126520335eac492377",
+      "audio_seconds": 5.5769375,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 18856,
+        "file": "p251_006_mic1.flac",
+        "sha256": "15119af83b95e6420e1605a7976afa01b8d17ba73bb6cb0d172349382e91a65a"
+      }
+    },
+    {
+      "id": "vctk-p251-007",
+      "speaker": "p251",
+      "accent": "Indian",
+      "region": "",
+      "gender": "M",
+      "language": "en",
+      "reference": "The rainbow is a division of white light into many beautiful colors.",
+      "path": "tests/fixtures/vctk-public/vctk-p251-007.wav",
+      "sha256": "b4244ceb10dc6a44d572e765b3380818af91feebc1a68e4cf3a6e329a065c1cc",
+      "audio_seconds": 4.2149375,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 18858,
+        "file": "p251_007_mic1.flac",
+        "sha256": "349379bcd586a3c7967e2e8dc36a2b1486c7e2f1fbad5e8a76df76d3aed5b16b"
+      }
+    },
+    {
+      "id": "vctk-p251-008",
+      "speaker": "p251",
+      "accent": "Indian",
+      "region": "",
+      "gender": "M",
+      "language": "en",
+      "reference": "These take the shape of a long round arch, with its path high above, and its two ends apparently beyond the horizon.",
+      "path": "tests/fixtures/vctk-public/vctk-p251-008.wav",
+      "sha256": "4a5a09e749e4f4ebbfc96f63511d52cea668b728198c63a6e3a26c3f2bfe6633",
+      "audio_seconds": 7.0756875,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 18860,
+        "file": "p251_008_mic1.flac",
+        "sha256": "4f1c77d7c8f73a2b64106d0593e48bbf953cda625081e22913e47f5dc6f68bb3"
+      }
+    },
+    {
+      "id": "vctk-p251-009",
+      "speaker": "p251",
+      "accent": "Indian",
+      "region": "",
+      "gender": "M",
+      "language": "en",
+      "reference": "There is , according to legend, a boiling pot of gold at one end.",
+      "path": "tests/fixtures/vctk-public/vctk-p251-009.wav",
+      "sha256": "65eda7571b3d23be9be8f56b290f161e8c5dd83df3a6303258604e1af99f2df6",
+      "audio_seconds": 4.994125,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 18862,
+        "file": "p251_009_mic1.flac",
+        "sha256": "f68f98a870905ed9b92bdd493f3b1cb3591b2279eb4b0e6e9eb733e1476d76df"
+      }
+    },
+    {
+      "id": "vctk-p251-010",
+      "speaker": "p251",
+      "accent": "Indian",
+      "region": "",
+      "gender": "M",
+      "language": "en",
+      "reference": "People look, but no one ever finds it.",
+      "path": "tests/fixtures/vctk-public/vctk-p251-010.wav",
+      "sha256": "6698dfe4f00fd85b0b8093c555825f37a90f675e15fa299b582cf3e82c14656c",
+      "audio_seconds": 3.273125,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 18864,
+        "file": "p251_010_mic1.flac",
+        "sha256": "16e2868f54aeab12784182a80b79ccfffa89b2e8fb223c0b10f6c6f48a3367ad"
+      }
+    },
+    {
+      "id": "vctk-p251-011",
+      "speaker": "p251",
+      "accent": "Indian",
+      "region": "",
+      "gender": "M",
+      "language": "en",
+      "reference": "When a man looks for something beyond his reach, his friends say he is looking for the pot of gold at the end of the rainbow.",
+      "path": "tests/fixtures/vctk-public/vctk-p251-011.wav",
+      "sha256": "027723ecad8b71f843bb708d47176b7d516fd31f2c2bc12229d28c225d442997",
+      "audio_seconds": 6.4825,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 18866,
+        "file": "p251_011_mic1.flac",
+        "sha256": "934f5350036f5e5fcdfba0883a74c4d0e874e831034f5d2d874e042c53075c29"
+      }
+    },
+    {
+      "id": "vctk-p251-012",
+      "speaker": "p251",
+      "accent": "Indian",
+      "region": "",
+      "gender": "M",
+      "language": "en",
+      "reference": "Throughout the centuries people have explained the rainbow in various ways.",
+      "path": "tests/fixtures/vctk-public/vctk-p251-012.wav",
+      "sha256": "e675057e8e3a187d06283598d8a712b42ed69c184ed4880b2f4253e5bdece6b0",
+      "audio_seconds": 4.4116875,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 18868,
+        "file": "p251_012_mic1.flac",
+        "sha256": "056958004a240335380c28e3777d77617e17397ff701ca43c6fad043d5f45fd7"
+      }
+    },
+    {
+      "id": "vctk-p251-013",
+      "speaker": "p251",
+      "accent": "Indian",
+      "region": "",
+      "gender": "M",
+      "language": "en",
+      "reference": "Some have accepted it as a miracle without physical explanation.",
+      "path": "tests/fixtures/vctk-public/vctk-p251-013.wav",
+      "sha256": "2208613a6b98c17d0aad45fce75b6fd6ff9427c2942ad5752f1d0f575e29350b",
+      "audio_seconds": 4.8254375,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 18870,
+        "file": "p251_013_mic1.flac",
+        "sha256": "c6eb767f189891572f1aefcf1cf9e5a79443a95a19d80d76e88fa7ee8fa2c716"
+      }
+    },
+    {
+      "id": "vctk-p251-014",
+      "speaker": "p251",
+      "accent": "Indian",
+      "region": "",
+      "gender": "M",
+      "language": "en",
+      "reference": "To the Hebrews it was a token that there would be no more universal floods.",
+      "path": "tests/fixtures/vctk-public/vctk-p251-014.wav",
+      "sha256": "621d5b8c867cce43034b46b7cb1cdd185448115263033f4f3a173ac483cfb1cd",
+      "audio_seconds": 5.0879375,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 18872,
+        "file": "p251_014_mic1.flac",
+        "sha256": "f8a9a96d6eff3d5048100e7a74888442bcf2736bcc35405a7e0f3771068e52d5"
+      }
+    },
+    {
+      "id": "vctk-p251-015",
+      "speaker": "p251",
+      "accent": "Indian",
+      "region": "",
+      "gender": "M",
+      "language": "en",
+      "reference": "The Greeks used to imagine that it was a sign from the gods to foretell war or heavy rain.",
+      "path": "tests/fixtures/vctk-public/vctk-p251-015.wav",
+      "sha256": "79f81420426273aefbd4470e77b6ee9564135955d95135108c3d60af3c770593",
+      "audio_seconds": 5.62275,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 18874,
+        "file": "p251_015_mic1.flac",
+        "sha256": "e5e1eb7b74ed7ca2000eb25ef6791c9a5923de5fcb5a4b8e1b1795798a40b246"
+      }
+    },
+    {
+      "id": "vctk-p251-016",
+      "speaker": "p251",
+      "accent": "Indian",
+      "region": "",
+      "gender": "M",
+      "language": "en",
+      "reference": "The Norsemen considered the rainbow as a bridge over which the gods passed from earth to their home in the sky.",
+      "path": "tests/fixtures/vctk-public/vctk-p251-016.wav",
+      "sha256": "9f0728c42cb6172689d094d2a652c8cb3746e9b65abc6facf477755237371e76",
+      "audio_seconds": 6.7720625,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 18876,
+        "file": "p251_016_mic1.flac",
+        "sha256": "1a30ae2f50060cd41809887e56c25699ada70c5b7bf175ca768d593b543c68ee"
+      }
+    },
+    {
+      "id": "vctk-p251-017",
+      "speaker": "p251",
+      "accent": "Indian",
+      "region": "",
+      "gender": "M",
+      "language": "en",
+      "reference": "Others have tried to explain the phenomenon physically.",
+      "path": "tests/fixtures/vctk-public/vctk-p251-017.wav",
+      "sha256": "eb7ad1a291d604579dde768c03291d09f6e9b39bd95ff04530fd8cc533f98262",
+      "audio_seconds": 3.9445,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 18878,
+        "file": "p251_017_mic1.flac",
+        "sha256": "b9bf5b104d77beaba2c96ca29621aa1335aea998ad2aeb5b6d4e666bb1ddede4"
+      }
+    },
+    {
+      "id": "vctk-p251-018",
+      "speaker": "p251",
+      "accent": "Indian",
+      "region": "",
+      "gender": "M",
+      "language": "en",
+      "reference": "Aristotle thought that the rainbow was caused by reflection of the sun's rays by the rain.",
+      "path": "tests/fixtures/vctk-public/vctk-p251-018.wav",
+      "sha256": "5ef5664c4154cc8511fc77661a20a2c481d9d1f7cdaaa0ee5cad60fe9ad40c8a",
+      "audio_seconds": 5.480875,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 18880,
+        "file": "p251_018_mic1.flac",
+        "sha256": "01c5457a79877f1684dd3dc84385adc57271d911599172fd633e23b2c28cccf6"
+      }
+    },
+    {
+      "id": "vctk-p251-019",
+      "speaker": "p251",
+      "accent": "Indian",
+      "region": "",
+      "gender": "M",
+      "language": "en",
+      "reference": "Since then physicists have found that it is not reflection, but refraction by the raindrops which causes the rainbows.",
+      "path": "tests/fixtures/vctk-public/vctk-p251-019.wav",
+      "sha256": "dc1cebb300551b4cfa982e209a50150a444546584c605c7f183493715642c796",
+      "audio_seconds": 7.0420625,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 18882,
+        "file": "p251_019_mic1.flac",
+        "sha256": "4f25225c642c2dc8490abc78ef7478f2a24ba4033595dd7150cf87a05c1903c3"
+      }
+    },
+    {
+      "id": "vctk-p251-020",
+      "speaker": "p251",
+      "accent": "Indian",
+      "region": "",
+      "gender": "M",
+      "language": "en",
+      "reference": "Many complicated ideas about the rainbow have been formed.",
+      "path": "tests/fixtures/vctk-public/vctk-p251-020.wav",
+      "sha256": "804e1c8579177a278005112e8cb214489728c0e268682776df1da2a89f523018",
+      "audio_seconds": 4.466625,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 18884,
+        "file": "p251_020_mic1.flac",
+        "sha256": "6d22fc0f402acd021eabe5fee31b8ec9a402ad74c2e0c5920054cd35dce15b0b"
+      }
+    },
+    {
+      "id": "vctk-p251-021",
+      "speaker": "p251",
+      "accent": "Indian",
+      "region": "",
+      "gender": "M",
+      "language": "en",
+      "reference": "The difference in the rainbow depends considerably upon the size of the drops, and the width of the colored band increases as the size of the drops increases.",
+      "path": "tests/fixtures/vctk-public/vctk-p251-021.wav",
+      "sha256": "19cc1f2d35e62d4d9899fc20b1665a546ce729d611fc36c54ee42de827afda7d",
+      "audio_seconds": 8.68275,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 18886,
+        "file": "p251_021_mic1.flac",
+        "sha256": "63e870c90c2a7d04eeafc5b5c6b2087e249bcf065160c7ad5c68dde96728012e"
+      }
+    },
+    {
+      "id": "vctk-p251-022",
+      "speaker": "p251",
+      "accent": "Indian",
+      "region": "",
+      "gender": "M",
+      "language": "en",
+      "reference": "The actual primary rainbow observed is said to be the effect of super-imposition of a number of bows.",
+      "path": "tests/fixtures/vctk-public/vctk-p251-022.wav",
+      "sha256": "88e895deac683b13178ea5d32e4987b1f9aa718732023ca76677f4b3a2871f0a",
+      "audio_seconds": 6.067,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 18888,
+        "file": "p251_022_mic1.flac",
+        "sha256": "e047fd9eed5365395e622dea47d04aad73148b5933645abc42edcdef703eb559"
+      }
+    },
+    {
+      "id": "vctk-p251-023",
+      "speaker": "p251",
+      "accent": "Indian",
+      "region": "",
+      "gender": "M",
+      "language": "en",
+      "reference": "If the red of the second bow falls upon the green of the first, the result is to give a bow with an abnormally wide yellow band, since red and green light when mixed form yellow.",
+      "path": "tests/fixtures/vctk-public/vctk-p251-023.wav",
+      "sha256": "8a0ce412f69913b85f8d0bd262e57f24f22fc4c639715dcbeaf5cf7b9c437396",
+      "audio_seconds": 11.0894375,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 18890,
+        "file": "p251_023_mic1.flac",
+        "sha256": "402aaee456a19486d2fb07e87178a58c872300d0bcccad0603ae6cb57ed3f6da"
+      }
+    },
+    {
+      "id": "vctk-p251-024",
+      "speaker": "p251",
+      "accent": "Indian",
+      "region": "",
+      "gender": "M",
+      "language": "en",
+      "reference": "This is a very common type of bow, one showing mainly red and yellow, with little or no green or blue.",
+      "path": "tests/fixtures/vctk-public/vctk-p251-024.wav",
+      "sha256": "1196fc3fc1259de1042a1c12a7c9465fa59656472f03675b5825d765865c0358",
+      "audio_seconds": 7.202,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 18892,
+        "file": "p251_024_mic1.flac",
+        "sha256": "067b1aa1619dc4bee6fc42fa2e54f18d9c32a9c1fee65263863e4b66af1c0ef4"
+      }
+    },
+    {
+      "id": "vctk-p251-025",
+      "speaker": "p251",
+      "accent": "Indian",
+      "region": "",
+      "gender": "M",
+      "language": "en",
+      "reference": "Johnson was pretty low.",
+      "path": "tests/fixtures/vctk-public/vctk-p251-025.wav",
+      "sha256": "3104abb25943d984c822c830f0082c005bb50e2d0b4b885ab77f361ed1007635",
+      "audio_seconds": 2.3925,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 18894,
+        "file": "p251_025_mic1.flac",
+        "sha256": "2059b7ec4cfb0e434036708d319ba7d0325fac19a11791c8a2abc60704e3b5fd"
+      }
+    },
+    {
+      "id": "vctk-p251-026",
+      "speaker": "p251",
+      "accent": "Indian",
+      "region": "",
+      "gender": "M",
+      "language": "en",
+      "reference": "But it failed.",
+      "path": "tests/fixtures/vctk-public/vctk-p251-026.wav",
+      "sha256": "9b0a978f9af6b4881a7f150369e6514ba67dd0052ec81abe8c54802a8ce848ec",
+      "audio_seconds": 4.894625,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 18896,
+        "file": "p251_026_mic1.flac",
+        "sha256": "7be0415c244caf1ce283743ae41222c26c35f6d0bdce7df3ac0bb53d6b550738"
+      }
+    },
+    {
+      "id": "vctk-p251-027",
+      "speaker": "p251",
+      "accent": "Indian",
+      "region": "",
+      "gender": "M",
+      "language": "en",
+      "reference": "That's no bad thing.",
+      "path": "tests/fixtures/vctk-public/vctk-p251-027.wav",
+      "sha256": "aa0eddab2fcbb1fd6d39a4b9bab2b6bd9238db95a1b0451f5982a0e8d5f8aa42",
+      "audio_seconds": 4.705625,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 18898,
+        "file": "p251_027_mic1.flac",
+        "sha256": "67d5122f6b824b34677997af20ed924c64d20d01d361e31bef59c406b655780a"
+      }
+    },
+    {
+      "id": "vctk-p251-028",
+      "speaker": "p251",
+      "accent": "Indian",
+      "region": "",
+      "gender": "M",
+      "language": "en",
+      "reference": "People come into the Borders for the beauty of the background.",
+      "path": "tests/fixtures/vctk-public/vctk-p251-028.wav",
+      "sha256": "16f64daac056470925b5315ea2d1fe51b9aadf23791906b033ef4410451d116c",
+      "audio_seconds": 3.765625,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 18900,
+        "file": "p251_028_mic1.flac",
+        "sha256": "4ede92faea5b476bd7a31c18102dca4c76b8b1f2f4db97b92d7e9440c25ad43a"
+      }
+    },
+    {
+      "id": "vctk-p251-029",
+      "speaker": "p251",
+      "accent": "Indian",
+      "region": "",
+      "gender": "M",
+      "language": "en",
+      "reference": "However, the following year the cancer returned.",
+      "path": "tests/fixtures/vctk-public/vctk-p251-029.wav",
+      "sha256": "41838c8786b0d70c1436711cd89839d787d5a22c829b7c22c4570d0fe401bbdd",
+      "audio_seconds": 3.2673125,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 18902,
+        "file": "p251_029_mic1.flac",
+        "sha256": "fa511b819e25f86d37bfc62aef04eb98fb3e7a138147133e48f0a8bb0a2485c1"
+      }
+    },
+    {
+      "id": "vctk-p251-030",
+      "speaker": "p251",
+      "accent": "Indian",
+      "region": "",
+      "gender": "M",
+      "language": "en",
+      "reference": "So if we can take anything from tonight, it will be fantastic.",
+      "path": "tests/fixtures/vctk-public/vctk-p251-030.wav",
+      "sha256": "6bf58ea81d6aabaa1fb450725eadb6d5c617bdba3393efa6df5c7180cd682265",
+      "audio_seconds": 3.7195,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 18904,
+        "file": "p251_030_mic1.flac",
+        "sha256": "328eb2c3911130ab4f3632bc823fe27b1ed7d2e16f3182ce953054312dad013a"
+      }
+    },
+    {
+      "id": "vctk-p225-001",
+      "speaker": "p225",
+      "accent": "English",
+      "region": "Southern England",
+      "gender": "F",
+      "language": "en",
+      "reference": "Please call Stella.",
+      "path": "tests/fixtures/vctk-public/vctk-p225-001.wav",
+      "sha256": "df475fe313e237303f4686cc82867814de42b4f52fa290529783b0d9d9306524",
+      "audio_seconds": 2.0515625,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 0,
+        "file": "p225_001_mic1.flac",
+        "sha256": "2439aaaaf7edc055d4051a1c43c3130582dcb4c3f4c797936fe118208d06b1bb"
+      }
+    },
+    {
+      "id": "vctk-p225-002",
+      "speaker": "p225",
+      "accent": "English",
+      "region": "Southern England",
+      "gender": "F",
+      "language": "en",
+      "reference": "Ask her to bring these things with her from the store.",
+      "path": "tests/fixtures/vctk-public/vctk-p225-002.wav",
+      "sha256": "dc5598ad2df532168ff53daa04caa544f79ba4f709cd39bc0b61d06a964f21af",
+      "audio_seconds": 3.9386875,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 2,
+        "file": "p225_002_mic1.flac",
+        "sha256": "dade5ee98727b5a41abdc55c25bf58d5dddae940f200924133974134942ba4fb"
+      }
+    },
+    {
+      "id": "vctk-p225-003",
+      "speaker": "p225",
+      "accent": "English",
+      "region": "Southern England",
+      "gender": "F",
+      "language": "en",
+      "reference": "Six spoons of fresh snow peas, five thick slabs of blue cheese, and maybe a snack for her brother Bob.",
+      "path": "tests/fixtures/vctk-public/vctk-p225-003.wav",
+      "sha256": "659cd2a66682510b1ed5031c07920a6a6281ef428c21c22e33292c0851ebe094",
+      "audio_seconds": 7.5881875,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 4,
+        "file": "p225_003_mic1.flac",
+        "sha256": "877a8327608bd37b82d125adca98bdf7c92c904dff8c58fb711d7d9be364dc99"
+      }
+    },
+    {
+      "id": "vctk-p225-004",
+      "speaker": "p225",
+      "accent": "English",
+      "region": "Southern England",
+      "gender": "F",
+      "language": "en",
+      "reference": "We also need a small plastic snake and a big toy frog for the kids.",
+      "path": "tests/fixtures/vctk-public/vctk-p225-004.wav",
+      "sha256": "4ab85086e68303ead42b657801ea8c543a2315abc1809a6243cf594310956a66",
+      "audio_seconds": 4.4113125,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 6,
+        "file": "p225_004_mic1.flac",
+        "sha256": "1246c29924c2707cfe39c2123fbd37340fbe337000729a926aeffaeacde9050b"
+      }
+    },
+    {
+      "id": "vctk-p225-005",
+      "speaker": "p225",
+      "accent": "English",
+      "region": "Southern England",
+      "gender": "F",
+      "language": "en",
+      "reference": "She can scoop these things into three red bags, and we will go meet her Wednesday at the train station.",
+      "path": "tests/fixtures/vctk-public/vctk-p225-005.wav",
+      "sha256": "9033fe95fd6f2e95a3b196b648b44e3401ea49cc86497dc869d6634558f5437f",
+      "audio_seconds": 6.3226875,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 8,
+        "file": "p225_005_mic1.flac",
+        "sha256": "1447829bb068e0185a8dd7349abda9e16980148c220847a6785ae0be908b369a"
+      }
+    },
+    {
+      "id": "vctk-p225-006",
+      "speaker": "p225",
+      "accent": "English",
+      "region": "Southern England",
+      "gender": "F",
+      "language": "en",
+      "reference": "When the sunlight strikes raindrops in the air, they act as a prism and form a rainbow.",
+      "path": "tests/fixtures/vctk-public/vctk-p225-006.wav",
+      "sha256": "f7b58bb6b45a9eabb3ce6ce5e45cdad4f72598f38f1c482859fca8d03ba75473",
+      "audio_seconds": 7.1831875,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 10,
+        "file": "p225_006_mic1.flac",
+        "sha256": "d7e68924b9017ed970d9cc84b3efdf8da3e223ac6af686b614720d2d2ba6aceb"
+      }
+    },
+    {
+      "id": "vctk-p225-007",
+      "speaker": "p225",
+      "accent": "English",
+      "region": "Southern England",
+      "gender": "F",
+      "language": "en",
+      "reference": "The rainbow is a division of white light into many beautiful colors.",
+      "path": "tests/fixtures/vctk-public/vctk-p225-007.wav",
+      "sha256": "94dd408a173fc7be52024003e2926967fcb0a4e43eb304be29f47875179ab45e",
+      "audio_seconds": 5.6226875,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 12,
+        "file": "p225_007_mic1.flac",
+        "sha256": "258816c57e92c23172295f50bd5130f4ba29bb0586c94ed697421f829b753b24"
+      }
+    },
+    {
+      "id": "vctk-p225-008",
+      "speaker": "p225",
+      "accent": "English",
+      "region": "Southern England",
+      "gender": "F",
+      "language": "en",
+      "reference": "These take the shape of a long round arch, with its path high above, and its two ends apparently beyond the horizon.",
+      "path": "tests/fixtures/vctk-public/vctk-p225-008.wav",
+      "sha256": "221d9cce68de7d5eef8450d296a77cde8f9ff8494667cc5f7542ab4edc1a870e",
+      "audio_seconds": 7.6475625,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 14,
+        "file": "p225_008_mic1.flac",
+        "sha256": "c4c4d3e1e128821c364db33fcec4b708e36edcea3bbc70f5334d6715aa4e00f9"
+      }
+    },
+    {
+      "id": "vctk-p225-009",
+      "speaker": "p225",
+      "accent": "English",
+      "region": "Southern England",
+      "gender": "F",
+      "language": "en",
+      "reference": "There is , according to legend, a boiling pot of gold at one end.",
+      "path": "tests/fixtures/vctk-public/vctk-p225-009.wav",
+      "sha256": "84409ce019e86bca4d0323d8d40bcfa8648499bb3f6588ce3192cc0835d746a5",
+      "audio_seconds": 5.284125,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 16,
+        "file": "p225_009_mic1.flac",
+        "sha256": "e4ae82efddc866aea0ddd7b1b8cb6ed80c49a8019c8d929d86af6a7c47961942"
+      }
+    },
+    {
+      "id": "vctk-p225-010",
+      "speaker": "p225",
+      "accent": "English",
+      "region": "Southern England",
+      "gender": "F",
+      "language": "en",
+      "reference": "People look, but no one ever finds it.",
+      "path": "tests/fixtures/vctk-public/vctk-p225-010.wav",
+      "sha256": "5b5e966fbd9ed5ca1b298bb94f5b971d6fad89362fcf13f9ef1416ea78036ab4",
+      "audio_seconds": 3.22625,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 18,
+        "file": "p225_010_mic1.flac",
+        "sha256": "251411400225ebb7534b0fe1f661af5ee7b4a055927a7218c67cee4846a04d9f"
+      }
+    },
+    {
+      "id": "vctk-p225-011",
+      "speaker": "p225",
+      "accent": "English",
+      "region": "Southern England",
+      "gender": "F",
+      "language": "en",
+      "reference": "When a man looks for something beyond his reach, his friends say he is looking for the pot of gold at the end of the rainbow.",
+      "path": "tests/fixtures/vctk-public/vctk-p225-011.wav",
+      "sha256": "f377d5a9e7b22a7716d1c50572fba22dd71dd2f4664750d51c691ee5d9c4ad75",
+      "audio_seconds": 6.82125,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 20,
+        "file": "p225_011_mic1.flac",
+        "sha256": "8eaa96bb597b8ea88198b35da6f4a4e546125bc92c114e0aaee1cd87e7f08bbb"
+      }
+    },
+    {
+      "id": "vctk-p225-012",
+      "speaker": "p225",
+      "accent": "English",
+      "region": "Southern England",
+      "gender": "F",
+      "language": "en",
+      "reference": "Throughout the centuries people have explained the rainbow in various ways.",
+      "path": "tests/fixtures/vctk-public/vctk-p225-012.wav",
+      "sha256": "a2a38cd4bdc46644db3860826aa5e646dc1c48f6ad4256774a5c12975fd3a951",
+      "audio_seconds": 6.706375,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 22,
+        "file": "p225_012_mic1.flac",
+        "sha256": "41c0c7af9f64232a3e44d4b852d433688d49a58998bf0e42ed90846a27548815"
+      }
+    },
+    {
+      "id": "vctk-p225-013",
+      "speaker": "p225",
+      "accent": "English",
+      "region": "Southern England",
+      "gender": "F",
+      "language": "en",
+      "reference": "Some have accepted it as a miracle without physical explanation.",
+      "path": "tests/fixtures/vctk-public/vctk-p225-013.wav",
+      "sha256": "31040af5cb45d08d4fe320824f8cdf96c6b897aae371e9c0e23333515e475c8c",
+      "audio_seconds": 4.71875,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 24,
+        "file": "p225_013_mic1.flac",
+        "sha256": "904c0dee950a43ba0c6ae471211c93366aab99ee66fa8af4a63ab82fa2cdb928"
+      }
+    },
+    {
+      "id": "vctk-p225-014",
+      "speaker": "p225",
+      "accent": "English",
+      "region": "Southern England",
+      "gender": "F",
+      "language": "en",
+      "reference": "To the Hebrews it was a token that there would be no more universal floods.",
+      "path": "tests/fixtures/vctk-public/vctk-p225-014.wav",
+      "sha256": "f0c70a9813c230ff1826ca09407054b36ec5ba4f69c265afa0e69ab78c422e4d",
+      "audio_seconds": 5.4443125,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 26,
+        "file": "p225_014_mic1.flac",
+        "sha256": "5136377e0e01b41e23f942a682436db033270a24c5393d64aeadf340c106ddf6"
+      }
+    },
+    {
+      "id": "vctk-p225-016",
+      "speaker": "p225",
+      "accent": "English",
+      "region": "Southern England",
+      "gender": "F",
+      "language": "en",
+      "reference": "The Norsemen considered the rainbow as a bridge over which the gods passed from earth to their home in the sky.",
+      "path": "tests/fixtures/vctk-public/vctk-p225-016.wav",
+      "sha256": "3a605cd6dec38b381b907ee2b23c7648ede882c800f8760c42917cc9d2bd042a",
+      "audio_seconds": 6.734875,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 28,
+        "file": "p225_016_mic1.flac",
+        "sha256": "1da4054fe912f09319bff9318a5c19895d3c9a72c05aae190b2c9c33ab856497"
+      }
+    },
+    {
+      "id": "vctk-p225-017",
+      "speaker": "p225",
+      "accent": "English",
+      "region": "Southern England",
+      "gender": "F",
+      "language": "en",
+      "reference": "Others have tried to explain the phenomenon physically.",
+      "path": "tests/fixtures/vctk-public/vctk-p225-017.wav",
+      "sha256": "8b22cba7618a808306fd6a9baaa8fd83c7e384bcee39bbefef9a3f8109757450",
+      "audio_seconds": 4.2419375,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 30,
+        "file": "p225_017_mic1.flac",
+        "sha256": "710247e1a38392be80eb477eccdad72b56bd0fca31d0b4be8df1dcbfbeb43d38"
+      }
+    },
+    {
+      "id": "vctk-p225-018",
+      "speaker": "p225",
+      "accent": "English",
+      "region": "Southern England",
+      "gender": "F",
+      "language": "en",
+      "reference": "Aristotle thought that the rainbow was caused by reflection of the sun's rays by the rain.",
+      "path": "tests/fixtures/vctk-public/vctk-p225-018.wav",
+      "sha256": "d7689b32740125baed7736599b7b8631c0691a0f4894413c2fefa2dc96d856d2",
+      "audio_seconds": 5.5009375,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 32,
+        "file": "p225_018_mic1.flac",
+        "sha256": "85b01dde78e700c9441c4e92301da9a281886c53e18452fa3fee0695a9c5c834"
+      }
+    },
+    {
+      "id": "vctk-p225-019",
+      "speaker": "p225",
+      "accent": "English",
+      "region": "Southern England",
+      "gender": "F",
+      "language": "en",
+      "reference": "Since then physicists have found that it is not reflection, but refraction by the raindrops which causes the rainbows.",
+      "path": "tests/fixtures/vctk-public/vctk-p225-019.wav",
+      "sha256": "7160ef1af32cbebe82f7ed7f327514f996a4b4fe0909b509264e8328f4cc4569",
+      "audio_seconds": 7.170625,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 34,
+        "file": "p225_019_mic1.flac",
+        "sha256": "663b21c1c0c920c0648c16e5fc23c7e024c5e0e93d5aa83aab7e3021beedc3a7"
+      }
+    },
+    {
+      "id": "vctk-p225-020",
+      "speaker": "p225",
+      "accent": "English",
+      "region": "Southern England",
+      "gender": "F",
+      "language": "en",
+      "reference": "Many complicated ideas about the rainbow have been formed.",
+      "path": "tests/fixtures/vctk-public/vctk-p225-020.wav",
+      "sha256": "0b533817bfb5cfe1b9ca31c4d724af8b2236153c7214e92593783f516e7fa90a",
+      "audio_seconds": 6.0345,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 36,
+        "file": "p225_020_mic1.flac",
+        "sha256": "490d1fccd08ade9e68914ec6f89794a203fb6b7258e4ec8608d1b6ddf75b208f"
+      }
+    },
+    {
+      "id": "vctk-p225-021",
+      "speaker": "p225",
+      "accent": "English",
+      "region": "Southern England",
+      "gender": "F",
+      "language": "en",
+      "reference": "The difference in the rainbow depends considerably upon the size of the drops, and the width of the colored band increases as the size of the drops increases.",
+      "path": "tests/fixtures/vctk-public/vctk-p225-021.wav",
+      "sha256": "76d36477f2a2bc9a58f31c19b3ef2235e28d15031e727ca2cea95dc2e0d44cc0",
+      "audio_seconds": 9.0326875,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 38,
+        "file": "p225_021_mic1.flac",
+        "sha256": "92b75593a8ff681f880cb70f1e9bc71c9549891e95a09427fabd9e844ebb0f57"
+      }
+    },
+    {
+      "id": "vctk-p225-022",
+      "speaker": "p225",
+      "accent": "English",
+      "region": "Southern England",
+      "gender": "F",
+      "language": "en",
+      "reference": "The actual primary rainbow observed is said to be the effect of super-imposition of a number of bows.",
+      "path": "tests/fixtures/vctk-public/vctk-p225-022.wav",
+      "sha256": "82e0c785384af9c8b167dbad679964bcbd3af60d1f719f2201eb50c1c1284a18",
+      "audio_seconds": 7.015375,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 40,
+        "file": "p225_022_mic1.flac",
+        "sha256": "a4a88b254b17544e05fb259ded18c294b133abda8ff515ae9c72e842b64ec9d0"
+      }
+    },
+    {
+      "id": "vctk-p225-023",
+      "speaker": "p225",
+      "accent": "English",
+      "region": "Southern England",
+      "gender": "F",
+      "language": "en",
+      "reference": "If the red of the second bow falls upon the green of the first, the result is to give a bow with an abnormally wide yellow band, since red and green light when mixed form yellow.",
+      "path": "tests/fixtures/vctk-public/vctk-p225-023.wav",
+      "sha256": "e4a1d91d5b6258f4420be55345af91eabe4631d7360fba39a07bf6c91bc291b9",
+      "audio_seconds": 12.1545625,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 42,
+        "file": "p225_023_mic1.flac",
+        "sha256": "ac0751ba9aebfe1ccf55066bdfb779a636232e7ce7965be2fbd8c69881a0489a"
+      }
+    },
+    {
+      "id": "vctk-p225-024",
+      "speaker": "p225",
+      "accent": "English",
+      "region": "Southern England",
+      "gender": "F",
+      "language": "en",
+      "reference": "This is a very common type of bow, one showing mainly red and yellow, with little or no green or blue.",
+      "path": "tests/fixtures/vctk-public/vctk-p225-024.wav",
+      "sha256": "95502417d49252cb754264e6f5ed8deba622366d0058a655d3cceee85377b3a3",
+      "audio_seconds": 7.3625625,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 44,
+        "file": "p225_024_mic1.flac",
+        "sha256": "f90c5df56354f0ca529920d4517ed390e1187f0e278a80ee2964592c15d2b642"
+      }
+    },
+    {
+      "id": "vctk-p225-025",
+      "speaker": "p225",
+      "accent": "English",
+      "region": "Southern England",
+      "gender": "F",
+      "language": "en",
+      "reference": "Why do you want to come to Edinburgh?",
+      "path": "tests/fixtures/vctk-public/vctk-p225-025.wav",
+      "sha256": "d9be89f60d4fae7cbb1eb42980d348eec5cc5b69c4d654b7ddea14c6e3753e37",
+      "audio_seconds": 2.92025,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 46,
+        "file": "p225_025_mic1.flac",
+        "sha256": "83799ca18bf2bec724b730f478398aed59b7a8bf60c061e19407a707563cf1e6"
+      }
+    },
+    {
+      "id": "vctk-p225-026",
+      "speaker": "p225",
+      "accent": "English",
+      "region": "Southern England",
+      "gender": "F",
+      "language": "en",
+      "reference": "How are you, sir?",
+      "path": "tests/fixtures/vctk-public/vctk-p225-026.wav",
+      "sha256": "6c0f72d7a568b25c7088398bc4a17426a4546a34ca06c7759e3c9c2e5180d5ca",
+      "audio_seconds": 1.9574375,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 48,
+        "file": "p225_026_mic1.flac",
+        "sha256": "5bc1131498e55aa7451ef28ad529d77864b4ee32ae55b342705df3fd88536efe"
+      }
+    },
+    {
+      "id": "vctk-p225-027",
+      "speaker": "p225",
+      "accent": "English",
+      "region": "Southern England",
+      "gender": "F",
+      "language": "en",
+      "reference": "So is that it, then?",
+      "path": "tests/fixtures/vctk-public/vctk-p225-027.wav",
+      "sha256": "9b5b9f939bbf37131b8d83b4c56f9b5cae2959dccea4e07acd6ed79b4f63246d",
+      "audio_seconds": 2.63175,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 50,
+        "file": "p225_027_mic1.flac",
+        "sha256": "3ed9a0f20f8c52f76b62c78b98d96b6e356d7bbc27d378fdbe050a4b1f6ecf06"
+      }
+    },
+    {
+      "id": "vctk-p225-028",
+      "speaker": "p225",
+      "accent": "English",
+      "region": "Southern England",
+      "gender": "F",
+      "language": "en",
+      "reference": "Do I have a favourite?",
+      "path": "tests/fixtures/vctk-public/vctk-p225-028.wav",
+      "sha256": "c6b4fb63951059fe07c93a6735b6b4399a6ab229bcf477c9e6e2a0549af5fb87",
+      "audio_seconds": 2.1325,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 52,
+        "file": "p225_028_mic1.flac",
+        "sha256": "6be05e06e10bf3408124e689d7e26825c7843571bb3619122301e641067dd398"
+      }
+    },
+    {
+      "id": "vctk-p225-029",
+      "speaker": "p225",
+      "accent": "English",
+      "region": "Southern England",
+      "gender": "F",
+      "language": "en",
+      "reference": "What do we do?",
+      "path": "tests/fixtures/vctk-public/vctk-p225-029.wav",
+      "sha256": "db0353d8c0bdc6cf3d22c4212a8cd9ccb7da83fabbe9c79a14e012a2eb6a0ba3",
+      "audio_seconds": 1.795875,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 54,
+        "file": "p225_029_mic1.flac",
+        "sha256": "dfe4adad786a47a4ab710951331365b7e917f8cf9336a0c450053cc6b5cf4fb5"
+      }
+    },
+    {
+      "id": "vctk-p225-030",
+      "speaker": "p225",
+      "accent": "English",
+      "region": "Southern England",
+      "gender": "F",
+      "language": "en",
+      "reference": "People come into the Borders for the beauty of the background.",
+      "path": "tests/fixtures/vctk-public/vctk-p225-030.wav",
+      "sha256": "7ab54e986af62b58320841d79aeeb2d81dcc78246591ea0cd05aa9b8aeb7fe62",
+      "audio_seconds": 4.1760625,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 56,
+        "file": "p225_030_mic1.flac",
+        "sha256": "cb35a3b259e0baebb5aed38081d68d67d72cbd25b0787f380212504609a76146"
+      }
+    },
+    {
+      "id": "vctk-p225-033",
+      "speaker": "p225",
+      "accent": "English",
+      "region": "Southern England",
+      "gender": "F",
+      "language": "en",
+      "reference": "It's really no great surprise, because the price difference is so much.",
+      "path": "tests/fixtures/vctk-public/vctk-p225-033.wav",
+      "sha256": "4db02aa967cc941a6d39e8391ec3cd1571c48a85a30d5a205f947d708b090f37",
+      "audio_seconds": 5.3066875,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 58,
+        "file": "p225_033_mic1.flac",
+        "sha256": "6a8fb12923a0db1fcf2c33f39334de224683332927da66014f5cc5ee5aa1d028"
+      }
+    },
+    {
+      "id": "vctk-p226-001",
+      "speaker": "p226",
+      "accent": "English",
+      "region": "Surrey",
+      "gender": "M",
+      "language": "en",
+      "reference": "Please call Stella.",
+      "path": "tests/fixtures/vctk-public/vctk-p226-001.wav",
+      "sha256": "965f75e00570b9c4e564ea98d58ca7158804ad9147d62de91e3b0d59caca4fe1",
+      "audio_seconds": 2.79875,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 462,
+        "file": "p226_001_mic1.flac",
+        "sha256": "450ba3382afcfb0e3ec50d52296bc64a95be4b9bc89e0a10a5bfdc57f4756864"
+      }
+    },
+    {
+      "id": "vctk-p226-002",
+      "speaker": "p226",
+      "accent": "English",
+      "region": "Surrey",
+      "gender": "M",
+      "language": "en",
+      "reference": "Ask her to bring these things with her from the store.",
+      "path": "tests/fixtures/vctk-public/vctk-p226-002.wav",
+      "sha256": "a78b93932616936c9492738eb88e322234055947e68dc78837335e1fa69be57e",
+      "audio_seconds": 4.3136875,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 464,
+        "file": "p226_002_mic1.flac",
+        "sha256": "1248c579f70dc694efb9bd7231486b4de58c7bed16a57a070219709c1de6c3c4"
+      }
+    },
+    {
+      "id": "vctk-p226-003",
+      "speaker": "p226",
+      "accent": "English",
+      "region": "Surrey",
+      "gender": "M",
+      "language": "en",
+      "reference": "Six spoons of fresh snow peas, five thick slabs of blue cheese, and maybe a snack for her brother Bob.",
+      "path": "tests/fixtures/vctk-public/vctk-p226-003.wav",
+      "sha256": "4db1f3c3dfa9050ecd6a561b718353107eb9d6010d0860a9fce998060d3b35a0",
+      "audio_seconds": 8.009625,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 466,
+        "file": "p226_003_mic1.flac",
+        "sha256": "856c6a2bb57a54183bf383a2cc162d969b18a8714d40e9792de8f4670a7d299f"
+      }
+    },
+    {
+      "id": "vctk-p226-004",
+      "speaker": "p226",
+      "accent": "English",
+      "region": "Surrey",
+      "gender": "M",
+      "language": "en",
+      "reference": "We also need a small plastic snake and a big toy frog for the kids.",
+      "path": "tests/fixtures/vctk-public/vctk-p226-004.wav",
+      "sha256": "5f1c785d55c0f72d97b78a3c1f017bcd3a8b797903996a37a371fa695c822de9",
+      "audio_seconds": 6.0943125,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 468,
+        "file": "p226_004_mic1.flac",
+        "sha256": "07655937143294483640eb7bd850405aaea4b055726fcccf8f059100f7935ee6"
+      }
+    },
+    {
+      "id": "vctk-p226-005",
+      "speaker": "p226",
+      "accent": "English",
+      "region": "Surrey",
+      "gender": "M",
+      "language": "en",
+      "reference": "She can scoop these things into three red bags, and we will go meet her Wednesday at the train station.",
+      "path": "tests/fixtures/vctk-public/vctk-p226-005.wav",
+      "sha256": "c77dab4a3ab263fdb536756efe3bc47f244e5e267e86117a5f09301138e27054",
+      "audio_seconds": 7.723625,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 470,
+        "file": "p226_005_mic1.flac",
+        "sha256": "4d6dd88ece124fc95d4b6411e15c09bd818df48d0a35cb82d27b40db549f2504"
+      }
+    },
+    {
+      "id": "vctk-p226-006",
+      "speaker": "p226",
+      "accent": "English",
+      "region": "Surrey",
+      "gender": "M",
+      "language": "en",
+      "reference": "When the sunlight strikes raindrops in the air, they act as a prism and form a rainbow.",
+      "path": "tests/fixtures/vctk-public/vctk-p226-006.wav",
+      "sha256": "ca44787f9e3442bfc8a517f47c6652c6290983ca81042e49e1fbc72b675da201",
+      "audio_seconds": 6.5458125,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 472,
+        "file": "p226_006_mic1.flac",
+        "sha256": "e9a4c5ddf578a04fd5ad1739d1cbe68d7e9c18f8e66cab1364efe643ed7b1ca1"
+      }
+    },
+    {
+      "id": "vctk-p226-007",
+      "speaker": "p226",
+      "accent": "English",
+      "region": "Surrey",
+      "gender": "M",
+      "language": "en",
+      "reference": "The rainbow is a division of white light into many beautiful colors.",
+      "path": "tests/fixtures/vctk-public/vctk-p226-007.wav",
+      "sha256": "7b36a84e004eece1ae9c61d87ffe2e584c98855b4c65d9a7a6f49692f9a44c2d",
+      "audio_seconds": 5.5625,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 474,
+        "file": "p226_007_mic1.flac",
+        "sha256": "70b3d1488aecdee9a6d987cdf8b4c23d078b99f5a5dc4100a2498f51120e6340"
+      }
+    },
+    {
+      "id": "vctk-p226-008",
+      "speaker": "p226",
+      "accent": "English",
+      "region": "Surrey",
+      "gender": "M",
+      "language": "en",
+      "reference": "These take the shape of a long round arch, with its path high above, and its two ends apparently beyond the horizon.",
+      "path": "tests/fixtures/vctk-public/vctk-p226-008.wav",
+      "sha256": "c0df327ac82de256465fcb32a97e4ddf39d4a6ada4d138ad75a19e319c4faeed",
+      "audio_seconds": 9.0101875,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 476,
+        "file": "p226_008_mic1.flac",
+        "sha256": "9570b6f075670d731ed0f0e0097db48988972b7a541e36da6455c9f1003ae3c6"
+      }
+    },
+    {
+      "id": "vctk-p226-009",
+      "speaker": "p226",
+      "accent": "English",
+      "region": "Surrey",
+      "gender": "M",
+      "language": "en",
+      "reference": "There is , according to legend, a boiling pot of gold at one end.",
+      "path": "tests/fixtures/vctk-public/vctk-p226-009.wav",
+      "sha256": "048bff357d67609a94ca5e9e4be556710c70ff3daff82e277b894b1a692ffab5",
+      "audio_seconds": 5.3054375,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 478,
+        "file": "p226_009_mic1.flac",
+        "sha256": "57cd6e1c8d911cc59c8f5670f429ba5f23a8c3632ff92aea10c718ca5b80e4e8"
+      }
+    },
+    {
+      "id": "vctk-p226-010",
+      "speaker": "p226",
+      "accent": "English",
+      "region": "Surrey",
+      "gender": "M",
+      "language": "en",
+      "reference": "People look, but no one ever finds it.",
+      "path": "tests/fixtures/vctk-public/vctk-p226-010.wav",
+      "sha256": "d743ac359ac401b282dc0847681b75e80e2241971ce055db6ed46bd91e60a0af",
+      "audio_seconds": 3.8353125,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 480,
+        "file": "p226_010_mic1.flac",
+        "sha256": "76c0438f3f33052acdc2b6b0b30febdf3b8b6e920bc768751b0963ad66448912"
+      }
+    },
+    {
+      "id": "vctk-p226-011",
+      "speaker": "p226",
+      "accent": "English",
+      "region": "Surrey",
+      "gender": "M",
+      "language": "en",
+      "reference": "When a man looks for something beyond his reach, his friends say he is looking for the pot of gold at the end of the rainbow.",
+      "path": "tests/fixtures/vctk-public/vctk-p226-011.wav",
+      "sha256": "8ce5bd6b8e41d11901751003150c8ec0ee1a72b88bee8d18a81fbce03f710b25",
+      "audio_seconds": 8.27725,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 482,
+        "file": "p226_011_mic1.flac",
+        "sha256": "40f620ae2d917b56c5215a0b3a7acc199ba972c228e1a6b841578293195098c8"
+      }
+    },
+    {
+      "id": "vctk-p226-012",
+      "speaker": "p226",
+      "accent": "English",
+      "region": "Surrey",
+      "gender": "M",
+      "language": "en",
+      "reference": "Throughout the centuries people have explained the rainbow in various ways.",
+      "path": "tests/fixtures/vctk-public/vctk-p226-012.wav",
+      "sha256": "c71ee68b149686394456f4799f8b175d55fbcbceb81e1e0a90eba4c22c3d3f16",
+      "audio_seconds": 4.708125,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 484,
+        "file": "p226_012_mic1.flac",
+        "sha256": "f82efdefed572fa2e8d20bfaf1d344f37423e8d5852e1c645c4f7e1f83d116c5"
+      }
+    },
+    {
+      "id": "vctk-p226-013",
+      "speaker": "p226",
+      "accent": "English",
+      "region": "Surrey",
+      "gender": "M",
+      "language": "en",
+      "reference": "Some have accepted it as a miracle without physical explanation.",
+      "path": "tests/fixtures/vctk-public/vctk-p226-013.wav",
+      "sha256": "5f355c38717719b0c22f706f724c560a119fa04995bade6c0ab93e94bfd801dd",
+      "audio_seconds": 6.05025,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 486,
+        "file": "p226_013_mic1.flac",
+        "sha256": "31be3da4e24daf6e1b14b9c856cd3a4102310cf8ff1034e5eaf57709a87277fe"
+      }
+    },
+    {
+      "id": "vctk-p226-014",
+      "speaker": "p226",
+      "accent": "English",
+      "region": "Surrey",
+      "gender": "M",
+      "language": "en",
+      "reference": "To the Hebrews it was a token that there would be no more universal floods.",
+      "path": "tests/fixtures/vctk-public/vctk-p226-014.wav",
+      "sha256": "c4714d581137ae23e80413e7fd4b7af3759064c4a18431bab0feba0e2210fb30",
+      "audio_seconds": 5.7021875,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 488,
+        "file": "p226_014_mic1.flac",
+        "sha256": "c42b2c719716934deaf9a7285f4c3f1927b3ca8fc064823d10774773e7d390fc"
+      }
+    },
+    {
+      "id": "vctk-p226-015",
+      "speaker": "p226",
+      "accent": "English",
+      "region": "Surrey",
+      "gender": "M",
+      "language": "en",
+      "reference": "The Greeks used to imagine that it was a sign from the gods to foretell war or heavy rain.",
+      "path": "tests/fixtures/vctk-public/vctk-p226-015.wav",
+      "sha256": "09573ea701fd425c829eab7698b12372f35e5e093978bedc3932074692bdcbbd",
+      "audio_seconds": 6.384375,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 490,
+        "file": "p226_015_mic1.flac",
+        "sha256": "01d49bbb70b7819fdb88f964492f3bd84f8afafe63a9c81dd23f8a8dbbea9170"
+      }
+    },
+    {
+      "id": "vctk-p226-016",
+      "speaker": "p226",
+      "accent": "English",
+      "region": "Surrey",
+      "gender": "M",
+      "language": "en",
+      "reference": "The Norsemen considered the rainbow as a bridge over which the gods passed from earth to their home in the sky.",
+      "path": "tests/fixtures/vctk-public/vctk-p226-016.wav",
+      "sha256": "f3a2213855c34c10430f6c9590b91e2576e40d57b0e3310ecfc7bfc26bd9b93d",
+      "audio_seconds": 8.2106875,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 492,
+        "file": "p226_016_mic1.flac",
+        "sha256": "4b3124fbf362cff6f20e557cf18d20f2975f8f76d42a2942612ce67921b408da"
+      }
+    },
+    {
+      "id": "vctk-p226-017",
+      "speaker": "p226",
+      "accent": "English",
+      "region": "Surrey",
+      "gender": "M",
+      "language": "en",
+      "reference": "Others have tried to explain the phenomenon physically.",
+      "path": "tests/fixtures/vctk-public/vctk-p226-017.wav",
+      "sha256": "97b6ebe900c90cd1604aab991356e23c91ea9be3784b6b67ba55fe636f1c824d",
+      "audio_seconds": 4.0083125,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 494,
+        "file": "p226_017_mic1.flac",
+        "sha256": "e8e437c0e419c82d52039ea8c9ba371b46f8bd6b2359228e22f73eb77d7e878a"
+      }
+    },
+    {
+      "id": "vctk-p226-018",
+      "speaker": "p226",
+      "accent": "English",
+      "region": "Surrey",
+      "gender": "M",
+      "language": "en",
+      "reference": "Aristotle thought that the rainbow was caused by reflection of the sun's rays by the rain.",
+      "path": "tests/fixtures/vctk-public/vctk-p226-018.wav",
+      "sha256": "c4b5c9aa9512a67b9ece0e28205926c5876a92f00cb9631fc616aea3ad9c779e",
+      "audio_seconds": 6.2751875,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 496,
+        "file": "p226_018_mic1.flac",
+        "sha256": "3bc3473a14f32f3f9904dac5e2817abf5d9a50af55b162b310ef1ffebe641345"
+      }
+    },
+    {
+      "id": "vctk-p226-019",
+      "speaker": "p226",
+      "accent": "English",
+      "region": "Surrey",
+      "gender": "M",
+      "language": "en",
+      "reference": "Since then physicists have found that it is not reflection, but refraction by the raindrops which causes the rainbows.",
+      "path": "tests/fixtures/vctk-public/vctk-p226-019.wav",
+      "sha256": "61fc1aac519db35bcbf9e232f44b95320ff58bd3d1a10d261fca0b1de8e0ed47",
+      "audio_seconds": 7.520375,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 498,
+        "file": "p226_019_mic1.flac",
+        "sha256": "fd2c87cb627080062002f2674ab8d09e46e151a0f81b541db8e876ec7b24a830"
+      }
+    },
+    {
+      "id": "vctk-p226-020",
+      "speaker": "p226",
+      "accent": "English",
+      "region": "Surrey",
+      "gender": "M",
+      "language": "en",
+      "reference": "Many complicated ideas about the rainbow have been formed.",
+      "path": "tests/fixtures/vctk-public/vctk-p226-020.wav",
+      "sha256": "dbf52f107c61e04817668c6c9be975451ad0b60c09cb51c819237e06d40172d5",
+      "audio_seconds": 4.5176875,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 500,
+        "file": "p226_020_mic1.flac",
+        "sha256": "4d3e6532abcee99965c8e1173bee2e73ed25ee7f11813cd017b70f2c8388df36"
+      }
+    },
+    {
+      "id": "vctk-p226-021",
+      "speaker": "p226",
+      "accent": "English",
+      "region": "Surrey",
+      "gender": "M",
+      "language": "en",
+      "reference": "The difference in the rainbow depends considerably upon the size of the drops, and the width of the colored band increases as the size of the drops increases.",
+      "path": "tests/fixtures/vctk-public/vctk-p226-021.wav",
+      "sha256": "732cbac0ceb9dd9168cab4d84440a9150557007b1dd0fdfac8828a0316dfc634",
+      "audio_seconds": 9.999125,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 502,
+        "file": "p226_021_mic1.flac",
+        "sha256": "d39d5079350e82d9d49983b72abee0484bff56158b2f585c4117afe709e8586f"
+      }
+    },
+    {
+      "id": "vctk-p226-022",
+      "speaker": "p226",
+      "accent": "English",
+      "region": "Surrey",
+      "gender": "M",
+      "language": "en",
+      "reference": "The actual primary rainbow observed is said to be the effect of super-imposition of a number of bows.",
+      "path": "tests/fixtures/vctk-public/vctk-p226-022.wav",
+      "sha256": "a8cccc79cd520a65811236fb88936bcebae3fb46e994e4fe2bbb397f447af430",
+      "audio_seconds": 7.714625,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 504,
+        "file": "p226_022_mic1.flac",
+        "sha256": "b0a15883021e15889292a877cb1144e6fa727e982102d82e06b348193fb435cf"
+      }
+    },
+    {
+      "id": "vctk-p226-023",
+      "speaker": "p226",
+      "accent": "English",
+      "region": "Surrey",
+      "gender": "M",
+      "language": "en",
+      "reference": "If the red of the second bow falls upon the green of the first, the result is to give a bow with an abnormally wide yellow band, since red and green light when mixed form yellow.",
+      "path": "tests/fixtures/vctk-public/vctk-p226-023.wav",
+      "sha256": "5357374db4a3a80966011dd14277f89a093d32675c3bff2fbe860c99b5fb410e",
+      "audio_seconds": 12.153,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 506,
+        "file": "p226_023_mic1.flac",
+        "sha256": "e1fd78e41082e9966e2036283d8aa727397d50b111ebf2d008cfab6fb5f18792"
+      }
+    },
+    {
+      "id": "vctk-p226-024",
+      "speaker": "p226",
+      "accent": "English",
+      "region": "Surrey",
+      "gender": "M",
+      "language": "en",
+      "reference": "This is a very common type of bow, one showing mainly red and yellow, with little or no green or blue.",
+      "path": "tests/fixtures/vctk-public/vctk-p226-024.wav",
+      "sha256": "4f9b46c0b4b4a70765dea657582d2287f7e56835c36b2e2627a1d11eb0d098ea",
+      "audio_seconds": 7.5866875,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 508,
+        "file": "p226_024_mic1.flac",
+        "sha256": "cb164adfd33e45335b7fe592ac924536b480a2443269ea46171b7683201f3628"
+      }
+    },
+    {
+      "id": "vctk-p226-025",
+      "speaker": "p226",
+      "accent": "English",
+      "region": "Surrey",
+      "gender": "M",
+      "language": "en",
+      "reference": "He has not been named.",
+      "path": "tests/fixtures/vctk-public/vctk-p226-025.wav",
+      "sha256": "7561838e350c3974890b196ae01c9ff436309d06f0c0338681b798ecbd18ac0c",
+      "audio_seconds": 2.8169375,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 510,
+        "file": "p226_025_mic1.flac",
+        "sha256": "9b68a621a641393300760e174426cbe49a4c38f624925243e67fd872e3db87a1"
+      }
+    },
+    {
+      "id": "vctk-p226-026",
+      "speaker": "p226",
+      "accent": "English",
+      "region": "Surrey",
+      "gender": "M",
+      "language": "en",
+      "reference": "That's no bad thing.",
+      "path": "tests/fixtures/vctk-public/vctk-p226-026.wav",
+      "sha256": "ac1178496210ad67944adb2046b03aaed26485a8c8f31cc83c128d70283b5dc7",
+      "audio_seconds": 2.446,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 512,
+        "file": "p226_026_mic1.flac",
+        "sha256": "0c53986da272d41d763a8277ba245301e7c4710aba33cd3e2974f9b457ebff11"
+      }
+    },
+    {
+      "id": "vctk-p226-027",
+      "speaker": "p226",
+      "accent": "English",
+      "region": "Surrey",
+      "gender": "M",
+      "language": "en",
+      "reference": "They should have a major rethink about the event for next year.",
+      "path": "tests/fixtures/vctk-public/vctk-p226-027.wav",
+      "sha256": "2f10b2901cd741e290774910b42fdfcdb80ec20888847bca76a4b8f0920f823c",
+      "audio_seconds": 4.3314375,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 514,
+        "file": "p226_027_mic1.flac",
+        "sha256": "5d09a6dd07a4f75dd7c00ccf27c829f8951ada9d653245828d3c14d7332491a3"
+      }
+    },
+    {
+      "id": "vctk-p226-028",
+      "speaker": "p226",
+      "accent": "English",
+      "region": "Surrey",
+      "gender": "M",
+      "language": "en",
+      "reference": "Suggestions of the action being a punishment were dismissed.",
+      "path": "tests/fixtures/vctk-public/vctk-p226-028.wav",
+      "sha256": "99a31f63d87c916cda3b97b08f11ef7c604ff4939f9510b95e8341d41c0e6645",
+      "audio_seconds": 4.401,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 516,
+        "file": "p226_028_mic1.flac",
+        "sha256": "450489c8d63dc7a7386e801243d2862ede28e673627d6e07101d9b5a55be9513"
+      }
+    },
+    {
+      "id": "vctk-p226-029",
+      "speaker": "p226",
+      "accent": "English",
+      "region": "Surrey",
+      "gender": "M",
+      "language": "en",
+      "reference": "We want to ensure that the process is entirely transparent.",
+      "path": "tests/fixtures/vctk-public/vctk-p226-029.wav",
+      "sha256": "50fa05afb584105c3bbe1ec10a7654a782b42fceff717688905c827353189e4f",
+      "audio_seconds": 5.224625,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 518,
+        "file": "p226_029_mic1.flac",
+        "sha256": "c2eb481a6fcb8243c8400d65911be5b33daffda6f95cda03c7dd2461d0fdad02"
+      }
+    },
+    {
+      "id": "vctk-p226-030",
+      "speaker": "p226",
+      "accent": "English",
+      "region": "Surrey",
+      "gender": "M",
+      "language": "en",
+      "reference": "Because we do not need it.",
+      "path": "tests/fixtures/vctk-public/vctk-p226-030.wav",
+      "sha256": "161e12efccf05332517f439f36dfbd32682a2b9e7eb2f7c89fb43449b7333fd9",
+      "audio_seconds": 3.478375,
+      "source": {
+        "dataset": "sanchit-gandhi/vctk",
+        "revision": "73ef4ee7d49a6fed4ea1efd65f82b4c95faeb9de",
+        "row": 520,
+        "file": "p226_030_mic1.flac",
+        "sha256": "cbf1d1d14c2b3b407fc82f3ec49eb47da3112f2cede0e5e441d849899bb95f5c"
+      }
+    }
+  ]
+}
