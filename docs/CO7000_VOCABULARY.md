@@ -100,6 +100,11 @@ confusable words, negation and numbers, for example “The issue already exists;
 occur” and “The cost is fifteen thousand, not fifty thousand”. Test both the full term and
 how you naturally say its abbreviation. Do not put these full sentences into Today's vocabulary.
 
+The [expanded public-accent tests](evidence/indian-english-2026-09-23.md) found mixed
+effects from short topic hints, including omitted names in a live replay. Compare
+the complete caption with guidance off and on; do not assume more hints mean better
+recognition. The [five-minute paired check](ACCENT_CHECK.md) gives a simple procedure.
+
 No lecturer recordings were included in CO7000.zip. The slides and notes establish vocabulary,
 not speech accuracy. Improvement for Indian-accented English remains to be validated on your
 colleague's recordings, with the same before/after checks for your British-accented English.

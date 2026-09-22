@@ -191,7 +191,8 @@ Try changes while the lecture is stopped, using a short passage and your usual m
 
 1. Choose **English → Simplified Chinese** when comparing English words, and test your microphone.
    On Snapdragon or Apple Silicon, try **Balanced** for the larger Whisper model.
-2. Try **Speech recognition → Careful**. It checks more possible word sequences and can be slower.
+2. Start with **Standard**, then compare it with **Speech recognition → Careful**.
+   Careful checks more possible word sequences, can be slower and does not help every speaker.
 3. For technical words, enter a short relevant list under **Today's vocabulary**, one term per line,
    then tick **Use these terms to guide speech recognition**.
 4. For **CO7000**, choose the week and click **Use this week's terms**. This replaces the current list
@@ -205,6 +206,12 @@ the smaller Fast model. Balanced and Careful can increase memory use and caption
 [Speech settings and measured results](docs/SPEECH_RECOGNITION.md) ·
 [Five-minute check with your colleague](docs/ACCENT_CHECK.md) ·
 [CO7000 weekly vocabulary guide](docs/CO7000_VOCABULARY.md).
+
+**Expanded accent testing:** 120 additional public recordings support trying Balanced first.
+On the tested Snapdragon, it reduced Indian-English word errors from 6.80% to 4.76%
+compared with Fast; the English controls improved too. Hints sometimes omitted a spoken
+name, so check the whole sentence before keeping them on. These are public speakers,
+not your colleagues; [read the results and limitations](docs/evidence/indian-english-2026-09-23.md).
 
 English vocabulary, glossary corrections and CO7000 hints are preserved when switching, but are
 **not applied to Mandarin turns**. There is no reviewed reverse CO7000 glossary yet. For example,

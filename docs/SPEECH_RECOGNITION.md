@@ -41,28 +41,41 @@ first. Auto's language decision and Whisper's choice of words are different chec
 
 For project-management teaching, use the [CO7000 weekly vocabulary guide](CO7000_VOCABULARY.md).
 
-## What the current tests show
+## What the expanded tests show
 
-The public comparison used 20 short recordings from one Indian-English speaker and 20 from
-one Scottish-English speaker, plus eight existing synthetic technical clips. Neither public
-speaker is you or your colleague. These are small read-speech checks, not a classroom benchmark
-or evidence about all Indian or British accents.
+The new comparison adds **120 recordings**: 30 each from two Indian-English speakers
+and two English speakers from England. Each group has one female and one male voice.
+There are 23 sentences shared by all four speakers, plus other read material. These are public
+VCTK read recordings, not either lecturer or a classroom recording.
 
-With **Balanced / Whisper Small on Qualcomm NPU**, Careful decoding reduced word errors from
-8 to 6 out of 189 words for the Indian-English speaker (4.23% → 3.17%), and from 5 to 3 out of
-185 words for the Scottish-English speaker (2.70% → 1.62%). For example, the Indian-English
-recording's “rendezvous” changed from “Render Wu” to the correct word.
+On the tested Snapdragon NPU, **Balanced / Whisper Small with Standard** reduced
+Indian-English word errors from **60 to 42 out of 882 words**, compared with
+Fast / Whisper Base: **6.80% → 4.76% WER**. Both Indian-English speakers improved.
+The English controls also improved, from **35 to 23 errors out of 874 words**
+(4.00% → 2.63%). This supports trying the larger model first where available.
 
-Careful did **not** improve every model: Indian-English errors increased with both tested Base
-backends. Electronics vocabulary helped one raw technical transcription on Small but worsened
-unrelated read speech. The existing glossary already corrected that technical spelling in the
-final caption, so this is not evidence of a new visible technical-caption accuracy gain.
+**Careful is still a comparison option, not an automatic recommendation.** On Small,
+the Indian-English total changed only from 42 to 41 errors. One speaker improved
+from 32 to 29, including “A race total” becoming “Aristotle”; the other changed
+from 10 to 12, due to “raindrops” becoming “rain drops”. Raw WER counts such formatting
+differences too. Artificial noise also produced mixed results. Compare your own
+words and caption delay before saving a preset.
 
-Standard with hints off reproduced every baseline transcript in the 48-clip comparison on all
-three tested backends. The x64 UI/GPU path was checked separately on Adreno, under Windows
-ARM emulation. Physical Intel/AMD GPU/NPU verification remains pending.
+No speech model, decoder default, vocabulary rule, audio processing or language
+threshold was changed in this testing round. Your existing working settings remain
+the baseline. A short relevant vocabulary list can help names, but it can also
+worsen other words; a better score on these recordings is not proof of improvement
+on your colleague's CO7000 lectures.
 
-See [the full comparison and limitations](evidence/speech-recognition-2026-09-21.md).
+The live diagnostic also exposed a useful caution: with hints on, some captions
+omitted the very name being prompted. If that happens, turn guidance off and
+compare again. The unprompted Standard and Careful replays retained that name.
+
+See the [expanded results and limits](evidence/indian-english-2026-09-23.md).
+The [earlier KSP/AWB and synthetic technical comparison](evidence/speech-recognition-2026-09-21.md)
+remains available separately; it used different speakers and passages and should
+not be combined into an apparent before/after score. Physical Intel/AMD GPU/NPU
+and both lecturers' classroom recordings still need validation.
 
 ## Speed, memory and hardware
 

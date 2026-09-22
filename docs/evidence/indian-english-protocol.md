@@ -47,3 +47,19 @@ This is explicitly **exploratory**, not independent confirmation: the list was
 chosen after seeing some errors. It tests the existing prompting feature, not
 an accent-specific correction or new trained model. It does not validate CO7000
 pronunciation by either lecturer.
+
+## Live diagnostic replay
+
+After the full-clip comparisons, replay eight selected recordings through the
+production Pipeline/WavSource at real-time cadence: p248-018; p251-005, 015, 018,
+019, 023; p225-018; p226-018. They include observed name/word failures, long speech
+that crosses phrase boundaries and both English controls. Add one second of
+silence between clips without gain normalisation. Compare Small Standard,
+Small Careful and Small Standard with the exploratory science hints.
+
+This selected 61.63-second sequence is a diagnostic, not another independent
+accuracy set. Measure final English caption WER, translated pairs, queue drops,
+caption latency, transcript saving and byte-identical journal recovery. A
+functional/export pass is not an accuracy pass. There is no live microphone,
+classroom acoustics, human Chinese-translation review or Auto switching in this
+manual-English replay. `scripts/evaluate_accent_replay.py` reproduces it.

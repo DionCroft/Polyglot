@@ -3,6 +3,25 @@
 Updated 2026-09-23. Automatic English/Mandarin turns added to the main application.
 Production classroom acceptance remains open.
 
+## Expanded Indian-English testing (23 September 2026)
+
+- Added 120 pinned public recordings: two further Indian-English and two English
+  control speakers. Six clean backend/mode comparisons plus noise, quiet and
+  exploratory vocabulary checks produced 1,440 local full-clip transcriptions.
+- On Snapdragon, Small Standard reduced pooled Indian-English WER from 6.80%
+  (Base Standard) to 4.76%; both Indian-English speakers and both English controls
+  improved. Careful and hints remain optional because results vary by speaker.
+- Three real-time, 61.63-second public-audio replays exercised phrase boundaries,
+  translation and exports with no queue drops/skips and exact journal recovery.
+  The hinted replay was less accurate and sometimes omitted the hinted name.
+  These functional checks do not establish classroom or lecturer-specific accuracy.
+- Both Windows runtimes pass 112 tests (two POSIX-only skips each). A fresh run
+  exactly preserves the existing 36 English speech and 40 translation outputs.
+- App inference code, models and defaults remain unchanged. Updated beginner
+  guidance and reproducible test tools are on main; the release remains 0.7.0b1.
+- [Complete evidence and limits](docs/evidence/indian-english-2026-09-23.md) ·
+  [Five-minute check with your colleague](docs/ACCENT_CHECK.md).
+
 ## Auto conversations 0.7.0b1
 
 - **Auto · English ↔ Mandarin** is an optional choice in the main app and Teaching controls. Existing English/manual settings remain unchanged. Whisper detects each phrase offline; both translation directions are prepared before Auto starts.
