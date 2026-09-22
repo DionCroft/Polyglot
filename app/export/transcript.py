@@ -54,15 +54,23 @@ class Transcript:
             self.pending[c.identifier] = c
             self._write(
                 "events.jsonl",
-                json.dumps({"type": "english", **c.__dict__}, ensure_ascii=False)
+                json.dumps(
+                    {
+                        "type": "english" if c.source_language == "en" else "source",
+                        **c.__dict__,
+                    },
+                    ensure_ascii=False,
+                )
                 + "\n",
             )
+            language = "English" if c.source_language == "en" else "Chinese"
             self._write(
-                "English Transcript.txt", f"[{timestamp(c.start)}] {c.english}\n"
+                language + " Transcript.txt",
+                f"[{timestamp(c.start)}] {c.source_text}\n",
             )
             self._write(
-                "English.srt",
-                f"{c.identifier}\n{timestamp(c.start)} --> {timestamp(c.end)}\n{c.english}\n\n",
+                language + ".srt",
+                f"{c.identifier}\n{timestamp(c.start)} --> {timestamp(c.end)}\n{c.source_text}\n\n",
             )
 
     def pair(self, c):
@@ -83,21 +91,27 @@ class Transcript:
                 break
             c = self.ready.pop(identifier)
             self.pending.pop(identifier)
+            from app.languages import caption_labels
+
+            en_label, zh_label = caption_labels(c.source_language)
+            labelled = f"{en_label}: {c.english}\n{zh_label}: {c.chinese}"
             self._write(
                 "Bilingual Transcript.txt",
-                f"[{timestamp(c.start)}] {c.english}\n{c.chinese}\n\n",
+                f"[{timestamp(c.start)}] {labelled}\n\n",
             )
             self._write(
                 "Bilingual.vtt",
                 f"{c.identifier}\n{timestamp(c.start, True)} --> {timestamp(c.end, True)}\n{c.english}\n{c.chinese}\n\n",
             )
-            if c.chinese:
+            if c.translated_text:
+                language = "Chinese" if c.source_language == "en" else "English"
                 self._write(
-                    "Chinese Transcript.txt", f"[{timestamp(c.start)}] {c.chinese}\n"
+                    language + " Transcript.txt",
+                    f"[{timestamp(c.start)}] {c.translated_text}\n",
                 )
                 self._write(
-                    "Chinese.srt",
-                    f"{c.identifier}\n{timestamp(c.start)} --> {timestamp(c.end)}\n{c.chinese}\n\n",
+                    language + ".srt",
+                    f"{c.identifier}\n{timestamp(c.start)} --> {timestamp(c.end)}\n{c.translated_text}\n\n",
                 )
 
     def close(self):
@@ -136,7 +150,7 @@ def recover_journal(journal, destination):
                     raise ValueError("Invalid journal record")
                 kind = event.pop("type")
                 caption = Caption(**event)
-                if kind == "english":
+                if kind in {"english", "source"}:
                     english[caption.identifier] = caption
                 elif kind == "pair":
                     pairs[caption.identifier] = caption

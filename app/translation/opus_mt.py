@@ -7,9 +7,23 @@ from app.system.inference import session
 class OpusMT:
     name = "OPUS-MT EN → ZH · local CPU"
 
-    def __init__(self, folder, beams=4, length_penalty=1.0, early_stopping=False):
+    def __init__(
+        self,
+        folder,
+        beams=4,
+        length_penalty=1.0,
+        early_stopping=False,
+        source_language="en",
+    ):
         from opencc import OpenCC
+        from app.languages import validate_language
 
+        self.source_language = validate_language(source_language)
+        self.name = (
+            "OPUS-MT "
+            + ("EN → ZH" if source_language == "en" else "ZH → EN")
+            + " · local CPU"
+        )
         self.beams = beams
         self.length_penalty = length_penalty
         self.early_stopping = early_stopping
@@ -24,7 +38,7 @@ class OpusMT:
 
     def encode(self, text):
         return (
-            [self.vocab[">>cmn_Hans<<"]]
+            ([self.vocab[">>cmn_Hans<<"]] if self.source_language == "en" else [])
             + [self.vocab.get(p, 1) for p in self.source.encode(text, out_type=str)]
             + [0]
         )
@@ -125,4 +139,4 @@ class OpusMT:
             .replace("▁", " ")
             .strip()
         )
-        return self.simplify.convert(text)
+        return self.simplify.convert(text) if self.source_language == "en" else text

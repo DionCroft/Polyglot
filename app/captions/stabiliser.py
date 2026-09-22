@@ -13,7 +13,7 @@ class CaptionStabiliser:
         self.previous = []
         self.stable = []
 
-    def accept(self, phrase, text, epoch=0):
+    def accept(self, phrase, text, epoch=0, source_language="en"):
         text = " ".join(text.split())
         if not text or phrase.identifier <= self.last_final:
             return None
@@ -21,7 +21,8 @@ class CaptionStabiliser:
             self.current = (epoch, phrase.identifier)
             self.previous = []
             self.stable = []
-        words = text.split()
+        # Chinese has no mandatory word spaces. Compare characters for stable prefixes.
+        words = list(text) if source_language == "zh" else text.split()
         if phrase.final:
             self.last_final = phrase.identifier
         else:
@@ -36,12 +37,14 @@ class CaptionStabiliser:
             # Wait for agreement from two hypotheses before displaying a prefix.
             if not self.stable:
                 return None
-            text = " ".join(self.stable)
+            text = ("" if source_language == "zh" else " ").join(self.stable)
         return Caption(
             phrase.identifier,
             phrase.start,
             phrase.end,
-            text,
+            text if source_language == "en" else "",
+            chinese=text if source_language == "zh" else "",
             final=phrase.final,
             epoch=epoch,
+            source_language=source_language,
         )

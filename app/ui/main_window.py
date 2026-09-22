@@ -95,6 +95,7 @@ class MainWindow(QMainWindow):
         self.pipeline = None
         self.loader = None
         self.closer = None
+        self.language_worker = None
         self.closing = False
         self.wav = None
         self.checker = None
@@ -166,7 +167,12 @@ class MainWindow(QMainWindow):
         actions.addWidget(self.retry_button)
         layout.addLayout(actions)
         footer = QHBoxLayout()
-        privacy = QLabel("LOCAL PROCESSING  ·  ENGLISH → 简体中文")
+        from app.languages import DIRECTIONS
+
+        privacy = QLabel(
+            "LOCAL PROCESSING  ·  " + DIRECTIONS[self.cfg.speaking_language]
+        )
+        self.direction_label = privacy
         privacy.setObjectName("muted")
         footer.addWidget(privacy)
         footer.addStretch()
@@ -220,7 +226,11 @@ class MainWindow(QMainWindow):
 
         try:
             result = check(
-                ROOT, self.cfg.profile, self.model_store, self.cfg.accelerator
+                ROOT,
+                self.cfg.profile,
+                self.model_store,
+                self.cfg.accelerator,
+                self.cfg.speaking_language,
             )
         except Exception:
             logging.exception("Readiness check failed")
@@ -232,6 +242,67 @@ class MainWindow(QMainWindow):
                 "messages": ["Readiness check failed. See local logs."],
             }
         self.bridge.event.emit("readiness", result)
+
+    def sync_language_controls(self):
+        from app.languages import caption_labels, DIRECTIONS
+
+        for widget in [self.speaking_language] + (
+            [self.teaching.language] if self.teaching else []
+        ):
+            widget.blockSignals(True)
+            widget.setCurrentIndex(widget.findData(self.cfg.speaking_language))
+            widget.blockSignals(False)
+        en, zh = caption_labels(self.cfg.speaking_language)
+        self.preview_en_label.setText(en)
+        self.preview_zh_label.setText(zh)
+        self.direction_label.setText(
+            "LOCAL PROCESSING  ·  " + DIRECTIONS[self.cfg.speaking_language]
+        )
+
+    def enable_language_controls(self, enabled):
+        self.speaking_language.setEnabled(enabled)
+        if self.teaching:
+            self.teaching.language.setEnabled(enabled)
+
+    def select_language(self, *_):
+        language = self.speaking_language.currentData()
+        if not self.pipeline:
+            self.cfg.speaking_language = language
+            self.overlay.reset()
+            self.sync_language_controls()
+            self.readiness()
+            self.persist()
+            return
+        if (
+            self.closer
+            or not self.pipeline.started
+            or self.pipeline.loading
+            or (self.language_worker and self.language_worker.is_alive())
+        ):
+            self.sync_language_controls()
+            return
+        self.enable_language_controls(False)
+        self.pause_button.setEnabled(False)
+        engine = self.pipeline
+
+        def switch():
+            try:
+                engine.switch_language(language)
+            except Exception as exc:
+                logging.exception("Language switch failed; previous direction retained")
+                self.bridge.event.emit(
+                    "warning",
+                    "Language was not changed. "
+                    + str(exc)
+                    + " Repair setup if the Mandarin translation model is missing.",
+                )
+            finally:
+                self.bridge.event.emit("language-finished", None)
+
+        self.language_worker = threading.Thread(
+            target=switch, name="LectureLive language switch", daemon=False
+        )
+        self.language_worker.start()
 
     def select_accelerator(self):
         self.cfg.accelerator = self.accelerator.currentData()
@@ -267,6 +338,7 @@ class MainWindow(QMainWindow):
             vocabulary_guidance=self.vocabulary_guidance.isChecked(),
             glossary=self.glossary.currentData(),
             save_transcripts=self.save.isChecked(),
+            speaking_language=self.speaking_language.currentData(),
         )
 
     def save_preset(self):
@@ -296,6 +368,7 @@ class MainWindow(QMainWindow):
             cfg.lock_shortcut = self.cfg.lock_shortcut
             cfg.pause_shortcut = self.cfg.pause_shortcut
             self.cfg = cfg
+            self.sync_language_controls()
             self.overlay.settings = cfg
             self.title.setText(cfg.lecture_title)
             self.vocabulary.setPlainText(cfg.vocabulary)
@@ -412,6 +485,7 @@ class MainWindow(QMainWindow):
 
             self.teaching = TeachingControls(self)
         self.teaching.status.setText(self.status.text())
+        self.sync_language_controls()
         self.teaching.show()
         self.teaching.raise_()
         self.hide()
@@ -537,6 +611,21 @@ class MainWindow(QMainWindow):
         form.addWidget(self.mic_test_result)
         left.addWidget(mic)
         captions, form = self.group("2 · CAPTIONS")
+        form.addWidget(QLabel("Who is speaking?"))
+        self.speaking_language = QComboBox()
+        self.speaking_language.setAccessibleName("Speaking language")
+        self.speaking_language.addItem("English → 简体中文", "en")
+        self.speaking_language.addItem("Mandarin 普通话 → English", "zh")
+        self.speaking_language.setCurrentIndex(
+            max(0, self.speaking_language.findData(self.cfg.speaking_language))
+        )
+        self.speaking_language.currentIndexChanged.connect(self.select_language)
+        form.addWidget(self.speaking_language)
+        self.language_hint = QLabel(
+            "Switch between speakers. Wait for Listening before speaking again."
+        )
+        self.language_hint.setWordWrap(True)
+        form.addWidget(self.language_hint)
         form.addWidget(QLabel("Caption languages"))
         self.mode = QComboBox()
         self.mode.setAccessibleName("Caption languages")
@@ -603,9 +692,9 @@ class MainWindow(QMainWindow):
             form.addWidget(QLabel("Processing hardware"))
             form.addWidget(self.accelerator)
             hint = QLabel(
-                "Automatic uses Core ML for Fast and CPU for Balanced. Core ML with Balanced is experimental.\nDecoding and Chinese translation use CPU. First Core ML use can take several minutes."
+                "Automatic uses Core ML for Fast and CPU for Balanced. Core ML with Balanced is experimental.\nDecoding and translation use CPU. First Core ML use can take several minutes."
                 if is_macos()
-                else "GPU/NPU accelerates speech encoding. Decoding and Chinese translation use CPU.\nFor NPU setup, read the Windows beta guide."
+                else "GPU/NPU accelerates speech encoding. Decoding and translation use CPU.\nFor NPU setup, read the Windows beta guide."
             )
             hint.setWordWrap(True)
             form.addWidget(hint)
@@ -651,6 +740,12 @@ class MainWindow(QMainWindow):
         steps.setObjectName("muted")
         right.addWidget(steps)
         preview, form = self.group("CAPTION PREVIEW")
+        from app.languages import caption_labels
+
+        en_label, zh_label = caption_labels(self.cfg.speaking_language)
+        self.preview_en_label = QLabel(en_label)
+        self.preview_en_label.setObjectName("muted")
+        form.addWidget(self.preview_en_label)
         self.preview_en = QLabel("Your words. Understood.")
         self.preview_en.setObjectName("previewEnglish")
         self.preview_en.setWordWrap(True)
@@ -658,6 +753,9 @@ class MainWindow(QMainWindow):
             QFont("Helvetica Neue" if is_macos() else "Segoe UI", 22)
         )
         form.addWidget(self.preview_en)
+        self.preview_zh_label = QLabel(zh_label)
+        self.preview_zh_label.setObjectName("muted")
+        form.addWidget(self.preview_zh_label)
         self.preview_zh = QLabel("让每一句话，都被听懂。")
         self.preview_zh.setObjectName("previewChinese")
         self.preview_zh.setWordWrap(True)
@@ -718,6 +816,11 @@ class MainWindow(QMainWindow):
         )
         guidance_help.setWordWrap(True)
         form.addWidget(guidance_help)
+        direction_help = QLabel(
+            "English vocabulary and CO7000 hints are kept for English turns. They are not applied to Mandarin speech or Mandarin → English translation."
+        )
+        direction_help.setWordWrap(True)
+        form.addWidget(direction_help)
         label = QLabel(
             "Vocabulary guidance is optional. Use only terms relevant to this lecture; save them in a lecture preset."
         )
@@ -851,7 +954,7 @@ class MainWindow(QMainWindow):
         title.setObjectName("sectionTitle")
         layout.addWidget(title)
         intro = QLabel(
-            "English speech. Simplified Chinese captions. All processed on your computer."
+            "English and Mandarin conversations. Speech and translation processed on your computer."
         )
         intro.setWordWrap(True)
         intro.setObjectName("muted")
@@ -996,6 +1099,8 @@ class MainWindow(QMainWindow):
         self.cfg.mode = mode
         self.preview_en.setVisible(mode != "Chinese")
         self.preview_zh.setVisible(mode != "English")
+        self.preview_en_label.setVisible(mode != "Chinese")
+        self.preview_zh_label.setVisible(mode != "English")
         self.overlay.update()
         self.persist()
 
@@ -1046,7 +1151,10 @@ class MainWindow(QMainWindow):
             (
                 "Translation model",
                 (
-                    ROOT / "models/translation/opus/onnx/encoder_model_quantized.onnx"
+                    ROOT
+                    / "models/translation"
+                    / ("opus" if self.cfg.speaking_language == "en" else "opus-zh-en")
+                    / "onnx/encoder_model_quantized.onnx"
                 ).exists(),
             ),
             ("Voice detection", (ROOT / "models/vad/silero_vad.onnx").exists()),
@@ -1120,6 +1228,7 @@ class MainWindow(QMainWindow):
         self.cfg.vocabulary_guidance = self.vocabulary_guidance.isChecked()
         self.cfg.glossary = self.glossary.currentData()
         self.cfg.save_transcripts = self.save.isChecked()
+        self.cfg.speaking_language = self.speaking_language.currentData()
         self.persist()
         from dataclasses import replace
 
@@ -1142,6 +1251,7 @@ class MainWindow(QMainWindow):
         self.start_button.setText("Stop lecture")
         self.pause_button.setEnabled(True)
         self.mic_test_button.setEnabled(False)
+        self.enable_language_controls(False)
         for w in [
             self.microphone,
             self.profile,
@@ -1182,6 +1292,8 @@ class MainWindow(QMainWindow):
         def finish():
             if loader:
                 loader.join()
+            if self.language_worker:
+                self.language_worker.join()
             engine.close()
             self.bridge.event.emit("stopped", None)
 
@@ -1211,7 +1323,7 @@ class MainWindow(QMainWindow):
                     ("✓ " if value[k] else "Unavailable: ") + label
                     for k, label in [
                         ("speech", "Speech"),
-                        ("translation", "Chinese"),
+                        ("translation", "Translation"),
                         ("vad", "Voice detection"),
                     ]
                 )
@@ -1236,6 +1348,8 @@ class MainWindow(QMainWindow):
             self.pipeline = None
             self.loader = None
             self.closer = None
+            self.language_worker = None
+            self.enable_language_controls(True)
             self.status.setText("●  Ready")
             self.start_button.setText("Start lecture")
             self.start_button.setEnabled(True)
@@ -1258,6 +1372,23 @@ class MainWindow(QMainWindow):
                 self.close()
             elif self.restart_requested:
                 QTimer.singleShot(100, self.restart_after_failure)
+        elif kind == "language":
+            self.cfg.speaking_language = value
+            self.overlay.reset()
+            self.overlay.preview = False
+            self.last_caption = None
+            self.preview_en.setText("")
+            self.preview_zh.setText("")
+            self.preview_hint.setText(
+                "Language changed. Wait for Listening, then speak."
+            )
+            self.sync_language_controls()
+            self.persist()
+        elif kind == "language-finished":
+            self.sync_language_controls()
+            if self.pipeline and not self.pipeline.stop_event.is_set():
+                self.enable_language_controls(True)
+                self.pause_button.setEnabled(True)
         elif kind == "warning":
             self.warn(str(value))
         elif kind == "backend":
@@ -1265,6 +1396,8 @@ class MainWindow(QMainWindow):
         elif kind == "transcript":
             self.transcript_path = Path(value)
         elif kind == "state":
+            if value in {"Listening", "Paused"} and not self.closer:
+                self.enable_language_controls(True)
             if "unavailable" in str(value):
                 self.retry_button.show()
             self.status.setText("●  " + str(value))
@@ -1272,7 +1405,10 @@ class MainWindow(QMainWindow):
                 self.teaching.status.setText(str(value))
                 self.teaching.pause.setText("Resume" if value == "Paused" else "Pause")
                 self.teaching.pause.setEnabled(
-                    not self.pipeline.stop_event.is_set() if self.pipeline else False
+                    not self.pipeline.stop_event.is_set()
+                    and not self.pipeline.switching.is_set()
+                    if self.pipeline
+                    else False
                 )
             self.pause_button.setText("Resume" if value == "Paused" else "Pause")
             if (
@@ -1293,16 +1429,29 @@ class MainWindow(QMainWindow):
                 return
             self.overlay.set_caption(value)
             en, zh, upcoming = self.overlay.display.contents(self.cfg.mode)
-            if value.final and (value.chinese or self.last_caption is None):
+            if value.final and (value.translated_text or self.last_caption is None):
                 self.last_caption = value
-            self.preview_en.setText(en)
+            unavailable = (
+                self.overlay.display.pair
+                and self.overlay.display.pair.translation_status == "unavailable"
+            )
+            self.preview_en.setText(
+                en
+                or (
+                    "Translation unavailable" if unavailable else "Translation pending…"
+                )
+                if self.cfg.speaking_language == "zh"
+                else en
+            )
             self.preview_zh.setText(
                 zh
                 or (
-                    "Translation unavailable — English continues"
+                    "Translation unavailable — recognised speech continues"
                     if self.overlay.display.pair
                     and self.overlay.display.pair.translation_status == "unavailable"
                     else "Translation pending…"
+                    if self.cfg.speaking_language == "en"
+                    else ""
                 )
             )
             self.preview_hint.setText(

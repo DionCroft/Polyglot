@@ -24,6 +24,17 @@ def main():
     from app.utils.logging import configure
 
     configure(DATA / "logs")
+    if "--conversation-ui-test" in sys.argv:
+        from app.system.conversation_ui_test import run
+
+        index = sys.argv.index("--conversation-ui-test")
+        return run(sys.argv[index + 1], sys.argv[index + 2])
+    if "--conversation-self-test" in sys.argv:
+        from app.system.conversation_self_test import run
+        from app.config.settings import ROOT
+
+        index = sys.argv.index("--conversation-self-test")
+        return run(ROOT, sys.argv[index + 1], sys.argv[index + 2])
     if "--self-test" in sys.argv:
         from app.system.self_test import run
         from app.config.settings import ROOT

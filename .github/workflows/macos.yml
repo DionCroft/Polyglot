@@ -46,6 +46,7 @@ jobs:
           python -m scripts.setup_macos
           python -m scripts.setup_macos --verify --offline
           python -m scripts.setup_assets --fixtures
+          python -m scripts.prepare_conversation_fixtures
       - name: Tests
         run: |
           mkdir -p tests/artifacts
@@ -57,6 +58,8 @@ jobs:
         run: |
           dist/LectureLive.app/Contents/MacOS/LectureLive --self-test tests/fixtures/jfk.wav tests/artifacts/macos-packaged.json
           dist/LectureLive.app/Contents/MacOS/LectureLive --mac-ui-test tests/artifacts/macos-ui.json
+          dist/LectureLive.app/Contents/MacOS/LectureLive --conversation-self-test tests/fixtures tests/artifacts/macos-conversations.json
+          dist/LectureLive.app/Contents/MacOS/LectureLive --conversation-ui-test tests/fixtures tests/artifacts/macos-conversation-ui.json
           codesign --verify --deep --strict dist/LectureLive.app
           /usr/libexec/PlistBuddy -c "Print :NSMicrophoneUsageDescription" dist/LectureLive.app/Contents/Info.plist
       - name: Create DMG and ZIP
@@ -64,7 +67,7 @@ jobs:
       - name: Upload installable beta
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: LectureLive-0.5.0b1-macOS-AppleSilicon
+          name: LectureLive-0.6.0b1-macOS-AppleSilicon
           path: dist/macos-release/*
           compression-level: 0
           if-no-files-found: error

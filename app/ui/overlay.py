@@ -91,15 +91,22 @@ class Overlay(QWidget):
         )
         doc.setTextWidth((width or self.width()) - 64)
         lines = []
+        from app.languages import caption_labels
+
+        language = self.settings.speaking_language
+        en_label, zh_label = caption_labels(language)
         if self.settings.mode != "Chinese":
             lines.append(
-                f'<p style="margin:0;color:{self.settings.english_color};line-height:{self.settings.spacing}%;">{html.escape(en)}{(" …" if provisional else "")}</p>'
+                f'<p style="margin:0;color:{self.settings.english_color};line-height:{self.settings.spacing}%;"><span style="font-size:12pt;">{en_label}</span><br>{html.escape(en)}{(" …" if provisional and language == "en" else "")}</p>'
             )
         if self.settings.mode != "English" and zh:
             lines.append(
-                f'<p style="margin-top:8px;margin-bottom:0;color:{self.settings.chinese_color};line-height:{self.settings.spacing}%;">{html.escape(zh)}</p>'
+                f'<p style="margin-top:8px;margin-bottom:0;color:{self.settings.chinese_color};line-height:{self.settings.spacing}%;"><span style="font-size:12pt;">{zh_label}</span><br>{html.escape(zh)}{(" …" if provisional and language == "zh" else "")}</p>'
             )
-        if upcoming and self.settings.mode != "Chinese":
+        if upcoming and (
+            self.settings.mode == "Bilingual"
+            or self.settings.mode == ("English" if language == "en" else "Chinese")
+        ):
             lines.append(
                 f'<p style="font-size:{max(14, int(point_size * 0.65))}pt;color:#b3c5cb;margin-top:12px;">{html.escape(upcoming)} …</p>'
             )

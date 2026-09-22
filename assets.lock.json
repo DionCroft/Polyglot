@@ -213,6 +213,54 @@
       "url": "https://raw.githubusercontent.com/snakers4/silero-vad/867c2aa692646a1f1de3e94a15c9dd9f614c0acb/LICENSE",
       "bytes": 1075,
       "sha256": "2e63e9a38b6e8fc0c7bc37ce174caca1862870856c6daf5697cfb785e925520b"
+    },
+    {
+      "path": "models/translation/opus-zh-en/config.json",
+      "url": "https://huggingface.co/Xenova/opus-mt-zh-en/resolve/39d480d52a9ea3065a1f117adfe4dbc55de10e6f/config.json",
+      "bytes": 1389,
+      "sha256": "293d318fce41dbf04114eac45037bb88a32d7c4ee21011a75e24a8b98ca45ad1"
+    },
+    {
+      "path": "models/translation/opus-zh-en/generation_config.json",
+      "url": "https://huggingface.co/Xenova/opus-mt-zh-en/resolve/39d480d52a9ea3065a1f117adfe4dbc55de10e6f/generation_config.json",
+      "bytes": 293,
+      "sha256": "8dc29fef0fe82109f94ef3c2e6ea6bded3215d357b226c34cf7b4630726766c9"
+    },
+    {
+      "path": "models/translation/opus-zh-en/source.spm",
+      "url": "https://huggingface.co/Xenova/opus-mt-zh-en/resolve/39d480d52a9ea3065a1f117adfe4dbc55de10e6f/source.spm",
+      "bytes": 804677,
+      "sha256": "e27a3a1b539f4959ec72ea60e453f49156289f95d4e6000b29332efc45616203"
+    },
+    {
+      "path": "models/translation/opus-zh-en/target.spm",
+      "url": "https://huggingface.co/Xenova/opus-mt-zh-en/resolve/39d480d52a9ea3065a1f117adfe4dbc55de10e6f/target.spm",
+      "bytes": 806530,
+      "sha256": "6a881f4717cd7265f53fea54fd3dc689c767c05338fac7a4590f3088cb2d7855"
+    },
+    {
+      "path": "models/translation/opus-zh-en/vocab.json",
+      "url": "https://huggingface.co/Xenova/opus-mt-zh-en/resolve/39d480d52a9ea3065a1f117adfe4dbc55de10e6f/vocab.json",
+      "bytes": 1747906,
+      "sha256": "08a119a1defd522fa047cb5e3bfe3e89633e96caa38ced0dc9cee7ef1021a011"
+    },
+    {
+      "path": "models/translation/opus-zh-en/onnx/encoder_model_quantized.onnx",
+      "url": "https://huggingface.co/Xenova/opus-mt-zh-en/resolve/39d480d52a9ea3065a1f117adfe4dbc55de10e6f/onnx/encoder_model_quantized.onnx",
+      "bytes": 52899742,
+      "sha256": "84d5e171b626bc8b6b220d022ac58696e9528c25deeacca62b5cbf4364547a99"
+    },
+    {
+      "path": "models/translation/opus-zh-en/onnx/decoder_model_quantized.onnx",
+      "url": "https://huggingface.co/Xenova/opus-mt-zh-en/resolve/39d480d52a9ea3065a1f117adfe4dbc55de10e6f/onnx/decoder_model_quantized.onnx",
+      "bytes": 59842102,
+      "sha256": "debcc3054b9ff9aaed972bd6e251a459abe1e2f1402da1efa63163dc2f46ef73"
+    },
+    {
+      "path": "models/translation/opus-zh-en/onnx/decoder_with_past_model_quantized.onnx",
+      "url": "https://huggingface.co/Xenova/opus-mt-zh-en/resolve/39d480d52a9ea3065a1f117adfe4dbc55de10e6f/onnx/decoder_with_past_model_quantized.onnx",
+      "bytes": 56570638,
+      "sha256": "fbc484152fad41788c729d184058261b2a55d84eed270efa59f0ece477494e00"
     }
   ]
 }

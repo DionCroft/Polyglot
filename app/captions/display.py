@@ -15,7 +15,7 @@ class CaptionDisplay:
             self.__init__()
             self.epoch = caption.epoch
         if caption.final and (
-            caption.chinese or caption.translation_status == "unavailable"
+            caption.translated_text or caption.translation_status == "unavailable"
         ):
             if self.pair and caption.identifier <= self.pair.identifier:
                 return False
@@ -51,10 +51,10 @@ class CaptionDisplay:
             return (latest.english if latest else "", "", "")
         primary = self.pair or self.pending or self.partial
         en = primary.english if primary else ""
-        zh = self.pair.chinese if self.pair else ""
+        zh = primary.chinese if primary else ""
         upcoming = self.partial or self.pending
         extra = (
-            upcoming.english
+            upcoming.source_text
             if upcoming and primary and upcoming.identifier > primary.identifier
             else ""
         )

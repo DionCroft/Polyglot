@@ -4,7 +4,7 @@ import logging
 from app.system.models import ModelStore
 
 
-def check(root, profile, store=None, accelerator="auto"):
+def check(root, profile, store=None, accelerator="auto", language="en"):
     result = {
         "speech": False,
         "translation": False,
@@ -16,9 +16,10 @@ def check(root, profile, store=None, accelerator="auto"):
     store = store or ModelStore(root)
     try:
         bundle = store.load(profile, accelerator=accelerator)
+        translation = bundle.mt if language == "en" else store.translation_for(language)
         result.update(
             speech=True,
-            translation=bundle.mt is not None,
+            translation=translation is not None,
             vad=True,
             npu=bundle.npu,
             accelerated=bundle.accelerated,

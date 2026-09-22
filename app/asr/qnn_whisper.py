@@ -39,8 +39,8 @@ class QnnWhisper:
                 extra += 1
         self.byte_decoder = dict(zip(map(chr, cs), bs))
 
-    def configure_recognition(self, mode="standard", vocabulary=""):
-        self.recognition.configure(mode, vocabulary)
+    def configure_recognition(self, mode="standard", vocabulary="", language="en"):
+        self.recognition.configure(mode, vocabulary, language)
 
     def transcribe(self, audio):
         if self.recognition.enabled:
@@ -72,8 +72,8 @@ class QnnWhisper:
         length = feed[mask_name].shape[-1]
         feed[mask_name].fill(-100)
         token = self.cfg["decoder_start_token_id"]
-        # Force English, transcription, and no timestamps (multilingual Whisper).
-        prefix = [50259, 50359, 50363]
+        # Force the selected language, transcription, and no timestamps.
+        prefix = [self.recognition.language_token, 50359, 50363]
         result = []
         for n in range(length - 1):
             feed[inputs[0].name].fill(token)

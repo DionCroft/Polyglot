@@ -1,7 +1,7 @@
 """Bounded, cancellable offline pipeline. No Qt or network dependencies."""
 
 import logging, queue, threading, time
-from dataclasses import replace
+from dataclasses import dataclass, field, replace
 from collections import deque
 import numpy as np
 from app.audio.capture import Microphone, WavSource
@@ -11,6 +11,15 @@ from app.captions.glossary import Glossary
 from app.export.transcript import Transcript
 
 log = logging.getLogger(__name__)
+
+
+@dataclass
+class TurnBoundary:
+    """A FIFO barrier acknowledged only after captured speech and translation drain."""
+
+    identifier: int = -1
+    final: bool = True
+    done: threading.Event = field(default_factory=threading.Event)
 
 
 class PhraseQueue:
@@ -114,6 +123,13 @@ class Pipeline:
         self.failure_reported = False
         self.last_meter = 0
         self.last_warning = 0
+        self.switching = threading.Event()
+        self.capture_lock = threading.RLock()
+        self.switch_lock = threading.Lock()
+        self._store = model_store
+        from opencc import OpenCC
+
+        self.simplify = OpenCC("t2s")
 
     def _notify(self, kind, value):
         self.emit(kind, value)
@@ -124,10 +140,13 @@ class Pipeline:
             self._notify("state", "Loading local models…")
             from app.system.models import ModelStore
 
-            bundle = (self.model_store or ModelStore(self.root)).load(
+            self._store = self.model_store or ModelStore(self.root)
+            bundle = self._store.load(
                 self.settings.profile, self.force_cpu, self.settings.accelerator
             )
             self.asr, self.mt = bundle.asr, bundle.mt
+            if self.settings.speaking_language == "zh":
+                self.mt = self._store.translation_for("zh")
             self._configure_speech()
             self.using_npu = bundle.npu
             self.accelerated = bundle.accelerated
@@ -191,8 +210,12 @@ class Pipeline:
             self.loading = False
 
     def _frame(self, frame, end):
+        with self.capture_lock:
+            self._accept_frame(frame, end)
+
+    def _accept_frame(self, frame, end):
         epoch = self.epoch
-        if self.stop_event.is_set() or self.paused.is_set():
+        if self.stop_event.is_set() or self.paused.is_set() or self.switching.is_set():
             return
         self.last_audio_end = end
         self.level = min(100, int(float(np.sqrt(np.mean(frame * frame))) * 450))
@@ -216,7 +239,7 @@ class Pipeline:
         self._notify("warning", message)
 
     def pause(self):
-        if self.stop_event.is_set():
+        if self.stop_event.is_set() or self.switching.is_set():
             return
         if self.paused.is_set():
             if self.failure_reported:
@@ -239,7 +262,9 @@ class Pipeline:
     def _submit_phrase(self, phrase, epoch):
         # Once capture stops, preserve accepted final phrases instead of dropping
         # them to maintain live latency. The downstream worker still drains.
-        while self.stop_event.is_set() and len(self.phrases) >= self.phrases.capacity:
+        while (self.stop_event.is_set() or self.switching.is_set()) and len(
+            self.phrases
+        ) >= self.phrases.capacity:
             if self.asr_done.wait(0.02):
                 return
         dropped = self.phrases.put((phrase, epoch))
@@ -258,6 +283,13 @@ class Pipeline:
                 try:
                     frame, end, current = self.audio.get(timeout=0.1)
                 except queue.Empty:
+                    continue
+                if isinstance(frame, TurnBoundary):
+                    if epoch == self.epoch and not self.paused.is_set():
+                        phrase = self.segmenter.finish(end)
+                        if phrase:
+                            self._submit_phrase(phrase, current)
+                    self._submit_phrase(frame, current)
                     continue
                 if current != self.epoch or self.paused.is_set():
                     continue
@@ -306,12 +338,74 @@ class Pipeline:
     def _configure_speech(self):
         configure = getattr(self.asr, "configure_recognition", None)
         if configure:
-            configure(
+            args = (
                 self.settings.recognition_mode,
                 "\n".join(self.glossary.vocabulary)
                 if self.settings.vocabulary_guidance
+                and self.settings.speaking_language == "en"
                 else "",
             )
+            if self.settings.speaking_language == "en":
+                configure(*args)
+            else:
+                configure(*args, language="zh")
+
+    def switch_language(self, language):
+        """Run off the GUI thread. Preserve one transcript and the microphone clock."""
+        from app.languages import validate_language
+
+        validate_language(language)
+        with self.switch_lock:
+            if not self.started or self.loading or self.stop_event.is_set():
+                raise RuntimeError(
+                    "Wait until the lecture is listening before switching."
+                )
+            if self.failure_reported:
+                raise RuntimeError(
+                    "Reconnect the microphone before switching languages."
+                )
+            if language == self.settings.speaking_language:
+                return
+            boundary = TurnBoundary()
+            with self.capture_lock:
+                self.switching.set()
+            self._notify("state", "Switching language… finish speaking and wait")
+            try:
+                # No new audio can enter behind the marker, even from an active callback.
+                self.audio.put((boundary, self.last_audio_end, self.epoch))
+                while not boundary.done.wait(0.1):
+                    if self.asr_done.is_set() or self.segment_done.is_set():
+                        raise RuntimeError(
+                            "Speech processing stopped before the language switch."
+                        )
+                if self.stop_event.is_set():
+                    return
+                if self.failure_reported:
+                    raise RuntimeError(
+                        "Speech input failed. Stop and reconnect before switching."
+                    )
+                translator = self._store.translation_for(language)
+                if self.stop_event.is_set():
+                    return
+                previous = self.settings
+                self.settings = replace(self.settings, speaking_language=language)
+                try:
+                    self._configure_speech()
+                except Exception:
+                    self.settings = previous
+                    self._configure_speech()
+                    raise
+                self.mt = translator
+                self.segmenter.reset()
+                self.stabiliser.reset()
+                self.epoch += 1
+                self._notify("language", language)
+            finally:
+                self.switching.clear()
+                if not self.stop_event.is_set() and not self.failure_reported:
+                    self._notify(
+                        "state", "Paused" if self.paused.is_set() else "Listening"
+                    )
 
     def _transcribe(self, audio, final=True):
         try:
@@ -359,6 +453,9 @@ class Pipeline:
             if not item:
                 continue
             phrase, epoch = item
+            if isinstance(phrase, TurnBoundary):
+                self.translation.put(phrase)
+                continue
             if epoch != self.epoch or self.paused.is_set():
                 continue
             try:
@@ -371,10 +468,15 @@ class Pipeline:
                 )
                 if epoch != self.epoch or self.paused.is_set():
                     continue
-                if text.rstrip().endswith((".", "?", "!")):
+                if text.rstrip().endswith((".", "?", "!", "。", "？", "！")):
                     self.segmenter.sentence_complete(phrase.identifier)
                 caption = self.stabiliser.accept(
-                    phrase, self.glossary.english(text), epoch
+                    phrase,
+                    self.glossary.english(text)
+                    if self.settings.speaking_language == "en"
+                    else self.simplify.convert(text),
+                    epoch,
+                    self.settings.speaking_language,
                 )
                 if not caption:
                     continue
@@ -386,7 +488,7 @@ class Pipeline:
                 if caption.final:
                     self._save("english", caption)
                     try:
-                        if self.stop_event.is_set():
+                        if self.stop_event.is_set() or self.switching.is_set():
                             self.translation.put(caption)
                         else:
                             self.translation.put_nowait(caption)
@@ -397,7 +499,7 @@ class Pipeline:
                         self._notify("caption", caption)
                         self._notify(
                             "warning",
-                            "Chinese translation is behind. English captions continue; a translation was skipped.",
+                            "Translation is behind. Recognised speech continues; a translation was skipped.",
                         )
                 log.info(
                     "ASR %.3fs rtf %.3f final=%s",
@@ -424,19 +526,28 @@ class Pipeline:
                 caption = self.translation.get(timeout=0.1)
             except queue.Empty:
                 continue
+            if isinstance(caption, TurnBoundary):
+                caption.done.set()
+                continue
             try:
                 start = time.monotonic()
                 text = (
                     self.glossary.chinese(
                         caption.english, self.mt.translate(caption.english)
                     )
+                    if self.mt and caption.source_language == "en"
+                    else self.mt.translate(caption.chinese)
                     if self.mt
                     else ""
                 )
                 self.metrics["translation_seconds"] = time.monotonic() - start
                 caption = replace(
                     caption,
-                    chinese=text,
+                    **(
+                        {"chinese": text}
+                        if caption.source_language == "en"
+                        else {"english": text}
+                    ),
                     translation_status="complete" if text else "unavailable",
                 )
                 self.metrics["bilingual_latency"] = max(
@@ -452,7 +563,7 @@ class Pipeline:
                 log.exception("Translation failed")
                 self._notify(
                     "warning",
-                    "Chinese translation failed locally. English captions continue.",
+                    "Translation failed locally. Recognised speech continues.",
                 )
             finally:
                 self._save("pair", caption)
@@ -473,6 +584,8 @@ class Pipeline:
                     True,
                 )
         return {
+            "speaking_language": self.settings.speaking_language,
+            "switching_language": self.switching.is_set(),
             "recognition_mode": self.settings.recognition_mode,
             "vocabulary_guidance": self.settings.vocabulary_guidance,
             **self.metrics,
@@ -524,9 +637,7 @@ class Pipeline:
                         "warning",
                         "Final transcript save failed. Earlier journal entries remain available for recovery.",
                     )
-        if not self.model_store:
-            close = getattr(self.asr, "close", None)
-            if close:
-                close()
+        if not self.model_store and self._store:
+            self._store.close()
         self.started = False
         log.info("Session stopped; all pipeline workers joined")

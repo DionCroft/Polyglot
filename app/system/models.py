@@ -24,6 +24,7 @@ class ModelStore:
         self.key = None
         self.bundle = None
         self.loads = 0
+        self.translators = {}
 
     def invalidate(self):
         with self.lock:
@@ -33,6 +34,7 @@ class ModelStore:
                 if close:
                     close()
             self.bundle = None
+            self.translators.clear()
 
     close = invalidate
 
@@ -158,6 +160,28 @@ class ModelStore:
                     close()
                 raise
             self.bundle = ModelBundle(asr, mt, vad, npu, messages, accelerated)
+            if mt is not None:
+                self.translators["en"] = mt
             self.key = key
             self.loads += 1
             return self.bundle
+
+    def translation_for(self, language):
+        """Lazy-load the extra direction once; never download at runtime."""
+        from app.languages import validate_language
+        from app.translation.opus_mt import OpusMT
+
+        validate_language(language)
+        with self.lock:
+            if language not in self.translators:
+                folder = "opus" if language == "en" else "opus-zh-en"
+                model = OpusMT(
+                    self.root / "models/translation" / folder, source_language=language
+                )
+                sample = (
+                    "Welcome to the lecture." if language == "en" else "请再解释一次。"
+                )
+                if not model.translate(sample):
+                    raise RuntimeError("Local translation model returned no text.")
+                self.translators[language] = model
+            return self.translators[language]

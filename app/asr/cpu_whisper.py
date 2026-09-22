@@ -34,7 +34,11 @@ class CpuWhisper(QnnWhisper):
             out = decoder.run(
                 None, {i.name: feed[i.name] for i in decoder.get_inputs()}
             )
-            token = [50259, 50359, 50363][n] if n < 3 else int(np.argmax(out[0][0, -1]))
+            token = (
+                [self.recognition.language_token, 50359, 50363][n]
+                if n < 3
+                else int(np.argmax(out[0][0, -1]))
+            )
             if token == 50257:
                 break
             result.append(token)

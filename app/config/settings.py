@@ -10,6 +10,7 @@ DATA = data_directory()
 
 @dataclass
 class Settings:
+    speaking_language: str = "en"
     lecture_title: str = ""
     vocabulary: str = ""
     lock_shortcut: str = "Ctrl+Alt+C"
@@ -73,6 +74,8 @@ class Settings:
             cfg.accelerator = "auto"
         if cfg.recognition_mode not in {"standard", "careful"}:
             cfg.recognition_mode = "standard"
+        if cfg.speaking_language not in {"en", "zh"}:
+            cfg.speaking_language = "en"
         if cfg.mode not in {"Bilingual", "English", "Chinese"}:
             cfg.mode = "Bilingual"
         if cfg.placement not in {"Top", "Bottom", "Custom"}:

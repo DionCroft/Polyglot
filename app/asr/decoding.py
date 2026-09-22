@@ -110,7 +110,10 @@ class RecognitionOptions:
         self.tokenizer = None
         self.configure("standard", "")
 
-    def configure(self, mode, vocabulary):
+    def configure(self, mode, vocabulary, language="en"):
+        from app.languages import validate_language
+
+        self.language = validate_language(language)
         if mode not in {"standard", "careful"}:
             raise ValueError("Unknown recognition mode")
         self.mode = mode
@@ -126,8 +129,12 @@ class RecognitionOptions:
 
     @property
     def prefix(self):
-        prefix = [50258, 50259, 50359, 50363]
+        prefix = [50258, self.language_token, 50359, 50363]
         return [50361, *self.prompt, *prefix] if self.prompt else prefix
+
+    @property
+    def language_token(self):
+        return 50259 if self.language == "en" else 50260
 
     def filtered(self, logits, first):
         values = np.asarray(logits, dtype=np.float64).reshape(-1).copy()

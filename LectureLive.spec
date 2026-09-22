@@ -5,6 +5,7 @@ from PyInstaller.utils.hooks import collect_all
 
 datas = [('assets', 'assets'), ('glossaries', 'glossaries'), ('docs', 'docs'), ('models/whisper', 'models/whisper'), ('models/translation/opus', 'models/translation/opus'), ('models/vad', 'models/vad')]
 binaries = []
+datas += [('models/translation/opus-zh-en', 'models/translation/opus-zh-en')]
 hiddenimports = []
 datas += collect_data_files('opencc')
 binaries += collect_dynamic_libs('onnxruntime')

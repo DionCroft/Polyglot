@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "dataset": "google/fleurs",
+  "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+  "license": "CC-BY-4.0",
+  "source": "https://huggingface.co/datasets/google/fleurs",
+  "archive_url": "https://huggingface.co/datasets/google/fleurs/resolve/70bb2e84b976b7e960aa89f1c648e09c59f894dd/data/cmn_hans_cn/audio/test.tar.gz",
+  "purpose": "First three archive entries with references; functional smoke samples, not a classroom accuracy benchmark.",
+  "cases": [
+    {
+      "id": "fleurs-cmn-1",
+      "path": "tests/fixtures/mandarin-1.wav",
+      "member": "test/10026684690566417990.wav",
+      "reference": "“这并不是告别。这是一个篇章的结束，也是新篇章的开始。”",
+      "source_sha256": "a72c0b59fdba80850552af7991de07f9f4940846d2d70f0890eeb153c40f164b",
+      "source_bytes": 664378,
+      "sha256": "407400c0a228817cfe9cc95feffe48261e005aaaea828412d6bcbb36915d8f7b",
+      "bytes": 332204
+    },
+    {
+      "id": "fleurs-cmn-2",
+      "path": "tests/fixtures/mandarin-2.wav",
+      "member": "test/10040380210557600780.wav",
+      "reference": "钙、钾等元素属于金属，银和金等元素当然也是金属。",
+      "source_sha256": "b39d2c84aefada280b73a9ab439726d370d45e5a75bd05f0a90153288ea4561b",
+      "source_bytes": 529978,
+      "sha256": "d15ddc6cf1c0eaac6277cd7c57d061d06c71fb2e1ecdfb68fea9484a6eb35db8",
+      "bytes": 265004
+    },
+    {
+      "id": "fleurs-cmn-3",
+      "path": "tests/fixtures/mandarin-3.wav",
+      "member": "test/10048525650290665384.wav",
+      "reference": "桥下垂直净空 15 米。该项目于 2011 年 8 月完工，但直到 2017 年 3 月才开始通车。",
+      "source_sha256": "aeb95366f4907daf8797d66797c87f6e002f10704e78e87a0c4b4521756a1616",
+      "source_bytes": 887098,
+      "sha256": "a0b2f1f1b106e400cd7e80ec8ebcb8a3a9e30deec0da732036bc23c6c7b6a668",
+      "bytes": 443564
+    }
+  ]
+}

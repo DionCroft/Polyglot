@@ -6,6 +6,7 @@ from PySide6.QtWidgets import (
     QLabel,
     QPushButton,
     QProgressBar,
+    QComboBox,
 )
 
 
@@ -19,6 +20,21 @@ class TeachingControls(QDialog):
         layout = QVBoxLayout(self)
         self.status = QLabel("Listening")
         layout.addWidget(self.status)
+        layout.addWidget(QLabel("Who is speaking?"))
+        self.language = QComboBox()
+        self.language.setAccessibleName("Speaking language")
+        self.language.addItem("English → 简体中文", "en")
+        self.language.addItem("Mandarin 普通话 → English", "zh")
+        self.language.setCurrentIndex(
+            self.language.findData(owner.cfg.speaking_language)
+        )
+        self.language.currentIndexChanged.connect(
+            lambda: owner.speaking_language.setCurrentIndex(
+                owner.speaking_language.findData(self.language.currentData())
+            )
+        )
+        self.language.setEnabled(owner.speaking_language.isEnabled())
+        layout.addWidget(self.language)
         self.meter = QProgressBar()
         self.meter.setRange(0, 100)
         self.meter.setTextVisible(False)
@@ -34,7 +50,9 @@ class TeachingControls(QDialog):
         show = QPushButton("Full controls")
         show.clicked.connect(self.close)
         layout.addWidget(show)
-        self.note = QLabel("Captions stay on the selected display.")
+        self.note = QLabel(
+            "Switch between speakers. Wait for Listening before speaking again. Captions stay on the selected display."
+        )
         self.note.setWordWrap(True)
         layout.addWidget(self.note)
 

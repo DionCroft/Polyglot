@@ -13,7 +13,7 @@ if ($beta) {
     if ($LASTEXITCODE -ne 0) { throw 'Beta model staging failed.' }
     $arguments += @('--collect-all','winui3','--collect-all','winrt','--add-data','build/beta-assets/models;models')
 } else {
-    $arguments += @('--collect-all','onnxruntime_qnn','--add-data','models/whisper;models/whisper','--add-data','models/translation/opus;models/translation/opus','--add-data','models/vad;models/vad')
+    $arguments += @('--collect-all','onnxruntime_qnn','--add-data','models/whisper;models/whisper','--add-data','models/translation/opus;models/translation/opus','--add-data','models/translation/opus-zh-en;models/translation/opus-zh-en','--add-data','models/vad;models/vad')
 }
 & $pythonExe -m PyInstaller @arguments LectureLive.pyw
 if ($LASTEXITCODE -ne 0) { throw 'Application build failed.' }

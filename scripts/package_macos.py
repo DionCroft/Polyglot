@@ -16,7 +16,7 @@ def main():
     subprocess.run(["codesign", "--verify", "--deep", "--strict", str(app)], check=True)
     release = root / "dist/macos-release"
     release.mkdir(parents=True, exist_ok=True)
-    name = "LectureLive-0.5.0b1-macOS-AppleSilicon"
+    name = "LectureLive-0.6.0b1-macOS-AppleSilicon"
     archive = release / (name + ".zip")
     image = release / (name + ".dmg")
     # Notarisation is optional and only uses a preconfigured local keychain profile.
