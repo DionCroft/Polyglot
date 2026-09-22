@@ -8,10 +8,18 @@ import numpy as np
 from app.system.conversation_self_test import read_audio
 
 
-def conversation_wav(fixtures, destination):
+def conversation_wav(fixtures, destination, normalise=False):
     parts = []
     for name in ("jfk.wav", "mandarin-1.wav", "jfk.wav"):
-        parts.extend([read_audio(Path(fixtures) / name), np.zeros(16000, np.float32)])
+        audio = read_audio(Path(fixtures) / name)
+        if normalise:
+            # Test preparation only: equal recording levels before controlled noise.
+            rms = float(np.sqrt(np.mean(audio * audio)))
+            gain = min(
+                0.05 / max(rms, 1e-8), 0.95 / max(float(np.max(np.abs(audio))), 1e-8)
+            )
+            audio = audio * gain
+        parts.extend([audio, np.zeros(16000, np.float32)])
     audio = np.concatenate(parts)
     with wave.open(str(destination), "wb") as writer:
         writer.setparams((1, 2, 16000, 0, "NONE", "not compressed"))
@@ -56,7 +64,7 @@ def verify_exports(folder):
     }
 
 
-def run(root, fixtures, report_path):
+def run(root, fixtures, report_path, force_cpu=False):
     from app.config.settings import Settings, DATA
     from app.pipeline import Pipeline
     from app import __version__
@@ -76,10 +84,14 @@ def run(root, fixtures, report_path):
     pipeline = Pipeline(
         root,
         DATA,
-        Settings(speaking_language="auto", profile="fast", accelerator="cpu"),
+        Settings(
+            speaking_language="auto",
+            profile="fast",
+            accelerator="cpu" if force_cpu else "auto",
+        ),
         lambda k, v: events.append((k, v)),
         wav=str(wav),
-        force_cpu=True,
+        force_cpu=force_cpu,
     )
     try:
         pipeline.start()
@@ -100,6 +112,11 @@ def run(root, fixtures, report_path):
         return 0
     finally:
         pipeline.close()
+        result.update(
+            metrics=pipeline.diagnostics(),
+            warnings=[str(v) for k, v in events if k == "warning"],
+            backend=getattr(getattr(pipeline, "asr", None), "name", None),
+        )
         report.write_text(
             json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8"
         )
@@ -112,7 +129,7 @@ def run_ui(fixtures, report_path):
     from app.ui.main_window import MainWindow
     from app.ui.teaching import TeachingControls
 
-    Settings(speaking_language="auto", profile="fast", accelerator="cpu").save()
+    Settings(speaking_language="auto", profile="fast", accelerator="auto").save()
     app = QApplication.instance() or QApplication([])
     window = MainWindow()
     window.show()

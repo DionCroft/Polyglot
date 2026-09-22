@@ -33,7 +33,12 @@ def main():
         return (
             run_ui(sys.argv[index + 1], sys.argv[index + 2])
             if flag == "--auto-ui-test"
-            else run(ROOT, sys.argv[index + 1], sys.argv[index + 2])
+            else run(
+                ROOT,
+                sys.argv[index + 1],
+                sys.argv[index + 2],
+                force_cpu="--auto-cpu" in sys.argv,
+            )
         )
     if "--conversation-ui-test" in sys.argv:
         from app.system.conversation_ui_test import run

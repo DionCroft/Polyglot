@@ -21,6 +21,7 @@ def main():
     parser.add_argument("--profile", default="balanced")
     parser.add_argument("--cpu", action="store_true")
     parser.add_argument("--noise-snr", type=float, default=20)
+    parser.add_argument("--normalise-speakers", action="store_true")
     parser.add_argument("--output", required=True)
     args = parser.parse_args()
     assert args.seconds > 0
@@ -29,7 +30,7 @@ def main():
     report = Path(args.output)
     report.parent.mkdir(parents=True, exist_ok=True)
     seed = report.with_suffix(".seed.wav")
-    conversation_wav(root / "tests/fixtures", seed)
+    conversation_wav(root / "tests/fixtures", seed, normalise=args.normalise_speakers)
     with wave.open(str(seed)) as stream:
         source = np.frombuffer(stream.readframes(stream.getnframes()), "<i2")
     audio = np.resize(source, args.seconds * 16000).astype(np.float32) / 32768
@@ -56,6 +57,7 @@ def main():
         "physical_classroom_tested": False,
         "noise_snr_db": args.noise_snr,
         "audio_seconds": args.seconds,
+        "normalised_recording_levels": args.normalise_speakers,
     }
     start = time.monotonic()
     try:
@@ -88,6 +90,7 @@ def main():
             a["source_language"] != b["source_language"]
             for a, b in zip(pairs, pairs[1:])
         )
+        result.update(pairs=len(pairs), switches=switches, backend=pipeline.asr.name)
         assert switches >= max(2, args.seconds // 35)
         recovered, skipped = recover_journal(
             folder / "events.jsonl", folder.parent / "recovered"
