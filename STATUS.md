@@ -1,9 +1,16 @@
 # LectureLive — STATUS
 
-Updated 2026-09-22. Offline English/Mandarin conversation beta implemented.
+Updated 2026-09-23. Automatic English/Mandarin turns added to the main application.
 Production classroom acceptance remains open.
 
-## Conversation beta 0.6.0b1
+## Auto conversations 0.7.0b1
+
+- **Auto · English ↔ Mandarin** is an optional choice in the main app and Teaching controls. Existing English/manual settings remain unchanged. Whisper detects each phrase offline; both translation directions are prepared before Auto starts.
+- Uncertain phrases are withheld, with an on-screen repeat instruction and a bilingual transcript marker. Provisional text is retracted if the final language check disagrees. Manual override remains available.
+- Expanded development checks include 148 recordings, shortened speech, controlled noise, unsupported-language examples, concurrent translation, pause/override, recovery and native UI. This does not certify classroom word/translation accuracy.
+- [Using Auto](docs/AUTO_LANGUAGE.md) · [Current test/build evidence and remaining checks](docs/evidence/auto-language-0.7.md).
+
+## Previous conversation beta 0.6.0b1
 
 - Manually switch **Who is speaking?** between English → 简体中文 and Mandarin 普通话 → English, including during a lecture. Finish speaking, change the selector, and wait for Listening before the next speaker starts.
 - Whisper remains the recogniser. Both offline translation models are included in setup and packaging; the new Mandarin → English files add 172.7 MB. Source and translation have explicit labels and share one mixed-language transcript session.

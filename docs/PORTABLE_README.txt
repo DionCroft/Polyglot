@@ -17,7 +17,14 @@ Preview release: review translations and rehearse before teaching. See STATUS.md
 Microphone audio is not recorded. Text transcripts are optional and stay local.
 This build is unsigned; follow your organisation's software approval process.
 
-CONVERSATIONS (0.6.0b1)
+AUTOMATIC CONVERSATIONS (0.7.0b1)
+Choose Auto under Who is speaking? and keep Bilingual selected. Pause briefly
+between speakers and use the selected microphone. Both directions work offline.
+If Language unclear appears, choose the language manually and repeat the sentence.
+Short replies may be withheld; bilingual transcripts mark them [Not transcribed].
+Open Quick start > Automatic language switching for help. Manual options remain:
+
+CONVERSATIONS (manual selection)
 Choose English -> Chinese under Who is speaking? for your lecture. To take a Mandarin
 question, choose Mandarin -> English, wait for Listening, then let the student speak.
 Switch back to English before answering. Audio during switching is not captured.

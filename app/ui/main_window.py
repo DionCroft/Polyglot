@@ -1400,6 +1400,15 @@ class MainWindow(QMainWindow):
             ):
                 return
             language = value["language"]
+            if language is None and value["final"]:
+                self.overlay.display.reject_partial(value["identifier"], value["epoch"])
+                self.overlay.partial = self.overlay.display.partial
+                en, zh, _ = self.overlay.display.contents(self.cfg.mode)
+                self.preview_en.setText(en)
+                self.preview_zh.setText(zh)
+                self.preview_hint.setText(
+                    "Phrase not transcribed; select a language and repeat."
+                )
             message = (
                 ("Detected: " + ("English" if language == "en" else "Mandarin"))
                 if language

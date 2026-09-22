@@ -39,13 +39,18 @@ Rehearse actual questions. For example, the reverse translation model may render
 “key route” rather than the project-management term “critical path”. It can also make errors
 with names, numbers, negation and mixed English/Chinese sentences. These need bilingual review.
 
-## Why language selection is manual
+## Automatic switching
 
-Whisper supports language identification, but the previous application forced English. A
-short student question, silence, an acronym or a mixed-language sentence is insufficient evidence
-for a dependable automatic switch in this application. Automatic detection has not been validated
-with representative classroom recordings, so this release requires manual selection. It does not
-guess a speaker's language or use cloud recognition.
+In the same selector, choose **Auto · English ↔ Mandarin** for hands-free turns. Keep **Bilingual**
+selected. Finish speaking, pause briefly, and let the next speaker use the microphone. Auto
+detects each phrase locally and chooses its translation direction without pausing capture.
+Manual English/Mandarin choices remain available; only changing the selector manually has
+the switching pause described above.
+
+If **Language unclear** appears, choose the language manually and repeat the sentence. Very short
+replies and mixed/overlapping speech are harder to detect. Uncertain phrases are withheld and
+marked **[Not transcribed]** in the bilingual transcript/VTT and journal; single-language
+files omit them. The audio is not stored for later recovery. [Auto guide and limits](AUTO_LANGUAGE.md).
 
 ## Setup, memory and speed
 
@@ -54,12 +59,13 @@ of pinned, checksum-verified Mandarin → English translation assets. Existing E
 unchanged. Windows users update using **Setup.cmd**; Mac users install the new conversation build.
 Older Mac beta 0.5.0b1 does not include this feature.
 
-The extra translation model loads on the first Mandarin turn and is retained until the speech
+The extra translation model loads on the first Mandarin turn (or when Auto prepares both directions) and is retained until the speech
 model bundle is replaced or the app closes, so subsequent switches can reuse it. Its download
 size is not its RAM requirement: model sessions, working buffers and decoder caches need extra
 memory. Translation runs on CPU in both directions. Whisper uses the existing platform
 acceleration and CPU fallback; a failed accelerator retains the selected speaking language.
-Balanced and Careful can increase latency. Wait for **Listening** after every switch.
+Balanced and Careful can increase latency. Auto adds a detection pass and may wait for more speech.
+Wait for **Listening** after changing the selector manually.
 
 On the Snapdragon test machine, loading and warming the reverse model took about **0.63 s**
 and increased process RAM by about **527 MiB**. Eight short questions took **0.076–0.155 s**

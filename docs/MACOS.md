@@ -1,10 +1,10 @@
-# LectureLive for Apple Silicon — beta 0.6.0b1
+# LectureLive for Apple Silicon — beta 0.7.0b1
 
 Requires an Apple Silicon Mac (M1 or newer, including M2 MacBook Air) running **macOS 14 Sonoma or later**. Intel Macs and Rosetta are not supported by this build. Native M2 classroom validation is still required. The Windows builds remain available separately.
 
 ## Install the ready-made app
 
-1. Open the [Mac beta download page](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.6.0b1). Under **Assets**, choose **LectureLive-0.6.0b1-macOS-AppleSilicon.dmg** (about 1.22 GB; recommended) or the application ZIP (about 1.17 GB). Do not choose **Source code**. Developer builds are also available from successful **macOS Apple Silicon** runs in **Actions**; those require extracting an outer artifact ZIP and may require signing into GitHub.
+1. Open the [Mac beta download page](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.7.0b1). Under **Assets**, choose **LectureLive-0.7.0b1-macOS-AppleSilicon.dmg** (about 1.22 GB; recommended) or the application ZIP (about 1.17 GB). Do not choose **Source code**. Developer builds are also available from successful **macOS Apple Silicon** runs in **Actions**; those require extracting an outer artifact ZIP and may require signing into GitHub.
 2. Open the DMG and drag **LectureLive** onto **Applications**. Alternatively, double-click the inner application ZIP and move **LectureLive.app** to **Applications**. Eject the DMG before starting the installed app.
 3. Open **Applications → LectureLive**. This beta is ad-hoc signed and is **not Apple notarised**. If macOS blocks this downloaded beta, open **System Settings → Privacy & Security**, find the message about LectureLive, choose **Open Anyway**, and confirm **Open**. Only approve the copy you obtained from this repository. Your organisation may require IT approval.
 4. Choose your microphone and click **Test microphone**. Choose **Allow** when macOS asks for microphone access. If access was denied, turn on **System Settings → Privacy & Security → Microphone → LectureLive**, then quit and reopen LectureLive.
@@ -22,13 +22,23 @@ the student speaks. The same selector is in **Teaching controls**. Try “请再
 before the switch; speech during switching is not captured. Both directions stay in one transcript.
 
 This app includes the extra 172.7 MB Mandarin → English model; the older 0.5.0b1 installer does
-not. First Mandarin use loads extra model sessions into RAM; one Windows measurement added
+not. First Mandarin use, or preparing Auto, loads extra model sessions into RAM; one Windows measurement added
 about 527 MiB. Mac memory and timings may differ. Translation remains on CPU. Both directions
 keep the existing Whisper acceleration and CPU fallback. English vocabulary and CO7000 hints
-are preserved for English turns and are not applied to Mandarin. Automatic language detection
-is not included. [Full conversation guide and limitations](CONVERSATIONS.md).
+are preserved for English turns and are not applied to Mandarin.
+
+For automatic turns, choose **Auto · English ↔ Mandarin** under **Who is speaking?** and
+keep **Bilingual** selected. Pause between speakers and use the same selected microphone.
+If **Language unclear** appears, choose the language manually and repeat. Auto prepares both
+translation models, adds detection work and may withhold brief phrases. No extra download
+is needed beyond the included models. [Auto help](AUTO_LANGUAGE.md) ·
+[Full conversation guide and limitations](CONVERSATIONS.md).
 
 ## Processing choices and limits
+
+The 0.7 Auto verification and native build results are recorded in the
+[Auto evidence report](evidence/auto-language-0.7.md). Auto is available in the main app;
+physical M2 microphone, projector and full-lecture testing remains outstanding.
 
 The 0.6 conversation app passed **94 tests** and packaged English/Mandarin, switching,
 transcript and native UI checks on macOS 14.8.9 ARM64. See the

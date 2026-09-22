@@ -85,6 +85,20 @@ subtitle order if a later translation is skipped before an earlier one finishes.
 ONNX telemetry is explicitly disabled. Python socket creation, DNS and send operations
 are denied. OS-level native traffic verification remains an acceptance requirement.
 
+## 0.7 automatic phrase language
+
+Auto is a selector value; each accepted Caption retains a concrete `en` or `zh` source.
+Whisper uses an unprompted SOT decoder step and softmax over all language tokens. VAD
+voiced duration, confidence and English/Chinese margin govern acceptance. Two growing
+partial decisions must agree; finals are rechecked. Uncertain finals retract provisional
+text and reserve an ordered journal/bilingual-export notice without inventing words.
+
+Both translation models are prepared before Auto listens. The translation worker routes
+by the queued caption's source language, independently of subsequent detected turns.
+Automatic turns do not stop capture or change the session epoch. Manual selector changes
+retain the FIFO drain barrier and pause semantics. Detection failures use the existing
+accelerator-to-CPU retry. English vocabulary is applied only after an English decision.
+
 ## 0.2 session and display state
 
 Stop rejects new capture but does not invalidate accepted audio. Input closure,

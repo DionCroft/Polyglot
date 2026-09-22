@@ -1,4 +1,4 @@
-# Mandarin development fixtures
+# FLEURS development fixtures
 
 The three Mandarin samples in `tests/fixtures/mandarin-cases.json` come from
 **Google FLEURS**, `cmn_hans_cn`, test split, under **CC-BY-4.0**.
@@ -14,3 +14,12 @@ and converted checksums are recorded in the fixture manifest. Selection is the f
 three audio entries in the published archive, not a curated accuracy set. They are
 public read-speech smoke tests, not lecturer recordings or classroom validation.
 Audio is fetched only for development/CI tests and is not included in the teaching app.
+
+The Auto development manifest `tests/fixtures/auto-language-cases.json` adds 60 Mandarin
+recordings (excluding the three above), 20 US English, 10 French and 10 Latin American
+Spanish recordings from the same pinned test archives and licence. These are the first
+remaining archive entries, selected before evaluation. They are converted to PCM16;
+short excerpts and deterministic additive noise variants are generated during evaluation.
+The manifests preserve attribution, references and checksums; audio is not distributed
+with LectureLive. The corpus was used to tune the short-phrase acceptance threshold,
+so it is not an independent classroom accuracy estimate.

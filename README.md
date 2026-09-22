@@ -12,8 +12,9 @@ double-click a setup file that prepares everything for them.
 
 ![LectureLive captions showing Mandarin speech and its English translation](docs/evidence/conversation-overlay-0.6.png)
 
-**New in conversation beta 0.6.0b1:** a manual speaking-language selector, labelled captions,
-and one saved transcript for lecturer–student conversations. [Conversation guide](docs/CONVERSATIONS.md).
+**New in 0.7.0b1, included in the main application:** choose **Auto · English ↔ Mandarin**
+to change direction as speakers take turns. Manual selection remains available and English
+remains the default. [Auto guide](docs/AUTO_LANGUAGE.md) · [Test results](docs/evidence/auto-language-0.7.md).
 
 > **Preview/beta software:** rehearse with your teaching microphone and projector before a lecture.
 > Captions and translations can contain mistakes. [What has been tested](STATUS.md).
@@ -75,11 +76,11 @@ The repository's **Code → Download ZIP** contains source code and needs **Setu
 
 ## Install on Mac
 
-Use an **Apple Silicon Mac running macOS 14 or later**. The conversation Mac beta is **0.6.0b1**.
+Use an **Apple Silicon Mac running macOS 14 or later**. The conversation Mac beta is **0.7.0b1**.
 The DMG download is about **1.22 GB** (ZIP alternative: **1.17 GB**). The speech and both translation models are included; the app runs offline after downloading.
 
-1. [Download LectureLive for Apple Silicon — DMG](https://github.com/DionCroft/Polyglot/releases/download/macos-v0.6.0b1/LectureLive-0.6.0b1-macOS-AppleSilicon.dmg).
-   Alternatively, open the [Mac beta release page](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.6.0b1)
+1. [Download LectureLive for Apple Silicon — DMG](https://github.com/DionCroft/Polyglot/releases/download/macos-v0.7.0b1/LectureLive-0.7.0b1-macOS-AppleSilicon.dmg).
+   Alternatively, open the [Mac beta release page](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.7.0b1)
    and choose the **.dmg** under **Assets**. Do not choose **Source code**.
 2. Open the downloaded DMG. Drag **LectureLive** onto **Applications**, wait for copying to finish,
    then eject the DMG.
@@ -146,7 +147,18 @@ Test captions over your actual slide presentation, including full-screen mode, b
 
 ## Let students ask questions in Mandarin
 
-You can switch during the same lecture, including from the small **Teaching controls** panel:
+For hands-free conversation, choose **Who is speaking? → Auto · English ↔ Mandarin**, keep
+**Bilingual** selected, and start the lecture. Finish your English sentence, then let the student
+ask their Mandarin question. Pause briefly between speakers. Both must be audible through the
+selected microphone. Watch **Detected: English** or **Detected: Mandarin**. No selector changes
+are needed between accepted turns. The same option is in **Teaching controls**.
+
+**If you see Language unclear**, select English or Mandarin manually and ask the speaker to repeat.
+Short replies, names and acronyms are harder to detect. Auto can withhold a phrase, including
+meaningful words; the bilingual transcript marks it **[Not transcribed]**. A complete question
+usually provides more evidence. Use manual mode if Auto repeatedly misses short exchanges.
+
+To select the language manually during the same lecture:
 
 1. Finish your English sentence and choose **Mandarin 普通话 → English** under **Who is speaking?**.
 2. Wait for **Listening**. The app finishes the captured turn before changing language;
@@ -160,14 +172,16 @@ Keep **Bilingual** selected to show both languages. Only one person should speak
 Your microphone, projector, shortcuts and transcript folder stay the same. Switching while paused
 keeps the lecture paused. Saved presets remember the speaking language; older presets use English.
 
-Language selection is manual: automatic detection has not been validated for short questions and
-mixed-language speech. **Mandarin support is a beta**; rehearsal and bilingual review are still needed.
-Our small public speech check found errors in homophones and dates. [Results and limitations](docs/evidence/conversations-0.6.md).
+Auto is designed for one speaker and one main language per phrase. It does not reliably separate
+overlapping voices or switches within a sentence. Expanded public speech, noise and software checks
+are documented in the [Auto test report](docs/evidence/auto-language-0.7.md). **Classroom validation
+with your microphone and both lecturers is still needed.** Language detection does not guarantee
+correct words or translation; Mandarin homophones, dates and technical terms still need review.
 
 The additional offline translation model adds **172.7 MB** to setup and packaging. It loads on the
-first Mandarin turn, then stays cached. One Snapdragon test measured about **527 MiB extra RAM**
+first Mandarin turn, or when preparing Auto, then stays cached. One Snapdragon test measured about **527 MiB extra RAM**
 when loading it; other computers can differ. It can add caption delay and first-switch preparation
-time. Windows setup includes it automatically; install the **0.6.0b1** Mac build to obtain it on Mac.
+time. Windows setup includes it automatically; install the **0.7.0b1** Mac build to obtain it on Mac.
 The older Mac **0.5.0b1** does not have conversation support.
 
 ## Improve missed words and use CO7000 vocabulary
@@ -207,7 +221,8 @@ English vocabulary, glossary corrections and CO7000 hints are preserved when swi
 | English appears but Chinese does not | Select **Bilingual** and read any warning. For missing files, close the app and rerun Windows setup, or reinstall the Mac app from the release download. |
 | Captions are slow | Try **Fast / Standard** for the next session, close heavy applications and pause naturally between sentences. |
 | Mandarin speech produces incorrect captions | Check **Who is speaking?** is set to **Mandarin 普通话 → English** and wait for **Listening** before speaking. Speak one language at a time. |
-| Switching says the Mandarin model is missing | Close the app and rerun the current Windows **Setup.cmd**, or install the 0.6.0b1 Mac app. The previous speaking language is retained. |
+| Auto says Language unclear | Choose the language manually and repeat the complete sentence. Read [Auto help](docs/AUTO_LANGUAGE.md). |
+| Switching says the Mandarin model is missing | Close the app and rerun the current Windows **Setup.cmd**, or install the 0.7.0b1 Mac app. The previous speaking language is retained. |
 | An accelerator check fails or takes too long | On Mac or the Intel/AMD beta, stop the lecture and select **CPU** under Processing hardware. See the platform guide for details. |
 | Captions are on the wrong screen | Open **Overlay** and select the projector or preferred caption display. |
 | You want your saved text | Open **Diagnostics → Open transcripts**. Text is saved only when the transcript option is enabled. |

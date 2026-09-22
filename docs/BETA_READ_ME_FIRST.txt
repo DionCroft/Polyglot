@@ -1,4 +1,4 @@
-LectureLive - Windows x64 Beta 0.6.0b1
+LectureLive - Windows x64 Beta 0.7.0b1
 
 1. Keep this entire folder together, including _internal.
 2. Open LectureLive-x64-Beta.exe.
@@ -9,7 +9,11 @@ LectureLive - Windows x64 Beta 0.6.0b1
    Switch back to English before answering. Audio during switching is not captured.
    Both directions stay in one transcript folder. English vocabulary/CO7000 hints apply only
    to English turns. Both translation models are included; Mandarin support is a beta.
-6. Stop lecture and wait for the last caption to finish saving.
+6. For hands-free turns, choose Auto under Who is speaking? and keep Bilingual selected.
+   Pause between speakers. If Language unclear appears, choose the language manually
+   and repeat the complete sentence. Short replies may be withheld and marked in
+   the bilingual transcript. Open Quick start > Automatic language switching.
+7. Stop lecture and wait for the last caption to finish saving.
 
 CPU captions and compatible DirectML GPU acceleration are available to try.
 Intel/AMD NPU support is experimental and needs separate preparation on this PC.

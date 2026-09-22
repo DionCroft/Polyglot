@@ -48,7 +48,7 @@ Both translation directions are prepared when Auto starts; this can add roughly 
 of RAM compared with English-only operation. No new model download beyond the 0.6 conversation
 models is required. Existing acceleration and CPU recovery remain available.
 
-Expanded public-recording, noise, short-speech, native UI and transcript checks are being
-recorded for this release. They are development evidence, not classroom certification.
+Expanded public-recording, noise, short-speech, native UI and transcript checks are recorded
+in the [test report](evidence/auto-language-0.7.md). They are development evidence, not classroom certification.
 A rehearsal with your actual microphone, room and consented lecturer/student recordings is
 still needed, especially for distant questions, technical vocabulary, names and numbers.

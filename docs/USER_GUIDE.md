@@ -1,4 +1,4 @@
-# Teaching with LectureLive 0.6
+# Teaching with LectureLive 0.7
 
 New to the app? Use the **Quick start** button for the [short guide](QUICK_START.md).
 
@@ -24,7 +24,11 @@ leave **Bilingual** selected to show both recognised speech and translation with
 The selector is also in **Teaching controls**. Finish the current sentence, change direction,
 and wait for **Listening** before the next speaker starts. Captured speech finishes and is saved
 before the switch; audio during switching is not captured. Paused lectures remain paused.
-See [conversation examples and limitations](CONVERSATIONS.md).
+Choose **Auto · English ↔ Mandarin** in the same selector for automatic turns without
+pausing capture. Pause briefly between speakers. If the language is unclear, select it manually
+and repeat. Auto can withhold short or ambiguous phrases; bilingual exports mark these
+**[Not transcribed]**. Presets remember Auto. [Auto guide](AUTO_LANGUAGE.md) ·
+[conversation examples and limitations](CONVERSATIONS.md).
 
 ## Pause, finish and reconnect
 
@@ -50,7 +54,8 @@ Provisional recognised speech appears after agreement between successive hypothe
 Completed English/Chinese pairs remain together while the next phrase is being translated.
 New recognised speech is shown separately underneath. Each language is labelled as spoken
 or translated. Translation failures keep the source speech available; old translations are
-not presented as the new phrase. A language switch clears captions from the previous turn.
+not presented as the new phrase. A manual language switch clears captions from the previous turn. In Auto, completed pairs
+stay visible until the next pair is ready; an uncertain final retracts its provisional text.
 
 A normal phrase ends after roughly 576 ms of silence. A sentence-ending hypothesis
 can shorten that to 320 ms after sufficient speech. Continuous speech still has a

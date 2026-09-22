@@ -7,6 +7,15 @@ class CaptionDisplay:
         self.pending = None
         self.partial = None
         self.epoch = -1
+        self.rejected_through = -1
+
+    def reject_partial(self, identifier, epoch):
+        """Retract an uncertain provisional phrase without losing a completed pair."""
+        if epoch != self.epoch:
+            return
+        self.rejected_through = max(self.rejected_through, identifier)
+        if self.partial and self.partial.identifier <= identifier:
+            self.partial = None
 
     def accept(self, caption):
         if caption.epoch < self.epoch:
@@ -33,6 +42,8 @@ class CaptionDisplay:
             if self.partial and self.partial.identifier <= caption.identifier:
                 self.partial = None
         else:
+            if caption.identifier <= self.rejected_through:
+                return False
             boundary = max(
                 self.pair.identifier if self.pair else -1,
                 self.pending.identifier if self.pending else -1,

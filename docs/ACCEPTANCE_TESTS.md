@@ -49,6 +49,12 @@ scripts described in INSTALLATION.md; they are not accidentally collected by pyt
 
 ## Physical rehearsal still required
 
+Auto checks and remaining limitations are in [the 0.7 evidence report](evidence/auto-language-0.7.md).
+Include short English/Mandarin replies, speaker changes, uncertain-phrase notices and manual
+override in rehearsal. Withheld phrases count as missed content even when no wrong language
+was selected. Test both voices at their actual microphone distances and use bilingual review
+to check meaning; language-identification scores alone are not word/translation accuracy.
+
 1. Use the intended lecture microphone and speak real subject material from normal
    teaching positions. Check audience questions, room noise, pacing and accents.
 2. Enable Airplane Mode, disconnect any Ethernet/VPN path, and verify startup, both

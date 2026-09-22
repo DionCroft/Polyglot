@@ -17,7 +17,7 @@ jobs:
       GH_TOKEN: ${{ github.token }}
       GH_REPO: ${{ github.repository }}
       RUN_ID: ${{ inputs.run_id }}
-      RELEASE_TAG: macos-v0.6.0b1
+      RELEASE_TAG: macos-v0.7.0b1
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
       - name: Require a successful trusted main-branch build and a draft release
@@ -29,13 +29,14 @@ jobs:
           run = json.loads(subprocess.check_output(['gh', 'api', f"repos/{os.environ['GH_REPO']}/actions/runs/{run_id}"]))
           assert run['conclusion'] == 'success' and run['head_branch'] == 'main'
           assert run['path'] == '.github/workflows/macos.yml' and run['event'] in ('push', 'workflow_dispatch')
-          release = json.loads(subprocess.check_output(['gh', 'release', 'view', os.environ['RELEASE_TAG'], '--json', 'isDraft']))
+          release = json.loads(subprocess.check_output(['gh', 'release', 'view', os.environ['RELEASE_TAG'], '--json', 'isDraft,targetCommitish']))
           assert release['isDraft'], 'Only publish a prepared draft; never replace a published release'
+          assert release['targetCommitish'] == run['head_sha'], 'Draft must target the exact tested commit'
           print('Verified successful native build', run['head_sha'])
           PY
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
-          name: LectureLive-0.6.0b1-macOS-AppleSilicon
+          name: LectureLive-0.7.0b1-macOS-AppleSilicon
           path: downloads
           run-id: ${{ inputs.run_id }}
           github-token: ${{ github.token }}
@@ -45,7 +46,7 @@ jobs:
           from pathlib import Path
           import hashlib
           folder = Path('downloads')
-          wanted = {'LectureLive-0.6.0b1-macOS-AppleSilicon.dmg', 'LectureLive-0.6.0b1-macOS-AppleSilicon.zip'}
+          wanted = {'LectureLive-0.7.0b1-macOS-AppleSilicon.dmg', 'LectureLive-0.7.0b1-macOS-AppleSilicon.zip'}
           records = {}
           for line in (folder / 'SHA256SUMS.txt').read_text().splitlines():
               digest, name = line.split()

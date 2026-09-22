@@ -64,7 +64,12 @@ In Mac shortcut settings, **Ctrl** means Control and **Alt** means Option. The s
 
 ## Take a question in Mandarin
 
-Finish your sentence, choose **Mandarin 普通话 → English** under **Who is speaking?**, and wait
+For automatic turns, choose **Who is speaking? → Auto · English ↔ Mandarin** and keep
+**Bilingual** selected. Pause between speakers; both must be audible through the microphone.
+If **Language unclear** appears, select the language manually and repeat a complete sentence.
+Short replies and overlapping voices need particular care. [Auto help](AUTO_LANGUAGE.md).
+
+For manual selection, finish your sentence, choose **Mandarin 普通话 → English** under **Who is speaking?**, and wait
 for **Listening** before the student speaks. Try “请再解释一次。” (“Please explain again.”).
 Then choose **English → 简体中文** and wait for **Listening** before answering. The selector is
 also in **Teaching controls**. Audio during switching is not captured; the previous turn is finished
@@ -83,7 +88,7 @@ was enabled. Audio is not recorded.
 Check the selected microphone and its test result first. If a device disconnects, reconnect it and
 use **Reconnect / retry**. If captions lag, try **Fast / Standard** for your next session.
 For missing files, close LectureLive and rerun **Setup.cmd** on Windows, or reinstall the Mac app
-from the [Mac beta release](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.6.0b1).
+from the [Mac beta release](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.7.0b1).
 
 This is a preview release. Review translations and rehearse with your actual microphone and
 projector before relying on it in class. Read the [full user guide](USER_GUIDE.md),

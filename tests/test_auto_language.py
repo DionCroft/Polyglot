@@ -261,6 +261,21 @@ def test_visible_caption_language_is_independent_of_current_detector():
     assert display.contents()[2] == "请解释"
 
 
+def test_uncertain_final_retracts_provisional_text_but_retains_previous_pair():
+    display = CaptionDisplay()
+    pair = Caption(1, 0, 1, "Hello", "你好", True, translation_status="complete")
+    partial = Caption(2, 2, 3, "Possibly wrong", final=False)
+    display.accept(pair)
+    display.accept(partial)
+    display.reject_partial(2, 0)
+    assert display.contents() == ("Hello", "你好", "")
+    assert not display.accept(partial)
+    assert display.accept(replace(partial, identifier=3))
+    display.reject_partial(3, -1)
+    assert display.partial.identifier == 3
+    assert display.accept(replace(partial, identifier=2, epoch=1))
+
+
 def test_auto_readiness_checks_concrete_translation_languages(tmp_path):
     store = Mock()
     store.load.return_value = Mock(

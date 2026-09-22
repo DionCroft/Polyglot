@@ -20,6 +20,7 @@ class GuideDialog(QDialog):
         for label, filename in [
             ("Quick start", "QUICK_START.md"),
             ("English and Mandarin conversations", "CONVERSATIONS.md"),
+            ("Automatic language switching", "AUTO_LANGUAGE.md"),
             ("Full user guide", "USER_GUIDE.md"),
             ("Installation help", "INSTALLATION.md"),
             ("Windows Intel/AMD beta", "WINDOWS_BETA.md"),

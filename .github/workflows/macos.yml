@@ -47,11 +47,14 @@ jobs:
           python -m scripts.setup_macos --verify --offline
           python -m scripts.setup_assets --fixtures
           python -m scripts.prepare_conversation_fixtures
+          python -m scripts.prepare_auto_fixtures --limit-per-language 6
       - name: Tests
         run: |
           mkdir -p tests/artifacts
           python -m pytest -q --junitxml=tests/artifacts/macos-pytest.xml
           python -m ruff check app scripts/setup_macos.py scripts/build_macos.py scripts/package_macos.py --select E9,F63,F7,F82
+      - name: Evaluate automatic language decisions on public speech
+        run: python -m scripts.evaluate_auto_language --limit 6 --accelerator cpu --output tests/artifacts/macos-auto-evaluation.json
       - name: Build native app and verify signature
         run: python -m scripts.build_macos
       - name: Test packaged inference and native Cocoa UI
@@ -60,6 +63,8 @@ jobs:
           dist/LectureLive.app/Contents/MacOS/LectureLive --mac-ui-test tests/artifacts/macos-ui.json
           dist/LectureLive.app/Contents/MacOS/LectureLive --conversation-self-test tests/fixtures tests/artifacts/macos-conversations.json
           dist/LectureLive.app/Contents/MacOS/LectureLive --conversation-ui-test tests/fixtures tests/artifacts/macos-conversation-ui.json
+          dist/LectureLive.app/Contents/MacOS/LectureLive --auto-self-test tests/fixtures tests/artifacts/macos-auto.json
+          dist/LectureLive.app/Contents/MacOS/LectureLive --auto-ui-test tests/fixtures tests/artifacts/macos-auto-ui.json
           codesign --verify --deep --strict dist/LectureLive.app
           /usr/libexec/PlistBuddy -c "Print :NSMicrophoneUsageDescription" dist/LectureLive.app/Contents/Info.plist
       - name: Create DMG and ZIP
@@ -67,7 +72,7 @@ jobs:
       - name: Upload installable beta
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: LectureLive-0.6.0b1-macOS-AppleSilicon
+          name: LectureLive-0.7.0b1-macOS-AppleSilicon
           path: dist/macos-release/*
           compression-level: 0
           if-no-files-found: error

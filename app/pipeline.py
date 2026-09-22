@@ -515,7 +515,13 @@ class Pipeline:
             notice = UncertainTurn(phrase.identifier, phrase.start, phrase.end, epoch)
             self._save("uncertain", notice)
             self._notify(
-                "language-detection", {"epoch": epoch, "language": None, "final": True}
+                "language-detection",
+                {
+                    "epoch": epoch,
+                    "language": None,
+                    "final": True,
+                    "identifier": phrase.identifier,
+                },
             )
         return language
 
