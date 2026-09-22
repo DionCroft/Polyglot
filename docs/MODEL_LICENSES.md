@@ -9,6 +9,7 @@ The app uses local weights; using Whisper does not use an OpenAI API.
 | Original Whisper weights/code | OpenAI Whisper, MIT |
 | Qualcomm Whisper Base/Small exports | Qualcomm Hugging Face cards identify Apache-2.0 and link the Transformers Apache license; preserve their source notice and original Whisper MIT notice |
 | OPUS-MT EN–ZH | Helsinki-NLP card: Apache-2.0; ONNX conversion by onnx-community |
+| OPUS-MT ZH–EN | Helsinki-NLP, CC-BY-4.0; ONNX quantisation by Xenova; [attribution and conversion notice](licenses/opus-zh-en-NOTICE.md) |
 | Silero VAD | snakers4/silero-vad, MIT (bundled LICENSE) |
 | ONNX Runtime / QNN plugin | MIT package notices; retain bundled third-party notices |
 | PySide6 / Qt | LGPLv3/GPLv3 or commercial licensing; dynamically linked distribution, preserve notices and users' replacement rights |

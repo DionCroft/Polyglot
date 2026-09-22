@@ -1,10 +1,10 @@
-# LectureLive for Apple Silicon — beta 0.5.0b1
+# LectureLive for Apple Silicon — beta 0.6.0b1
 
 Requires an Apple Silicon Mac (M1 or newer, including M2 MacBook Air) running **macOS 14 Sonoma or later**. Intel Macs and Rosetta are not supported by this build. Native M2 classroom validation is still required. The Windows builds remain available separately.
 
 ## Install the ready-made app
 
-1. Open the [Mac beta download page](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.5.0b1). Under **Assets**, choose **LectureLive-0.5.0b1-macOS-AppleSilicon.dmg** (recommended) or the application ZIP. Do not choose **Source code**. Developer builds are also available from successful **macOS Apple Silicon** runs in **Actions**; those require extracting an outer artifact ZIP and may require signing into GitHub.
+1. Open the [Mac beta download page](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.6.0b1). Under **Assets**, choose **LectureLive-0.6.0b1-macOS-AppleSilicon.dmg** (recommended) or the application ZIP. Do not choose **Source code**. Developer builds are also available from successful **macOS Apple Silicon** runs in **Actions**; those require extracting an outer artifact ZIP and may require signing into GitHub.
 2. Open the DMG and drag **LectureLive** onto **Applications**. Alternatively, double-click the inner application ZIP and move **LectureLive.app** to **Applications**. Eject the DMG before starting the installed app.
 3. Open **Applications → LectureLive**. This beta is ad-hoc signed and is **not Apple notarised**. If macOS blocks this downloaded beta, open **System Settings → Privacy & Security**, find the message about LectureLive, choose **Open Anyway**, and confirm **Open**. Only approve the copy you obtained from this repository. Your organisation may require IT approval.
 4. Choose your microphone and click **Test microphone**. Choose **Allow** when macOS asks for microphone access. If access was denied, turn on **System Settings → Privacy & Security → Microphone → LectureLive**, then quit and reopen LectureLive.
@@ -12,6 +12,21 @@ Requires an Apple Silicon Mac (M1 or newer, including M2 MacBook Air) running **
 6. Position the caption overlay on your screen or projector, then lock it. Pause with **Control + Option + Space**; lock/unlock with **Control + Option + C**. The screen buttons also work. In shortcut settings, **Ctrl** means Control and **Alt** means Option; Cmd/Command is supported. Change conflicting shortcuts, especially when VoiceOver is enabled.
 
 All speech models, Chinese translation, voice detection, glossaries and course lists are included. Normal use needs no account, Python installation or internet connection. Audio is processed locally. Text transcripts are saved when **Save transcripts** is selected (on by default); turn it off if you do not want saved text. Microphone audio is not recorded. Settings, presets, logs, transcripts and Core ML caches live in `~/Library/Application Support/LectureLive`.
+
+## Lecturer–student conversations
+
+Choose **English → 简体中文** under **Who is speaking?** for your lecture. For a question,
+finish your sentence, choose **Mandarin 普通话 → English**, and wait for **Listening** before
+the student speaks. The same selector is in **Teaching controls**. Try “请再解释一次。”
+(“Please explain again.”). Switch back to English before answering. The captured turn finishes
+before the switch; speech during switching is not captured. Both directions stay in one transcript.
+
+This app includes the extra 172.7 MB Mandarin → English model; the older 0.5.0b1 installer does
+not. First Mandarin use loads extra model sessions into RAM; one Windows measurement added
+about 527 MiB. Mac memory and timings may differ. Translation remains on CPU. Both directions
+keep the existing Whisper acceleration and CPU fallback. English vocabulary and CO7000 hints
+are preserved for English turns and are not applied to Mandarin. Automatic language detection
+is not included. [Full conversation guide and limitations](CONVERSATIONS.md).
 
 ## Processing choices and limits
 

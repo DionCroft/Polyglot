@@ -1,17 +1,22 @@
-"""Create a complete portable beta ZIP and verify every archived member."""
+"""Create a portable Windows ZIP and verify every archived member (default: x64)."""
 
+import argparse
 import hashlib
 import json
 import zipfile
 from pathlib import Path
 
 root = Path(__file__).resolve().parents[1]
-source = root / "dist/LectureLive-x64-Beta"
-if not (source / "LectureLive-x64-Beta.exe").is_file():
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument("--architecture", choices=("ARM64", "x64"), default="x64")
+architecture = parser.parse_args().architecture
+app_name = "LectureLive" if architecture == "ARM64" else "LectureLive-x64-Beta"
+source = root / "dist" / app_name
+if not (source / (app_name + ".exe")).is_file():
     raise RuntimeError("Build the beta first")
 out = root / "recovery"
 out.mkdir(exist_ok=True)
-archive = out / "LectureLive-Windows-x64-Beta-0.6.0b1.zip"
+archive = out / f"LectureLive-Windows-{architecture}-Beta-0.6.0b1.zip"
 partial = archive.with_suffix(".zip.partial")
 manifest = {}
 with zipfile.ZipFile(

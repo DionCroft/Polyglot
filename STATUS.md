@@ -1,7 +1,16 @@
 # LectureLive — STATUS
 
-Updated 2026-09-22. Native Apple Silicon beta implemented and packaged.
+Updated 2026-09-22. Offline English/Mandarin conversation beta implemented.
 Production classroom acceptance remains open.
+
+## Conversation beta 0.6.0b1
+
+- Manually switch **Who is speaking?** between English → 简体中文 and Mandarin 普通话 → English, including during a lecture. Finish speaking, change the selector, and wait for Listening before the next speaker starts.
+- Whisper remains the recogniser. Both offline translation models are included in setup and packaging; the new Mandarin → English files add 172.7 MB. Source and translation have explicit labels and share one mixed-language transcript session.
+- Existing English defaults, recognition settings and models are preserved. The selected regression fixtures produced exactly the same 36 English speech outputs and 40 English translation results. English vocabulary/CO7000 guidance remains English-only.
+- 92 tests pass on each Windows runtime, with two POSIX-only skips. Mandarin model and UI smoke tests pass on CPU, Qualcomm NPU and emulated x64/DirectML. Packaged Windows and native macOS release checks are in progress; see the evidence report for verified results.
+- Automatic language detection is not enabled: short questions and mixed-language speech have not been validated. Mandarin recognition and technical translation require native-speaker classroom evaluation.
+- [Conversation instructions](docs/CONVERSATIONS.md) · [Tests, measured memory/speed and limitations](docs/evidence/conversations-0.6.md).
 
 ## macOS Apple Silicon beta 0.5.0b1
 

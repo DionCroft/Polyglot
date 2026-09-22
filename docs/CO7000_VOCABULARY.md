@@ -5,6 +5,13 @@ The supplied CO7000 lecture slides and weekly notes cover project management acr
 subject glossary. These are suitable for testing with either lecturer. They do not represent
 an accent-specific model or a verified improvement for your colleague's voice.
 
+## Direction support
+
+These lists and glossary rules apply to **English → Simplified Chinese**. Switching to
+**Mandarin → English** retains them for the next English turn but does not apply them to
+Mandarin recognition or reverse translation. A reviewed reverse glossary is not yet included;
+for example, 关键路径 may be translated as “key route”. [Conversation guide](CONVERSATIONS.md).
+
 ## Set up a lecture
 
 1. Stop the lecture. In **Today's vocabulary**, choose the relevant **CO7000 week**.

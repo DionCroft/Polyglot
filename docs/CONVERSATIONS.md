@@ -61,6 +61,12 @@ memory. Translation runs on CPU in both directions. Whisper uses the existing pl
 acceleration and CPU fallback; a failed accelerator retains the selected speaking language.
 Balanced and Careful can increase latency. Wait for **Listening** after every switch.
 
+On the Snapdragon test machine, loading and warming the reverse model took about **0.63 s**
+and increased process RAM by about **527 MiB**. Eight short questions took **0.076–0.155 s**
+each to translate after warm-up. These are translation-only timings, not microphone-to-caption
+latency or Mac/Intel/AMD promises. Segmentation, speech recognition and any queued work add delay.
+[Detailed verification and limits](evidence/conversations-0.6.md).
+
 ## Saved conversations
 
 **Save text transcripts and subtitles** is on by default. Open **Diagnostics → Open transcripts**.

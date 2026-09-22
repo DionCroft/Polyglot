@@ -10,12 +10,20 @@ This is the ready-to-run Windows 11 Snapdragon ARM64 application.
 
 Keep the _internal folder next to LectureLive.exe. Do not copy the EXE alone.
 No Python installation, account or initial download is needed for this complete copy.
-Intel/AMD Windows PCs and Macs are not supported by this release.
+This folder is for Snapdragon ARM64. Separate Intel/AMD Windows and Apple Silicon Mac builds are available.
 Use the Quick start button for help inside the app, including projector instructions.
 
 Preview release: review translations and rehearse before teaching. See STATUS.md.
 Microphone audio is not recorded. Text transcripts are optional and stay local.
 This build is unsigned; follow your organisation's software approval process.
+
+CONVERSATIONS (0.6.0b1)
+Choose English -> Chinese under Who is speaking? for your lecture. To take a Mandarin
+question, choose Mandarin -> English, wait for Listening, then let the student speak.
+Switch back to English before answering. Audio during switching is not captured.
+Both turns stay in one transcript folder. English vocabulary and CO7000 hints are
+retained for English turns only. Open Quick start > English and Mandarin conversations.
+Both translation models are included and work offline; Mandarin support is a beta.
 
 PROJECT CONTACT
 Dr Dion Miroy Mariyanayagam BEng (Hons) PGCert FHEA PhD MIET CEng

@@ -8,6 +8,17 @@ its entire `_internal` directory. The existing Surface/Qualcomm driver supplies 
 NPU device runtime; no separate QAIRT SDK was needed on the tested machine.
 The build is unsigned and still requires classroom acceptance.
 
+## English and Mandarin support in 0.6.0b1
+
+The current setup includes both offline translation directions, adding 172.7 MB of verified
+Mandarin → English assets. Close older copies and run the current **Setup.cmd** to update.
+Keep complete portable folders together, including `_internal`; copying only an EXE is insufficient.
+Mac users should use the [Mac installer](MACOS.md), which includes the same translation assets.
+
+After setup, choose **English → 简体中文** or **Mandarin 普通话 → English** under **Who is
+speaking?**. When switching during a lecture, wait for **Listening** before the next speaker starts.
+See [conversations](CONVERSATIONS.md) for examples, saved text and vocabulary limitations.
+
 ## First installation: double-click setup
 
 The README included with the source download has the full beginner walkthrough. Download the
@@ -15,7 +26,7 @@ source ZIP from GitHub, use **Extract All**, open the extracted folder, and doub
 **Setup.cmd**. Keep the window open until **SETUP COMPLETE**, then use **Launch.cmd**
 or the **LectureLive** Start menu shortcut. No separate Python or Git installation is needed.
 
-Setup checks for Windows 11 ARM64, a writable extracted folder and a closed application.
+Setup checks for Windows 11 ARM64 or x64, a writable extracted folder and a closed application.
 It keeps a **setup.log** in the project folder. A failed shortcut does not prevent you
 using Launch.cmd. Keep the project folder in place after setup.
 

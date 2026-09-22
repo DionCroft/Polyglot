@@ -1,6 +1,6 @@
 # Windows Intel/AMD beta
 
-LectureLive 0.4.0 beta 2 adds a Windows x64 edition. You can try it on Intel or AMD PCs.
+LectureLive 0.6.0 beta 1 includes a Windows x64 edition with English and Mandarin conversations. You can try it on Intel or AMD PCs.
 The existing Snapdragon ARM64 edition remains available. macOS, Linux and 32-bit Windows
 are outside this release.
 
@@ -37,6 +37,17 @@ compare caption speed on your own PC. This beta uses the **Fast / Whisper Base**
 A complete ready-to-run beta folder contains **LectureLive-x64-Beta.exe** and **_internal**.
 Keep both together. Copying that whole folder needs no Python installation or initial model
 download for CPU/GPU use. The source ZIP from GitHub needs setup first.
+
+## Taking Mandarin questions
+
+The current setup includes the additional **172.7 MB** Mandarin → English model. Update by
+closing the app and running the current **Setup.cmd** or **Setup-Beta.cmd**. CPU and GPU
+speech paths use the same Whisper Base model for both languages. NPU hardware support remains
+experimental. The reverse translator runs on CPU and loads on the first Mandarin turn.
+
+Use **Who is speaking? → Mandarin 普通话 → English**, wait for **Listening**, then let the
+student speak. Return to **English → 简体中文** to answer. English-only CO7000/vocabulary
+hints are retained but not applied to Mandarin. [Conversation guide](CONVERSATIONS.md).
 
 ## Improving speech recognition
 

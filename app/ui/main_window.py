@@ -1458,7 +1458,8 @@ class MainWindow(QMainWindow):
                 "Next phrase: " + upcoming
                 if upcoming
                 else "Stable phrase"
-                if zh
+                if self.overlay.display.pair
+                and self.overlay.display.pair.translated_text
                 else "Listening…"
             )
 

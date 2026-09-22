@@ -5,7 +5,9 @@
 
 Copy the complete `dist/LectureLive` folder to a second drive and launch it there before
 travel. The bundle contains Fast and Balanced NPU speech models, independent CPU
-speech recovery, translation, VAD, tokenisation assets and required libraries.
+speech recovery, both translation directions, VAD, tokenisation assets and required libraries.
+For conversation support, use a 0.6.0b1-or-newer bundle, including `models/translation/opus-zh-en`.
+After copying it, test both speaking-language choices offline. [Conversation walkthrough](CONVERSATIONS.md).
 
 `recovery/LectureLive-Windows-ARM64-Recovery.zip` contains the app bundle, source,
 documentation, pinned manifests, Python ARM64 ZIP and dependency wheels. QNN models

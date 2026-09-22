@@ -41,6 +41,31 @@ Sources verified 2026-09-08:
 The public Qualcomm page has contradictory Compute support text. Exact downloadable
 chipset artifacts and actual strict-provider inference determine support here.
 
+## 0.6 bidirectional conversations
+
+`Settings.speaking_language` uses `en` or `zh`; old settings and presets default to `en`.
+Both Whisper backends force the corresponding language token while retaining transcription,
+Standard/Careful decoding and existing accelerator selection. No audio is sent to a translation
+API. Mandarin recognition is normalised locally to Simplified Chinese. English vocabulary and
+source-gated glossaries stay confined to English turns.
+
+`Caption` retains its legacy `english`/`chinese` fields and adds `source_language`, with explicit
+source/translation properties. Mandarin source text is not mistaken for a completed translation.
+OPUS-MT EN–ZH keeps the original prefix and decoding path; a separately pinned OPUS-MT ZH–EN
+model omits the Chinese target prefix. The extra translator loads lazily and is cached with the
+model bundle. New sessions and language switches never download assets.
+
+A capture lock inserts a FIFO turn boundary after accepted audio. While switching, new capture
+is rejected; VAD finalises the turn, ASR completes it, and translation/export acknowledge the
+boundary before model language changes. Workers and microphone timestamps remain alive; phrase
+IDs remain monotonic and a new epoch rejects stale display events. Stop drains pending work and
+joins a language switch; Pause keeps its existing discard semantics. A failed model load leaves
+the old direction selected. The UI selector runs this work outside the GUI thread.
+
+Journals retain old English events and add direction-tagged source events. Per-language exports
+contain recognised speech and translated turns in the appropriate language. Recovery accepts
+both journal generations. See [conversation verification](evidence/conversations-0.6.md).
+
 ## Verified implementation refinements
 
 Surface WASAPI input requires shared-mode sample-rate conversion (48 kHz hardware to

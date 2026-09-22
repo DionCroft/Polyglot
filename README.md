@@ -1,15 +1,19 @@
 # LectureLive
 
-**Speak in English. Show English and Simplified Chinese captions.**
+**Teach in English. Take questions in Mandarin. Show both languages together.**
 
 LectureLive displays a floating caption panel over your slides, desktop or projector.
-It uses **Whisper** for speech recognition and translates on your computer. After installation,
+It uses **Whisper** for **English → Simplified Chinese** and **Mandarin Chinese → English**
+captions, with translation on your computer. English remains the default. After installation,
 everyday use needs **no internet connection, account or API key**.
 
 You do not need programming experience. The Mac download is a ready-made app; Windows users
 double-click a setup file that prepares everything for them.
 
 ![LectureLive control panel](docs/evidence/control-panel-0.3.png)
+
+**New in conversation beta 0.6.0b1:** a manual speaking-language selector, labelled captions,
+and one saved transcript for lecturer–student conversations. [Conversation guide](docs/CONVERSATIONS.md).
 
 > **Preview/beta software:** rehearse with your teaching microphone and projector before a lecture.
 > Captions and translations can contain mistakes. [What has been tested](STATUS.md).
@@ -71,11 +75,11 @@ The repository's **Code → Download ZIP** contains source code and needs **Setu
 
 ## Install on Mac
 
-Use an **Apple Silicon Mac running macOS 14 or later**. The current Mac beta is **0.5.0b1**.
+Use an **Apple Silicon Mac running macOS 14 or later**. The conversation Mac beta is **0.6.0b1**.
 Internet is needed to download the app; the speech and translation models are included.
 
-1. [Download LectureLive for Apple Silicon — DMG, about 1.1 GB](https://github.com/DionCroft/Polyglot/releases/download/macos-v0.5.0b1/LectureLive-0.5.0b1-macOS-AppleSilicon.dmg).
-   Alternatively, open the [Mac beta release page](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.5.0b1)
+1. [Download LectureLive for Apple Silicon — DMG](https://github.com/DionCroft/Polyglot/releases/download/macos-v0.6.0b1/LectureLive-0.6.0b1-macOS-AppleSilicon.dmg).
+   Alternatively, open the [Mac beta release page](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.6.0b1)
    and choose the **.dmg** under **Assets**. Do not choose **Source code**.
 2. Open the downloaded DMG. Drag **LectureLive** onto **Applications**, wait for copying to finish,
    then eject the DMG.
@@ -102,7 +106,8 @@ performance choices, the ZIP alternative and current limitations.
 2. **Select and test your microphone.** Click **Test microphone · 3 seconds** and speak.
    Check that the meter moves and read the test result. If you connect a microphone after opening
    the app, use the refresh button beside the microphone list.
-3. **Keep Bilingual and Standard selected.** Start with the speech profile below. Where
+3. **Choose English → 简体中文 under Who is speaking?** Keep **Bilingual** and **Standard** selected.
+   Start with the speech profile below. Where
    **Processing hardware** is shown, leave it on **Automatic**. Lecture details and presets are optional.
 4. **Choose whether to save text.** **Save text transcripts and subtitles** is on by default.
    Untick it before starting if you do not want saved text. Microphone audio is not recorded.
@@ -139,6 +144,32 @@ Change shortcuts under **Overlay** if another app uses them. On Mac, the setting
 Control and **Alt** for Option; VoiceOver may use these combinations. The on-screen buttons also work.
 Test captions over your actual slide presentation, including full-screen mode, before teaching.
 
+## Let students ask questions in Mandarin
+
+You can switch during the same lecture, including from the small **Teaching controls** panel:
+
+1. Finish your English sentence and choose **Mandarin 普通话 → English** under **Who is speaking?**.
+2. Wait for **Listening**. The app finishes the captured turn before changing language;
+   anything spoken during **Switching language…** is not captured.
+3. Let the student ask their question, for example **“请再解释一次。”** (“Please explain again.”).
+4. Read the English translation beside the recognised Simplified Chinese. Each line is labelled
+   **spoken** or **translation**.
+5. Choose **English → 简体中文**, wait for **Listening**, then answer in English.
+
+Keep **Bilingual** selected to show both languages. Only one person should speak at a time.
+Your microphone, projector, shortcuts and transcript folder stay the same. Switching while paused
+keeps the lecture paused. Saved presets remember the speaking language; older presets use English.
+
+Language selection is manual: automatic detection has not been validated for short questions and
+mixed-language speech. **Mandarin support is a beta**; rehearsal and bilingual review are still needed.
+Our small public speech check found errors in homophones and dates. [Results and limitations](docs/evidence/conversations-0.6.md).
+
+The additional offline translation model adds **172.7 MB** to setup and packaging. It loads on the
+first Mandarin turn, then stays cached. One Snapdragon test measured about **527 MiB extra RAM**
+when loading it; other computers can differ. It can add caption delay and first-switch preparation
+time. Windows setup includes it automatically; install the **0.6.0b1** Mac build to obtain it on Mac.
+The older Mac **0.5.0b1** does not have conversation support.
+
 ## Improve missed words and use CO7000 vocabulary
 
 Keep **Standard** and vocabulary guidance off if recognition already works well for you.
@@ -159,6 +190,11 @@ the smaller Fast model. Balanced and Careful can increase memory use and caption
 [Speech settings and measured results](docs/SPEECH_RECOGNITION.md) ·
 [CO7000 weekly vocabulary guide](docs/CO7000_VOCABULARY.md).
 
+English vocabulary, glossary corrections and CO7000 hints are preserved when switching, but are
+**not applied to Mandarin turns**. There is no reviewed reverse CO7000 glossary yet. For example,
+**关键路径** may translate as “key route” instead of “critical path”. See the
+[conversation guide](docs/CONVERSATIONS.md) for direction-specific limitations.
+
 ## Help with common problems
 
 | What you see | What to do |
@@ -170,11 +206,14 @@ the smaller Fast model. Balanced and Careful can increase memory use and caption
 | A microphone disconnects | Reconnect it and use **Reconnect / retry**. If needed, stop the lecture, refresh the microphone list and select it again. |
 | English appears but Chinese does not | Select **Bilingual** and read any warning. For missing files, close the app and rerun Windows setup, or reinstall the Mac app from the release download. |
 | Captions are slow | Try **Fast / Standard** for the next session, close heavy applications and pause naturally between sentences. |
+| Mandarin speech produces incorrect captions | Check **Who is speaking?** is set to **Mandarin 普通话 → English** and wait for **Listening** before speaking. Speak one language at a time. |
+| Switching says the Mandarin model is missing | Close the app and rerun the current Windows **Setup.cmd**, or install the 0.6.0b1 Mac app. The previous speaking language is retained. |
 | An accelerator check fails or takes too long | On Mac or the Intel/AMD beta, stop the lecture and select **CPU** under Processing hardware. See the platform guide for details. |
 | Captions are on the wrong screen | Open **Overlay** and select the projector or preferred caption display. |
 | You want your saved text | Open **Diagnostics → Open transcripts**. Text is saved only when the transcript option is enabled. |
 
 More help: [Quick start](docs/QUICK_START.md) · [User guide](docs/USER_GUIDE.md) ·
+[English and Mandarin conversations](docs/CONVERSATIONS.md) ·
 [Mac guide](docs/MACOS.md) · [Windows beta guide](docs/WINDOWS_BETA.md) ·
 [Windows installation and repair](docs/INSTALLATION.md) · [Windows offline recovery](docs/OFFLINE_SETUP.md).
 
