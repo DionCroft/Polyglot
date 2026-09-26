@@ -139,6 +139,31 @@ def run(report_path):
         guide.pages.setCurrentIndex(index)
         assert "Back to live" in guide.browser.toPlainText()
         guide.close()
+        from types import SimpleNamespace
+        from threading import Event
+
+        # A previous translation must not erase newer provisional speech, and
+        # an uncertain Auto final must retract provisional text in BOTH views.
+        window.pipeline = SimpleNamespace(epoch=1, paused=Event())
+        try:
+            window.cfg.speaking_language = "auto"
+            window.on_event(
+                "caption", Caption(33, 162, 164, "Unfinished next question", epoch=1)
+            )
+            window.on_event(
+                "caption",
+                Caption(31, 156, 160, "Previous answer", "先前的回答", True, 1),
+            )
+            assert "Unfinished next question" in view.provisional.text()
+            window.on_event(
+                "language-detection",
+                {"epoch": 1, "identifier": 33, "language": None, "final": True},
+            )
+            assert "Unfinished next question" not in view.provisional.text()
+            assert "not transcribed" in view.provisional.text()
+        finally:
+            window.pipeline = None
+            window.cfg.speaking_language = "en"
         # New sessions clear temporary history; changing languages does not.
         window.select_language()
         assert len(window.history.entries) == 33
@@ -156,6 +181,8 @@ def run(report_path):
             offline_help=True,
             temporary_history_reset=True,
             fixed_projector_font=True,
+            uncertain_partial_retracted=True,
+            provisional_survives_older_translation=True,
         )
         return 0
     finally:

@@ -1390,6 +1390,9 @@ class MainWindow(QMainWindow):
             if self.closing:
                 QTimer.singleShot(50, self.close)
         elif kind == "stopped":
+            self.transcript_view.provisional.setText(
+                "Lecture finished. History stays here until the next lecture or app exit."
+            )
             if self.teaching:
                 self.teaching.hide()
                 if not self.closing:
@@ -1434,6 +1437,9 @@ class MainWindow(QMainWindow):
                 return
             language = value["language"]
             if language is None and value["final"]:
+                self.transcript_view.provisional.setText(
+                    "Speech not transcribed. Select English or Mandarin and repeat."
+                )
                 self.overlay.display.reject_partial(value["identifier"], value["epoch"])
                 self.overlay.partial = self.overlay.display.partial
                 en, zh, _ = self.overlay.display.contents(self.cfg.mode)
@@ -1518,12 +1524,15 @@ class MainWindow(QMainWindow):
                 or value.epoch != self.pipeline.epoch
             ):
                 return
-            self.transcript_view.provisional.setText(
-                "Recognised phrase added above; translation follows."
-                if value.final
-                else "Unfinished speech · " + value.source_text
-            )
             self.overlay.set_caption(value)
+            partial = self.overlay.display.partial
+            self.transcript_view.provisional.setText(
+                "Unfinished speech · " + partial.source_text
+                if partial
+                else "Translating…"
+                if self.overlay.display.pending
+                else "Listening…"
+            )
             en, zh, upcoming = self.overlay.display.contents(self.cfg.mode)
             primary = self.overlay.display.primary(self.cfg.mode)
             language = (
