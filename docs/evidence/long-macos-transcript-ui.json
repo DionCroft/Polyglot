@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "physical_microphone_tested": false,
+  "speech_accuracy_tested": false,
+  "native_qt_platform": "cocoa",
+  "scroll_anchor": true,
+  "search_copy": true,
+  "late_translation": true,
+  "bilingual_rows": true,
+  "explicit_gap": true,
+  "minimum_window": true,
+  "offline_help": true,
+  "temporary_history_reset": true,
+  "fixed_projector_font": true,
+  "uncertain_partial_retracted": true,
+  "provisional_survives_older_translation": true
+}

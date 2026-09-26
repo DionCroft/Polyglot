@@ -12,7 +12,10 @@ queues later passages, preserves reading position while hidden and adds reading 
 New tests measure fully visible wrapped-line coverage. Both Windows runtimes pass 141 tests
 (two POSIX-only skips). Both rebuilt EXEs pass complete-paragraph rendering, reader controls
 and offline English/Mandarin WAV conversation checks. Portable ARM64/x64 ZIPs are hash-verified.
-Native Mac packaged checks are in progress. See [reports and screenshots](docs/evidence/long-paragraph-0.8.1.md).
+Native Apple Silicon passes 143 tests with no skips, packaged long-paragraph rendering,
+manual/Auto conversations, inference, transcript/native UI checks and signature verification.
+DMG and ZIP installers are available in successful build 36255627088, at app commit `86ed6b3`.
+See [reports, screenshots and installation links](docs/evidence/long-paragraph-0.8.1.md).
 Speech recognition, translation models and vocabulary are unchanged.
 
 ## Rolling transcript (26 September 2026)

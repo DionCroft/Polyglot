@@ -65,6 +65,8 @@ checks reader anchoring, search/copy, labels, late translation, offline help, mi
 controls and native click-through flags. The third runs real local English/Mandarin
 WAVs through offline recognition/translation, checks switching and saved transcripts.
 Screenshots of the beginning, middle and end were visually inspected on Windows.
+A separate native control check confirms reading time persists in settings and round-trips
+through lecture presets (`long-speed-controls.json`); its control screenshot was inspected.
 
 ![Both languages at the beginning](long-projector-start-0.8.1.png)
 ![Both languages during rolling](long-projector-middle-0.8.1.png)
@@ -84,8 +86,30 @@ Extract the entire archive and open the EXE inside its application folder; keep 
 beside it. For this workspace, `Launch.cmd` opens the rebuilt application. Full checksums
 are in `long-arm64-package.json` and `long-x64-package.json`.
 
-The native Apple Silicon build is still completing packaged checks. The native run is [36255627088](https://github.com/DionCroft/Polyglot/actions/runs/36255627088),
-at application commit `86ed6b3`. This section will be completed with the resulting reports.
+The [native Apple Silicon run 36255627088](https://github.com/DionCroft/Polyglot/actions/runs/36255627088)
+completed successfully at application commit `86ed6b3`, on macOS 14.8.9 ARM64.
+All **143 tests pass, with zero failures, errors or skips**. Packaged checks pass for
+CPU/Core ML speech, English/Mandarin translation, manual and Auto conversations, transcript
+saving/recovery, native Cocoa controls and complete paragraph playback. The long-paragraph
+report confirms full coverage of the same English/Chinese text as the Windows tests.
+The native start/middle/end images were visually inspected; wrapping differs with Mac fonts.
+Ad-hoc signature verification and DMG/ZIP packaging pass. No notarisation is claimed.
+
+Download **Artifacts → LectureLive-0.8.1b1-macOS-AppleSilicon** from that run. The outer artifact
+is 2,394,781,973 bytes and contains the application DMG and ZIP, installation instructions
+and SHA-256 checksums. GitHub sign-in may be needed; artifacts are retained for 30 days.
+Extract the outer ZIP, open the DMG, drag LectureLive to Applications, eject the DMG and
+open the installed app. Requires **macOS 14 or later** on Apple Silicon. See [Mac first-use
+and permission steps](../MACOS.md). The published 0.7.0b1 release linked in that guide remains
+unchanged; choose this build artifact for the complete rolling fix.
+
+The installer artifact ID, size and GitHub SHA-256 digest are in `long-macos-artifact.json`.
+Only the small validation artifact was downloaded locally; the 2.39 GB installers remain
+on GitHub. Reports include `long-macos-pytest.xml`, `long-macos-long-paragraph.json` and
+packaged inference/conversation/UI reports. This is native hosted Apple Silicon execution,
+not physical M2 Air classroom certification.
+
+![Native Mac projector during a long paragraph](long-macos-middle-0.8.1.png)
 
 ## Limits and classroom use
 

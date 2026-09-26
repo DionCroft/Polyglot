@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "physical_microphone_tested": false,
+  "overlay_native_flags": 257,
+  "shortcuts_registered": 2,
+  "shortcut_conflicts": [],
+  "static_permission_plugins": [
+    "QDarwinBluetoothPermissionPlugin",
+    "QDarwinCalendarPermissionPlugin",
+    "QDarwinCameraPermissionPlugin",
+    "QDarwinContactsPermissionPlugin",
+    "QDarwinMicrophonePermissionPlugin"
+  ],
+  "microphone_request_handler_linked": true,
+  "microphone_permission_status": "PermissionStatus.Granted",
+  "wav_caption": "And so my fellow Americans",
+  "presets": true,
+  "co7000": true,
+  "overlay_lock": true,
+  "minimum_controls_visible": true
+}

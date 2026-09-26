@@ -30,9 +30,13 @@ and copying selected text or the whole transcript. These controls work while cap
 
 ![The rolling transcript showing English explanations and a Mandarin question](docs/evidence/rolling-reader-0.8.png)
 
-The published Mac download below remains 0.7.0b1. The new 0.8.1b1 native Mac build and its
-verification status will be linked here after packaging; source instructions are in
-[the Mac guide](docs/MACOS.md).
+The published Mac download below remains 0.7.0b1. To get this rolling fix on Mac, open
+[the tested 0.8.1b1 build](https://github.com/DionCroft/Polyglot/actions/runs/36255627088),
+then choose **Artifacts → LectureLive-0.8.1b1-macOS-AppleSilicon**. Sign into GitHub if asked,
+extract the outer ZIP, then open the **.dmg** inside and drag LectureLive to Applications.
+Build artifacts are retained for 30 days. Requires Apple Silicon and **macOS 14 or later**.
+Follow [the Mac guide](docs/MACOS.md) for first opening and microphone permissions.
+Native Mac validation passes 143 tests; both Windows runtimes pass 141 (two platform skips).
 
 > **Preview/beta software:** rehearse with your teaching microphone and projector before a lecture.
 > Captions and translations can contain mistakes. [What has been tested](STATUS.md).

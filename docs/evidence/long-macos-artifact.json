@@ -1,0 +1,23 @@
+{
+  "run_id": 36255627088,
+  "application_commit": "86ed6b3c6d8bfe837229a92d01035c67d88fe4f6",
+  "conclusion": "success",
+  "artifacts": [
+    {
+      "id": 10910343714,
+      "name": "macos-validation",
+      "size_in_bytes": 2739320,
+      "digest": "sha256:33a214894fcf14ca86165e111314089e6d67d7a789f012f5a7ee071510808b53",
+      "expired": false,
+      "expires_at": "2026-10-26T16:44:44Z"
+    },
+    {
+      "id": 10910194883,
+      "name": "LectureLive-0.8.1b1-macOS-AppleSilicon",
+      "size_in_bytes": 2394781973,
+      "digest": "sha256:4f7424512d1f3be07f9d2e4e1a9b96b111d98fce1b6e21f71011e14b566d40df",
+      "expired": false,
+      "expires_at": "2026-10-26T16:44:12Z"
+    }
+  ]
+}
