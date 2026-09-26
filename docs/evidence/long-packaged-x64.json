@@ -1,0 +1,49 @@
+{
+  "passed": true,
+  "physical_projector_tested": false,
+  "speech_accuracy_tested": false,
+  "clock": "simulated",
+  "cases": {
+    "long_english_short_chinese": {
+      "passages": 1,
+      "painted_frames": 238,
+      "fully_visible_utf16_units": {
+        "en": 5640,
+        "zh": 74
+      }
+    },
+    "short_english_long_chinese": {
+      "passages": 1,
+      "painted_frames": 146,
+      "fully_visible_utf16_units": {
+        "en": 235,
+        "zh": 1776
+      }
+    },
+    "both_long": {
+      "passages": 1,
+      "painted_frames": 118,
+      "fully_visible_utf16_units": {
+        "en": 2820,
+        "zh": 888
+      }
+    },
+    "eight_queued_turns": {
+      "passages": 8,
+      "painted_frames": 137,
+      "fully_visible_utf16_units": {
+        "en": 3824,
+        "zh": 1216
+      }
+    },
+    "unicode_and_paragraph_breaks": {
+      "passages": 1,
+      "painted_frames": 48,
+      "fully_visible_utf16_units": {
+        "en": 1218,
+        "zh": 306
+      }
+    }
+  },
+  "native_qt_platform": "windows"
+}

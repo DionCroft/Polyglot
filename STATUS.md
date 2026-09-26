@@ -9,7 +9,10 @@ The 0.8.0 projector could hide the beginning of a long paragraph and the shorter
 translation by sharing one bottom offset. The earlier tests checked stored text, not
 whether every line was visible. 0.8.1 rolls both columns independently from the beginning,
 queues later passages, preserves reading position while hidden and adds reading speed.
-New tests measure fully visible wrapped-line coverage. Packaging validation is in progress.
+New tests measure fully visible wrapped-line coverage. Both Windows runtimes pass 141 tests
+(two POSIX-only skips). Both rebuilt EXEs pass complete-paragraph rendering, reader controls
+and offline English/Mandarin WAV conversation checks. Portable ARM64/x64 ZIPs are hash-verified.
+Native Mac packaged checks are in progress. See [reports and screenshots](docs/evidence/long-paragraph-0.8.1.md).
 Speech recognition, translation models and vocabulary are unchanged.
 
 ## Rolling transcript (26 September 2026)

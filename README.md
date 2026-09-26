@@ -10,7 +10,7 @@ everyday use needs **no internet connection, account or API key**.
 You do not need programming experience. The Mac download is a ready-made app; Windows users
 double-click a setup file that prepares everything for them.
 
-![LectureLive captions showing Mandarin speech and its English translation](docs/evidence/auto-overlay-0.7.png)
+![LectureLive rolling through a long English and Chinese explanation](docs/evidence/long-projector-start-0.8.1.png)
 
 **New in 0.7.0b1, included in the main application:** choose **Auto · English ↔ Mandarin**
 to change direction as speakers take turns. Manual selection remains available and English
@@ -21,7 +21,8 @@ from beginning to end. The two columns move independently; new passages wait unt
 finish. Choose **Overlay → Caption layout → Rolling · readable projector**. Start with
 **Reading time per line → 1.4 seconds** (higher is slower). The waiting count tells you
 when the display is behind the speaker; a wider panel or faster rolling reduces the delay.
-No extra models are needed. [Beginner's transcript/projector guide](docs/TRANSCRIPT.md).
+No extra models are needed. [Beginner's transcript/projector guide](docs/TRANSCRIPT.md) ·
+[Long-paragraph test results](docs/evidence/long-paragraph-0.8.1.md).
 
 Open **Transcript** for the full bilingual history, **Back to live**, English/Chinese search,
 and copying selected text or the whole transcript. These controls work while captions roll.

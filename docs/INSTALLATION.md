@@ -94,6 +94,18 @@ fixtures are synthesised locally using an installed Windows voice. Voice-depende
 results vary by machine. Developer fixtures are excluded from Git and recovery ZIPs.
 Normal app use requires none of these test commands.
 
+For reproducible long-paragraph display checks (synthetic text; no microphone), set an
+isolated test-data folder and run the built application:
+
+```powershell
+$env:LECTURELIVE_DATA = "$PWD\tests\paragraph-data"
+.\dist\LectureLive\LectureLive.exe --long-paragraph-ui-test tests/artifacts/paragraphs.json
+```
+
+The x64 EXE and Mac executable support the same flag. The report checks that all English
+and Chinese wrapped lines become fully visible, and saves start/middle/end screenshots.
+Playback time is simulated; this does not replace classroom testing.
+
 Use `scripts/build.ps1` for subsequent builds and `scripts/install-shortcut.ps1` for
 an optional Start Menu launcher. Neither enables startup-at-login nor audio recording.
 Package versions remain pinned in `requirements-lock.txt`; QNN and all runtime binaries

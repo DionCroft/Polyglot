@@ -45,7 +45,9 @@ try:
     w.projector_preview()
     app.processEvents()
     assert w.overlay.isVisible()
-    # A long caption expands as needed, then the next short pair restores height.
+    # Compact layout expands and shrinks; rolling has separate line-coverage checks.
+    previous_layout = w.cfg.overlay_layout
+    w.cfg.overlay_layout = "compact"
     from app.captions.state import Caption
 
     base_height = w.cfg.height
@@ -55,6 +57,7 @@ try:
     pump_until(lambda: w.overlay.height() > base_height)
     w.overlay.set_caption(Caption(3, 0, 1, "Short sentence.", "短句。", True))
     pump_until(lambda: w.overlay.height() == base_height)
+    w.cfg.overlay_layout = previous_layout
     w.overlay.hide()
     w.lock_shortcut_edit.setText("Ctrl+Alt+Shift+F11")
     w.pause_shortcut_edit.setText("Ctrl+Alt+Shift+F12")

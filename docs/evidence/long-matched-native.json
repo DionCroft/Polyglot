@@ -1,0 +1,11 @@
+{
+  "passages": 1,
+  "painted_frames": 95,
+  "fully_visible_utf16_units": {
+    "en": 2304,
+    "zh": 27
+  },
+  "passed": true,
+  "platform": "windows",
+  "fixture": "Same text and geometry as long-before-native.json"
+}

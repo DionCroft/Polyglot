@@ -19,7 +19,8 @@ while not w.start_button.isEnabled() and time.monotonic()<limit:pump(50)
 assert w.start_button.isEnabled()
 # Capture using Qt itself for reproducible artifact comparison.
 w.grab().save(str(root/'docs/evidence/control-panel.png'))
-w.overlay.set_caption(Caption(1,0,5,'The interrupt service routine should execute as quickly as possible.','中断服务程序应尽快执行。',True));w.overlay.show();w.overlay.lock(True);QTest.qWait(300)
+w.cfg.overlay_layout="rolling"
+w.overlay.enqueue(Caption(1,0,5,'The interrupt service routine should execute as quickly as possible.','中断服务程序应尽快执行。',True));w.overlay.show();w.overlay.lock(True);QTest.qWait(300)
 w.overlay.grab().save(str(root/'docs/evidence/overlay.png'))
 style=user32.GetWindowLongPtrW(int(w.overlay.winId()),-20)
 assert style&0x20 and style&0x08000000
