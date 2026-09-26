@@ -58,11 +58,23 @@ Extract the entire ZIP and open the EXE inside its application folder. Keep `_in
 beside the EXE. Existing source installations can open the rebuilt app with **Launch.cmd**.
 The archive reports are `rolling-arm64-package.json` and `rolling-x64-package.json`.
 
-Native Apple Silicon validation is tracked in
-[build 36252250715](https://github.com/DionCroft/Polyglot/actions/runs/36252250715).
-At the Windows evidence milestone its unit tests and `.app` build passed; packaged
-inference/UI checks and DMG/ZIP production were still running. The published 0.7.0b1
-Mac download does not include the rolling transcript.
+## Native Apple Silicon
+
+[Build 36252250715](https://github.com/DionCroft/Polyglot/actions/runs/36252250715)
+completed successfully at application commit `4c2d01f` on a hosted macOS 14 ARM64 runner.
+All **129 tests pass, with zero failures, errors or skips**. Packaged inference,
+manual/Auto conversation checks, the existing Cocoa interface checks and the new
+native transcript/projector check all pass. The reader and projector screenshots
+were also visually inspected. Code-signature verification and DMG/ZIP production pass.
+
+This is actual native Apple Silicon execution, but not a physical M2 Air classroom
+rehearsal. The new UI test uses fixed text; WAV checks do not test a live microphone.
+The app remains ad-hoc signed, not Apple notarised, and requires macOS 14 or later.
+
+The installable files are in the run's **LectureLive-0.8.0b1-macOS-AppleSilicon** artifact.
+Extract the outer artifact ZIP, then open the DMG and drag LectureLive to Applications.
+GitHub may require sign-in; workflow artifacts expire after 30 days. The published
+0.7.0b1 Mac release is unchanged and does not include the rolling transcript.
 
 ## Remaining classroom checks
 

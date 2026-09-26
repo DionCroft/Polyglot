@@ -20,6 +20,14 @@ Production classroom acceptance remains open.
   checks (x64 under emulation). The fixed 36 speech and 40 translation regression outputs
   match the previous baseline exactly. Native macOS and archive details are recorded in
   [the accompanying evidence](docs/evidence/rolling-transcript-0.8.md).
+- Native Apple Silicon passes **129 tests with no skips**, packaged speech/translation,
+  manual/Auto conversation checks and the new Cocoa reader/projector test. Signature
+  validation and DMG/ZIP packaging pass in build **36252250715**, at application commit
+  `4c2d01f`. The published Mac 0.7.0b1 release remains unchanged; 0.8.0b1 is a tested build artifact.
+- Native Apple Silicon passes **129 tests with no skips**, packaged speech/translation,
+  manual/Auto conversation checks and the new Cocoa reader/projector test. Signature
+  validation and DMG/ZIP packaging pass in build **36252250715**, at application commit
+  `4c2d01f`. The published Mac 0.7.0b1 release remains unchanged; 0.8.0b1 is a tested build artifact.
   Speech models, recognition settings, CO7000 vocabulary and Auto thresholds are unchanged.
 
 ## Expanded Indian-English testing (23 September 2026)

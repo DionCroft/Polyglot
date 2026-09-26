@@ -16,26 +16,32 @@ double-click a setup file that prepares everything for them.
 to change direction as speakers take turns. Manual selection remains available and English
 remains the default. [Auto guide](docs/AUTO_LANGUAGE.md) · [Test results](docs/evidence/auto-language-0.7.md).
 
-**New in the 0.8.0b1 source/Windows build:** open **Transcript** for a rolling bilingual
+**New in 0.8.0b1:** open **Transcript** for a rolling bilingual
 history. Scroll back while listening continues, choose **Back to live**, search either
 language and copy selected text or the whole transcript. **Overlay → Caption layout →
 Rolling · readable projector** keeps the text size steady; **Compact** keeps the previous
 layout. [Beginner's transcript guide](docs/TRANSCRIPT.md).
 The published Mac download linked below is still 0.7.0b1 and does not include these new
-reading features; 0.8.0b1 Mac builds are produced by the repository's native build workflow.
+reading features. The [tested 0.8.0b1 Mac build](https://github.com/DionCroft/Polyglot/actions/runs/36252250715)
+is available under **Artifacts → LectureLive-0.8.0b1-macOS-AppleSilicon** (GitHub sign-in
+may be required; build artifacts are retained for 30 days). Extract that outer ZIP,
+then open the **.dmg** inside and follow the Mac installation steps below.
 
 ![The rolling transcript showing English explanations and a Mandarin question](docs/evidence/rolling-reader-0.8.png)
 
 No extra speech or translation models are needed for the transcript view.
 [Reading-feature test results](docs/evidence/rolling-transcript-0.8.md).
 
-**New in the 0.8.0b1 source/Windows build:** open **Transcript** for a rolling bilingual
+**New in 0.8.0b1:** open **Transcript** for a rolling bilingual
 history. Scroll back while listening continues, choose **Back to live**, search either
 language and copy selected text or the whole transcript. **Overlay → Caption layout →
 Rolling · readable projector** keeps the text size steady; **Compact** keeps the previous
 layout. [Beginner's transcript guide](docs/TRANSCRIPT.md).
 The published Mac download linked below is still 0.7.0b1 and does not include these new
-reading features; 0.8.0b1 Mac builds are produced by the repository's native build workflow.
+reading features. The [tested 0.8.0b1 Mac build](https://github.com/DionCroft/Polyglot/actions/runs/36252250715)
+is available under **Artifacts → LectureLive-0.8.0b1-macOS-AppleSilicon** (GitHub sign-in
+may be required; build artifacts are retained for 30 days). Extract that outer ZIP,
+then open the **.dmg** inside and follow the Mac installation steps below.
 
 > **Preview/beta software:** rehearse with your teaching microphone and projector before a lecture.
 > Captions and translations can contain mistakes. [What has been tested](STATUS.md).

@@ -1,0 +1,84 @@
+{
+  "version": "0.8.0b1",
+  "platform": "macOS-14.8.9-arm64-arm-64bit",
+  "machine": "arm64",
+  "course_vocabulary": {
+    "weeks": 12,
+    "terms": 92
+  },
+  "speech": [
+    {
+      "profile": "fast",
+      "requested": "cpu",
+      "backend": "Apple Silicon CPU · Whisper Base int8",
+      "accelerated": false,
+      "messages": [
+        "Using local CPU speech recognition; no internet is required."
+      ],
+      "warmup_seconds": 4.904323874999989,
+      "standard_seconds": 2.0692269999999553,
+      "careful_seconds": 2.199627708000037,
+      "english": "And so my fellow Americans ask not what your country can do for you, ask what you can do for your country.",
+      "guided": "and so my fellow Americans ask not what your country can do for you, ask what you can do for your country",
+      "chinese": "欢迎收听演讲"
+    },
+    {
+      "profile": "fast",
+      "requested": "coreml",
+      "backend": "Apple Core ML encoder + CPU decoder · Whisper Base",
+      "accelerated": true,
+      "messages": [],
+      "warmup_seconds": 46.43893316599997,
+      "standard_seconds": 4.045990125000003,
+      "careful_seconds": 3.394278999999983,
+      "english": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country.",
+      "guided": "and so my fellow Americans ask not what your country can do for you, ask what you can do for your country",
+      "chinese": "欢迎收听演讲",
+      "coreml": {
+        "ready": true,
+        "providers": [
+          "CoreMLExecutionProvider"
+        ],
+        "runtime": "1.29.0",
+        "compute_units": "ALL",
+        "device": "Selected by macOS; GPU/ANE not individually verified"
+      }
+    },
+    {
+      "profile": "balanced",
+      "requested": "cpu",
+      "backend": "Apple Silicon CPU · Whisper Small int8",
+      "accelerated": false,
+      "messages": [
+        "Using local CPU speech recognition; no internet is required."
+      ],
+      "warmup_seconds": 6.903247042000089,
+      "standard_seconds": 3.8592952909999667,
+      "careful_seconds": 5.9401480420000325,
+      "english": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country.",
+      "guided": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country.",
+      "chinese": "欢迎收听演讲"
+    },
+    {
+      "profile": "balanced",
+      "requested": "coreml",
+      "backend": "Apple Silicon CPU · Whisper Small int8",
+      "accelerated": false,
+      "messages": [
+        "Core ML unavailable: Core ML worker timed out; switching to CPU",
+        "Using local CPU speech recognition; no internet is required."
+      ],
+      "warmup_seconds": 188.50685654200004,
+      "standard_seconds": 4.888435374999972,
+      "careful_seconds": 4.803655208000009,
+      "english": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country.",
+      "guided": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country.",
+      "chinese": "欢迎收听演讲"
+    }
+  ],
+  "physical_microphone_tested": false,
+  "m2_tested": false,
+  "passed": true,
+  "parent_peak_rss_bytes": 3240886272,
+  "child_peak_rss_bytes": 2677587968
+}

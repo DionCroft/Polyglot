@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "version": "0.8.0b1",
+  "physical_microphone_tested": false,
+  "classroom_validated": false,
+  "audio_seconds": 35.38,
+  "directions": [
+    "en",
+    "zh",
+    "en"
+  ],
+  "completed_pairs": 7,
+  "uncertain_phrases": 3,
+  "journal_recovery": true,
+  "backend": "Apple Silicon CPU · Whisper Base int8",
+  "metrics": {
+    "speaking_language": "auto",
+    "detected_language": "en",
+    "switching_language": false,
+    "recognition_mode": "standard",
+    "vocabulary_guidance": false,
+    "dropped_audio_chunks": 0,
+    "dropped_phrases": 0,
+    "translation_skips": 0,
+    "asr_seconds": 1.8999943750000057,
+    "translation_seconds": 0.12023950000002515,
+    "rtf": 0.5654745163690493,
+    "english_latency": 2.7019947919999865,
+    "bilingual_latency": 2.8225005830000143,
+    "uncertain_language_phrases": 3,
+    "english_p95_seconds": 3.515,
+    "bilingual_p95_seconds": 4.372,
+    "audio_queue": 0,
+    "asr_queue": 0,
+    "translation_queue": 0
+  },
+  "warnings": [
+    "Using local CPU speech recognition; no internet is required.",
+    "WAV replay finished. Captions remain visible; stop to finish the session."
+  ]
+}
