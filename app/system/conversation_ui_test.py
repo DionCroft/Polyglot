@@ -51,6 +51,8 @@ def run(fixtures, report_path):
             )
         )
         wait(lambda: window.last_caption is not None)
+        wait(lambda: bool(window.history.entries))
+        assert any(c.source_language == "en" for c in window.history.entries.values())
         window.teaching = TeachingControls(window)
         window.teaching.show()
         window.teaching.language.setCurrentIndex(1)
@@ -62,6 +64,7 @@ def run(fixtures, report_path):
         )
         assert window.speaking_language.currentData() == "zh"
         assert window.pipeline.export is not None
+        assert window.history.entries  # Manual switching retains the earlier speech.
         folder = window.pipeline.export.folder
         caption = Caption(
             100,
@@ -75,12 +78,14 @@ def run(fixtures, report_path):
             "zh",
         )
         window.on_event("caption", caption)
+        window.on_event("transcript-entry", caption)
         text = window.overlay._caption_document(26).toPlainText()
         assert "English · translation" in text and "简体中文 · spoken" in text
         assert caption.english in text and caption.chinese in text
         window.overlay.grab().save(str(Path(report_path).with_suffix(".overlay.png")))
         window.teaching.grab().save(str(Path(report_path).with_suffix(".teaching.png")))
         window.pause()
+        assert window.history.entries
         window.speaking_language.setCurrentIndex(0)
         wait(
             lambda: (
@@ -110,6 +115,11 @@ def run(fixtures, report_path):
             )
         )
         result["mandarin_wav_caption"] = window.last_caption.__dict__
+        wait(
+            lambda: any(
+                c.source_language == "zh" for c in window.history.entries.values()
+            )
+        )
         mandarin_folder = window.pipeline.export.folder
         window.stop()
         wait(lambda: window.pipeline is None)

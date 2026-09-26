@@ -1,7 +1,23 @@
 # LectureLive — STATUS
 
-Updated 2026-09-23. Automatic English/Mandarin turns added to the main application.
+Updated 2026-09-26. Rolling transcript and projector reading layout added in 0.8.0b1.
 Production classroom acceptance remains open.
+
+## Rolling transcript (26 September 2026)
+
+- Added a session transcript tab, Back to live/new-passage count, bilingual search,
+  text selection/copy and a fixed-font rolling projector layout. Compact remains available.
+- Completed history survives language switching and pause/resume; delayed translations
+  update their original passage. Temporary history works with saving disabled. The reader
+  retains up to 10,000 passages; saved exports remain complete.
+- Windows ARM64 and emulated x64 each pass 127 tests with two POSIX-only skips. Tests include
+  1,440 simulated passages over a two-hour timeline, missing translations, uncertain turns,
+  retention, scroll anchoring, Unicode selection, search/copy and journal recovery.
+- Native Windows reader/projector checks pass, including minimum window size, resizing,
+  hidden-tab live following, offline help and click-through flags. These text fixtures do
+  not test speech accuracy, actual lecture duration or physical projector readability.
+- Native macOS and packaged build results will be recorded in the accompanying evidence.
+  Speech models, recognition settings, CO7000 vocabulary and Auto thresholds are unchanged.
 
 ## Expanded Indian-English testing (23 September 2026)
 

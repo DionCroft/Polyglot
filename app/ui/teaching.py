@@ -55,11 +55,18 @@ class TeachingControls(QDialog):
         show = QPushButton("Full controls")
         show.clicked.connect(self.close)
         layout.addWidget(show)
+        transcript = QPushButton("Read transcript")
+        transcript.clicked.connect(self.show_transcript)
+        layout.addWidget(transcript)
         self.note = QLabel(
             "Choose Auto for conversation, or select the speaking language manually. Pause briefly between speakers. Captions stay on the selected display."
         )
         self.note.setWordWrap(True)
         layout.addWidget(self.note)
+
+    def show_transcript(self):
+        self.owner.tabs.setCurrentWidget(self.owner.transcript_view)
+        self.close()
 
     def closeEvent(self, event):
         self.owner.show()

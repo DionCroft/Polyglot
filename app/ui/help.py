@@ -19,6 +19,7 @@ class GuideDialog(QDialog):
             self.pages.addItem("Mac installation and first captions", "MACOS.md")
         for label, filename in [
             ("Quick start", "QUICK_START.md"),
+            ("Rolling transcript and projector", "TRANSCRIPT.md"),
             ("English and Mandarin conversations", "CONVERSATIONS.md"),
             ("Automatic language switching", "AUTO_LANGUAGE.md"),
             ("Full user guide", "USER_GUIDE.md"),

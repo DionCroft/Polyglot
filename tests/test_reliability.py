@@ -74,7 +74,10 @@ def test_write_and_cleanup_failure_does_not_escape_or_repeat(tmp_path):
     p.export = Broken()
     p._save("english", Caption(1, 0, 1, "Still captioning", final=True))
     p._save("english", Caption(2, 1, 2, "Next", final=True))
-    assert p.export is None and len(events) == 1
+    assert p.export is None
+    assert len([event for event in events if event[0] == "warning"]) == 1
+    assert [v for k, v in events if k == "transcript-saving"] == [False]
+    assert len([event for event in events if event[0] == "transcript-entry"]) == 2
     assert not p.failure_reported
 
 

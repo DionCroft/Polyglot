@@ -1,4 +1,4 @@
-# Teaching with LectureLive 0.7
+# Teaching with LectureLive 0.8
 
 New to the app? Use the **Quick start** button for the [short guide](QUICK_START.md).
 
@@ -50,11 +50,18 @@ A conflicting shortcut is rejected and the previous bindings are restored.
 
 ## Caption behaviour
 
+The default **Rolling · readable projector** layout keeps a fixed font size and shows
+recent completed passages in aligned English/Chinese columns. It updates translation
+in the same passage. Older passages move out of view as space is needed. Very long
+passages may extend above the visible area; the full text remains in **Transcript**.
+**Rolling overlay height** controls the panel height. **Compact · latest caption**
+retains the previous behaviour described below.
+
 Provisional recognised speech appears after agreement between successive hypotheses.
 Completed English/Chinese pairs remain together while the next phrase is being translated.
 New recognised speech is shown separately underneath. Each language is labelled as spoken
 or translated. Translation failures keep the source speech available; old translations are
-not presented as the new phrase. A manual language switch clears captions from the previous turn. In Auto, completed pairs
+not presented as the new phrase. A manual language switch clears compact captions from the previous turn. In Auto, completed pairs
 stay visible until the next pair is ready; an uncertain final retracts its provisional text.
 
 A normal phrase ends after roughly 576 ms of silence. A sentence-ending hypothesis
@@ -63,7 +70,7 @@ can shorten that to 320 ms after sufficient speech. Continuous speech still has 
 
 Choose English, Chinese or bilingual display. Drag an unlocked overlay to move it,
 and drag its lower-right corner to resize. Text size, width, spacing, opacity and
-colours are adjustable. Long content can expand the overlay and reduce its font to
+colours are adjustable. In Compact, long content can expand the overlay and reduce its font to
 fit the screen; the next short caption restores its normal dimensions.
 
 If a display disappears, the app falls back to an available screen. Reconnect and
@@ -84,6 +91,17 @@ passage before teaching. See [speech settings](SPEECH_RECOGNITION.md) and
 [translation evaluation](TRANSLATION_EVALUATION.md). Presets also remember the speaking language.
 
 ## Transcripts and recovery
+
+The **Transcript** tab retains completed bilingual passages across manual/Auto language
+changes and pause/resume. Scroll back or select text to stop automatic following while
+recognition continues; **Back to live** returns to the newest passage. Search either language,
+copy selected text or copy the retained transcript. **Teaching controls → Read transcript**
+opens it directly. See [rolling transcript help](TRANSCRIPT.md) for examples and shortcuts.
+
+This reading history also works with disk saving off. It stays after Stop and clears at
+the next Start or app exit. Up to 10,000 passages are held in memory; a visible notice
+appears if older text leaves the view. Saved exports remain complete. A translation of
+already committed speech can finish while paused; unfinished speech is excluded.
 
 Saving is on by default and can be disabled before a lecture. **Diagnostics → Open transcripts**
 opens the session folder. Windows Snapdragon uses `%LOCALAPPDATA%/LectureLive`, the x64 beta

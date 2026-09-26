@@ -30,6 +30,8 @@ from app.system.architecture import is_x64, is_macos
 from app.audio.capture import microphones
 from app.pipeline import Pipeline
 from app.ui.overlay import Overlay
+from app.captions.history import TranscriptHistory
+from app.ui.transcript import TranscriptView
 from app.system.desktop import Hotkeys
 from app.system.permissions import microphone_permission
 
@@ -120,7 +122,10 @@ class MainWindow(QMainWindow):
             if is_macos()
             else STYLE
         )
-        self.overlay = Overlay(self.cfg)
+        self.history = TranscriptHistory()
+        self.transcript_view = TranscriptView(self.history)
+        self.transcript_view.set_saving(self.cfg.save_transcripts)
+        self.overlay = Overlay(self.cfg, self.history)
         self.overlay.moved.connect(self.persist)
         host = QWidget()
         self.setCentralWidget(host)
@@ -154,6 +159,7 @@ class MainWindow(QMainWindow):
         self.tabs = tabs
         layout.addWidget(tabs, 1)
         tabs.addTab(self.lecture_tab(), "Lecture")
+        tabs.addTab(self.transcript_view, "Transcript")
         tabs.addTab(self.appearance_tab(), "Overlay")
         tabs.addTab(self.diagnostics_tab(), "Diagnostics")
         tabs.addTab(self.about_tab(), "About")
@@ -405,6 +411,9 @@ class MainWindow(QMainWindow):
                 spin.setValue(getattr(cfg, key))
                 spin.blockSignals(False)
             self.mode.setCurrentText(cfg.mode)
+            self.overlay_layout.setCurrentIndex(
+                self.overlay_layout.findData(cfg.overlay_layout)
+            )
             self.placement.setCurrentText(cfg.placement)
             self.refresh_microphones()
             self.refresh_displays()
@@ -877,6 +886,14 @@ class MainWindow(QMainWindow):
         projector_preview = QPushButton("Preview captions on selected display")
         projector_preview.clicked.connect(self.projector_preview)
         form.addRow(projector_preview)
+        self.overlay_layout = QComboBox()
+        self.overlay_layout.addItem("Rolling · readable projector", "rolling")
+        self.overlay_layout.addItem("Compact · latest caption", "compact")
+        self.overlay_layout.setCurrentIndex(
+            self.overlay_layout.findData(self.cfg.overlay_layout)
+        )
+        self.overlay_layout.currentIndexChanged.connect(self.change_overlay_layout)
+        form.addRow("Caption layout", self.overlay_layout)
         self.placement = QComboBox()
         self.placement.addItems(["Bottom", "Top", "Custom"])
         self.placement.setCurrentText(self.cfg.placement)
@@ -886,6 +903,7 @@ class MainWindow(QMainWindow):
             ("Text size", "font_size", 16, 64),
             ("Backdrop opacity (%)", "opacity", 10, 100),
             ("Overlay width", "width", 400, 4000),
+            ("Rolling overlay height", "projector_height", 200, 1200),
             ("Line spacing (%)", "spacing", 100, 180),
         ]:
             spin = QSpinBox()
@@ -1128,9 +1146,15 @@ class MainWindow(QMainWindow):
         self.overlay.place()
         self.persist()
 
+    def change_overlay_layout(self, *_):
+        self.cfg.overlay_layout = self.overlay_layout.currentData()
+        self.overlay.place()
+        self.overlay.update()
+        self.persist()
+
     def appearance(self, key, value):
         setattr(self.cfg, key, value)
-        if key == "width":
+        if key in {"width", "projector_height"}:
             self.overlay.place()
         self.overlay.update()
         self.persist()
@@ -1263,6 +1287,7 @@ class MainWindow(QMainWindow):
             model_store=self.model_store,
         )
         self.last_caption = None
+        self.transcript_view.clear(self.cfg.save_transcripts)
         self.overlay.reset()
         self.overlay.lock(True)
         self.cfg.locked = True
@@ -1322,6 +1347,14 @@ class MainWindow(QMainWindow):
         self.closer.start()
 
     def on_event(self, kind, value):
+        if kind == "transcript-saving":
+            self.transcript_view.set_saving(value)
+            return
+        if kind == "transcript-entry":
+            if self.transcript_view.accept(value):
+                self.overlay.preview = False
+                self.overlay.update()
+            return
         if kind == "microphone-level":
             self.meter.setValue(value)
             return
@@ -1428,6 +1461,9 @@ class MainWindow(QMainWindow):
             self.overlay.reset()
             self.overlay.preview = False
             self.last_caption = None
+            self.transcript_view.provisional.setText(
+                "Speaking language changed. Earlier passages remain above."
+            )
             self.preview_en.setText("")
             self.preview_zh.setText("")
             self.preview_hint.setText(
@@ -1447,6 +1483,10 @@ class MainWindow(QMainWindow):
         elif kind == "transcript":
             self.transcript_path = Path(value)
         elif kind == "state":
+            if value != "Listening":
+                self.transcript_view.provisional.setText(str(value))
+            else:
+                self.transcript_view.provisional.setText("Listening…")
             if value in {"Listening", "Paused"} and not self.closer:
                 self.enable_language_controls(True)
             if "unavailable" in str(value):
@@ -1478,6 +1518,11 @@ class MainWindow(QMainWindow):
                 or value.epoch != self.pipeline.epoch
             ):
                 return
+            self.transcript_view.provisional.setText(
+                "Recognised phrase added above; translation follows."
+                if value.final
+                else "Unfinished speech · " + value.source_text
+            )
             self.overlay.set_caption(value)
             en, zh, upcoming = self.overlay.display.contents(self.cfg.mode)
             primary = self.overlay.display.primary(self.cfg.mode)

@@ -16,6 +16,22 @@ double-click a setup file that prepares everything for them.
 to change direction as speakers take turns. Manual selection remains available and English
 remains the default. [Auto guide](docs/AUTO_LANGUAGE.md) · [Test results](docs/evidence/auto-language-0.7.md).
 
+**New in the 0.8.0b1 source/Windows build:** open **Transcript** for a rolling bilingual
+history. Scroll back while listening continues, choose **Back to live**, search either
+language and copy selected text or the whole transcript. **Overlay → Caption layout →
+Rolling · readable projector** keeps the text size steady; **Compact** keeps the previous
+layout. [Beginner's transcript guide](docs/TRANSCRIPT.md).
+The published Mac download linked below is still 0.7.0b1 and does not include these new
+reading features; 0.8.0b1 Mac builds are produced by the repository's native build workflow.
+
+**New in the 0.8.0b1 source/Windows build:** open **Transcript** for a rolling bilingual
+history. Scroll back while listening continues, choose **Back to live**, search either
+language and copy selected text or the whole transcript. **Overlay → Caption layout →
+Rolling · readable projector** keeps the text size steady; **Compact** keeps the previous
+layout. [Beginner's transcript guide](docs/TRANSCRIPT.md).
+The published Mac download linked below is still 0.7.0b1 and does not include these new
+reading features; 0.8.0b1 Mac builds are produced by the repository's native build workflow.
+
 > **Preview/beta software:** rehearse with your teaching microphone and projector before a lecture.
 > Captions and translations can contain mistakes. [What has been tested](STATUS.md).
 
