@@ -35,18 +35,33 @@ translation are added while you read. Select **Back to live** before answering.
 ## Make the projector easy to read
 
 Under **Overlay → Caption layout**, select **Rolling · readable projector** (the new default).
-It shows recent passages with English and Simplified Chinese in aligned columns.
-Text size stays fixed; older text moves out of the visible area instead of shrinking.
-Long passages can extend above the visible area; open **Transcript** for their full text.
-Use **Text size**, **Overlay width**, **Rolling overlay height** and **Line spacing** to
-fit your room. Choose the caption display, preview it and check readability from the
-back of the room. A wider or taller panel fits more text.
+Each passage starts at its beginning. English and Chinese **roll upwards one complete
+line at a time**, independently, until both have been shown in full. A shorter translation
+stays visible while the longer side finishes. New passages wait their turn, instead of
+replacing text before you can read it. Delayed translations start from their beginning.
 
-The rolling projector displays completed recognised phrases as they arrive; translation
-follows in the same row. The unfinished phrase remains visible in the full controls and
-Transcript tab. **Compact · latest caption** keeps the previous overlay behaviour,
-including provisional text and automatic size fitting. English-only and Chinese-only
-display options still work. Lock either layout before teaching so clicks reach your slides.
+1. Keep **Bilingual** selected to display both columns.
+2. Start with **Reading time per line → 1.4 seconds**. Increase it to **2.0 seconds**
+   for slower reading, or reduce it towards **0.9 seconds** for faster rolling.
+3. Adjust **Text size**, **Overlay width**, **Rolling overlay height** and **Line spacing**
+   for the room. A wider panel means fewer wrapped lines; a taller panel shows more at once.
+4. Check the footer: **3 waiting** means three later passages are queued. Captions can lag
+   behind the speaker when speech arrives faster than the chosen reading speed. A wider
+   panel or faster rolling reduces this delay. Text is not skipped to catch up.
+5. Lock the overlay before teaching so clicks reach your slides. **Pause** or **Hide overlay**
+   freezes rolling; showing it again continues from the same place. Stop leaves the queue
+   available to finish reading. Starting a new lecture clears it.
+
+For example, a long explanation of project risk can take many lines in English but fewer
+in Chinese. Both begin at the top; the Chinese ending remains visible until English
+reaches its ending. A student's next Mandarin question then takes its turn in the same panel.
+
+The rolling projector uses completed recognised phrases. The unfinished phrase remains in
+Lecture controls and **Transcript**. **Compact · latest caption** retains the previous overlay
+behaviour, including provisional text and automatic size fitting; use **Rolling** for full
+paragraph playback. English-only and Chinese-only options roll the selected language.
+**Transcript → Back to live** moves the reader to the latest text; it does not discard the
+projector's unread queue. Search and copy still cover the full retained transcript immediately.
 
 ## Saving and privacy
 
@@ -65,3 +80,7 @@ under **Diagnostics → Open transcripts**. Audio is not recorded.
 **Translating…**, **Translation unavailable** and **Speech not transcribed** identify pending
 work or gaps. They are not guesses about what someone said. Recognition models, English
 vocabulary/CO7000 hints, Auto language thresholds and acceleration settings are unchanged.
+
+Unread projector passages are held in memory until displayed or until the next lecture/app exit.
+A very large backlog therefore uses more memory. Completed passages are released as the next
+starts. No extra models or downloads are needed; this change only affects display timing.

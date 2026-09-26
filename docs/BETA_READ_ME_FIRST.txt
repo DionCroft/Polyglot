@@ -1,4 +1,4 @@
-LectureLive - Windows x64 Beta 0.8.0b1
+LectureLive - Windows x64 Beta 0.8.1b1
 
 1. Keep this entire folder together, including _internal.
 2. Open LectureLive-x64-Beta.exe.
@@ -16,6 +16,9 @@ LectureLive - Windows x64 Beta 0.8.0b1
 7. Stop lecture and wait for the last caption to finish saving.
 
 READ LONGER PASSAGES
+Rolling captions now show BOTH languages from beginning to end. Later passages wait.
+Overlay > Reading time per line: 1.4 seconds is normal; 2.0 gives more reading time.
+If the waiting count grows, widen the panel or reduce reading time per line.
 Open Transcript to read a rolling bilingual history. Scroll back without stopping
 listening; Back to live returns to new speech. Search English or Chinese, then use
 Copy selection or Copy transcript. Open Quick start > Rolling transcript and projector.

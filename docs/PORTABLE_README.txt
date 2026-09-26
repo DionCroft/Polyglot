@@ -1,4 +1,4 @@
-LECTURELIVE 0.8.0b1 - START HERE
+LECTURELIVE 0.8.1b1 - START HERE
 
 This is the ready-to-run Windows 11 Snapdragon ARM64 application.
 
@@ -14,6 +14,9 @@ This folder is for Snapdragon ARM64. Separate Intel/AMD Windows and Apple Silico
 Use the Quick start button for help inside the app, including projector instructions.
 
 READ LONGER PASSAGES
+Rolling captions now show BOTH languages from beginning to end. Later passages wait.
+Overlay > Reading time per line: 1.4 seconds is normal; 2.0 gives more reading time.
+If the waiting count grows, widen the panel or reduce reading time per line.
 Open Transcript after starting. Scroll back while listening continues, then choose
 Back to live. Search English or Chinese text and use Copy selection or Copy transcript.
 Under Overlay, Rolling - readable projector keeps text size steady. Compact keeps

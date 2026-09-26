@@ -16,7 +16,7 @@ if not (source / (app_name + ".exe")).is_file():
     raise RuntimeError("Build the beta first")
 out = root / "recovery"
 out.mkdir(exist_ok=True)
-archive = out / f"LectureLive-Windows-{architecture}-Beta-0.8.0b1.zip"
+archive = out / f"LectureLive-Windows-{architecture}-Beta-0.8.1b1.zip"
 partial = archive.with_suffix(".zip.partial")
 manifest = {}
 with zipfile.ZipFile(

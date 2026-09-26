@@ -50,12 +50,14 @@ A conflicting shortcut is rejected and the previous bindings are restored.
 
 ## Caption behaviour
 
-The default **Rolling · readable projector** layout keeps a fixed font size and shows
-recent completed passages in aligned English/Chinese columns. It updates translation
-in the same passage. Older passages move out of view as space is needed. Very long
-passages may extend above the visible area; the full text remains in **Transcript**.
-**Rolling overlay height** controls the panel height. **Compact · latest caption**
-retains the previous behaviour described below.
+The default **Rolling · readable projector** layout shows every completed passage from its
+beginning. English and Chinese roll independently through whole lines; the shorter side
+stays visible until both finish. Later passages wait, with a waiting count in the footer.
+Choose **Overlay → Reading time per line** (default 1.4 seconds; higher is slower).
+A backlog can delay captions: try a wider panel or faster reading speed. No unread text is
+silently discarded. Hiding/pausing freezes playback; a new lecture clears the queue.
+**Rolling overlay height** controls panel height. See [examples and controls](TRANSCRIPT.md).
+**Compact · latest caption** retains the previous behaviour described below.
 
 Provisional recognised speech appears after agreement between successive hypotheses.
 Completed English/Chinese pairs remain together while the next phrase is being translated.

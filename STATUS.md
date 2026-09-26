@@ -1,7 +1,16 @@
 # LectureLive — STATUS
 
-Updated 2026-09-26. Rolling transcript and projector reading layout added in 0.8.0b1.
+Updated 2026-09-27. Long-paragraph rolling fix: 0.8.1b1.
 Production classroom acceptance remains open.
+
+## Complete bilingual paragraph playback (27 September 2026)
+
+The 0.8.0 projector could hide the beginning of a long paragraph and the shorter
+translation by sharing one bottom offset. The earlier tests checked stored text, not
+whether every line was visible. 0.8.1 rolls both columns independently from the beginning,
+queues later passages, preserves reading position while hidden and adds reading speed.
+New tests measure fully visible wrapped-line coverage. Packaging validation is in progress.
+Speech recognition, translation models and vocabulary are unchanged.
 
 ## Rolling transcript (26 September 2026)
 
@@ -20,10 +29,6 @@ Production classroom acceptance remains open.
   checks (x64 under emulation). The fixed 36 speech and 40 translation regression outputs
   match the previous baseline exactly. Native macOS and archive details are recorded in
   [the accompanying evidence](docs/evidence/rolling-transcript-0.8.md).
-- Native Apple Silicon passes **129 tests with no skips**, packaged speech/translation,
-  manual/Auto conversation checks and the new Cocoa reader/projector test. Signature
-  validation and DMG/ZIP packaging pass in build **36252250715**, at application commit
-  `4c2d01f`. The published Mac 0.7.0b1 release remains unchanged; 0.8.0b1 is a tested build artifact.
 - Native Apple Silicon passes **129 tests with no skips**, packaged speech/translation,
   manual/Auto conversation checks and the new Cocoa reader/projector test. Signature
   validation and DMG/ZIP packaging pass in build **36252250715**, at application commit

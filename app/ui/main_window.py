@@ -20,6 +20,7 @@ from PySide6.QtWidgets import (
     QGroupBox,
     QFormLayout,
     QSpinBox,
+    QDoubleSpinBox,
     QFileDialog,
     QScrollArea,
     QColorDialog,
@@ -47,7 +48,7 @@ QLabel#status { color:#8ce2c9; background:#193830; border-radius:12px; padding:7
 QLabel#warning { color:#ffd59b; background:#342a20; padding:12px; border-radius:8px; }
 QGroupBox { background:#18242d; border:1px solid #2c3d48; border-radius:12px; margin-top:16px; padding:12px 16px 12px; font-weight:600; }
 QGroupBox::title { subcontrol-origin:margin; left:16px; padding:0 6px; color:#a5bdc9; }
-QComboBox,QLineEdit,QSpinBox,QPlainTextEdit { background:#111d26; border:1px solid #3b505e; border-radius:7px; padding:10px; selection-background-color:#24725e; }
+QComboBox,QLineEdit,QSpinBox,QDoubleSpinBox,QPlainTextEdit { background:#111d26; border:1px solid #3b505e; border-radius:7px; padding:10px; selection-background-color:#24725e; }
 QComboBox { min-height:20px; }
 QLineEdit { min-height:20px; }
 QComboBox::drop-down { border:0; width:25px; }
@@ -408,7 +409,11 @@ class MainWindow(QMainWindow):
             self.save.setChecked(cfg.save_transcripts)
             for key, spin in self.appearance_spins.items():
                 spin.blockSignals(True)
-                spin.setValue(getattr(cfg, key))
+                spin.setValue(
+                    getattr(cfg, key) / 1000
+                    if key == "projector_line_ms"
+                    else getattr(cfg, key)
+                )
                 spin.blockSignals(False)
             self.mode.setCurrentText(cfg.mode)
             self.overlay_layout.setCurrentIndex(
@@ -475,6 +480,7 @@ class MainWindow(QMainWindow):
                 True,
             )
         )
+        self.overlay.preview = True
         self.overlay.show()
         self.overlay.lock(False)
         self.lock_button.setText("Lock overlay")
@@ -912,6 +918,25 @@ class MainWindow(QMainWindow):
             self.appearance_spins[key] = spin
             spin.valueChanged.connect(lambda value, k=key: self.appearance(k, value))
             form.addRow(title, spin)
+        speed = QDoubleSpinBox()
+        speed.setRange(0.5, 5.0)
+        speed.setDecimals(1)
+        speed.setSingleStep(0.1)
+        speed.setSuffix(" seconds")
+        speed.setValue(self.cfg.projector_line_ms / 1000)
+        speed.setToolTip(
+            "Higher means slower. Try 1.4 seconds per line; 2.0 for more reading time."
+        )
+        speed.valueChanged.connect(
+            lambda value: self.appearance("projector_line_ms", round(value * 1000))
+        )
+        self.appearance_spins["projector_line_ms"] = speed
+        form.addRow("Reading time per line", speed)
+        rolling_help = QLabel(
+            "Both languages roll from beginning to end. New passages wait their turn; the footer shows how many are waiting. Increase the panel size or reduce reading time if captions fall behind."
+        )
+        rolling_help.setWordWrap(True)
+        form.addRow(rolling_help)
         for title, key in [
             ("English colour", "english_color"),
             ("Chinese colour", "chinese_color"),
@@ -1288,7 +1313,7 @@ class MainWindow(QMainWindow):
         )
         self.last_caption = None
         self.transcript_view.clear(self.cfg.save_transcripts)
-        self.overlay.reset()
+        self.overlay.reset(new_session=True)
         self.overlay.lock(True)
         self.cfg.locked = True
         self.lock_button.setText("Unlock overlay")
@@ -1351,9 +1376,8 @@ class MainWindow(QMainWindow):
             self.transcript_view.set_saving(value)
             return
         if kind == "transcript-entry":
-            if self.transcript_view.accept(value):
-                self.overlay.preview = False
-                self.overlay.update()
+            self.transcript_view.accept(value)
+            self.overlay.enqueue(value)
             return
         if kind == "microphone-level":
             self.meter.setValue(value)

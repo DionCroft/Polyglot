@@ -16,32 +16,22 @@ double-click a setup file that prepares everything for them.
 to change direction as speakers take turns. Manual selection remains available and English
 remains the default. [Auto guide](docs/AUTO_LANGUAGE.md) · [Test results](docs/evidence/auto-language-0.7.md).
 
-**New in 0.8.0b1:** open **Transcript** for a rolling bilingual
-history. Scroll back while listening continues, choose **Back to live**, search either
-language and copy selected text or the whole transcript. **Overlay → Caption layout →
-Rolling · readable projector** keeps the text size steady; **Compact** keeps the previous
-layout. [Beginner's transcript guide](docs/TRANSCRIPT.md).
-The published Mac download linked below is still 0.7.0b1 and does not include these new
-reading features. The [tested 0.8.0b1 Mac build](https://github.com/DionCroft/Polyglot/actions/runs/36252250715)
-is available under **Artifacts → LectureLive-0.8.0b1-macOS-AppleSilicon** (GitHub sign-in
-may be required; build artifacts are retained for 30 days). Extract that outer ZIP,
-then open the **.dmg** inside and follow the Mac installation steps below.
+**Fixed in 0.8.1b1:** long paragraphs now roll through **all** English and Chinese text,
+from beginning to end. The two columns move independently; new passages wait until both
+finish. Choose **Overlay → Caption layout → Rolling · readable projector**. Start with
+**Reading time per line → 1.4 seconds** (higher is slower). The waiting count tells you
+when the display is behind the speaker; a wider panel or faster rolling reduces the delay.
+No extra models are needed. [Beginner's transcript/projector guide](docs/TRANSCRIPT.md).
+
+Open **Transcript** for the full bilingual history, **Back to live**, English/Chinese search,
+and copying selected text or the whole transcript. These controls work while captions roll.
+**Compact** remains available for the previous latest-caption layout.
 
 ![The rolling transcript showing English explanations and a Mandarin question](docs/evidence/rolling-reader-0.8.png)
 
-No extra speech or translation models are needed for the transcript view.
-[Reading-feature test results](docs/evidence/rolling-transcript-0.8.md).
-
-**New in 0.8.0b1:** open **Transcript** for a rolling bilingual
-history. Scroll back while listening continues, choose **Back to live**, search either
-language and copy selected text or the whole transcript. **Overlay → Caption layout →
-Rolling · readable projector** keeps the text size steady; **Compact** keeps the previous
-layout. [Beginner's transcript guide](docs/TRANSCRIPT.md).
-The published Mac download linked below is still 0.7.0b1 and does not include these new
-reading features. The [tested 0.8.0b1 Mac build](https://github.com/DionCroft/Polyglot/actions/runs/36252250715)
-is available under **Artifacts → LectureLive-0.8.0b1-macOS-AppleSilicon** (GitHub sign-in
-may be required; build artifacts are retained for 30 days). Extract that outer ZIP,
-then open the **.dmg** inside and follow the Mac installation steps below.
+The published Mac download below remains 0.7.0b1. The new 0.8.1b1 native Mac build and its
+verification status will be linked here after packaging; source instructions are in
+[the Mac guide](docs/MACOS.md).
 
 > **Preview/beta software:** rehearse with your teaching microphone and projector before a lecture.
 > Captions and translations can contain mistakes. [What has been tested](STATUS.md).

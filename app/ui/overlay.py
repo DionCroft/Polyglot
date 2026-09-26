@@ -1,11 +1,13 @@
 import html
+import time
 from PySide6.QtCore import Qt, QRectF, Signal, QTimer
-from PySide6.QtGui import QColor, QPainter, QTextDocument, QFont
+from PySide6.QtGui import QColor, QPainter, QTextDocument, QFont, QFontMetricsF
 from PySide6.QtWidgets import QWidget, QApplication
 from app.system.desktop import overlay_input
 from app.system.architecture import is_macos
 from app.captions.display import CaptionDisplay
 from app.captions.state import Caption
+from app.ui.projector import RollingProjector
 
 
 class Overlay(QWidget):
@@ -26,6 +28,14 @@ class Overlay(QWidget):
         self.partial = None
         self.drag = None
         self.preview = True
+        self.projector = RollingProjector()
+        if history:
+            for entry in history.entries.values():
+                self.projector.accept(entry)
+        self.roll_timer = QTimer(self)
+        self.roll_timer.setInterval(50)
+        self.roll_timer.timeout.connect(self._roll_tick)
+        self.last_tick = time.monotonic()
         self.setAttribute(Qt.WA_TranslucentBackground)
         self.setAttribute(Qt.WA_ShowWithoutActivating)
         self.setMinimumSize(400, 130)
@@ -61,95 +71,52 @@ class Overlay(QWidget):
             else self.settings.height
         )
 
-    def _rolling_document(self, width, max_height=None):
-        """A shared table keeps both languages on the same chronological row."""
-        doc = QTextDocument()
-        doc.setDocumentMargin(0)
-        doc.setDefaultFont(
-            QFont(
-                "PingFang SC" if is_macos() else "Microsoft YaHei UI",
-                self.settings.font_size,
-            )
-        )
-        doc.setTextWidth(width)
-        entries = self.history.recent(4) if self.history else []
-        if not entries:
-            current = self.display.pending or self.display.pair
-            if current:
-                entries = [current]
-            elif self.preview:
-                entries = [
-                    Caption(
-                        0,
-                        0,
-                        0,
-                        "Your words. Understood.",
-                        "让每一句话，都被听懂。",
-                        True,
-                    )
-                ]
-        languages = (
-            ["en", "zh"]
-            if self.settings.mode == "Bilingual"
-            else ["en" if self.settings.mode == "English" else "zh"]
-        )
-        rows = []
-        for entry in entries:
-            if not isinstance(entry, Caption):
-                rows.append(
-                    f'<tr><td colspan="{len(languages)}"><p style="font-size:14pt;color:#ffd59b;margin-bottom:16px">'
-                    f"Speech not transcribed · {html.escape(entry.reason)}</p></td></tr>"
-                )
-                continue
-            cells = []
-            for language in languages:
-                if isinstance(entry, Caption):
-                    source = entry.source_language == language
-                    text = entry.english if language == "en" else entry.chinese
-                    text = text or (
-                        "Translation unavailable"
-                        if entry.translation_status == "unavailable"
-                        else "Translating…"
-                    )
-                    label = "Spoken" if source else "Translation"
-                colour = (
-                    self.settings.english_color
-                    if language == "en"
-                    else self.settings.chinese_color
-                )
-                cells.append(
-                    f'<td width="{100 // len(languages)}%" valign="top"><p style="color:{colour};line-height:{self.settings.spacing}%;margin-bottom:16px"><span style="font-size:12pt">{label}</span><br>{html.escape(text)}</p></td>'
-                )
-            rows.append("<tr>" + "".join(cells) + "</tr>")
-        doc.trimmed = False
-        while True:
-            doc.setHtml(
-                '<table width="100%" cellspacing="14" cellpadding="0">'
-                + "".join(rows)
-                + "</table>"
-            )
-            if (
-                max_height is None
-                or doc.size().height() <= max_height
-                or len(rows) <= 1
-            ):
-                break
-            rows.pop(0)
-            doc.trimmed = True
-        return doc
+    def enqueue(self, entry):
+        self.projector.accept(entry)
+        self.preview = False
+        self.update()
+
+    def _roll_tick(self):
+        now = time.monotonic()
+        elapsed = min(0.1, max(0, now - self.last_tick))
+        self.last_tick = now
+        if (
+            self.settings.overlay_layout == "rolling"
+            and self.isVisible()
+            and not self.preview
+        ):
+            self.projector.prepare(self.width() - 48, self.height() - 88, self.settings)
+            self.projector.advance(elapsed, self.settings.projector_line_ms / 1000)
+            self.update()
 
     def _paint_rolling(self):
         screen = self.screen().availableGeometry()
         width = (
             self.width() if self.drag else min(self.settings.width, screen.width() - 32)
         )
-        height = (
-            self.height()
-            if self.drag
-            else min(self.settings.projector_height, screen.height() - 40)
+        font = QFont(
+            "PingFang SC" if is_macos() else "Microsoft YaHei UI",
+            self.settings.font_size,
         )
-        if (width, height) != (self.width(), self.height()) and not self.drag:
+        # Even a small panel must fit one complete line at the chosen font size.
+        minimum = int(QFontMetricsF(font).height() * self.settings.spacing / 100) + 96
+        desired = self.height() if self.drag else self.settings.projector_height
+        height = min(max(minimum, desired), screen.height() - 40)
+        if (width, height) != (self.width(), self.height()):
             QTimer.singleShot(0, lambda: self._fit_geometry(width, height))
+        viewport = QRectF(24, 44, self.width() - 48, self.height() - 88)
+        player = self.projector
+        if self.preview:
+            # Preview does not become part of the lecture queue.
+            player = RollingProjector()
+            player.accept(
+                self.display.pending
+                or self.display.pair
+                or Caption(
+                    0, 0, 0, "Your words. Understood.", "让每一句话，都被听懂。", True
+                )
+            )
+        player.prepare(viewport.width(), viewport.height(), self.settings)
         painter = QPainter(self)
         painter.setRenderHint(QPainter.Antialiasing)
         backdrop = QColor("#10191e")
@@ -160,47 +127,57 @@ class Overlay(QWidget):
         painter.setFont(
             QFont("PingFang SC" if is_macos() else "Microsoft YaHei UI", 12)
         )
-        painter.setPen(QColor("#c6d9e2"))
-        painter.drawText(
-            30, 27, "简体中文" if self.settings.mode == "Chinese" else "English"
-        )
-        if self.settings.mode == "Bilingual":
-            painter.drawText(self.width() // 2 + 7, 27, "简体中文")
-        viewport = QRectF(24, 38, self.width() - 48, self.height() - 82)
-        doc = self._rolling_document(self.width() - 48, viewport.height())
-        offset = max(0, doc.size().height() - viewport.height())
-        painter.save()
-        inset = 0
-        if offset:
-            block = doc.begin()
-            while block.isValid():
-                top = doc.documentLayout().blockBoundingRect(block).top()
-                layout = block.layout()
-                for index in range(layout.lineCount()):
-                    line = layout.lineAt(index)
-                    start = top + line.y()
-                    end = start + line.height()
-                    if start < offset < end:
-                        inset = max(inset, end - offset)
-                block = block.next()
-        painter.setClipRect(viewport.adjusted(0, inset, 0, 0))
-        painter.translate(viewport.left(), viewport.top() - offset)
-        doc.drawContents(painter)
-        painter.restore()
-        if not self.settings.locked:
-            footer = "Drag to move · resize ↘ · lock before teaching"
-        else:
-            footer = (
-                "Earlier text ↑ · full history in Transcript"
-                if offset or doc.trimmed
-                else "Rolling captions · full history in Transcript"
+        count = max(1, len(player.columns))
+        column_width = (viewport.width() - 24 * (count - 1)) / count
+        for index, (lang, column) in enumerate(player.columns.items()):
+            x = viewport.left() + index * (column_width + 24)
+            painter.setPen(QColor("#c6d9e2"))
+            painter.drawText(
+                QRectF(x, 9, column_width, 30),
+                Qt.AlignVCenter,
+                painter.fontMetrics().elidedText(
+                    player.labels[lang], Qt.ElideRight, int(column_width)
+                ),
             )
-            if self.settings.speaking_language == "auto" and getattr(
-                self, "language_notice", ""
-            ):
-                footer = self.language_notice
+            visible = column.visible_lines()
+            if not visible:
+                continue
+            # Clip at the last complete line, never halfway through the next one.
+            visible_height = visible[-1].bottom - column.offset
+            painter.save()
+            painter.setClipRect(QRectF(x, viewport.top(), column_width, visible_height))
+            painter.translate(x, viewport.top() - column.offset)
+            column.document.drawContents(
+                painter, QRectF(0, column.offset, column_width, visible_height)
+            )
+            painter.restore()
+        player.drawn = True
+        progress = " · ".join(
+            ("EN" if lang == "en" else "中文" if lang == "zh" else "Notice")
+            + f" {column.index + 1}–{column.index + len(column.visible_lines())}/{len(column.lines)}"
+            for lang, column in player.columns.items()
+        )
+        footer = (f"{player.backlog} waiting · " if player.backlog else "") + progress
+        notice = getattr(self, "language_notice", "")
+        if self.settings.speaking_language == "auto" and notice:
+            footer = (
+                (f"{player.backlog} waiting · " if player.backlog else "")
+                + notice
+                + " · "
+                + progress
+            )
+        if player.waiting:
+            footer += " · Waiting for translation"
+        elif not footer:
+            footer = "Waiting for speech"
+        if not self.settings.locked:
+            footer += " · Drag / resize · lock before teaching"
         painter.setPen(QColor("#b3c5cb"))
-        painter.drawText(30, self.height() - 14, footer)
+        painter.drawText(
+            24,
+            self.height() - 14,
+            painter.fontMetrics().elidedText(footer, Qt.ElideRight, self.width() - 48),
+        )
         painter.end()
 
     def set_caption(self, caption):
@@ -211,11 +188,13 @@ class Overlay(QWidget):
         self.preview = False
         self.update()
 
-    def reset(self):
+    def reset(self, *, new_session=False):
+        if new_session:
+            self.projector = RollingProjector()
         self.display = CaptionDisplay()
         self.caption = None
         self.partial = None
-        self.preview = True
+        self.preview = self.projector.current is None
         self.update()
 
     def lock(self, locked):
@@ -227,6 +206,13 @@ class Overlay(QWidget):
     def showEvent(self, event):
         super().showEvent(event)
         overlay_input(int(self.winId()), self.settings.locked)
+        self.last_tick = time.monotonic()
+        self.roll_timer.start()
+
+    def hideEvent(self, event):
+        self.roll_timer.stop()
+        self.projector.drawn = False
+        super().hideEvent(event)
 
     def _caption_document(self, point_size, width=None):
         en, zh, upcoming = self.display.contents(self.settings.mode)

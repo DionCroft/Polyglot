@@ -36,6 +36,7 @@ class Settings:
     height: int = 230
     overlay_layout: str = "rolling"
     projector_height: int = 420
+    projector_line_ms: int = 1400
     english_color: str = "#ffffff"
     chinese_color: str = "#8fe9d5"
 
@@ -60,6 +61,7 @@ class Settings:
             ("width", 400, 4000),
             ("height", 130, 1200),
             ("projector_height", 200, 1200),
+            ("projector_line_ms", 500, 5000),
             ("spacing", 100, 180),
         ]:
             setattr(cfg, key, max(low, min(high, int(getattr(cfg, key)))))

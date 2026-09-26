@@ -117,7 +117,7 @@ def run(report_path):
             assert style & 0x20 and style & 0x08000000
         window.overlay.grab().save(str(report.with_suffix(".projector.png")))
         assert (
-            window.overlay._rolling_document(1000).defaultFont().pointSize()
+            window.overlay.projector.columns["en"].document.defaultFont().pointSize()
             == window.cfg.font_size
         )
         window.resize(860, 640)

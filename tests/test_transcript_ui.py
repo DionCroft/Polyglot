@@ -197,14 +197,16 @@ def test_projector_uses_fixed_font_geometry_labels_and_compact_option(qt, monkey
         overlay.preview = False
         overlay.show()
         qt.processEvents()
-        doc = overlay._rolling_document(900)
+        doc = overlay.projector.columns["en"].document
         assert doc.defaultFont().pointSize() == 32
-        assert "Critical path" in doc.toPlainText() and "关键路径" in doc.toPlainText()
+        assert "Critical path" in doc.toPlainText()
+        assert "关键路径" in overlay.projector.columns["zh"].document.toPlainText()
         height = overlay.height()
         qt.processEvents()
         assert overlay.height() == height
         cfg.mode = "English"
-        assert "关键路径" not in overlay._rolling_document(900).toPlainText()
+        overlay.repaint()
+        assert list(overlay.projector.columns) == ["en"]
         cfg.overlay_layout = "compact"
         overlay.set_caption(Caption(2, 5, 8, "Hello", "你好", True))
         assert "Hello" in overlay._caption_document(30).toPlainText()

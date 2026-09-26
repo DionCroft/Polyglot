@@ -66,6 +66,7 @@ jobs:
           dist/LectureLive.app/Contents/MacOS/LectureLive --auto-self-test tests/fixtures tests/artifacts/macos-auto.json --auto-cpu
           dist/LectureLive.app/Contents/MacOS/LectureLive --auto-ui-test tests/fixtures tests/artifacts/macos-auto-ui.json
           dist/LectureLive.app/Contents/MacOS/LectureLive --transcript-ui-test tests/artifacts/macos-transcript-ui.json
+          dist/LectureLive.app/Contents/MacOS/LectureLive --long-paragraph-ui-test tests/artifacts/macos-long-paragraph.json
           codesign --verify --deep --strict dist/LectureLive.app
           /usr/libexec/PlistBuddy -c "Print :NSMicrophoneUsageDescription" dist/LectureLive.app/Contents/Info.plist
       - name: Create DMG and ZIP
@@ -73,7 +74,7 @@ jobs:
       - name: Upload installable beta
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: LectureLive-0.8.0b1-macOS-AppleSilicon
+          name: LectureLive-0.8.1b1-macOS-AppleSilicon
           path: dist/macos-release/*
           compression-level: 0
           if-no-files-found: error
