@@ -1,4 +1,4 @@
-LECTURELIVE - START HERE
+LECTURELIVE 0.8.0b1 - START HERE
 
 This is the ready-to-run Windows 11 Snapdragon ARM64 application.
 
@@ -12,6 +12,14 @@ Keep the _internal folder next to LectureLive.exe. Do not copy the EXE alone.
 No Python installation, account or initial download is needed for this complete copy.
 This folder is for Snapdragon ARM64. Separate Intel/AMD Windows and Apple Silicon Mac builds are available.
 Use the Quick start button for help inside the app, including projector instructions.
+
+READ LONGER PASSAGES
+Open Transcript after starting. Scroll back while listening continues, then choose
+Back to live. Search English or Chinese text and use Copy selection or Copy transcript.
+Under Overlay, Rolling - readable projector keeps text size steady. Compact keeps
+the previous caption layout. Open Quick start > Rolling transcript and projector.
+History stays after Stop but clears when you start another lecture or close the app.
+With saving off it is temporary: copy any text you want to keep before leaving.
 
 Preview release: review translations and rehearse before teaching. See STATUS.md.
 Microphone audio is not recorded. Text transcripts are optional and stay local.

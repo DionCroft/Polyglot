@@ -16,7 +16,10 @@ Production classroom acceptance remains open.
 - Native Windows reader/projector checks pass, including minimum window size, resizing,
   hidden-tab live following, offline help and click-through flags. These text fixtures do
   not test speech accuracy, actual lecture duration or physical projector readability.
-- Native macOS and packaged build results will be recorded in the accompanying evidence.
+- Both Windows EXEs pass native reader/projector and real bilingual WAV conversation
+  checks (x64 under emulation). The fixed 36 speech and 40 translation regression outputs
+  match the previous baseline exactly. Native macOS and archive details are recorded in
+  [the accompanying evidence](docs/evidence/rolling-transcript-0.8.md).
   Speech models, recognition settings, CO7000 vocabulary and Auto thresholds are unchanged.
 
 ## Expanded Indian-English testing (23 September 2026)

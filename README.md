@@ -24,6 +24,11 @@ layout. [Beginner's transcript guide](docs/TRANSCRIPT.md).
 The published Mac download linked below is still 0.7.0b1 and does not include these new
 reading features; 0.8.0b1 Mac builds are produced by the repository's native build workflow.
 
+![The rolling transcript showing English explanations and a Mandarin question](docs/evidence/rolling-reader-0.8.png)
+
+No extra speech or translation models are needed for the transcript view.
+[Reading-feature test results](docs/evidence/rolling-transcript-0.8.md).
+
 **New in the 0.8.0b1 source/Windows build:** open **Transcript** for a rolling bilingual
 history. Scroll back while listening continues, choose **Back to live**, search either
 language and copy selected text or the whole transcript. **Overlay → Caption layout →

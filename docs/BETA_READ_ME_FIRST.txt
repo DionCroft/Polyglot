@@ -1,4 +1,4 @@
-LectureLive - Windows x64 Beta 0.7.0b1
+LectureLive - Windows x64 Beta 0.8.0b1
 
 1. Keep this entire folder together, including _internal.
 2. Open LectureLive-x64-Beta.exe.
@@ -14,6 +14,14 @@ LectureLive - Windows x64 Beta 0.7.0b1
    and repeat the complete sentence. Short replies may be withheld and marked in
    the bilingual transcript. Open Quick start > Automatic language switching.
 7. Stop lecture and wait for the last caption to finish saving.
+
+READ LONGER PASSAGES
+Open Transcript to read a rolling bilingual history. Scroll back without stopping
+listening; Back to live returns to new speech. Search English or Chinese, then use
+Copy selection or Copy transcript. Open Quick start > Rolling transcript and projector.
+Overlay > Caption layout lets you choose the steady-font Rolling projector view or
+the previous Compact layout. History clears at the next lecture or app exit; with
+saving off, copy any text you need before leaving.
 
 CPU captions and compatible DirectML GPU acceleration are available to try.
 Intel/AMD NPU support is experimental and needs separate preparation on this PC.
