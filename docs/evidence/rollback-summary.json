@@ -1,0 +1,12 @@
+{
+  "restored_baseline": "03e7973",
+  "rollback_commit": "cd84704",
+  "application_matches_pre_rolling": true,
+  "published_mac_tag": "macos-v0.7.0b1",
+  "mac_application_and_spec_match": true,
+  "speech_regression_cases": 36,
+  "translation_regression_cases": 40,
+  "regression_matches_pre_rolling_baseline": true,
+  "prior_rolling_fixture_outputs_also_match": true,
+  "new_classroom_accuracy_claim": false
+}

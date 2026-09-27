@@ -25,6 +25,7 @@ The rolling reader, search/copy interface and scrolling projector queue have bee
 English/Mandarin switching, Auto, offline models, presets and vocabulary remain available.
 When speaking English, select **English → 简体中文** under **Who is speaking?**.
 A manually selected Mandarin mode expects Mandarin speech.
+[Rollback verification and results](docs/evidence/pre-rolling-rollback.md).
 
 ## Start here: choose your computer
 

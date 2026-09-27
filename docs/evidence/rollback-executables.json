@@ -1,0 +1,14 @@
+[
+  {
+    "exe": "dist\\LectureLive\\LectureLive.exe",
+    "version": "0.7.0b1",
+    "rolling_modules_absent": true,
+    "sha256": "799adf25e5e61ebf446cc260154c16860904bcd090f37fe0fc3993de03b2b205"
+  },
+  {
+    "exe": "dist\\LectureLive-x64-Beta\\LectureLive-x64-Beta.exe",
+    "version": "0.7.0b1",
+    "rolling_modules_absent": true,
+    "sha256": "c39b6f5da43e14569ffb7c6040bd370fb702a0452bac148ac1aec15dc9df7c99"
+  }
+]

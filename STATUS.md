@@ -1,6 +1,6 @@
 # LectureLive — STATUS
 
-Updated 2026-09-23. Automatic English/Mandarin turns added to the main application.
+Updated 2026-09-27. Pre-rolling 0.7.0b1 application restored.
 Production classroom acceptance remains open.
 
 ## Pre-rolling version restored
@@ -10,9 +10,9 @@ Application files match that baseline exactly; the original latest-caption overl
 saved transcripts are restored. English/Mandarin switching, offline operation, vocabulary,
 CO7000 support and earlier recognition improvements remain available.
 Both Windows runtimes pass 112 tests with two POSIX-only skips each. The published Mac
-0.7 installer uses the same application code and Mac build specification. Updated local
-Windows builds and a fresh comparison against the established English regression set
-are being verified. The rolling display tests did not establish translation accuracy.
+0.7 installer uses the same application code and Mac build specification. Both rebuilt Windows EXEs pass offline English/Mandarin conversation and saved-transcript
+checks. A fresh comparison exactly matches all 36 speech and 40 translation baseline outputs.
+[Rollback report and limits](docs/evidence/pre-rolling-rollback.md). The rolling display tests did not establish translation accuracy.
 
 ## Expanded Indian-English testing (23 September 2026)
 
