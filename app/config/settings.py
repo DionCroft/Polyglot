@@ -34,9 +34,6 @@ class Settings:
     x: int = -1
     y: int = -1
     height: int = 230
-    overlay_layout: str = "rolling"
-    projector_height: int = 420
-    projector_line_ms: int = 1400
     english_color: str = "#ffffff"
     chinese_color: str = "#8fe9d5"
 
@@ -60,8 +57,6 @@ class Settings:
             ("opacity", 10, 100),
             ("width", 400, 4000),
             ("height", 130, 1200),
-            ("projector_height", 200, 1200),
-            ("projector_line_ms", 500, 5000),
             ("spacing", 100, 180),
         ]:
             setattr(cfg, key, max(low, min(high, int(getattr(cfg, key)))))
@@ -83,8 +78,6 @@ class Settings:
             cfg.speaking_language = "en"
         if cfg.mode not in {"Bilingual", "English", "Chinese"}:
             cfg.mode = "Bilingual"
-        if cfg.overlay_layout not in {"rolling", "compact"}:
-            cfg.overlay_layout = "rolling"
         if cfg.placement not in {"Top", "Bottom", "Custom"}:
             cfg.placement = "Bottom"
         if not re.fullmatch(r"[a-z_]+", cfg.glossary):

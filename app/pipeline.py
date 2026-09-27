@@ -328,9 +328,6 @@ class Pipeline:
             self.segment_done.set()
 
     def _save(self, method, caption):
-        # Committed history also works with saving off. Unlike the live overlay,
-        # it accepts late translations of speech committed before a pause/switch.
-        self._notify("transcript-entry", caption)
         # ASR and translation both write exports. Detach a failed writer before
         # cleanup so another worker cannot reuse it or emit repeated errors.
         with self.export_lock:
@@ -341,7 +338,6 @@ class Pipeline:
                 getattr(writer, method)(caption)
             except OSError:
                 self.export = None
-                self._notify("transcript-saving", False)
                 log.exception("Transcript write failed")
                 try:
                     writer.close()

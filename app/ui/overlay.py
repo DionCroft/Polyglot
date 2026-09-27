@@ -1,19 +1,16 @@
 import html
-import time
 from PySide6.QtCore import Qt, QRectF, Signal, QTimer
-from PySide6.QtGui import QColor, QPainter, QTextDocument, QFont, QFontMetricsF
+from PySide6.QtGui import QColor, QPainter, QTextDocument, QFont
 from PySide6.QtWidgets import QWidget, QApplication
 from app.system.desktop import overlay_input
 from app.system.architecture import is_macos
 from app.captions.display import CaptionDisplay
-from app.captions.state import Caption
-from app.ui.projector import RollingProjector
 
 
 class Overlay(QWidget):
     moved = Signal()
 
-    def __init__(self, settings, history=None):
+    def __init__(self, settings):
         super().__init__(
             None,
             Qt.Tool
@@ -22,20 +19,11 @@ class Overlay(QWidget):
             | Qt.WindowDoesNotAcceptFocus,
         )
         self.settings = settings
-        self.history = history
         self.display = CaptionDisplay()
         self.caption = None
         self.partial = None
         self.drag = None
         self.preview = True
-        self.projector = RollingProjector()
-        if history:
-            for entry in history.entries.values():
-                self.projector.accept(entry)
-        self.roll_timer = QTimer(self)
-        self.roll_timer.setInterval(50)
-        self.roll_timer.timeout.connect(self._roll_tick)
-        self.last_tick = time.monotonic()
         self.setAttribute(Qt.WA_TranslucentBackground)
         self.setAttribute(Qt.WA_ShowWithoutActivating)
         self.setMinimumSize(400, 130)
@@ -51,7 +39,7 @@ class Overlay(QWidget):
         )
         rect = screen.availableGeometry()
         width = min(self.settings.width, rect.width() - 32)
-        height = min(self.target_height(), rect.height() - 32)
+        height = min(self.settings.height, rect.height() - 32)
         self.resize(width, height)
         x = rect.x() + (rect.width() - width) // 2
         y = (
@@ -64,122 +52,6 @@ class Overlay(QWidget):
             y = max(rect.top(), min(self.settings.y, rect.bottom() - height))
         self.move(x, y)
 
-    def target_height(self):
-        return (
-            self.settings.projector_height
-            if self.settings.overlay_layout == "rolling"
-            else self.settings.height
-        )
-
-    def enqueue(self, entry):
-        self.projector.accept(entry)
-        self.preview = False
-        self.update()
-
-    def _roll_tick(self):
-        now = time.monotonic()
-        elapsed = min(0.1, max(0, now - self.last_tick))
-        self.last_tick = now
-        if (
-            self.settings.overlay_layout == "rolling"
-            and self.isVisible()
-            and not self.preview
-        ):
-            self.projector.prepare(self.width() - 48, self.height() - 88, self.settings)
-            self.projector.advance(elapsed, self.settings.projector_line_ms / 1000)
-            self.update()
-
-    def _paint_rolling(self):
-        screen = self.screen().availableGeometry()
-        width = (
-            self.width() if self.drag else min(self.settings.width, screen.width() - 32)
-        )
-        font = QFont(
-            "PingFang SC" if is_macos() else "Microsoft YaHei UI",
-            self.settings.font_size,
-        )
-        # Even a small panel must fit one complete line at the chosen font size.
-        minimum = int(QFontMetricsF(font).height() * self.settings.spacing / 100) + 96
-        desired = self.height() if self.drag else self.settings.projector_height
-        height = min(max(minimum, desired), screen.height() - 40)
-        if (width, height) != (self.width(), self.height()):
-            QTimer.singleShot(0, lambda: self._fit_geometry(width, height))
-        viewport = QRectF(24, 44, self.width() - 48, self.height() - 88)
-        player = self.projector
-        if self.preview:
-            # Preview does not become part of the lecture queue.
-            player = RollingProjector()
-            player.accept(
-                self.display.pending
-                or self.display.pair
-                or Caption(
-                    0, 0, 0, "Your words. Understood.", "让每一句话，都被听懂。", True
-                )
-            )
-        player.prepare(viewport.width(), viewport.height(), self.settings)
-        painter = QPainter(self)
-        painter.setRenderHint(QPainter.Antialiasing)
-        backdrop = QColor("#10191e")
-        backdrop.setAlphaF(self.settings.opacity / 100)
-        painter.setBrush(backdrop)
-        painter.setPen(Qt.NoPen)
-        painter.drawRoundedRect(self.rect(), 16, 16)
-        painter.setFont(
-            QFont("PingFang SC" if is_macos() else "Microsoft YaHei UI", 12)
-        )
-        count = max(1, len(player.columns))
-        column_width = (viewport.width() - 24 * (count - 1)) / count
-        for index, (lang, column) in enumerate(player.columns.items()):
-            x = viewport.left() + index * (column_width + 24)
-            painter.setPen(QColor("#c6d9e2"))
-            painter.drawText(
-                QRectF(x, 9, column_width, 30),
-                Qt.AlignVCenter,
-                painter.fontMetrics().elidedText(
-                    player.labels[lang], Qt.ElideRight, int(column_width)
-                ),
-            )
-            visible = column.visible_lines()
-            if not visible:
-                continue
-            # Clip at the last complete line, never halfway through the next one.
-            visible_height = visible[-1].bottom - column.offset
-            painter.save()
-            painter.setClipRect(QRectF(x, viewport.top(), column_width, visible_height))
-            painter.translate(x, viewport.top() - column.offset)
-            column.document.drawContents(
-                painter, QRectF(0, column.offset, column_width, visible_height)
-            )
-            painter.restore()
-        player.drawn = True
-        progress = " · ".join(
-            ("EN" if lang == "en" else "中文" if lang == "zh" else "Notice")
-            + f" {column.index + 1}–{column.index + len(column.visible_lines())}/{len(column.lines)}"
-            for lang, column in player.columns.items()
-        )
-        footer = (f"{player.backlog} waiting · " if player.backlog else "") + progress
-        notice = getattr(self, "language_notice", "")
-        if self.settings.speaking_language == "auto" and notice:
-            footer = (
-                (f"{player.backlog} waiting · " if player.backlog else "")
-                + notice
-                + " · "
-                + progress
-            )
-        if player.waiting:
-            footer += " · Waiting for translation"
-        elif not footer:
-            footer = "Waiting for speech"
-        if not self.settings.locked:
-            footer += " · Drag / resize · lock before teaching"
-        painter.setPen(QColor("#b3c5cb"))
-        painter.drawText(
-            24,
-            self.height() - 14,
-            painter.fontMetrics().elidedText(footer, Qt.ElideRight, self.width() - 48),
-        )
-        painter.end()
-
     def set_caption(self, caption):
         if not self.display.accept(caption):
             return
@@ -188,13 +60,11 @@ class Overlay(QWidget):
         self.preview = False
         self.update()
 
-    def reset(self, *, new_session=False):
-        if new_session:
-            self.projector = RollingProjector()
+    def reset(self):
         self.display = CaptionDisplay()
         self.caption = None
         self.partial = None
-        self.preview = self.projector.current is None
+        self.preview = True
         self.update()
 
     def lock(self, locked):
@@ -206,13 +76,6 @@ class Overlay(QWidget):
     def showEvent(self, event):
         super().showEvent(event)
         overlay_input(int(self.winId()), self.settings.locked)
-        self.last_tick = time.monotonic()
-        self.roll_timer.start()
-
-    def hideEvent(self, event):
-        self.roll_timer.stop()
-        self.projector.drawn = False
-        super().hideEvent(event)
 
     def _caption_document(self, point_size, width=None):
         en, zh, upcoming = self.display.contents(self.settings.mode)
@@ -273,9 +136,6 @@ class Overlay(QWidget):
         self.move(x, y)
 
     def paintEvent(self, event):
-        if self.settings.overlay_layout == "rolling":
-            self._paint_rolling()
-            return
         screen = self.screen().availableGeometry()
         max_height = screen.height() - 40
         width = (
@@ -347,9 +207,6 @@ class Overlay(QWidget):
             self.settings.x = self.x()
             self.settings.y = self.y()
             self.settings.width = self.width()
-            if self.settings.overlay_layout == "rolling":
-                self.settings.projector_height = self.height()
-            else:
-                self.settings.height = self.height()
+            self.settings.height = self.height()
             self.settings.placement = "Custom"
             self.moved.emit()

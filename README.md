@@ -10,36 +10,21 @@ everyday use needs **no internet connection, account or API key**.
 You do not need programming experience. The Mac download is a ready-made app; Windows users
 double-click a setup file that prepares everything for them.
 
-![LectureLive rolling through a long English and Chinese explanation](docs/evidence/long-projector-start-0.8.1.png)
+![LectureLive captions showing Mandarin speech and its English translation](docs/evidence/auto-overlay-0.7.png)
 
 **New in 0.7.0b1, included in the main application:** choose **Auto · English ↔ Mandarin**
 to change direction as speakers take turns. Manual selection remains available and English
 remains the default. [Auto guide](docs/AUTO_LANGUAGE.md) · [Test results](docs/evidence/auto-language-0.7.md).
 
-**Fixed in 0.8.1b1:** long paragraphs now roll through **all** English and Chinese text,
-from beginning to end. The two columns move independently; new passages wait until both
-finish. Choose **Overlay → Caption layout → Rolling · readable projector**. Start with
-**Reading time per line → 1.4 seconds** (higher is slower). The waiting count tells you
-when the display is behind the speaker; a wider panel or faster rolling reduces the delay.
-No extra models are needed. [Beginner's transcript/projector guide](docs/TRANSCRIPT.md) ·
-[Long-paragraph test results](docs/evidence/long-paragraph-0.8.1.md).
-
-Open **Transcript** for the full bilingual history, **Back to live**, English/Chinese search,
-and copying selected text or the whole transcript. These controls work while captions roll.
-**Compact** remains available for the previous latest-caption layout.
-
-![The rolling transcript showing English explanations and a Mandarin question](docs/evidence/rolling-reader-0.8.png)
-
-The published Mac download below remains 0.7.0b1. To get this rolling fix on Mac, open
-[the tested 0.8.1b1 build](https://github.com/DionCroft/Polyglot/actions/runs/36255627088),
-then choose **Artifacts → LectureLive-0.8.1b1-macOS-AppleSilicon**. Sign into GitHub if asked,
-extract the outer ZIP, then open the **.dmg** inside and drag LectureLive to Applications.
-Build artifacts are retained for 30 days. Requires Apple Silicon and **macOS 14 or later**.
-Follow [the Mac guide](docs/MACOS.md) for first opening and microphone permissions.
-Native Mac validation passes 143 tests; both Windows runtimes pass 141 (two platform skips).
-
 > **Preview/beta software:** rehearse with your teaching microphone and projector before a lecture.
 > Captions and translations can contain mistakes. [What has been tested](STATUS.md).
+
+**Current main version: 0.7.0b1, restored to the last version before rolling features**
+(commit `03e7973`). It uses the previous caption overlay and saved transcript files.
+The rolling reader, search/copy interface and scrolling projector queue have been removed.
+English/Mandarin switching, Auto, offline models, presets and vocabulary remain available.
+When speaking English, select **English → 简体中文** under **Who is speaking?**.
+A manually selected Mandarin mode expects Mandarin speech.
 
 ## Start here: choose your computer
 

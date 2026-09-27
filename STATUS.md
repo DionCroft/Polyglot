@@ -1,45 +1,18 @@
 # LectureLive — STATUS
 
-Updated 2026-09-27. Long-paragraph rolling fix: 0.8.1b1.
+Updated 2026-09-23. Automatic English/Mandarin turns added to the main application.
 Production classroom acceptance remains open.
 
-## Complete bilingual paragraph playback (27 September 2026)
+## Pre-rolling version restored
 
-The 0.8.0 projector could hide the beginning of a long paragraph and the shorter
-translation by sharing one bottom offset. The earlier tests checked stored text, not
-whether every line was visible. 0.8.1 rolls both columns independently from the beginning,
-queues later passages, preserves reading position while hidden and adds reading speed.
-New tests measure fully visible wrapped-line coverage. Both Windows runtimes pass 141 tests
-(two POSIX-only skips). Both rebuilt EXEs pass complete-paragraph rendering, reader controls
-and offline English/Mandarin WAV conversation checks. Portable ARM64/x64 ZIPs are hash-verified.
-Native Apple Silicon passes 143 tests with no skips, packaged long-paragraph rendering,
-manual/Auto conversations, inference, transcript/native UI checks and signature verification.
-DMG and ZIP installers are available in successful build 36255627088, at app commit `86ed6b3`.
-See [reports, screenshots and installation links](docs/evidence/long-paragraph-0.8.1.md).
-Speech recognition, translation models and vocabulary are unchanged.
-
-## Rolling transcript (26 September 2026)
-
-- Added a session transcript tab, Back to live/new-passage count, bilingual search,
-  text selection/copy and a fixed-font rolling projector layout. Compact remains available.
-- Completed history survives language switching and pause/resume; delayed translations
-  update their original passage. Temporary history works with saving disabled. The reader
-  retains up to 10,000 passages; saved exports remain complete.
-- Windows ARM64 and emulated x64 each pass 127 tests with two POSIX-only skips. Tests include
-  1,440 simulated passages over a two-hour timeline, missing translations, uncertain turns,
-  retention, scroll anchoring, Unicode selection, search/copy and journal recovery.
-- Native Windows reader/projector checks pass, including minimum window size, resizing,
-  hidden-tab live following, offline help and click-through flags. These text fixtures do
-  not test speech accuracy, actual lecture duration or physical projector readability.
-- Both Windows EXEs pass native reader/projector and real bilingual WAV conversation
-  checks (x64 under emulation). The fixed 36 speech and 40 translation regression outputs
-  match the previous baseline exactly. Native macOS and archive details are recorded in
-  [the accompanying evidence](docs/evidence/rolling-transcript-0.8.md).
-- Native Apple Silicon passes **129 tests with no skips**, packaged speech/translation,
-  manual/Auto conversation checks and the new Cocoa reader/projector test. Signature
-  validation and DMG/ZIP packaging pass in build **36252250715**, at application commit
-  `4c2d01f`. The published Mac 0.7.0b1 release remains unchanged; 0.8.0b1 is a tested build artifact.
-  Speech models, recognition settings, CO7000 vocabulary and Auto thresholds are unchanged.
+Main has been restored to `03e7973` (0.7.0b1), the last commit before any rolling features.
+Application files match that baseline exactly; the original latest-caption overlay and
+saved transcripts are restored. English/Mandarin switching, offline operation, vocabulary,
+CO7000 support and earlier recognition improvements remain available.
+Both Windows runtimes pass 112 tests with two POSIX-only skips each. The published Mac
+0.7 installer uses the same application code and Mac build specification. Updated local
+Windows builds and a fresh comparison against the established English regression set
+are being verified. The rolling display tests did not establish translation accuracy.
 
 ## Expanded Indian-English testing (23 September 2026)
 

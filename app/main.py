@@ -24,14 +24,6 @@ def main():
     from app.utils.logging import configure
 
     configure(DATA / "logs")
-    if "--long-paragraph-ui-test" in sys.argv:
-        from app.system.long_paragraph_test import run
-
-        return run(sys.argv[sys.argv.index("--long-paragraph-ui-test") + 1])
-    if "--transcript-ui-test" in sys.argv:
-        from app.system.transcript_ui_test import run
-
-        return run(sys.argv[sys.argv.index("--transcript-ui-test") + 1])
     if "--auto-self-test" in sys.argv or "--auto-ui-test" in sys.argv:
         from app.system.auto_self_test import run, run_ui
         from app.config.settings import ROOT

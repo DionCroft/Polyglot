@@ -47,22 +47,6 @@ Open **Overlay**, choose the caption display, and select **Preview captions on s
 before starting a lecture. Adjust the text size for the back of the room. Unlock the panel to move it;
 lock it to click through to your slides. Starting a lecture locks the overlay automatically.
 
-Choose **Caption layout → Rolling · readable projector** to roll every English and Chinese
-passage from beginning to end. Both columns move independently, and later passages wait
-until both finish. **Reading time per line** starts at 1.4 seconds; increase it for slower
-reading. Adjust **Rolling overlay height** to show more text. A waiting count means captions
-are behind the speaker; try a wider panel or faster rolling. **Compact · latest caption**
-keeps the previous layout.
-
-## Read longer explanations
-
-Open **Transcript** after starting. Original speech and translation stay together with
-timestamps. Scroll upwards to read earlier text while listening continues; select
-**Back to live** to follow new speech again. Search English or Chinese with **Next/Previous**,
-then use **Copy selection** or **Copy transcript**. From Teaching controls, choose **Read transcript**.
-This also works with saving off, but temporary history clears at the next lecture or app exit.
-[Full transcript help](TRANSCRIPT.md).
-
 ## 5. Pause or finish
 
 - **Pause** hides captions and discards unfinished speech. Select **Resume** to continue.
