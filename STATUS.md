@@ -9,7 +9,7 @@ Production classroom acceptance remains open.
   remains non-blocking; audio loss produces a throttled warning and saved gap markers.
 - All six exports preserve mixed-language order and journal recovery. The live export
   reorder buffer is bounded; delayed translations do not create an ever-growing backlog.
-- 125 tests pass on native Windows ARM64 and x64 under ARM emulation (two POSIX-only
+- 126 tests pass on native Windows ARM64 and x64 under ARM emulation (two POSIX-only
   skips each). Five newly added regression cases failed before production changes.
 - The real offline 36-speech / 40-translation comparison exactly matches the earlier
   baseline. Models, defaults and Auto detection thresholds are unchanged.

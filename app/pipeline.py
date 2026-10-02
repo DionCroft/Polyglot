@@ -237,11 +237,13 @@ class Pipeline:
         epoch = self.epoch
         if self.stop_event.is_set() or self.paused.is_set() or self.switching.is_set():
             return
-        self.last_audio_end = end
         self.level = min(100, int(float(np.sqrt(np.mean(frame * frame))) * 450))
         try:
             if epoch != self.epoch or self.paused.is_set() or self.stop_event.is_set():
                 return
+            # Only attempted capture counts toward a trailing loss interval. A
+            # callback rejected by Stop/Pause must not manufacture an audio gap.
+            self.last_audio_end = end
             self.audio.put_nowait((frame, end, epoch))
         except queue.Full:
             self.metrics["dropped_audio_chunks"] += 1

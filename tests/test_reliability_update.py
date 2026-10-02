@@ -318,3 +318,26 @@ def test_export_backlog_is_bounded_while_translation_is_stalled(tmp_path):
         p.close()
     assert len(p.asr.seen) == 6
     assert_recovered(folder, tmp_path / "recover")
+
+
+def test_stop_during_callback_does_not_create_false_audio_gap(tmp_path):
+    from unittest.mock import patch
+
+    submitted = []
+    p = Pipeline(ROOT, tmp_path, Settings(), lambda *args: None)
+    p.segmenter = Segmenter(Voice())
+    p._submit_phrase = lambda phrase, epoch: submitted.append(phrase)
+    for i in range(6):
+        p._frame(np.ones(512, np.float32), (i + 1) * 0.032)
+
+    def stop_during_meter(data):
+        p.request_stop()
+        return 0.0
+
+    with patch("app.pipeline.np.mean", side_effect=stop_during_meter):
+        p._frame(np.ones(512, np.float32), 0.224)
+    p.input_closed.set()
+    p._segment()
+    assert p.last_audio_end == pytest.approx(0.192)
+    assert not p.metrics["audio_gaps"]
+    assert len([x for x in submitted if x.final]) == 1

@@ -8,7 +8,7 @@ edit in `app/system/accelerators.py` is excluded from the commits.
 
 Before production edits, five new cases failed: lost pre-gap speech, missing overflow
 warning, out-of-order separate exports in both initial directions, and a missing
-trailing gap on stop. After implementation, 125 tests pass on Windows ARM64 and on
+trailing gap on stop. After implementation, 126 tests pass on Windows ARM64 and on
 Windows x64 under ARM emulation; two POSIX-only tests skip in each environment.
 The additional cases use stub inference and real processing threads where applicable.
 They cover actual bounded-queue overflow, midstream/trailing gaps, manual/Auto routing,
@@ -51,3 +51,9 @@ controls. The panel now sizes the label to its wrapped content and expands as ne
 A second native Windows UI replay passed, asserting both full warning height and a
 visible Finish lecture button; the saved image was visually inspected.
 [UI report](reliability-071-warning-ui.json) · [Verified warning image](reliability-071-teaching-warning.png).
+
+A further failing regression reproduced Stop occurring during the callback's meter
+calculation. The last-capture timestamp now advances only after the Stop/Pause check,
+so this intentionally rejected frame does not create a false trailing audio-gap
+marker. The complete suite then passed 126 tests on both Windows runtimes (two
+POSIX-only skips each). This change does not alter any model or decode settings.
