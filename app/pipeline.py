@@ -7,6 +7,7 @@ import numpy as np
 from app.audio.capture import Microphone, WavSource
 from app.audio.vad import Segmenter
 from app.captions.stabiliser import CaptionStabiliser
+from app.captions.state import AudioGap
 from app.captions.glossary import Glossary
 from app.export.transcript import Transcript
 from app.asr.language_detection import PhraseLanguage, UncertainTurn
@@ -58,9 +59,11 @@ class PhraseQueue:
                 self.condition.wait(timeout)
             return self.items.popleft() if self.items else None
 
-    def clear(self):
+    def clear(self, keep_gaps=False):
         with self.condition:
-            self.items.clear()
+            self.items = deque(
+                x for x in self.items if keep_gaps and isinstance(x[0], AudioGap)
+            )
 
     def __len__(self):
         with self.condition:
@@ -124,6 +127,10 @@ class Pipeline:
         self.failure_reported = False
         self.last_meter = 0
         self.last_warning = 0
+        self.last_loss_warning = float("-inf")
+        self.notified_loss = (0, 0)
+        self.loss_warning_lock = threading.Lock()
+        self.metrics["audio_gaps"] = 0
         self.switching = threading.Event()
         self.capture_lock = threading.RLock()
         self.switch_lock = threading.Lock()
@@ -264,7 +271,7 @@ class Pipeline:
             self.paused.set()
             self.epoch += 1
             self.level = 0
-            self.phrases.clear()
+            self.phrases.clear(keep_gaps=True)
             self._notify("state", "Paused")
         while True:
             try:
@@ -272,43 +279,77 @@ class Pipeline:
             except queue.Empty:
                 break
 
+    def _warn_audio_loss(self):
+        # Called by workers / the UI timer, never by the microphone callback.
+        snapshot = (self.metrics["dropped_audio_chunks"], self.metrics["audio_gaps"])
+        now = time.monotonic()
+        with self.loss_warning_lock:
+            if snapshot == self.notified_loss or now - self.last_loss_warning < 5:
+                return
+            self.notified_loss = snapshot
+            self.last_loss_warning = now
+        self._notify(
+            "warning",
+            "Audio was lost. Please repeat the affected sentence. Close heavy "
+            "applications or try Fast mode if this continues. Saved transcripts "
+            "mark detected audio gaps; missing audio cannot be recovered.",
+        )
+
     def _submit_phrase(self, phrase, epoch):
-        # Once capture stops, preserve accepted final phrases instead of dropping
-        # them to maintain live latency. The downstream worker still drains.
-        while (self.stop_event.is_set() or self.switching.is_set()) and len(
-            self.phrases
-        ) >= self.phrases.capacity:
+        # Backpressure only the VAD worker. Never evict final speech or gap markers
+        # to make room for a newer final; capture stays non-blocking and bounded.
+        while (
+            phrase.final or self.stop_event.is_set() or self.switching.is_set()
+        ) and len(self.phrases) >= self.phrases.capacity:
             if self.asr_done.wait(0.02):
                 return
-        dropped = self.phrases.put((phrase, epoch))
-        if dropped and dropped[0].final:
-            self.metrics["dropped_phrases"] += 1
-            self._notify(
-                "warning",
-                "Recognition is behind live speech. A phrase was skipped; try Fast mode.",
-            )
+            if not isinstance(phrase, (AudioGap, TurnBoundary)) and (
+                epoch != self.epoch or self.paused.is_set()
+            ):
+                return
+        self.phrases.put((phrase, epoch))
+
+    def _finish_audio(self, last_end, gap_end, epoch):
+        phrase = self.segmenter.finish(last_end)
+        if phrase:
+            self._submit_phrase(phrase, epoch)
+        if gap_end - last_end > 1e-6:
+            self.segmenter.identifier += 1
+            gap = AudioGap(self.segmenter.identifier, last_end, gap_end, epoch)
+            self.metrics["audio_gaps"] += 1
+            self._warn_audio_loss()
+            self._submit_phrase(gap, epoch)
 
     def _segment(self):
         epoch = -1
         last_end = None
         try:
             while not self.input_closed.is_set() or not self.audio.empty():
+                self._warn_audio_loss()
                 try:
                     frame, end, current = self.audio.get(timeout=0.1)
                 except queue.Empty:
                     continue
                 if isinstance(frame, TurnBoundary):
-                    if epoch == self.epoch and not self.paused.is_set():
-                        phrase = self.segmenter.finish(end)
-                        if phrase:
-                            self._submit_phrase(phrase, current)
+                    if (
+                        last_end is not None
+                        and epoch == self.epoch
+                        and not self.paused.is_set()
+                    ):
+                        self._finish_audio(last_end, end, current)
+                    last_end = None
+                    self.segmenter.reset()
                     self._submit_phrase(frame, current)
                     continue
                 if current != self.epoch or self.paused.is_set():
                     continue
-                if current != epoch or (last_end is not None and end - last_end > 0.05):
+                if current != epoch:
                     self.segmenter.reset()
                     epoch = current
+                    last_end = None
+                if last_end is not None and end - last_end > 0.05:
+                    self._finish_audio(last_end, end - len(frame) / 16000, current)
+                    self.segmenter.reset()
                 last_end = end
                 phrase = self.segmenter.push(frame, end)
                 if phrase:
@@ -318,9 +359,7 @@ class Pipeline:
                 and epoch == self.epoch
                 and not self.paused.is_set()
             ):
-                phrase = self.segmenter.finish(last_end)
-                if phrase:
-                    self._submit_phrase(phrase, epoch)
+                self._finish_audio(last_end, self.last_audio_end, epoch)
         except Exception:
             log.exception("VAD failed")
             self._error("Voice detection failed. Stop and restart the session.", True)
@@ -533,12 +572,21 @@ class Pipeline:
 
     def _recognize_loop(self):
         while not self.segment_done.is_set() or len(self.phrases):
+            # An unusually slow translation must not grow the export reorder buffer
+            # for the rest of the lecture. The translation worker releases space.
+            writer = self.export
+            if writer is not None and writer.full:
+                time.sleep(0.02)
+                continue
             item = self.phrases.get()
             if not item:
                 continue
             phrase, epoch = item
             if isinstance(phrase, TurnBoundary):
                 self.translation.put(phrase)
+                continue
+            if isinstance(phrase, AudioGap):
+                self._save("gap", phrase)
                 continue
             if epoch != self.epoch or self.paused.is_set():
                 continue
@@ -662,6 +710,7 @@ class Pipeline:
                 self._save("pair", caption)
 
     def diagnostics(self):
+        self._warn_audio_loss()
         if (
             isinstance(self.source, Microphone)
             and self.source.stream is not None

@@ -83,6 +83,14 @@ Read the [conversation guide](CONVERSATIONS.md) for examples and accuracy limita
 Open **Diagnostics → Open transcripts**. Transcripts are available only for sessions where saving
 was enabled. Audio is not recorded.
 
+## If Audio was lost appears
+
+Repeat the affected sentence. The app keeps usable speech captured before the gap,
+but cannot recover missing audio. Close heavy applications. If warnings continue,
+finish the lecture and try **Fast / Standard**, then rehearse again.
+The warning also appears in **Teaching controls**. When saving is enabled, all text
+and subtitle files mark known gaps as **[Audio lost]**. See [audio-loss and recovery help](RELIABILITY.md).
+
 ## If something looks wrong
 
 Check the selected microphone and its test result first. If a device disconnects, reconnect it and

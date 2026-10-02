@@ -72,7 +72,7 @@ jobs:
       - name: Upload installable beta
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: LectureLive-0.7.0b1-macOS-AppleSilicon
+          name: LectureLive-0.7.1b1-macOS-AppleSilicon
           path: dist/macos-release/*
           compression-level: 0
           if-no-files-found: error

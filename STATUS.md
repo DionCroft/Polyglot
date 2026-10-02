@@ -1,12 +1,25 @@
 # LectureLive — STATUS
 
-Updated 2026-09-27. Pre-rolling 0.7.0b1 application restored.
+Updated 2026-10-03. Reliability beta 0.7.1b1; pre-rolling layout retained.
 Production classroom acceptance remains open.
 
-## Pre-rolling version restored
+## Reliability update 0.7.1b1
 
-Main has been restored to `03e7973` (0.7.0b1), the last commit before any rolling features.
-Application files match that baseline exactly; the original latest-caption overlay and
+- Audio gaps finish usable captured speech before resetting voice detection. Capture
+  remains non-blocking; audio loss produces a throttled warning and saved gap markers.
+- All six exports preserve mixed-language order and journal recovery. The live export
+  reorder buffer is bounded; delayed translations do not create an ever-growing backlog.
+- 125 tests pass on native Windows ARM64 and x64 under ARM emulation (two POSIX-only
+  skips each). Five newly added regression cases failed before production changes.
+- The real offline 36-speech / 40-translation comparison exactly matches the earlier
+  baseline. Models, defaults and Auto detection thresholds are unchanged.
+- New packaged Windows and native Mac verification is pending at this milestone.
+  [Detailed evidence and limitations](docs/evidence/reliability-0.7.1.md).
+
+## Historical rollback: pre-rolling version restored (27 September)
+
+At that milestone, main was restored to `03e7973` (0.7.0b1), the last commit before any rolling features.
+Application files then matched that baseline exactly; the original latest-caption overlay and
 saved transcripts are restored. English/Mandarin switching, offline operation, vocabulary,
 CO7000 support and earlier recognition improvements remain available.
 Both Windows runtimes pass 112 tests with two POSIX-only skips each. The published Mac

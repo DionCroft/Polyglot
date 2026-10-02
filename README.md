@@ -19,13 +19,16 @@ remains the default. [Auto guide](docs/AUTO_LANGUAGE.md) · [Test results](docs/
 > **Preview/beta software:** rehearse with your teaching microphone and projector before a lecture.
 > Captions and translations can contain mistakes. [What has been tested](STATUS.md).
 
-**Current main version: 0.7.0b1, restored to the last version before rolling features**
-(commit `03e7973`). It uses the previous caption overlay and saved transcript files.
-The rolling reader, search/copy interface and scrolling projector queue have been removed.
-English/Mandarin switching, Auto, offline models, presets and vocabulary remain available.
-When speaking English, select **English → 简体中文** under **Who is speaking?**.
+**Current main version: 0.7.1b1 — reliability update, keeping the pre-rolling layout.**
+Captured speech before an audio gap is finished rather than silently discarded. An
+**Audio was lost** warning asks you to repeat; saved files mark known missing intervals
+as **[Audio lost]**. Separate English and Chinese exports now keep conversation order
+when translations arrive late. Whisper, translation models, recognition defaults and
+Auto language thresholds are unchanged. No rolling reader has been reintroduced.
+[What to do if audio is lost](docs/RELIABILITY.md) · [Verification](docs/evidence/reliability-0.7.1.md).
+
+When speaking English, choose **English → 简体中文** under **Who is speaking?**.
 A manually selected Mandarin mode expects Mandarin speech.
-[Rollback verification and results](docs/evidence/pre-rolling-rollback.md).
 
 ## Start here: choose your computer
 
@@ -84,7 +87,7 @@ The repository's **Code → Download ZIP** contains source code and needs **Setu
 
 ## Install on Mac
 
-Use an **Apple Silicon Mac running macOS 14 or later**. The conversation Mac beta is **0.7.0b1**.
+Use an **Apple Silicon Mac running macOS 14 or later**. The previous published Mac beta is **0.7.0b1**. The **0.7.1b1** native build is being validated; the previous installer does not include the reliability fixes.
 The DMG download is about **1.22 GB** (ZIP alternative: **1.17 GB**). The speech and both translation models are included; the app runs offline after downloading.
 
 1. [Download LectureLive for Apple Silicon — DMG](https://github.com/DionCroft/Polyglot/releases/download/macos-v0.7.0b1/LectureLive-0.7.0b1-macOS-AppleSilicon.dmg).
@@ -236,6 +239,7 @@ English vocabulary, glossary corrections and CO7000 hints are preserved when swi
 | Mac microphone is unavailable | Enable **System Settings → Privacy & Security → Microphone → LectureLive**, then quit and reopen the app. |
 | A microphone disconnects | Reconnect it and use **Reconnect / retry**. If needed, stop the lecture, refresh the microphone list and select it again. |
 | English appears but Chinese does not | Select **Bilingual** and read any warning. For missing files, close the app and rerun Windows setup, or reinstall the Mac app from the release download. |
+| Audio was lost | Repeat the affected sentence. Close heavy applications; if it repeats, finish the session and try Fast / Standard. See [audio-loss help](docs/RELIABILITY.md). |
 | Captions are slow | Try **Fast / Standard** for the next session, close heavy applications and pause naturally between sentences. |
 | Mandarin speech produces incorrect captions | Check **Who is speaking?** is set to **Mandarin 普通话 → English** and wait for **Listening** before speaking. Speak one language at a time. |
 | Auto says Language unclear | Choose the language manually and repeat the complete sentence. Read [Auto help](docs/AUTO_LANGUAGE.md). |

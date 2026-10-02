@@ -53,6 +53,14 @@ def run(fixtures, report_path):
         wait(lambda: window.last_caption is not None)
         window.teaching = TeachingControls(window)
         window.teaching.show()
+        warning = "Audio was lost. Please repeat the affected sentence."
+        # Assert synchronous forwarding before unrelated queued WAV notices arrive.
+        window.on_event("warning", warning)
+        assert window.warning.text() == warning and not window.warning.isHidden()
+        assert window.teaching.warning.text() == warning
+        assert window.teaching.warning.isVisible()
+        assert window.teaching.warning.wordWrap()
+        result["teaching_warning_visible"] = True
         window.teaching.language.setCurrentIndex(1)
         wait(
             lambda: (

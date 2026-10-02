@@ -1,4 +1,4 @@
-LectureLive - Windows x64 Beta 0.7.0b1
+LectureLive - Windows x64 Beta 0.7.1b1
 
 1. Keep this entire folder together, including _internal.
 2. Open LectureLive-x64-Beta.exe.
@@ -31,3 +31,11 @@ Contact: Dr Dion Miroy Mariyanayagam, d.mariyanayagam@londonmet.ac.uk
 Words being missed? Open Quick start > Improving speech recognition.
 Standard recognition keeps the previous behaviour. Careful and vocabulary hints
 are optional and should be tested with each speaker before teaching.
+
+RELIABILITY UPDATE 0.7.1b1
+If Audio was lost appears, repeat the sentence. Captured speech before a gap is
+retained where usable, but missing audio cannot be recovered. Close heavy apps;
+if warnings repeat, finish the session and try Fast / Standard.
+All saved text/subtitles mark known audio gaps as [Audio lost]. Language files
+wait for earlier translations to keep the conversation in chronological order.
+Quick start > Audio loss and transcript recovery explains warnings and recovery.

@@ -8,7 +8,15 @@ its entire `_internal` directory. The existing Surface/Qualcomm driver supplies 
 NPU device runtime; no separate QAIRT SDK was needed on the tested machine.
 The build is unsigned and still requires classroom acceptance.
 
-## English, Mandarin and Auto support in 0.7.0b1
+## Updating to reliability beta 0.7.1b1
+
+Finish any lecture and close the old app. Update the source folder and run **Setup.cmd**,
+or extract the complete new portable folder and open its EXE. Keep `_internal` beside
+it. Existing preferences, presets and saved transcripts stay in the app data folder.
+No new models or model downloads are required when updating a complete 0.7 installation.
+Open **Quick start → Audio loss and transcript recovery** for the new warning guidance.
+
+## English, Mandarin and Auto support
 
 The current setup includes both offline translation directions, adding 172.7 MB of verified
 Mandarin → English assets. Close older copies and run the current **Setup.cmd** to update.

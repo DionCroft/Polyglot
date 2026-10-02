@@ -90,7 +90,11 @@ opens the session folder. Windows Snapdragon uses `%LOCALAPPDATA%/LectureLive`, 
 uses `%LOCALAPPDATA%/LectureLive Beta`, and Mac uses `~/Library/Application Support/LectureLive`.
 Mixed conversations stay in one folder: each language file includes speech in that language
 and translations into it. English/Chinese/bilingual TXT, subtitles,
-and the UTF-8 `events.jsonl` journal are written incrementally. Saving failures disable
+and the UTF-8 `events.jsonl` journal are written incrementally.
+In 0.7.1, a language file waits if an earlier translation into that language is still
+pending; live source captions and the journal remain immediate. All files retain
+chronological order. **[Audio lost]** and **[Not transcribed]** notices identify gaps
+without inventing speech. Read [audio loss and recovery](RELIABILITY.md). Saving failures disable
 exports and leave captions running.
 
 **Recover transcript journal…** rebuilds exports into a new folder from complete

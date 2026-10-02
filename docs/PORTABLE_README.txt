@@ -17,7 +17,7 @@ Preview release: review translations and rehearse before teaching. See STATUS.md
 Microphone audio is not recorded. Text transcripts are optional and stay local.
 This build is unsigned; follow your organisation's software approval process.
 
-AUTOMATIC CONVERSATIONS (0.7.0b1)
+AUTOMATIC CONVERSATIONS (0.7.1b1)
 Choose Auto under Who is speaking? and keep Bilingual selected. Pause briefly
 between speakers and use the selected microphone. Both directions work offline.
 If Language unclear appears, choose the language manually and repeat the sentence.
@@ -45,3 +45,11 @@ Email: d.mariyanayagam@londonmet.ac.uk
 WORDS BEING MISSED?
 Use Quick start > Improving speech recognition. Standard preserves previous
 behaviour; Careful and vocabulary guidance are optional and speaker-dependent.
+
+RELIABILITY UPDATE 0.7.1b1
+If Audio was lost appears, repeat the sentence. Captured speech before a gap is
+retained where usable, but missing audio cannot be recovered. Close heavy apps;
+if warnings repeat, finish the session and try Fast / Standard.
+All saved text/subtitles mark known audio gaps as [Audio lost]. Language files
+wait for earlier translations to keep the conversation in chronological order.
+Quick start > Audio loss and transcript recovery explains warnings and recovery.
