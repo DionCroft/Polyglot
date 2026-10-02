@@ -1042,8 +1042,7 @@ class MainWindow(QMainWindow):
         self.warning.setText(message)
         self.warning.show()
         if self.teaching:
-            self.teaching.warning.setText(message)
-            self.teaching.warning.show()
+            self.teaching.show_warning(message)
 
     def open_folder(self, path):
         Path(path).mkdir(parents=True, exist_ok=True)

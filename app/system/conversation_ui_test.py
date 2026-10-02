@@ -87,6 +87,23 @@ def run(fixtures, report_path):
         assert "English · translation" in text and "简体中文 · spoken" in text
         assert caption.english in text and caption.chinese in text
         window.overlay.grab().save(str(Path(report_path).with_suffix(".overlay.png")))
+        window.warn(
+            "Audio was lost. Please repeat the affected sentence. Close heavy "
+            "applications or try Fast mode if this continues. Saved transcripts "
+            "mark detected audio gaps; missing audio cannot be recovered."
+        )
+        app.processEvents()
+        warning_label = window.teaching.warning
+        assert warning_label.height() >= warning_label.heightForWidth(
+            warning_label.width()
+        )
+        assert (
+            window.teaching.stop.mapTo(
+                window.teaching, window.teaching.stop.rect().bottomRight()
+            ).y()
+            < window.teaching.height()
+        )
+        result["full_warning_fits"] = True
         window.teaching.grab().save(str(Path(report_path).with_suffix(".teaching.png")))
         window.pause()
         window.speaking_language.setCurrentIndex(0)

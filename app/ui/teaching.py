@@ -67,6 +67,23 @@ class TeachingControls(QDialog):
         self.note.setWordWrap(True)
         layout.addWidget(self.note)
 
+    def show_warning(self, message):
+        self.warning.setText(message)
+        self.warning.setVisible(bool(message))
+        self.layout().activate()
+        self._fit_warning()
+        self.adjustSize()
+
+    def _fit_warning(self):
+        if not self.warning.isHidden():
+            height = self.warning.heightForWidth(self.warning.width())
+            if height > 0:
+                self.warning.setMinimumHeight(height)
+
+    def resizeEvent(self, event):
+        super().resizeEvent(event)
+        self._fit_warning()
+
     def closeEvent(self, event):
         self.owner.show()
         self.owner.raise_()

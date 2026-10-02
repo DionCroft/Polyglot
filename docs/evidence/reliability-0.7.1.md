@@ -43,3 +43,11 @@ that language. The live pipeline limits pending export turns to 32. Gap and unce
 markers are saved in all six files and understood by journal recovery. Missing
 translations remain absent rather than being invented. The models need no extra disk
 space; bookkeeping is bounded and does not require another inference model.
+
+## Warning layout follow-up
+
+Visual inspection of the source UI found a long warning could be clipped in Teaching
+controls. The panel now sizes the label to its wrapped content and expands as needed.
+A second native Windows UI replay passed, asserting both full warning height and a
+visible Finish lecture button; the saved image was visually inspected.
+[UI report](reliability-071-warning-ui.json) · [Verified warning image](reliability-071-teaching-warning.png).
