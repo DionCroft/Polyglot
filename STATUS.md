@@ -13,7 +13,14 @@ Production classroom acceptance remains open.
   skips each). Five newly added regression cases failed before production changes.
 - The real offline 36-speech / 40-translation comparison exactly matches the earlier
   baseline. Models, defaults and Auto detection thresholds are unchanged.
-- New packaged Windows and native Mac verification is pending at this milestone.
+- Both final Windows packages pass all five offline speech/conversation/Auto/UI checks.
+  All bundled model hashes verify; eight sessions preserve chronology and recover
+  byte-for-byte in all six text/subtitle formats. Both portable ZIPs are hash-verified.
+- Native hosted macOS 14.8.9 ARM64 passes 128 tests, no skips, plus packaged inference,
+  CPU/Core ML fallback, conversation/Auto/Cocoa UI, signature and DMG/ZIP checks.
+  The [0.7.1b1 Mac DMG/ZIP](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.7.1b1)
+  is published with verified installer hashes. Physical microphones, Intel/AMD and
+  M2 classroom acceptance remain outstanding.
   [Detailed evidence and limitations](docs/evidence/reliability-0.7.1.md).
 
 ## Historical rollback: pre-rolling version restored (27 September)
