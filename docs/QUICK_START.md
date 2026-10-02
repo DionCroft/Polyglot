@@ -96,7 +96,7 @@ and subtitle files mark known gaps as **[Audio lost]**. See [audio-loss and reco
 Check the selected microphone and its test result first. If a device disconnects, reconnect it and
 use **Reconnect / retry**. If captions lag, try **Fast / Standard** for your next session.
 For missing files, close LectureLive and rerun **Setup.cmd** on Windows, or reinstall the Mac app
-from the [Mac beta release](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.7.0b1).
+from the [Mac beta release](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.7.1b1).
 
 This is a preview release. Review translations and rehearse with your actual microphone and
 projector before relying on it in class. Read the [full user guide](USER_GUIDE.md),

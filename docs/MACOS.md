@@ -1,10 +1,10 @@
-# LectureLive for Apple Silicon — beta 0.7.0b1
+# LectureLive for Apple Silicon — beta 0.7.1b1
 
 Requires an Apple Silicon Mac (M1 or newer, including M2 MacBook Air) running **macOS 14 Sonoma or later**. Intel Macs and Rosetta are not supported by this build. Native M2 classroom validation is still required. The Windows builds remain available separately.
 
 ## Install the ready-made app
 
-1. Open the [Mac beta download page](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.7.0b1). Under **Assets**, choose **LectureLive-0.7.0b1-macOS-AppleSilicon.dmg** (about 1.22 GB; recommended) or the application ZIP (about 1.17 GB). Do not choose **Source code**. Developer builds are also available from successful **macOS Apple Silicon** runs in **Actions**; those require extracting an outer artifact ZIP and may require signing into GitHub.
+1. Open the [Mac beta download page](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.7.1b1). Under **Assets**, choose **LectureLive-0.7.1b1-macOS-AppleSilicon.dmg** (about 1.22 GB; recommended) or the application ZIP (about 1.17 GB). Do not choose **Source code**. Developer builds are also available from successful **macOS Apple Silicon** runs in **Actions**; those require extracting an outer artifact ZIP and may require signing into GitHub.
 2. Open the DMG and drag **LectureLive** onto **Applications**. Alternatively, double-click the inner application ZIP and move **LectureLive.app** to **Applications**. Eject the DMG before starting the installed app.
 3. Open **Applications → LectureLive**. This beta is ad-hoc signed and is **not Apple notarised**. If macOS blocks this downloaded beta, open **System Settings → Privacy & Security**, find the message about LectureLive, choose **Open Anyway**, and confirm **Open**. Only approve the copy you obtained from this repository. Your organisation may require IT approval.
 4. Choose your microphone and click **Test microphone**. Choose **Allow** when macOS asks for microphone access. If access was denied, turn on **System Settings → Privacy & Security → Microphone → LectureLive**, then quit and reopen LectureLive.
@@ -12,6 +12,19 @@ Requires an Apple Silicon Mac (M1 or newer, including M2 MacBook Air) running **
 6. Position the caption overlay on your screen or projector, then lock it. Pause with **Control + Option + Space**; lock/unlock with **Control + Option + C**. The screen buttons also work. In shortcut settings, **Ctrl** means Control and **Alt** means Option; Cmd/Command is supported. Change conflicting shortcuts, especially when VoiceOver is enabled.
 
 All speech models, translation in both directions, voice detection, glossaries and course lists are included. Normal use needs no account, Python installation or internet connection. Audio is processed locally. Text transcripts are saved when **Save transcripts** is selected (on by default); turn it off if you do not want saved text. Microphone audio is not recorded. Settings, presets, logs, transcripts and Core ML caches live in `~/Library/Application Support/LectureLive`.
+
+## Updating from 0.7.0 or an older beta
+
+Finish the lecture and quit LectureLive. Install the complete 0.7.1 app using the
+steps above, replacing the old copy in Applications. Preferences, presets and
+transcripts stay in your Library/Application Support/LectureLive folder. No extra
+speech or translation models are needed. Microphone permission may need confirming
+for the new ad-hoc signed app.
+
+This update retains the pre-rolling caption layout. If **Audio was lost** appears,
+repeat the sentence; missing audio cannot be recovered. All saved files mark known
+gaps, and separate language exports now retain conversation order when translation
+is delayed. Open **Quick start → Audio loss and transcript recovery** for help.
 
 ## Lecturer–student conversations
 

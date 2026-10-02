@@ -87,11 +87,11 @@ The repository's **Code → Download ZIP** contains source code and needs **Setu
 
 ## Install on Mac
 
-Use an **Apple Silicon Mac running macOS 14 or later**. The previous published Mac beta is **0.7.0b1**. The **0.7.1b1** native build is being validated; the previous installer does not include the reliability fixes.
+Use an **Apple Silicon Mac running macOS 14 or later**. The Mac edition for this reliability update is **0.7.1b1**.
 The DMG download is about **1.22 GB** (ZIP alternative: **1.17 GB**). The speech and both translation models are included; the app runs offline after downloading.
 
-1. [Download LectureLive for Apple Silicon — DMG](https://github.com/DionCroft/Polyglot/releases/download/macos-v0.7.0b1/LectureLive-0.7.0b1-macOS-AppleSilicon.dmg).
-   Alternatively, open the [Mac beta release page](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.7.0b1)
+1. [Download LectureLive for Apple Silicon — DMG](https://github.com/DionCroft/Polyglot/releases/download/macos-v0.7.1b1/LectureLive-0.7.1b1-macOS-AppleSilicon.dmg).
+   Alternatively, open the [Mac beta release page](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.7.1b1)
    and choose the **.dmg** under **Assets**. Do not choose **Source code**.
 2. Open the downloaded DMG. Drag **LectureLive** onto **Applications**, wait for copying to finish,
    then eject the DMG.
@@ -192,7 +192,7 @@ correct words or translation; Mandarin homophones, dates and technical terms sti
 The additional offline translation model adds **172.7 MB** to setup and packaging. It loads on the
 first Mandarin turn, or when preparing Auto, then stays cached. One Snapdragon test measured about **527 MiB extra RAM**
 when loading it; other computers can differ. It can add caption delay and first-switch preparation
-time. Windows setup includes it automatically; install the **0.7.0b1** Mac build to obtain it on Mac.
+time. Windows setup includes it automatically; install the **0.7.1b1** Mac build to obtain it on Mac.
 The older Mac **0.5.0b1** does not have conversation support.
 
 ## Improve missed words and use CO7000 vocabulary
@@ -243,7 +243,7 @@ English vocabulary, glossary corrections and CO7000 hints are preserved when swi
 | Captions are slow | Try **Fast / Standard** for the next session, close heavy applications and pause naturally between sentences. |
 | Mandarin speech produces incorrect captions | Check **Who is speaking?** is set to **Mandarin 普通话 → English** and wait for **Listening** before speaking. Speak one language at a time. |
 | Auto says Language unclear | Choose the language manually and repeat the complete sentence. Read [Auto help](docs/AUTO_LANGUAGE.md). |
-| Switching says the Mandarin model is missing | Close the app and rerun the current Windows **Setup.cmd**, or install the 0.7.0b1 Mac app. The previous speaking language is retained. |
+| Switching says the Mandarin model is missing | Close the app and rerun the current Windows **Setup.cmd**, or install the 0.7.1b1 Mac app. The previous speaking language is retained. |
 | An accelerator check fails or takes too long | On Mac or the Intel/AMD beta, stop the lecture and select **CPU** under Processing hardware. See the platform guide for details. |
 | Captions are on the wrong screen | Open **Overlay** and select the projector or preferred caption display. |
 | You want your saved text | Open **Diagnostics → Open transcripts**. Text is saved only when the transcript option is enabled. |
