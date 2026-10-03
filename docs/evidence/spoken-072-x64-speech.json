@@ -1,0 +1,50 @@
+{
+  "passed": true,
+  "version": "0.7.2b1",
+  "physical_microphone_tested": false,
+  "sound_heard_by_human": false,
+  "voice_quality_validated": false,
+  "native_engine": "winrt",
+  "installed_voices": [
+    {
+      "id": "en_GB|Microsoft George",
+      "name": "Microsoft George",
+      "locale": "en_GB",
+      "language": "en"
+    },
+    {
+      "id": "en_GB|Microsoft Hazel",
+      "name": "Microsoft Hazel",
+      "locale": "en_GB",
+      "language": "en"
+    },
+    {
+      "id": "en_GB|Microsoft Susan",
+      "name": "Microsoft Susan",
+      "locale": "en_GB",
+      "language": "en"
+    }
+  ],
+  "native_muted_playback": [
+    "en"
+  ],
+  "missing_voice_languages": [
+    "zh"
+  ],
+  "native_stop_and_reuse": true,
+  "mock_ui_lifecycle": true,
+  "manual_pauses_listening": true,
+  "playback_keeps_captions_visible": true,
+  "privacy_pause_preserved": true,
+  "automatic_requires_headphones": true,
+  "both_directions": true,
+  "final_only": true,
+  "duplicate_suppression": true,
+  "pause_resume": true,
+  "language_switch_cancels": true,
+  "stop_cancels": true,
+  "late_events_ignored": true,
+  "speak_stop_shortcut": true,
+  "minimum_controls_visible": true,
+  "in_app_guide": true
+}

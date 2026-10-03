@@ -1,0 +1,2 @@
+8f864eef14dce89126d9c259fc15a15e870f6d5b9ff69259e3eb380ccf974ef4  LectureLive-0.7.2b1-macOS-AppleSilicon.zip
+d3d5e018a23b19c1c5dd90298312f5b90e4c077030e4ba57d8578af7c1a474ad  LectureLive-0.7.2b1-macOS-AppleSilicon.dmg

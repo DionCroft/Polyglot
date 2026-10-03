@@ -10,9 +10,17 @@ Production classroom acceptance remains open.
   confirmation for each lecture. Captions and inference settings are unchanged.
 - Voice, volume and speed controls; global Speak/Stop shortcut; bounded audio queue,
   cancellation on pause/switch/stop, and clear missing-voice notices.
-- Source tests pass on Windows ARM64, including muted native WinRT English playback
-  and cancellation. This PC has no Mandarin voice installed. Native Mac, final
-  packaged tests and listening-quality feedback are pending at this milestone.
+- Both Windows runtimes pass 139 tests (two POSIX-only skips) and all six final
+  packaged checks. Native WinRT English playback and a real Mandarin-to-English
+  caption-to-voice path pass at zero volume. No Mandarin voice is installed on this PC.
+- Two real automatic-voice replays at normal/slow rates complete six utterances each
+  with no lost caption input; all six exports recover exactly. The 36 speech / 40
+  translation baseline is unchanged.
+- Native hosted Apple Silicon passes 141 tests with no skips, real English/Mandarin
+  system-voice playback at zero volume, and packaged caption/voice/Cocoa checks.
+  The [Mac 0.7.2b1 DMG/ZIP](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.7.2b1)
+  is published with verified hashes. Real audibility, pronunciation and physical
+  classroom feedback remain open; see the [evidence report](docs/evidence/spoken-audio-0.7.2.md).
 - [Voice setup and feedback instructions](docs/SPOKEN_AUDIO.md).
 
 ## Reliability update 0.7.1b1

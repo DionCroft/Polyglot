@@ -1,0 +1,91 @@
+{
+  "version": "0.7.2b1",
+  "build_commit": "e5df9c7f9fbf3e8c5483438ee84ca02ed27518ff",
+  "physical_microphone_tested": false,
+  "classroom_validated": false,
+  "editions": {
+    "arm64": {
+      "checks": {
+        "speech": true,
+        "english": true,
+        "conversations": true,
+        "conversation-ui": true,
+        "auto": true,
+        "auto-ui": true
+      },
+      "embedded_version": "0.7.2b1",
+      "model_files_verified": 42,
+      "exe_sha256": "90c8fd04c96c8962a4f28f790b060c525f16b3877e389eac65b5ed125e3a187e",
+      "sessions": [
+        {
+          "session": "2026-10-03_11-01-42_867663_Lecture",
+          "records": 8,
+          "six_exports_byte_identical": true,
+          "six_exports_chronological": true
+        },
+        {
+          "session": "2026-10-03_11-01-55_739940_Lecture",
+          "records": 4,
+          "six_exports_byte_identical": true,
+          "six_exports_chronological": true
+        },
+        {
+          "session": "2026-10-03_11-02-13_647057_Lecture",
+          "records": 18,
+          "six_exports_byte_identical": true,
+          "six_exports_chronological": true
+        },
+        {
+          "session": "2026-10-03_11-02-52_970883_Lecture",
+          "records": 18,
+          "six_exports_byte_identical": true,
+          "six_exports_chronological": true
+        }
+      ],
+      "native_hardware": true,
+      "x64_on_arm_emulation": false
+    },
+    "x64": {
+      "checks": {
+        "speech": true,
+        "english": true,
+        "conversations": true,
+        "conversation-ui": true,
+        "auto": true,
+        "auto-ui": true
+      },
+      "embedded_version": "0.7.2b1",
+      "model_files_verified": 29,
+      "exe_sha256": "f1eb5d0d8692ee83dde64af520dae83d4f05af45630275591be52acbe5fed8f9",
+      "sessions": [
+        {
+          "session": "2026-10-03_11-04-12_639118_Lecture",
+          "records": 8,
+          "six_exports_byte_identical": true,
+          "six_exports_chronological": true
+        },
+        {
+          "session": "2026-10-03_11-04-26_787436_Lecture",
+          "records": 4,
+          "six_exports_byte_identical": true,
+          "six_exports_chronological": true
+        },
+        {
+          "session": "2026-10-03_11-04-47_344184_Lecture",
+          "records": 18,
+          "six_exports_byte_identical": true,
+          "six_exports_chronological": true
+        },
+        {
+          "session": "2026-10-03_11-05-29_389976_Lecture",
+          "records": 18,
+          "six_exports_byte_identical": true,
+          "six_exports_chronological": true
+        }
+      ],
+      "native_hardware": false,
+      "x64_on_arm_emulation": true
+    }
+  },
+  "passed": true
+}

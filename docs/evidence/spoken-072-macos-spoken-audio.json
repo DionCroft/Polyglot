@@ -1,0 +1,337 @@
+{
+  "passed": true,
+  "version": "0.7.2b1",
+  "physical_microphone_tested": false,
+  "sound_heard_by_human": false,
+  "voice_quality_validated": false,
+  "native_engine": "darwin",
+  "installed_voices": [
+    {
+      "id": "zh_TW|Meijia",
+      "name": "Meijia",
+      "locale": "zh_TW",
+      "language": "zh"
+    },
+    {
+      "id": "zh_CN|Yu-shu",
+      "name": "Yu-shu",
+      "locale": "zh_CN",
+      "language": "zh"
+    },
+    {
+      "id": "zh_CN|Li-Mu",
+      "name": "Li-Mu",
+      "locale": "zh_CN",
+      "language": "zh"
+    },
+    {
+      "id": "zh_CN|Tingting",
+      "name": "Tingting",
+      "locale": "zh_CN",
+      "language": "zh"
+    },
+    {
+      "id": "en_US|Flo",
+      "name": "Flo",
+      "locale": "en_US",
+      "language": "en"
+    },
+    {
+      "id": "en_US|Bahh",
+      "name": "Bahh",
+      "locale": "en_US",
+      "language": "en"
+    },
+    {
+      "id": "en_US|Albert",
+      "name": "Albert",
+      "locale": "en_US",
+      "language": "en"
+    },
+    {
+      "id": "en_US|Fred",
+      "name": "Fred",
+      "locale": "en_US",
+      "language": "en"
+    },
+    {
+      "id": "en_US|Jester",
+      "name": "Jester",
+      "locale": "en_US",
+      "language": "en"
+    },
+    {
+      "id": "en_US|Organ",
+      "name": "Organ",
+      "locale": "en_US",
+      "language": "en"
+    },
+    {
+      "id": "en_US|Cellos",
+      "name": "Cellos",
+      "locale": "en_US",
+      "language": "en"
+    },
+    {
+      "id": "en_US|Zarvox",
+      "name": "Zarvox",
+      "locale": "en_US",
+      "language": "en"
+    },
+    {
+      "id": "en_US|Rocko",
+      "name": "Rocko",
+      "locale": "en_US",
+      "language": "en"
+    },
+    {
+      "id": "en_US|Shelley",
+      "name": "Shelley",
+      "locale": "en_US",
+      "language": "en"
+    },
+    {
+      "id": "en_US|Superstar",
+      "name": "Superstar",
+      "locale": "en_US",
+      "language": "en"
+    },
+    {
+      "id": "en_US|Grandma",
+      "name": "Grandma",
+      "locale": "en_US",
+      "language": "en"
+    },
+    {
+      "id": "en_US|Eddy",
+      "name": "Eddy",
+      "locale": "en_US",
+      "language": "en"
+    },
+    {
+      "id": "en_US|Bells",
+      "name": "Bells",
+      "locale": "en_US",
+      "language": "en"
+    },
+    {
+      "id": "en_US|Grandpa",
+      "name": "Grandpa",
+      "locale": "en_US",
+      "language": "en"
+    },
+    {
+      "id": "en_US|Trinoids",
+      "name": "Trinoids",
+      "locale": "en_US",
+      "language": "en"
+    },
+    {
+      "id": "en_US|Kathy",
+      "name": "Kathy",
+      "locale": "en_US",
+      "language": "en"
+    },
+    {
+      "id": "en_US|Reed",
+      "name": "Reed",
+      "locale": "en_US",
+      "language": "en"
+    },
+    {
+      "id": "en_US|Boing",
+      "name": "Boing",
+      "locale": "en_US",
+      "language": "en"
+    },
+    {
+      "id": "en_US|Whisper",
+      "name": "Whisper",
+      "locale": "en_US",
+      "language": "en"
+    },
+    {
+      "id": "en_US|Good News",
+      "name": "Good News",
+      "locale": "en_US",
+      "language": "en"
+    },
+    {
+      "id": "en_US|Wobble",
+      "name": "Wobble",
+      "locale": "en_US",
+      "language": "en"
+    },
+    {
+      "id": "en_US|Nicky",
+      "name": "Nicky",
+      "locale": "en_US",
+      "language": "en"
+    },
+    {
+      "id": "en_US|Bad News",
+      "name": "Bad News",
+      "locale": "en_US",
+      "language": "en"
+    },
+    {
+      "id": "en_US|Aaron",
+      "name": "Aaron",
+      "locale": "en_US",
+      "language": "en"
+    },
+    {
+      "id": "en_US|Bubbles",
+      "name": "Bubbles",
+      "locale": "en_US",
+      "language": "en"
+    },
+    {
+      "id": "en_US|Samantha",
+      "name": "Samantha",
+      "locale": "en_US",
+      "language": "en"
+    },
+    {
+      "id": "en_US|Sandy",
+      "name": "Sandy",
+      "locale": "en_US",
+      "language": "en"
+    },
+    {
+      "id": "en_US|Junior",
+      "name": "Junior",
+      "locale": "en_US",
+      "language": "en"
+    },
+    {
+      "id": "en_US|Ralph",
+      "name": "Ralph",
+      "locale": "en_US",
+      "language": "en"
+    },
+    {
+      "id": "en_ZA|Tessa",
+      "name": "Tessa",
+      "locale": "en_ZA",
+      "language": "en"
+    },
+    {
+      "id": "en_IE|Moira",
+      "name": "Moira",
+      "locale": "en_IE",
+      "language": "en"
+    },
+    {
+      "id": "en_AU|Gordon",
+      "name": "Gordon",
+      "locale": "en_AU",
+      "language": "en"
+    },
+    {
+      "id": "en_AU|Karen",
+      "name": "Karen",
+      "locale": "en_AU",
+      "language": "en"
+    },
+    {
+      "id": "en_AU|Catherine",
+      "name": "Catherine",
+      "locale": "en_AU",
+      "language": "en"
+    },
+    {
+      "id": "en_GB|Rocko",
+      "name": "Rocko",
+      "locale": "en_GB",
+      "language": "en"
+    },
+    {
+      "id": "en_GB|Shelley",
+      "name": "Shelley",
+      "locale": "en_GB",
+      "language": "en"
+    },
+    {
+      "id": "en_GB|Daniel",
+      "name": "Daniel",
+      "locale": "en_GB",
+      "language": "en"
+    },
+    {
+      "id": "en_GB|Martha",
+      "name": "Martha",
+      "locale": "en_GB",
+      "language": "en"
+    },
+    {
+      "id": "en_GB|Grandma",
+      "name": "Grandma",
+      "locale": "en_GB",
+      "language": "en"
+    },
+    {
+      "id": "en_GB|Grandpa",
+      "name": "Grandpa",
+      "locale": "en_GB",
+      "language": "en"
+    },
+    {
+      "id": "en_GB|Flo",
+      "name": "Flo",
+      "locale": "en_GB",
+      "language": "en"
+    },
+    {
+      "id": "en_GB|Eddy",
+      "name": "Eddy",
+      "locale": "en_GB",
+      "language": "en"
+    },
+    {
+      "id": "en_GB|Reed",
+      "name": "Reed",
+      "locale": "en_GB",
+      "language": "en"
+    },
+    {
+      "id": "en_GB|Sandy",
+      "name": "Sandy",
+      "locale": "en_GB",
+      "language": "en"
+    },
+    {
+      "id": "en_GB|Arthur",
+      "name": "Arthur",
+      "locale": "en_GB",
+      "language": "en"
+    },
+    {
+      "id": "en_IN|Rishi",
+      "name": "Rishi",
+      "locale": "en_IN",
+      "language": "en"
+    }
+  ],
+  "native_muted_playback": [
+    "en",
+    "zh"
+  ],
+  "missing_voice_languages": [],
+  "native_stop_and_reuse": true,
+  "mock_ui_lifecycle": true,
+  "manual_pauses_listening": true,
+  "playback_keeps_captions_visible": true,
+  "privacy_pause_preserved": true,
+  "automatic_requires_headphones": true,
+  "both_directions": true,
+  "final_only": true,
+  "duplicate_suppression": true,
+  "pause_resume": true,
+  "language_switch_cancels": true,
+  "stop_cancels": true,
+  "late_events_ignored": true,
+  "speak_stop_shortcut": true,
+  "minimum_controls_visible": true,
+  "in_app_guide": true
+}

@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "version": "0.7.2b1",
+  "physical_microphone_tested": false,
+  "classroom_validated": false,
+  "audio_seconds": 35.38,
+  "directions": [
+    "en",
+    "zh",
+    "en"
+  ],
+  "completed_pairs": 8,
+  "uncertain_phrases": 2,
+  "journal_recovery": true,
+  "backend": "Qualcomm NPU · Whisper Base FP16",
+  "metrics": {
+    "speaking_language": "auto",
+    "detected_language": "en",
+    "switching_language": false,
+    "recognition_mode": "standard",
+    "vocabulary_guidance": false,
+    "dropped_audio_chunks": 0,
+    "dropped_phrases": 0,
+    "translation_skips": 0,
+    "asr_seconds": 0.18699999999989814,
+    "translation_seconds": 0.046999999998661224,
+    "rtf": 0.05565476190473159,
+    "english_latency": 0.7569999999999979,
+    "bilingual_latency": 0.8039999999986591,
+    "audio_gaps": 0,
+    "uncertain_language_phrases": 2,
+    "english_p95_seconds": 0.788,
+    "bilingual_p95_seconds": 0.923,
+    "audio_queue": 0,
+    "asr_queue": 0,
+    "translation_queue": 0
+  },
+  "warnings": [
+    "WAV replay finished. Captions remain visible; stop to finish the session."
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "version": "0.7.2b1",
+  "physical_microphone_tested": false,
+  "classroom_validated": false,
+  "audio_seconds": 35.38,
+  "directions": [
+    "en",
+    "zh",
+    "en"
+  ],
+  "completed_pairs": 8,
+  "uncertain_phrases": 2,
+  "journal_recovery": true,
+  "backend": "Windows GPU (DirectML) speech encoder + CPU decoder · Beta",
+  "metrics": {
+    "speaking_language": "auto",
+    "detected_language": "en",
+    "switching_language": false,
+    "recognition_mode": "standard",
+    "vocabulary_guidance": false,
+    "dropped_audio_chunks": 0,
+    "dropped_phrases": 0,
+    "translation_skips": 0,
+    "asr_seconds": 0.6409999999996217,
+    "translation_seconds": 0.09400000000096043,
+    "rtf": 0.19077380952369694,
+    "english_latency": 1.2109999999997214,
+    "bilingual_latency": 1.3200000000000998,
+    "audio_gaps": 0,
+    "uncertain_language_phrases": 2,
+    "english_p95_seconds": 1.292,
+    "bilingual_p95_seconds": 1.51,
+    "audio_queue": 0,
+    "asr_queue": 0,
+    "translation_queue": 0
+  },
+  "warnings": [
+    "WAV replay finished. Captions remain visible; stop to finish the session."
+  ]
+}
