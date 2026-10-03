@@ -1,7 +1,19 @@
 # LectureLive — STATUS
 
-Updated 2026-10-03. Reliability beta 0.7.1b1; pre-rolling layout retained.
+Updated 2026-10-03. Spoken-audio beta 0.7.2b1; pre-rolling layout retained.
 Production classroom acceptance remains open.
+
+## Spoken translations 0.7.2b1
+
+- Optional local English/Mandarin speech output, off on opening; manual playback
+  pauses listening and waits for Resume. Automatic playback requires a headphone
+  confirmation for each lecture. Captions and inference settings are unchanged.
+- Voice, volume and speed controls; global Speak/Stop shortcut; bounded audio queue,
+  cancellation on pause/switch/stop, and clear missing-voice notices.
+- Source tests pass on Windows ARM64, including muted native WinRT English playback
+  and cancellation. This PC has no Mandarin voice installed. Native Mac, final
+  packaged tests and listening-quality feedback are pending at this milestone.
+- [Voice setup and feedback instructions](docs/SPOKEN_AUDIO.md).
 
 ## Reliability update 0.7.1b1
 

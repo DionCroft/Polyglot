@@ -9,14 +9,20 @@ from pathlib import Path
 root = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("--architecture", choices=("ARM64", "x64"), default="x64")
-architecture = parser.parse_args().architecture
+parser.add_argument(
+    "--dist-root", default="dist", help="Build output folder inside the project"
+)
+args = parser.parse_args()
+architecture = args.architecture
 app_name = "LectureLive" if architecture == "ARM64" else "LectureLive-x64-Beta"
-source = root / "dist" / app_name
+source = (root / args.dist_root / app_name).resolve()
+if not source.is_relative_to(root):
+    raise RuntimeError("Build output must remain inside the project")
 if not (source / (app_name + ".exe")).is_file():
     raise RuntimeError("Build the beta first")
 out = root / "recovery"
 out.mkdir(exist_ok=True)
-archive = out / f"LectureLive-Windows-{architecture}-Beta-0.7.1b1.zip"
+archive = out / f"LectureLive-Windows-{architecture}-Beta-0.7.2b1.zip"
 partial = archive.with_suffix(".zip.partial")
 manifest = {}
 with zipfile.ZipFile(

@@ -81,6 +81,8 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.cfg = Settings.load()
+        # Never enable audible output merely by opening the app or loading a preset.
+        self.cfg.speech_mode = "off"
         from app.system.models import ModelStore
 
         self.model_store = ModelStore(ROOT)
@@ -154,6 +156,10 @@ class MainWindow(QMainWindow):
         self.tabs = tabs
         layout.addWidget(tabs, 1)
         tabs.addTab(self.lecture_tab(), "Lecture")
+        from app.ui.spoken_audio import SpokenAudio
+
+        self.spoken = SpokenAudio(self)
+        tabs.addTab(self.spoken, "Spoken audio")
         tabs.addTab(self.appearance_tab(), "Overlay")
         tabs.addTab(self.diagnostics_tab(), "Diagnostics")
         tabs.addTab(self.about_tab(), "About")
@@ -190,14 +196,24 @@ class MainWindow(QMainWindow):
                 self.pause,
                 self.cfg.lock_shortcut,
                 self.cfg.pause_shortcut,
+                on_speak=self.speech_hotkey,
+                speak=self.cfg.speech_shortcut,
             )
         except ValueError:
-            self.cfg.lock_shortcut, self.cfg.pause_shortcut = (
+            (
+                self.cfg.lock_shortcut,
+                self.cfg.pause_shortcut,
+                self.cfg.speech_shortcut,
+            ) = (
                 "Ctrl+Alt+C",
                 "Ctrl+Alt+Space",
+                "Ctrl+Alt+S",
             )
             self.hotkeys = Hotkeys(
-                QApplication.instance(), self.toggle_lock, self.pause
+                QApplication.instance(),
+                self.toggle_lock,
+                self.pause,
+                on_speak=self.speech_hotkey,
             )
             self.warn("Saved shortcuts were invalid; defaults have been restored.")
         if self.hotkeys.errors:
@@ -279,6 +295,7 @@ class MainWindow(QMainWindow):
             self.teaching.language.setEnabled(enabled)
 
     def select_language(self, *_):
+        self.spoken.player.reset()
         language = self.speaking_language.currentData()
         if not self.pipeline:
             self.cfg.speaking_language = language
@@ -381,6 +398,17 @@ class MainWindow(QMainWindow):
             # Global shortcuts are app preferences, not changed by a lecture preset.
             cfg.lock_shortcut = self.cfg.lock_shortcut
             cfg.pause_shortcut = self.cfg.pause_shortcut
+            cfg.speech_shortcut = self.cfg.speech_shortcut
+            for key in (
+                "speech_voice_en",
+                "speech_voice_zh",
+                "speech_rate",
+                "speech_volume",
+            ):
+                setattr(cfg, key, getattr(self.cfg, key))
+            cfg.speech_mode = "off"
+            self.spoken.player.reset()
+            self.spoken.mode.setCurrentIndex(0)
             self.cfg = cfg
             self.sync_language_controls()
             self.overlay.settings = cfg
@@ -500,6 +528,7 @@ class MainWindow(QMainWindow):
             self.teaching = TeachingControls(self)
         self.teaching.status.setText(self.status.text())
         self.sync_language_controls()
+        self.spoken.sync()
         self.teaching.show()
         self.teaching.raise_()
         self.hide()
@@ -509,21 +538,37 @@ class MainWindow(QMainWindow):
 
         lock = self.lock_shortcut_edit.text().strip()
         pause = self.pause_shortcut_edit.text().strip()
+        speak = self.speech_shortcut_edit.text().strip()
         try:
-            if parse_shortcut(lock) == parse_shortcut(pause):
-                raise ValueError("Lock and pause shortcuts must differ")
+            if len({parse_shortcut(value) for value in (lock, pause, speak)}) != 3:
+                raise ValueError("All shortcuts must differ")
         except ValueError as exc:
             self.warn(str(exc))
             return
-        old = (self.cfg.lock_shortcut, self.cfg.pause_shortcut)
+        old = (
+            self.cfg.lock_shortcut,
+            self.cfg.pause_shortcut,
+            self.cfg.speech_shortcut,
+        )
         self.hotkeys.close()
         candidate = Hotkeys(
-            QApplication.instance(), self.toggle_lock, self.pause, lock, pause
+            QApplication.instance(),
+            self.toggle_lock,
+            self.pause,
+            lock,
+            pause,
+            on_speak=self.speech_hotkey,
+            speak=speak,
         )
         if candidate.errors:
             candidate.close()
             self.hotkeys = Hotkeys(
-                QApplication.instance(), self.toggle_lock, self.pause, *old
+                QApplication.instance(),
+                self.toggle_lock,
+                self.pause,
+                *old[:2],
+                on_speak=self.speech_hotkey,
+                speak=old[2],
             )
             self.warn(
                 "Shortcut already in use: "
@@ -534,6 +579,8 @@ class MainWindow(QMainWindow):
         self.hotkeys = candidate
         self.cfg.lock_shortcut = lock
         self.cfg.pause_shortcut = pause
+        self.cfg.speech_shortcut = speak
+        self.spoken.speak.setToolTip("Speak / Stop: " + speak)
         self.shortcut_label.setText(f"Pause  {pause}     Lock  {lock}")
         self.overlay.update()
         self.persist()
@@ -910,6 +957,8 @@ class MainWindow(QMainWindow):
         self.pause_shortcut_edit = QLineEdit(self.cfg.pause_shortcut)
         form.addRow("Lock shortcut", self.lock_shortcut_edit)
         form.addRow("Pause shortcut", self.pause_shortcut_edit)
+        self.speech_shortcut_edit = QLineEdit(self.cfg.speech_shortcut)
+        form.addRow("Speak / Stop shortcut", self.speech_shortcut_edit)
         apply_shortcuts = QPushButton("Apply shortcuts")
         apply_shortcuts.clicked.connect(self.apply_shortcuts)
         form.addRow(apply_shortcuts)
@@ -1265,6 +1314,7 @@ class MainWindow(QMainWindow):
             model_store=self.model_store,
         )
         self.last_caption = None
+        self.spoken.new_session()
         self.overlay.reset()
         self.overlay.lock(True)
         self.cfg.locked = True
@@ -1291,9 +1341,33 @@ class MainWindow(QMainWindow):
         )
         self.loader.start()
 
+    def speech_hotkey(self):
+        if self.spoken.player.current is not None or self.spoken.player.pending:
+            self.spoken.stop_audio()
+        else:
+            self.speak_translation()
+
+    def speak_translation(self):
+        self.spoken.sync()
+        if not self.spoken.speak.isEnabled():
+            return
+
+        def before_play():
+            # On-demand playback is an explicit turn boundary, not an input failure.
+            if self.pipeline and not self.pipeline.paused.is_set():
+                self.pause()
+            if self.pipeline and not self.pipeline.paused.is_set():
+                raise RuntimeError(
+                    "Wait until listening can be paused before playing audio"
+                )
+
+        self.spoken.player.speak_latest(before_play)
+        self.spoken.sync()
+
     def pause(self):
         if not self.pipeline:
             return
+        self.spoken.player.stop(clear_latest=self.pipeline.paused.is_set())
         self.pipeline.pause()
         if self.pipeline.paused.is_set():
             self.overlay.hide()
@@ -1301,6 +1375,7 @@ class MainWindow(QMainWindow):
             self.overlay.show()
 
     def stop(self):
+        self.spoken.player.reset()
         if not self.pipeline or self.closer:
             return
         self.pipeline.request_stop()
@@ -1359,6 +1434,7 @@ class MainWindow(QMainWindow):
             if self.closing:
                 QTimer.singleShot(50, self.close)
         elif kind == "stopped":
+            self.spoken.player.reset()
             if self.teaching:
                 self.teaching.hide()
                 if not self.closing:
@@ -1403,6 +1479,7 @@ class MainWindow(QMainWindow):
                 return
             language = value["language"]
             if language is None and value["final"]:
+                self.spoken.player.forget_latest()
                 self.overlay.display.reject_partial(value["identifier"], value["epoch"])
                 self.overlay.partial = self.overlay.display.partial
                 en, zh, _ = self.overlay.display.contents(self.cfg.mode)
@@ -1426,6 +1503,7 @@ class MainWindow(QMainWindow):
             if self.teaching:
                 self.teaching.language_status.setText(message)
         elif kind == "language":
+            self.spoken.player.reset()
             self.cfg.speaking_language = value
             self.overlay.reset()
             self.overlay.preview = False
@@ -1449,6 +1527,8 @@ class MainWindow(QMainWindow):
         elif kind == "transcript":
             self.transcript_path = Path(value)
         elif kind == "state":
+            if "unavailable" in str(value):
+                self.spoken.player.stop(clear_latest=True)
             if value in {"Listening", "Paused"} and not self.closer:
                 self.enable_language_controls(True)
             if "unavailable" in str(value):
@@ -1480,6 +1560,12 @@ class MainWindow(QMainWindow):
                 or value.epoch != self.pipeline.epoch
             ):
                 return
+            if (
+                not self.closer
+                and not self.pipeline.stop_event.is_set()
+                and not self.pipeline.switching.is_set()
+            ):
+                self.spoken.player.accept(value)
             self.overlay.set_caption(value)
             en, zh, upcoming = self.overlay.display.contents(self.cfg.mode)
             primary = self.overlay.display.primary(self.cfg.mode)
@@ -1526,6 +1612,7 @@ class MainWindow(QMainWindow):
             )
 
     def tick(self):
+        self.spoken.tick()
         if self.pipeline:
             self.meter.setValue(self.pipeline.level)
             self.diagnostics.setPlainText(
@@ -1538,6 +1625,7 @@ class MainWindow(QMainWindow):
 
     def closeEvent(self, event):
         self.closing = True
+        self.spoken.player.reset()
         if self.microphone_checker and self.microphone_checker.is_alive():
             self.microphone_cancel.set()
             event.ignore()

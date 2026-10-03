@@ -107,3 +107,11 @@ diagnostic logs omit caption text. No private recordings or transcripts are uplo
 Ordinary startup never downloads models or contacts hosted inference. Before class,
 complete the Airplane Mode, intended-microphone, projector and teaching-length checks
 in ACCEPTANCE_TESTS.md. Synthetic tests do not establish real-room accuracy.
+
+## Optional spoken translations (0.7.2 beta)
+
+Open **Spoken audio** and choose **On demand**. Wait for the translation, then
+click **Speak last translation** or press **Ctrl+Alt+S** (Control+Option+S on Mac).
+Listening pauses for speaker playback; press **Resume** afterwards. Automatic audio
+requires headphones. Audio starts off; English/Mandarin system voices may need a
+one-time download. [Voice setup and first test](SPOKEN_AUDIO.md).

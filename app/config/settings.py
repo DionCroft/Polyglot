@@ -15,6 +15,12 @@ class Settings:
     vocabulary: str = ""
     lock_shortcut: str = "Ctrl+Alt+C"
     pause_shortcut: str = "Ctrl+Alt+Space"
+    speech_shortcut: str = "Ctrl+Alt+S"
+    speech_mode: str = "off"
+    speech_voice_en: str = ""
+    speech_voice_zh: str = ""
+    speech_rate: int = 0
+    speech_volume: int = 80
     microphone: str = ""
     mode: str = "Bilingual"
     profile: str = default_profile()
@@ -53,6 +59,8 @@ class Settings:
             if field.type is bool and not isinstance(value, bool):
                 raise ValueError("Invalid boolean setting: " + field.name)
         for key, low, high in [
+            ("speech_rate", -50, 50),
+            ("speech_volume", 0, 100),
             ("font_size", 16, 64),
             ("opacity", 10, 100),
             ("width", 400, 4000),
@@ -62,6 +70,8 @@ class Settings:
             setattr(cfg, key, max(low, min(high, int(getattr(cfg, key)))))
         cfg.x = int(cfg.x)
         cfg.y = int(cfg.y)
+        if cfg.speech_mode not in {"off", "manual", "auto"}:
+            cfg.speech_mode = "off"
         if cfg.profile not in {"fast", "balanced"}:
             cfg.profile = "balanced"
         if is_x64():

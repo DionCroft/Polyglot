@@ -45,18 +45,29 @@ def overlay_input(hwnd, locked):
 
 class Hotkeys(QAbstractNativeEventFilter):
     def __init__(
-        self, app, on_lock, on_pause, lock="Ctrl+Alt+C", pause="Ctrl+Alt+Space"
+        self,
+        app,
+        on_lock,
+        on_pause,
+        lock="Ctrl+Alt+C",
+        pause="Ctrl+Alt+Space",
+        on_speak=None,
+        speak="Ctrl+Alt+S",
     ):
         super().__init__()
         self.app = app
         self.actions = {4101: on_lock, 4102: on_pause}
+        if on_speak is not None:
+            self.actions[4103] = on_speak
         self.registered = []
         self.errors = []
         if sys.platform == "win32":
             bindings = [(4101, lock), (4102, pause)]
+            if on_speak is not None:
+                bindings.append((4103, speak))
             parsed = [parse_shortcut(text) for _, text in bindings]
-            if parsed[0] == parsed[1]:
-                raise ValueError("Lock and pause shortcuts must differ")
+            if len(set(parsed)) != len(parsed):
+                raise ValueError("All shortcuts must differ")
             for (identifier, text), (modifiers, key) in zip(bindings, parsed):
                 if user32.RegisterHotKey(None, identifier, modifiers, key):
                     self.registered.append(identifier)

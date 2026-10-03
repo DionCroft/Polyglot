@@ -24,6 +24,10 @@ def main():
     from app.utils.logging import configure
 
     configure(DATA / "logs")
+    if "--speech-self-test" in sys.argv:
+        from app.system.speech_output_test import run
+
+        return run(sys.argv[sys.argv.index("--speech-self-test") + 1])
     if "--auto-self-test" in sys.argv or "--auto-ui-test" in sys.argv:
         from app.system.auto_self_test import run, run_ui
         from app.config.settings import ROOT

@@ -136,6 +136,29 @@ def run(fixtures, report_path):
         )
         result["mandarin_wav_caption"] = window.last_caption.__dict__
         mandarin_folder = window.pipeline.export.folder
+        # A real Mandarin pipeline feeds a completed English translation to a
+        # real local voice. Mute output: audibility still needs human feedback.
+        window.spoken.mode.setCurrentIndex(1)
+        window.spoken.volume.setValue(0)
+        voices = window.spoken.player.backend.voices()
+        if any(voice["language"] == "en" for voice in voices):
+            wait(
+                lambda: (
+                    window.spoken.player.latest is not None
+                    and window.spoken.player.latest.source_language == "zh"
+                )
+            )
+            window.speak_translation()
+            assert window.pipeline.paused.is_set()
+            wait(lambda: window.spoken.player.current is None)
+            assert window.spoken.player.status == "Audio finished"
+            window.pause()
+            assert not window.pipeline.paused.is_set()
+            result["real_pipeline_muted_english_playback"] = True
+        else:
+            result["real_pipeline_muted_english_playback"] = (
+                "Not run: English system voice absent"
+            )
         window.stop()
         wait(lambda: window.pipeline is None)
         assert "English · translation" in (

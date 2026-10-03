@@ -1,13 +1,20 @@
-param([ValidateSet('auto','ARM64','x64')][string]$Architecture = 'auto')
+param([ValidateSet('auto','ARM64','x64')][string]$Architecture = 'auto', [string]$OutputRoot = 'dist')
 $ErrorActionPreference = 'Stop'
 . (Join-Path $PSScriptRoot 'platform.ps1')
 $projectRoot = Split-Path -Parent $PSScriptRoot
 Set-Location -LiteralPath $projectRoot
-$releaseDir = [IO.Path]::GetFullPath((Join-Path $projectRoot ('dist\' + $releaseName)))
+$distRoot = [IO.Path]::GetFullPath((Join-Path $projectRoot $OutputRoot))
+if (-not $distRoot.StartsWith($projectRoot + [IO.Path]::DirectorySeparatorChar)) { throw 'Build output must remain inside the project.' }
+$ancestor = $distRoot
+while ($ancestor -ne $projectRoot -and $ancestor.StartsWith($projectRoot + [IO.Path]::DirectorySeparatorChar)) {
+    if ((Test-Path -LiteralPath $ancestor) -and ((Get-Item -LiteralPath $ancestor -Force).Attributes -band [IO.FileAttributes]::ReparsePoint)) { throw 'Build output ancestors must not be junctions or symlinks.' }
+    $ancestor = Split-Path -Parent $ancestor
+}
+$releaseDir = [IO.Path]::GetFullPath((Join-Path $distRoot $releaseName))
 if (-not $releaseDir.StartsWith($projectRoot + [IO.Path]::DirectorySeparatorChar)) { throw 'Unsafe build output path.' }
 if ((Test-Path -LiteralPath $releaseDir) -and ((Get-Item -LiteralPath $releaseDir -Force).Attributes -band [IO.FileAttributes]::ReparsePoint)) { throw 'Build output must not be a junction or symlink.' }
 $pythonExe = Join-Path $projectRoot ($runtimeName + '\python.exe')
-$arguments = @('--noconfirm','--onedir','--windowed','--name',$releaseName,'--icon','assets/lecturelive.ico','--add-data','assets;assets','--collect-binaries','onnxruntime','--collect-data','opencc','--add-data','glossaries;glossaries','--add-data','docs;docs')
+$arguments = @('--distpath',$distRoot,'--noconfirm','--onedir','--windowed','--name',$releaseName,'--icon','assets/lecturelive.ico','--add-data','assets;assets','--collect-binaries','onnxruntime','--collect-data','opencc','--add-data','glossaries;glossaries','--add-data','docs;docs')
 if ($beta) {
     & $pythonExe (Join-Path $PSScriptRoot 'stage_beta_models.py')
     if ($LASTEXITCODE -ne 0) { throw 'Beta model staging failed.' }

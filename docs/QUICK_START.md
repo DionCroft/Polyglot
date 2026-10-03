@@ -107,3 +107,11 @@ projector before relying on it in class. Read the [full user guide](USER_GUIDE.m
 Keep Standard if it works well for you. Try the optional Careful setting and relevant vocabulary
 guidance separately before teaching. See [Improving speech recognition](SPEECH_RECOGNITION.md)
 and [CO7000 weekly vocabulary](CO7000_VOCABULARY.md). Save useful choices as a preset for each lecturer.
+
+## Optional spoken translations (0.7.2 beta)
+
+Open **Spoken audio** and choose **On demand**. Wait for the translation, then
+click **Speak last translation** or press **Ctrl+Alt+S** (Control+Option+S on Mac).
+Listening pauses for speaker playback; press **Resume** afterwards. Automatic audio
+requires headphones. Audio starts off; English/Mandarin system voices may need a
+one-time download. [Voice setup and first test](SPOKEN_AUDIO.md).

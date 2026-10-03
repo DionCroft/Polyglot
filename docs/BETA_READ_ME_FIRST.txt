@@ -1,4 +1,4 @@
-LectureLive - Windows x64 Beta 0.7.1b1
+LectureLive - Windows x64 Beta 0.7.2b1
 
 1. Keep this entire folder together, including _internal.
 2. Open LectureLive-x64-Beta.exe.
@@ -32,10 +32,17 @@ Words being missed? Open Quick start > Improving speech recognition.
 Standard recognition keeps the previous behaviour. Careful and vocabulary hints
 are optional and should be tested with each speaker before teaching.
 
-RELIABILITY UPDATE 0.7.1b1
+RELIABILITY UPDATE 0.7.2b1
 If Audio was lost appears, repeat the sentence. Captured speech before a gap is
 retained where usable, but missing audio cannot be recovered. Close heavy apps;
 if warnings repeat, finish the session and try Fast / Standard.
 All saved text/subtitles mark known audio gaps as [Audio lost]. Language files
 wait for earlier translations to keep the conversation in chronological order.
 Quick start > Audio loss and transcript recovery explains warnings and recovery.
+
+OPTIONAL SPOKEN AUDIO
+Open Spoken audio, choose On demand, wait for a translation and click Speak last translation.
+Listening pauses during speaker playback. Press Resume afterwards. Ctrl+Alt+S speaks/stops.
+Automatic audio is for headphones only. Audio starts Off each time you open the app.
+Missing English/Mandarin voices can be installed in Windows Speech settings.
+See Help > Spoken translations and voice setup for instructions and a feedback checklist.

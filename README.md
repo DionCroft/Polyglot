@@ -19,7 +19,14 @@ remains the default. [Auto guide](docs/AUTO_LANGUAGE.md) · [Test results](docs/
 > **Preview/beta software:** rehearse with your teaching microphone and projector before a lecture.
 > Captions and translations can contain mistakes. [What has been tested](STATUS.md).
 
-**Current main version: 0.7.1b1 — reliability update, keeping the pre-rolling layout.**
+**Current main version: 0.7.2b1 — optional spoken translations.**
+Open **Spoken audio → On demand** to hear the completed translation in English or
+Mandarin. Speak/Stop is **Ctrl+Alt+S** (Control+Option+S on Mac). On-demand playback
+pauses listening; press **Resume** when it finishes. Automatic playback is for
+headphones only. Audio starts off, and missing system voices do not stop captions.
+[Voice installation and your first test](docs/SPOKEN_AUDIO.md).
+
+**Includes the 0.7.1 reliability update and pre-rolling layout.**
 Captured speech before an audio gap is finished rather than silently discarded. An
 **Audio was lost** warning asks you to repeat; saved files mark known missing intervals
 as **[Audio lost]**. Separate English and Chinese exports now keep conversation order
@@ -87,11 +94,11 @@ The repository's **Code → Download ZIP** contains source code and needs **Setu
 
 ## Install on Mac
 
-Use an **Apple Silicon Mac running macOS 14 or later**. The Mac edition for this reliability update is **0.7.1b1**.
+Use an **Apple Silicon Mac running macOS 14 or later**. The Mac spoken-audio beta is **0.7.2b1**.
 The DMG download is about **1.22 GB** (ZIP alternative: **1.17 GB**). The speech and both translation models are included; the app runs offline after downloading.
 
-1. [Download LectureLive for Apple Silicon — DMG](https://github.com/DionCroft/Polyglot/releases/download/macos-v0.7.1b1/LectureLive-0.7.1b1-macOS-AppleSilicon.dmg).
-   Alternatively, open the [Mac beta release page](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.7.1b1)
+1. [Download LectureLive for Apple Silicon — DMG](https://github.com/DionCroft/Polyglot/releases/download/macos-v0.7.2b1/LectureLive-0.7.2b1-macOS-AppleSilicon.dmg).
+   Alternatively, open the [Mac beta release page](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.7.2b1)
    and choose the **.dmg** under **Assets**. Do not choose **Source code**.
 2. Open the downloaded DMG. Drag **LectureLive** onto **Applications**, wait for copying to finish,
    then eject the DMG.
@@ -192,7 +199,7 @@ correct words or translation; Mandarin homophones, dates and technical terms sti
 The additional offline translation model adds **172.7 MB** to setup and packaging. It loads on the
 first Mandarin turn, or when preparing Auto, then stays cached. One Snapdragon test measured about **527 MiB extra RAM**
 when loading it; other computers can differ. It can add caption delay and first-switch preparation
-time. Windows setup includes it automatically; install the **0.7.1b1** Mac build to obtain it on Mac.
+time. Windows setup includes it automatically; install the **0.7.2b1** Mac build to obtain it on Mac.
 The older Mac **0.5.0b1** does not have conversation support.
 
 ## Improve missed words and use CO7000 vocabulary
@@ -243,7 +250,7 @@ English vocabulary, glossary corrections and CO7000 hints are preserved when swi
 | Captions are slow | Try **Fast / Standard** for the next session, close heavy applications and pause naturally between sentences. |
 | Mandarin speech produces incorrect captions | Check **Who is speaking?** is set to **Mandarin 普通话 → English** and wait for **Listening** before speaking. Speak one language at a time. |
 | Auto says Language unclear | Choose the language manually and repeat the complete sentence. Read [Auto help](docs/AUTO_LANGUAGE.md). |
-| Switching says the Mandarin model is missing | Close the app and rerun the current Windows **Setup.cmd**, or install the 0.7.1b1 Mac app. The previous speaking language is retained. |
+| Switching says the Mandarin model is missing | Close the app and rerun the current Windows **Setup.cmd**, or install the 0.7.2b1 Mac app. The previous speaking language is retained. |
 | An accelerator check fails or takes too long | On Mac or the Intel/AMD beta, stop the lecture and select **CPU** under Processing hardware. See the platform guide for details. |
 | Captions are on the wrong screen | Open **Overlay** and select the projector or preferred caption display. |
 | You want your saved text | Open **Diagnostics → Open transcripts**. Text is saved only when the transcript option is enabled. |

@@ -22,6 +22,7 @@ class GuideDialog(QDialog):
             ("English and Mandarin conversations", "CONVERSATIONS.md"),
             ("Automatic language switching", "AUTO_LANGUAGE.md"),
             ("Audio loss and transcript recovery", "RELIABILITY.md"),
+            ("Spoken translations and voice setup", "SPOKEN_AUDIO.md"),
             ("Full user guide", "USER_GUIDE.md"),
             ("Installation help", "INSTALLATION.md"),
             ("Windows Intel/AMD beta", "WINDOWS_BETA.md"),

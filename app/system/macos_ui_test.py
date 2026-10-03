@@ -68,7 +68,7 @@ def run(report_path):
         result["overlay_native_flags"] = int(native.collectionBehavior())
         result["shortcuts_registered"] = len(window.hotkeys.registered)
         result["shortcut_conflicts"] = window.hotkeys.errors
-        assert len(window.hotkeys.registered) == 2, window.hotkeys.errors
+        assert len(window.hotkeys.registered) == 3, window.hotkeys.errors
         # PySide imports Darwin permission plugins statically into QtCore.
         plugins = [
             item.metaObject().className() for item in QPluginLoader.staticInstances()

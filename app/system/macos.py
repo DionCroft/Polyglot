@@ -68,15 +68,27 @@ class _EventType(ctypes.Structure):
 
 class Hotkeys:
     def __init__(
-        self, app, on_lock, on_pause, lock="Ctrl+Alt+C", pause="Ctrl+Alt+Space"
+        self,
+        app,
+        on_lock,
+        on_pause,
+        lock="Ctrl+Alt+C",
+        pause="Ctrl+Alt+Space",
+        on_speak=None,
+        speak="Ctrl+Alt+S",
     ):
         self.errors = []
         self.registered = []
         self.handler = ctypes.c_void_p()
-        parsed = [parse_shortcut(lock), parse_shortcut(pause)]
-        if parsed[0] == parsed[1]:
-            raise ValueError("Lock and pause shortcuts must differ")
+        bindings = [(4101, lock), (4102, pause)]
+        if on_speak is not None:
+            bindings.append((4103, speak))
+        parsed = [parse_shortcut(text) for _, text in bindings]
+        if len(set(parsed)) != len(parsed):
+            raise ValueError("All shortcuts must differ")
         self.actions = {4101: on_lock, 4102: on_pause}
+        if on_speak is not None:
+            self.actions[4103] = on_speak
         self.carbon = ctypes.CDLL("/System/Library/Frameworks/Carbon.framework/Carbon")
         callback_type = ctypes.CFUNCTYPE(
             ctypes.c_int32, ctypes.c_void_p, ctypes.c_void_p, ctypes.c_void_p
@@ -148,11 +160,9 @@ class Hotkeys:
             None,
             ctypes.byref(self.handler),
         ):
-            self.errors = [lock, pause]
+            self.errors = [text for _, text in bindings]
             return
-        for identifier, text, (modifiers, key) in zip(
-            (4101, 4102), (lock, pause), parsed
-        ):
+        for (identifier, text), (modifiers, key) in zip(bindings, parsed):
             ref = ctypes.c_void_p()
             if c.RegisterEventHotKey(
                 key,

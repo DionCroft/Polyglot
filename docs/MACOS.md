@@ -1,10 +1,10 @@
-# LectureLive for Apple Silicon — beta 0.7.1b1
+# LectureLive for Apple Silicon — beta 0.7.2b1
 
 Requires an Apple Silicon Mac (M1 or newer, including M2 MacBook Air) running **macOS 14 Sonoma or later**. Intel Macs and Rosetta are not supported by this build. Native M2 classroom validation is still required. The Windows builds remain available separately.
 
 ## Install the ready-made app
 
-1. Open the [Mac beta download page](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.7.1b1). Under **Assets**, choose **LectureLive-0.7.1b1-macOS-AppleSilicon.dmg** (about 1.22 GB; recommended) or the application ZIP (about 1.17 GB). Do not choose **Source code**. Developer builds are also available from successful **macOS Apple Silicon** runs in **Actions**; those require extracting an outer artifact ZIP and may require signing into GitHub.
+1. Open the [Mac beta download page](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.7.2b1). Under **Assets**, choose **LectureLive-0.7.2b1-macOS-AppleSilicon.dmg** (about 1.22 GB; recommended) or the application ZIP (about 1.17 GB). Do not choose **Source code**. Developer builds are also available from successful **macOS Apple Silicon** runs in **Actions**; those require extracting an outer artifact ZIP and may require signing into GitHub.
 2. Open the DMG and drag **LectureLive** onto **Applications**. Alternatively, double-click the inner application ZIP and move **LectureLive.app** to **Applications**. Eject the DMG before starting the installed app.
 3. Open **Applications → LectureLive**. This beta is ad-hoc signed and is **not Apple notarised**. If macOS blocks this downloaded beta, open **System Settings → Privacy & Security**, find the message about LectureLive, choose **Open Anyway**, and confirm **Open**. Only approve the copy you obtained from this repository. Your organisation may require IT approval.
 4. Choose your microphone and click **Test microphone**. Choose **Allow** when macOS asks for microphone access. If access was denied, turn on **System Settings → Privacy & Security → Microphone → LectureLive**, then quit and reopen LectureLive.
@@ -103,3 +103,11 @@ For a public notarised release, configure a Developer ID Application certificate
 - [ONNX Runtime: Core ML provider and its compute choices](https://onnxruntime.ai/docs/execution-providers/CoreML-ExecutionProvider.html).
 - [GitHub: hosted Apple Silicon runner specifications](https://docs.github.com/en/actions/reference/runners/github-hosted-runners).
 - [Qt: microphone permissions](https://doc.qt.io/qtforpython-6/PySide6/QtCore/QMicrophonePermission.html).
+
+## Optional spoken translations (0.7.2 beta)
+
+Open **Spoken audio** and choose **On demand**. Wait for the translation, then
+click **Speak last translation** or press **Ctrl+Alt+S** (Control+Option+S on Mac).
+Listening pauses for speaker playback; press **Resume** afterwards. Automatic audio
+requires headphones. Audio starts off; English/Mandarin system voices may need a
+one-time download. [Voice setup and first test](SPOKEN_AUDIO.md).

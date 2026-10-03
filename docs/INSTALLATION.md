@@ -106,3 +106,11 @@ Use `scripts/build.ps1` for subsequent builds and `scripts/install-shortcut.ps1`
 an optional Start Menu launcher. Neither enables startup-at-login nor audio recording.
 Package versions remain pinned in `requirements-lock.txt`; QNN and all runtime binaries
 are native ARM64. The existing x64 Python installation is not modified.
+
+## Optional spoken translations (0.7.2 beta)
+
+Open **Spoken audio** and choose **On demand**. Wait for the translation, then
+click **Speak last translation** or press **Ctrl+Alt+S** (Control+Option+S on Mac).
+Listening pauses for speaker playback; press **Resume** afterwards. Automatic audio
+requires headphones. Audio starts off; English/Mandarin system voices may need a
+one-time download. [Voice setup and first test](SPOKEN_AUDIO.md).
