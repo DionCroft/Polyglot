@@ -157,11 +157,20 @@ def run(report_path):
         window.speech_hotkey()
         assert session.paused.is_set() and fake.calls[-1][1] == "zh"
         assert "Resume" in panel.status.text()
+        app.processEvents()
+        assert window.overlay.isVisible(), "Playback must keep captions visible"
         fake.done()
         window.pause()
         assert not session.paused.is_set() and panel.player.latest is None
         emit(2, "zh")
+        window.pause()
+        app.processEvents()
+        assert not window.overlay.isVisible()
         window.speak_translation()
+        app.processEvents()
+        assert not window.overlay.isVisible(), (
+            "Speech must not reveal privately paused captions"
+        )
         assert fake.calls[-1][1] == "en" and session.paused.is_set()
         window.pause()
         panel.mode.setCurrentIndex(2)
@@ -228,6 +237,8 @@ def run(report_path):
             passed=True,
             mock_ui_lifecycle=True,
             manual_pauses_listening=True,
+            playback_keeps_captions_visible=True,
+            privacy_pause_preserved=True,
             automatic_requires_headphones=True,
             both_directions=True,
             final_only=True,

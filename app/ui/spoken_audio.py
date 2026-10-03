@@ -114,7 +114,7 @@ class SpokenAudio(QScrollArea):
         self.voice_status.setWordWrap(True)
         layout.addWidget(self.voice_status)
         self.note = QLabel(
-            "For speakers: finish speaking and wait for the translation, then select Speak last translation. Listening pauses and unfinished speech is discarded. Press Resume after playback. The caption preview stays readable; Pause hides the projector overlay as usual.\n\nAutomatic playback requires headphones and reads only new completed translations. There is no echo cancellation. Use the system sound settings to select your output device before starting."
+            "For speakers: finish speaking and wait for the translation, then select Speak last translation. Listening pauses and unfinished speech is discarded. Press Resume after playback. Completed captions stay visible during playback. The normal Pause button still hides captions.\n\nAutomatic playback requires headphones and reads only new completed translations. There is no echo cancellation. Use the system sound settings to select your output device before starting."
         )
         self.shortcut_label = QLabel()
         layout.addWidget(self.shortcut_label)

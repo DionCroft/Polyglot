@@ -34,6 +34,8 @@
   "native_stop_and_reuse": true,
   "mock_ui_lifecycle": true,
   "manual_pauses_listening": true,
+  "playback_keeps_captions_visible": true,
+  "privacy_pause_preserved": true,
   "automatic_requires_headphones": true,
   "both_directions": true,
   "final_only": true,

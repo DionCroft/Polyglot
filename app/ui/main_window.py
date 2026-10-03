@@ -95,6 +95,7 @@ class MainWindow(QMainWindow):
         self.appearance_spins = {}
         self.restart_requested = False
         self.pipeline = None
+        self.playback_pause = False
         self.loader = None
         self.closer = None
         self.language_worker = None
@@ -1355,7 +1356,7 @@ class MainWindow(QMainWindow):
         def before_play():
             # On-demand playback is an explicit turn boundary, not an input failure.
             if self.pipeline and not self.pipeline.paused.is_set():
-                self.pause()
+                self.pause(for_speech=True)
             if self.pipeline and not self.pipeline.paused.is_set():
                 raise RuntimeError(
                     "Wait until listening can be paused before playing audio"
@@ -1364,17 +1365,20 @@ class MainWindow(QMainWindow):
         self.spoken.player.speak_latest(before_play)
         self.spoken.sync()
 
-    def pause(self):
+    def pause(self, for_speech=False):
         if not self.pipeline:
             return
-        self.spoken.player.stop(clear_latest=self.pipeline.paused.is_set())
+        was_paused = self.pipeline.paused.is_set()
+        self.spoken.player.stop(clear_latest=was_paused)
+        self.playback_pause = bool(for_speech and not was_paused)
         self.pipeline.pause()
-        if self.pipeline.paused.is_set():
+        if self.pipeline.paused.is_set() and not self.playback_pause:
             self.overlay.hide()
         elif self.cfg.visible:
             self.overlay.show()
 
     def stop(self):
+        self.playback_pause = False
         self.spoken.player.reset()
         if not self.pipeline or self.closer:
             return
@@ -1503,6 +1507,7 @@ class MainWindow(QMainWindow):
             if self.teaching:
                 self.teaching.language_status.setText(message)
         elif kind == "language":
+            self.playback_pause = False
             self.spoken.player.reset()
             self.cfg.speaking_language = value
             self.overlay.reset()
@@ -1551,7 +1556,9 @@ class MainWindow(QMainWindow):
                 and not self.pipeline.stop_event.is_set()
             ):
                 self.overlay.show()
-            if value == "Paused" or "unavailable" in str(value):
+            if (value == "Paused" and not self.playback_pause) or "unavailable" in str(
+                value
+            ):
                 self.overlay.hide()
         elif kind == "caption":
             if (

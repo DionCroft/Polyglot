@@ -150,6 +150,8 @@ def run(fixtures, report_path):
             )
             window.speak_translation()
             assert window.pipeline.paused.is_set()
+            app.processEvents()
+            assert window.overlay.isVisible()
             wait(lambda: window.spoken.player.current is None)
             assert window.spoken.player.status == "Audio finished"
             window.pause()

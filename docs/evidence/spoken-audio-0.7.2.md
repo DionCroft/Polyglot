@@ -34,8 +34,9 @@ The unrelated local whitespace edit in `app/system/accelerators.py` is excluded.
 Audio starts Off whenever the app opens or a preset is loaded. On-demand speech
 prepares the target voice before pausing listening, so a missing voice does not
 pause capture unnecessarily. The user presses Resume after playback; unfinished
-speech is intentionally discarded by the existing Pause behavior. Paused overlay
-privacy behavior is unchanged and the main caption preview stays readable.
+speech is intentionally discarded by the existing Pause behavior. The microphone pause
+used for playback keeps completed captions visible. The normal privacy Pause still
+hides the overlay, including when audio is requested from an already paused session.
 
 Automatic output requires a headphone confirmation for every lecture. There is no
 acoustic echo cancellation. It uses the default system output device; stop audio
@@ -61,3 +62,11 @@ Physical speaker/headphone audibility, acoustic feedback, technical pronunciatio
 long lectures and native Intel/AMD/M2 hardware require user testing. Automated muted
 playback and public-WAV tests do not establish classroom quality.
 [Five-minute feedback guide and voice installation](../SPOKEN_AUDIO.md).
+
+## Caption visibility polish
+
+A follow-up native UI check verifies that the microphone pause used by on-demand
+speech keeps completed captions visible. Explicit privacy Pause still hides them,
+and speaking a translation while already privately paused does not reveal them.
+The real Mandarin-to-English pipeline/playback check and all 139 Windows ARM64
+regression tests pass after this adjustment.

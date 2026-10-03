@@ -16,8 +16,9 @@ locally; a missing English or Mandarin voice needs a one-time installation first
 
 English input produces Mandarin audio; Mandarin input produces English audio.
 The button reads the last completed translation, not a provisional caption.
-Finish your sentence first: Pause discards unfinished speech. The main caption
-preview remains readable; Pause hides the projector overlay as usual. If a voice is
+Finish your sentence first: Pause discards unfinished speech. Completed captions
+stay visible during playback. The normal Pause button still hides the projector
+overlay for privacy; playing audio while already privately paused does not reveal it. If a voice is
 missing, listening is not paused just to report the missing voice.
 
 **Stop audio**, or the same shortcut during playback, stops and clears queued audio.
