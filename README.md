@@ -8,7 +8,7 @@ captions, with translation on your computer. English remains the default. After 
 everyday use needs **no internet connection, account or API key**.
 
 You do not need programming experience. The Mac download is a ready-made app; Windows users
-double-click a setup file that prepares everything for them.
+can use a complete Intel/AMD app download or double-click a setup file that prepares everything.
 
 ![LectureLive captions showing Mandarin speech and its English translation](docs/evidence/auto-overlay-0.7.png)
 
@@ -42,7 +42,7 @@ A manually selected Mandarin mode expects Mandarin speech.
 | Your computer | Where to start |
 |---|---|
 | **Windows 11, Snapdragon / ARM64** | [Install on Windows](#install-on-windows). Setup selects the Snapdragon edition. |
-| **Windows 11, Intel or AMD / x64** | [Install on Windows](#install-on-windows). Setup selects the Intel/AMD beta. |
+| **Windows 11, Intel or AMD / x64** | [Download the ready-to-run Intel CPU package](docs/INTEL_LAPTOP.md), including guidance for the i5-1035G1 / 16 GB laptop. Source setup is also available below. |
 | **Apple Silicon Mac: M1 or newer, including M2 MacBook Air** | [Install on Mac](#install-on-mac). Requires **macOS 14 Sonoma or later**. |
 
 **Not sure which computer you have?** On Windows, open **Settings → System → About → System type**.
@@ -52,6 +52,11 @@ Intel Macs, Windows 10, 32-bit Windows and Linux are not supported by these buil
 Already installed? Go straight to [your first captions](#your-first-captions).
 
 ## Install on Windows
+
+**Intel Core i5-1035G1 / 16 GB, or another Windows 11 x64 laptop?**
+Use the [complete Intel CPU package and simple installation guide](docs/INTEL_LAPTOP.md).
+Extract the ZIP and double-click **Launch-CPU.cmd**. Both translation models are included;
+no Python or source setup is needed. The steps below are for installing from source.
 
 **Before you start:** connect to the internet, plug in your computer and allow at least **15 GB of
 free disk space** for setup. Have your teaching microphone available. Setup downloads several GB;

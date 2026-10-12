@@ -6,17 +6,18 @@ from pathlib import Path
 from unittest.mock import patch
 
 
-def run(fixtures, report_path):
+def run(fixtures, report_path, *, cpu_start=False):
     from PySide6.QtWidgets import QApplication
     from app.config.settings import Settings
     from app.ui.main_window import MainWindow
     from app.ui.teaching import TeachingControls
     from app.captions.state import Caption
 
-    cfg = Settings(accelerator="cpu", profile="fast")
+    # An incompatible saved accelerator must be bypassed before startup warm-up.
+    cfg = Settings(accelerator="intel_npu" if cpu_start else "cpu", profile="fast")
     cfg.save()
     app = QApplication.instance() or QApplication([])
-    window = MainWindow()
+    window = MainWindow(cpu_start=cpu_start)
     window.show()
 
     def wait(condition, seconds=120):
@@ -30,6 +31,15 @@ def run(fixtures, report_path):
     try:
         wait(lambda: not window.checker.is_alive())
         app.processEvents()
+        if cpu_start:
+            assert window.cfg.accelerator == "cpu"
+            assert window.accelerator.currentData() == "cpu"
+            assert window.model_store.key == ("fast", False, "cpu")
+            assert not window.model_store.bundle.accelerated
+            assert not any(
+                "unavailable" in m for m in window.model_store.bundle.messages
+            )
+            result["cpu_launcher_before_warmup"] = True
         window.speaking_language.setCurrentIndex(1)
         with patch(
             "app.ui.main_window.QInputDialog.getText",

@@ -114,3 +114,9 @@ click **Speak last translation** or press **Ctrl+Alt+S** (Control+Option+S on Ma
 Listening pauses for speaker playback; press **Resume** afterwards. Automatic audio
 requires headphones. Audio starts off; English/Mandarin system voices may need a
 one-time download. [Voice setup and first test](SPOKEN_AUDIO.md).
+
+## Intel i5-1035G1 / 16 GB on Windows 11
+
+A ready-to-run x64 CPU package is available. [Follow the Intel laptop guide](INTEL_LAPTOP.md):
+extract the complete app ZIP and open **Launch-CPU.cmd**. This selects Fast/CPU before
+model checks and includes both translation directions. No developer tools or NPU are needed.

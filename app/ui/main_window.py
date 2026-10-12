@@ -78,9 +78,9 @@ class Bridge(QObject):
 
 
 class MainWindow(QMainWindow):
-    def __init__(self):
+    def __init__(self, *, cpu_start=False):
         super().__init__()
-        self.cfg = Settings.load()
+        self.cfg = Settings.for_startup(cpu_start=cpu_start)
         # Never enable audible output merely by opening the app or loading a preset.
         self.cfg.speech_mode = "off"
         from app.system.models import ModelStore

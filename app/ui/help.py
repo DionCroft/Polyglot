@@ -26,6 +26,7 @@ class GuideDialog(QDialog):
             ("Full user guide", "USER_GUIDE.md"),
             ("Installation help", "INSTALLATION.md"),
             ("Windows Intel/AMD beta", "WINDOWS_BETA.md"),
+            ("Intel laptop: CPU installation and first test", "INTEL_LAPTOP.md"),
             ("Improving speech recognition", "SPEECH_RECOGNITION.md"),
             ("CO7000 project-management vocabulary", "CO7000_VOCABULARY.md"),
         ]:

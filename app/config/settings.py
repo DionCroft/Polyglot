@@ -106,6 +106,15 @@ class Settings:
         except (OSError, ValueError, TypeError):
             return cls()
 
+    @classmethod
+    def for_startup(cls, *, cpu_start=False):
+        """Select the x64 CPU path before warm-up; retain teaching preferences."""
+        cfg = cls.load()
+        if cpu_start and is_x64():
+            cfg.accelerator = "cpu"
+            cfg.profile = "fast"
+        return cfg
+
     def save(self):
         DATA.mkdir(parents=True, exist_ok=True)
         tmp = DATA / "settings.tmp"

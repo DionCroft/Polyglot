@@ -48,7 +48,9 @@ def main():
         from app.system.conversation_ui_test import run
 
         index = sys.argv.index("--conversation-ui-test")
-        return run(sys.argv[index + 1], sys.argv[index + 2])
+        return run(
+            sys.argv[index + 1], sys.argv[index + 2], cpu_start="--cpu" in sys.argv
+        )
     if "--conversation-self-test" in sys.argv:
         from app.system.conversation_self_test import run
         from app.config.settings import ROOT
@@ -81,7 +83,7 @@ def main():
     from app.ui.main_window import MainWindow
 
     try:
-        window = MainWindow()
+        window = MainWindow(cpu_start="--cpu" in sys.argv)
         window.show()
     except Exception:
         import logging

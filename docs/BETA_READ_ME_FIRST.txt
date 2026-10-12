@@ -1,9 +1,11 @@
 LectureLive - Windows x64 Beta 0.7.2b1
 
 1. Keep this entire folder together, including _internal.
-2. Open LectureLive-x64-Beta.exe.
+2. On an Intel i5-1035G1 / 16 GB laptop, open Launch-CPU.cmd.
+   INSTALL-INTEL.md has the first-use guide. Other PCs can open LectureLive-x64-Beta.exe.
 3. Select your microphone and click Test microphone.
-4. Leave Processing hardware on Automatic, then click Start lecture.
+4. For the CPU launcher, keep Fast / Standard / CPU; then click Start lecture.
+   With the normal EXE, Automatic remains available. No NPU preparation is needed for i5-1035G1.
 5. Choose English -> Chinese under Who is speaking? and pause naturally between sentences.
    For a student question choose Mandarin -> English, wait for Listening, then let them speak.
    Switch back to English before answering. Audio during switching is not captured.

@@ -12,7 +12,10 @@ parser.add_argument("--architecture", choices=("ARM64", "x64"), default="x64")
 parser.add_argument(
     "--dist-root", default="dist", help="Build output folder inside the project"
 )
+parser.add_argument("--variant", choices=("standard", "intel-cpu1"), default="standard")
 args = parser.parse_args()
+if args.variant != "standard" and args.architecture != "x64":
+    parser.error("The Intel CPU package requires --architecture x64")
 architecture = args.architecture
 app_name = "LectureLive" if architecture == "ARM64" else "LectureLive-x64-Beta"
 source = (root / args.dist_root / app_name).resolve()
@@ -22,7 +25,8 @@ if not (source / (app_name + ".exe")).is_file():
     raise RuntimeError("Build the beta first")
 out = root / "recovery"
 out.mkdir(exist_ok=True)
-archive = out / f"LectureLive-Windows-{architecture}-Beta-0.7.2b1.zip"
+suffix = "-Intel-CPU1" if args.variant == "intel-cpu1" else ""
+archive = out / f"LectureLive-Windows-{architecture}-Beta-0.7.2b1{suffix}.zip"
 partial = archive.with_suffix(".zip.partial")
 manifest = {}
 with zipfile.ZipFile(

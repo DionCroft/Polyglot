@@ -1,6 +1,6 @@
 # Windows Intel/AMD beta
 
-LectureLive 0.7.0 beta 1 includes a Windows x64 edition with English and Mandarin conversations. You can try it on Intel or AMD PCs.
+LectureLive 0.7.2 beta 1 includes a Windows x64 edition with English and Mandarin conversations. You can try it on Intel or AMD PCs.
 The existing Snapdragon ARM64 edition remains available. Apple Silicon Macs have a [separate build](MACOS.md); Linux and 32-bit Windows
 are not supported.
 
@@ -17,6 +17,15 @@ An Intel or AMD processor does not necessarily have an NPU. NPU selection is onl
 when a matching device loads the model and its execution trace confirms accelerated work.
 Unsupported models or drivers fall back to CPU. There is no guaranteed speed improvement:
 compare caption speed on your own PC. This beta uses the **Fast / Whisper Base** speech model.
+
+## Intel i5-1035G1 / 16 GB laptop
+
+Use the [complete Intel CPU package and first-use guide](INTEL_LAPTOP.md).
+**Launch-CPU.cmd** selects CPU and Fast before the startup model check, including when
+old settings select an unavailable accelerator. This avoids GPU/NPU driver probing.
+The i5-1035G1 does not have a supported Intel NPU; no NPU preparation is needed.
+Whisper, bilingual captions, offline translation and optional spoken audio are retained.
+Physical Intel performance remains to be measured on the laptop.
 
 ## Install the beta — no programming needed
 

@@ -96,3 +96,63 @@ def test_beta_settings_normalize_profile_and_accelerator():
     with patch("app.config.settings.is_x64", return_value=True):
         cfg = Settings.from_dict({"profile": "balanced", "accelerator": "invalid"})
         assert cfg.profile == "fast" and cfg.accelerator == "auto"
+
+
+@pytest.mark.parametrize("saved_backend", ["auto", "gpu", "intel_npu", "amd_npu"])
+def test_cpu_launcher_overrides_saved_hardware_without_erasing_preferences(
+    tmp_path, saved_backend
+):
+    from dataclasses import asdict
+
+    original = Settings(
+        accelerator=saved_backend,
+        profile="fast",
+        speaking_language="zh",
+        microphone="Teaching microphone",
+        glossary="project_management",
+        vocabulary="CO7000",
+        recognition_mode="careful",
+        speech_voice_en="test voice",
+    )
+    with (
+        patch("app.config.settings.DATA", tmp_path),
+        patch("app.config.settings.is_x64", return_value=True),
+    ):
+        original.save()
+        before = (tmp_path / "settings.json").read_bytes()
+        cfg = Settings.for_startup(cpu_start=True)
+        expected = asdict(original) | {"accelerator": "cpu", "profile": "fast"}
+        assert asdict(cfg) == expected
+        assert (tmp_path / "settings.json").read_bytes() == before
+        assert Settings.for_startup().accelerator == saved_backend
+
+
+@pytest.mark.parametrize("cpu_start", [False, True])
+def test_cpu_launcher_does_not_change_other_platform_defaults(cpu_start):
+    original = Settings(profile="balanced", accelerator="auto")
+    with (
+        patch("app.config.settings.is_x64", return_value=False),
+        patch.object(Settings, "load", return_value=original),
+    ):
+        cfg = Settings.for_startup(cpu_start=cpu_start)
+        assert cfg.profile == "balanced" and cfg.accelerator == "auto"
+
+
+def test_cpu_start_never_constructs_gpu_or_npu_worker(tmp_path):
+    with (
+        patch("app.system.models.is_x64", return_value=True),
+        patch("app.asr.encoder_worker.EncoderWorker") as worker,
+        patch("app.asr.qnn_whisper.QnnWhisper") as qnn,
+        patch("app.asr.cpu_whisper.CpuWhisper") as cpu,
+        patch("app.translation.opus_mt.OpusMT"),
+        patch("app.audio.vad.SileroVAD"),
+    ):
+        store = ModelStore(tmp_path)
+        try:
+            bundle = store.load("fast", accelerator="cpu")
+            assert bundle.asr is cpu.return_value
+            assert not bundle.npu and not bundle.accelerated
+            worker.assert_not_called()
+            qnn.assert_not_called()
+        finally:
+            store.close()

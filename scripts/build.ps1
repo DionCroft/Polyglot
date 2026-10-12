@@ -30,3 +30,9 @@ if ($LASTEXITCODE -ne 0) { throw 'Executable architecture verification failed.' 
 $readme = if ($beta) { 'docs\BETA_READ_ME_FIRST.txt' } else { 'docs\PORTABLE_README.txt' }
 Copy-Item -LiteralPath (Join-Path $projectRoot $readme) -Destination (Join-Path $releaseDir 'READ_ME_FIRST.txt') -Force
 Copy-Item -LiteralPath (Join-Path $projectRoot 'STATUS.md') -Destination (Join-Path $releaseDir 'STATUS.md') -Force
+
+if ($beta) {
+    Copy-Item -LiteralPath (Join-Path $projectRoot 'Launch-CPU.cmd') -Destination (Join-Path $releaseDir 'Launch-CPU.cmd') -Force
+    $intelGuide = [IO.File]::ReadAllText((Join-Path $projectRoot 'docs\INTEL_LAPTOP.md')).Replace('(SPOKEN_AUDIO.md)', '(_internal/docs/SPOKEN_AUDIO.md)').Replace('(evidence/', '(_internal/docs/evidence/')
+    [IO.File]::WriteAllText((Join-Path $releaseDir 'INSTALL-INTEL.md'), $intelGuide)
+}

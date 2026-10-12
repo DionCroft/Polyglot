@@ -1,7 +1,18 @@
 # LectureLive — STATUS
 
-Updated 2026-10-03. Spoken-audio beta 0.7.2b1; pre-rolling layout retained.
+Updated 2026-10-12. Spoken-audio beta 0.7.2b1; Intel CPU package revision 1.
+Pre-rolling layout retained.
 Production classroom acceptance remains open.
+
+## Intel laptop CPU package
+
+- Windows 11 x64 launcher selects Fast/CPU before model warm-up, including when old
+  settings select GPU/NPU. Models and teaching preferences are preserved.
+- Ready-to-run package instructions target the i5-1035G1 / 16 GB laptop. No NPU required.
+- Both Windows suites pass 146 tests (two POSIX-only skips); real source CPU-start
+  conversation/UI checks pass. This host runs x64 under ARM emulation; physical
+  Intel performance, microphone, touch and projector checks remain outstanding.
+- [Installation and rehearsal guide](docs/INTEL_LAPTOP.md) · [Evidence](docs/evidence/intel-cpu-2026-10-12.md).
 
 ## Spoken translations 0.7.2b1
 
