@@ -117,6 +117,7 @@ def test_cpu_launcher_overrides_saved_hardware_without_erasing_preferences(
     with (
         patch("app.config.settings.DATA", tmp_path),
         patch("app.config.settings.is_x64", return_value=True),
+        patch("app.config.settings.is_macos", return_value=False),
     ):
         original.save()
         before = (tmp_path / "settings.json").read_bytes()
