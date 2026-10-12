@@ -1,0 +1,60 @@
+{
+  "build_commit": "e1bb19b87de7d9359482ae4ef05c715ef1a45cdf",
+  "host": "Snapdragon X ARM64; Windows x64 emulation",
+  "physical_intel_tested": false,
+  "physical_microphone_tested": false,
+  "checks": {
+    "english": {
+      "passed": true,
+      "elapsed_seconds": 17.56,
+      "peak_process_tree_rss_mb": 1868.2
+    },
+    "conversations": {
+      "passed": true,
+      "elapsed_seconds": 17.98,
+      "peak_process_tree_rss_mb": 2087.7
+    },
+    "cpu-ui": {
+      "passed": true,
+      "elapsed_seconds": 34.5,
+      "peak_process_tree_rss_mb": 1547.4
+    },
+    "auto-cpu": {
+      "passed": true,
+      "elapsed_seconds": 41.67,
+      "peak_process_tree_rss_mb": 1333.9
+    },
+    "auto-ui": {
+      "passed": true,
+      "elapsed_seconds": 43.06,
+      "peak_process_tree_rss_mb": 2104.3
+    },
+    "speech": {
+      "passed": true,
+      "elapsed_seconds": 4.91,
+      "peak_process_tree_rss_mb": 270.6
+    }
+  },
+  "passed": true,
+  "previous_packaged_outputs_unchanged": true,
+  "bundled_model_files_verified": 29,
+  "recovered_sessions": [
+    {
+      "session": "2026-10-12_12-01-35_217980_Lecture",
+      "six_exports_byte_identical": true
+    },
+    {
+      "session": "2026-10-12_12-02-18_304790_Lecture",
+      "six_exports_byte_identical": true
+    },
+    {
+      "session": "2026-10-12_12-01-00_962041_Lecture",
+      "six_exports_byte_identical": true
+    },
+    {
+      "session": "2026-10-12_12-01-15_054736_Lecture",
+      "six_exports_byte_identical": true
+    }
+  ],
+  "exe_sha256": "08f080a7e98708726e3129b53b2eb28d1cd4546373fe6f8def12bbe63a1b3b3c"
+}

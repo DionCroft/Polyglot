@@ -1,0 +1,22 @@
+{
+  "url": "https://github.com/DionCroft/Polyglot/releases/tag/windows-v0.7.2b1-cpu1",
+  "tag": "windows-v0.7.2b1-cpu1",
+  "target_commit": "4b6fb2ed14435bdbb07a05577bdedfeb50cd9973",
+  "is_draft": false,
+  "is_prerelease": true,
+  "assets": [
+    {
+      "name": "LectureLive-Windows-x64-Beta-0.7.2b1-Intel-CPU1.zip",
+      "bytes": 759398808,
+      "digest": "sha256:3724a908541dd01a9ae3451710a18f83cc04b4f89b4f16a67ba4db05f956c342",
+      "download_url": "https://github.com/DionCroft/Polyglot/releases/download/windows-v0.7.2b1-cpu1/LectureLive-Windows-x64-Beta-0.7.2b1-Intel-CPU1.zip"
+    },
+    {
+      "name": "LectureLive-Windows-x64-Beta-0.7.2b1-Intel-CPU1.zip.sha256",
+      "bytes": 119,
+      "digest": "sha256:066ec042da0e062806b81962550fa32f2177a717afdcea5d116800c489153400",
+      "download_url": "https://github.com/DionCroft/Polyglot/releases/download/windows-v0.7.2b1-cpu1/LectureLive-Windows-x64-Beta-0.7.2b1-Intel-CPU1.zip.sha256"
+    }
+  ],
+  "uploaded_zip_hash_verified": true
+}

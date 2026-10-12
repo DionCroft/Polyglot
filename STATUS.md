@@ -9,8 +9,12 @@ Production classroom acceptance remains open.
 - Windows 11 x64 launcher selects Fast/CPU before model warm-up, including when old
   settings select GPU/NPU. Models and teaching preferences are preserved.
 - Ready-to-run package instructions target the i5-1035G1 / 16 GB laptop. No NPU required.
-- Both Windows suites pass 146 tests (two POSIX-only skips); real source CPU-start
-  conversation/UI checks pass. This host runs x64 under ARM emulation; physical
+- Both Windows suites pass 146 tests (two POSIX-only skips). All six packaged checks
+  pass, the previous packaged speech/translation outputs match, 29 model hashes verify,
+  and all six exports recover exactly across four sessions. The CPU Auto replay has no
+  dropped audio or skipped translations; uncertain phrases are withheld as designed.
+- The [759.4 MB complete Windows ZIP](https://github.com/DionCroft/Polyglot/releases/tag/windows-v0.7.2b1-cpu1)
+  is published with verified hashes. This host runs x64 under ARM emulation; physical
   Intel performance, microphone, touch and projector checks remain outstanding.
 - [Installation and rehearsal guide](docs/INTEL_LAPTOP.md) · [Evidence](docs/evidence/intel-cpu-2026-10-12.md).
 
