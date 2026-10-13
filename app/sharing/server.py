@@ -92,6 +92,7 @@ class LocalServer(ThreadingMixIn, HTTPServer):
 
 
 class Handler(BaseHTTPRequestHandler):
+    protocol_version = "HTTP/1.1"
     server_version = "LectureLive"
     sys_version = ""
 
@@ -103,6 +104,10 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header("Content-Type", content_type)
         if length is not None:
             self.send_header("Content-Length", str(length))
+        else:
+            self.send_header("Transfer-Encoding", "chunked")
+        self.send_header("Connection", "close")
+        self.close_connection = True
         self.send_header("Cache-Control", "no-store")
         self.send_header("Referrer-Policy", "no-referrer")
         self.send_header("X-Content-Type-Options", "nosniff")
@@ -117,13 +122,18 @@ class Handler(BaseHTTPRequestHandler):
                 'attachment; filename="LectureLive-transcript.txt"',
             )
         self.end_headers()
+        self.output_started = True
 
     def do_GET(self):
+        self.output_started = False
         try:
             self.respond()
         except (BrokenPipeError, ConnectionResetError, TimeoutError):
             pass
         except Exception:
+            if self.output_started:
+                self.close_connection = True
+                return  # Missing chunk terminator marks an interrupted download.
             # Do not reveal database paths or internals to connected students.
             try:
                 self.send_error(
@@ -201,11 +211,22 @@ class Handler(BaseHTTPRequestHandler):
                 return
             with Database(self.server.db) as db:
                 self.headers_for("text/plain; charset=utf-8", download=True)
-                self.wfile.write(b"\xef\xbb\xbf")  # Windows Notepad UTF-8 detection.
+                buffer = bytearray(b"\xef\xbb\xbf")  # Windows Notepad UTF-8.
                 for line in db.text_lines(view):
-                    self.wfile.write(line.encode("utf-8"))
+                    buffer.extend(line.encode("utf-8"))
+                    if len(buffer) >= 65536:
+                        self.chunk(buffer)
+                        buffer.clear()
+                if buffer:
+                    self.chunk(buffer)
+                self.wfile.write(b"0\r\n\r\n")
             return
         self.send_error(404)
+
+    def chunk(self, data):
+        self.wfile.write(f"{len(data):x}\r\n".encode("ascii"))
+        self.wfile.write(data)
+        self.wfile.write(b"\r\n")
 
 
 def parent_input():

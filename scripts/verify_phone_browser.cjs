@@ -49,6 +49,7 @@ function assert(value,message){if(!value)throw Error(message);}
     // Loopback may expose the secure clipboard API; explicitly exercise the HTTP fallback.
     await page.evaluate(()=>Object.defineProperty(navigator,'clipboard',{value:undefined,configurable:true}));
     await page.locator('#copy').click();assert(await page.evaluate(()=>window.copied.includes('needle-first')&&(window.copied.includes('中文')||window.copied.includes('项目风险'))),'Copy visible bilingual text');
+    await page.locator('.entry button').click();assert(await page.locator('.entry button').textContent()==='Copied','Per-entry copy feedback');
     result.checks.push('Whole-history search, all language views, font size, HTTP clipboard fallback');
     await page.locator('#live').click();await page.waitForSelector('[data-id="10001"]');
     await context.setOffline(true);await page.waitForFunction(()=>document.getElementById('connection').textContent.includes('Reconnecting'));

@@ -2,7 +2,7 @@
 const $ = id => document.getElementById(id);
 const reader=$('reader'), entries=$('entries');
 let rows=[], version=-1, follow=true, busy=false, requestId=0, active=null, adjusting=false;
-let earlier=false, later=false, query='', timer=null, font=22, connection='';
+let earlier=false, later=false, query='', timer=null, font=22;
 try { $('view').value=localStorage.getItem('lecturelive-view')||'both'; font=Number(localStorage.getItem('lecturelive-size'))||22; } catch (_) {}
 font=Math.max(16,Math.min(34,font));
 function preferences() {
@@ -34,6 +34,7 @@ async function copy(text) {
     try {ok=document.execCommand('copy');} catch (_) {} box.remove();
   }
   $('notice').textContent=ok?'Copied.':'Copy unavailable here; select text or download the transcript.';
+  return ok;
 }
 function card(c, node) {
   if(!node) {
@@ -41,7 +42,10 @@ function card(c, node) {
     const head=document.createElement('div');head.className='entry-head';
     const time=document.createElement('time');head.append(time);
     const button=document.createElement('button');button.textContent='Copy';button.setAttribute('aria-label','Copy this caption');
-    button.addEventListener('click',()=>copy(textFor(node.caption)));head.append(button);node.append(head);
+    button.addEventListener('click',async()=>{
+      const ok=await copy(textFor(node.caption));button.textContent=ok?'Copied':'Copy failed';
+      setTimeout(()=>{button.textContent='Copy';},2000);
+    });head.append(button);node.append(head);
     for(const lang of ['en','zh']) {
       const block=document.createElement('section');block.className=lang;block.lang=lang==='zh'?'zh-Hans':'en';
       const label=document.createElement('div');label.className='language';block.append(label);

@@ -140,3 +140,20 @@ else: raise AssertionError('Network opened in the speech process')
         subprocess.run([sys.executable, "-c", code], capture_output=True).returncode
         == 0
     )
+
+
+def test_interrupted_download_is_not_a_successful_truncated_transcript(
+    server, monkeypatch
+):
+    import http.client
+
+    _, url = server
+
+    def broken(self, view="both"):
+        yield "Part of the lecture\n" * 5000
+        raise OSError("simulated read interruption")
+
+    monkeypatch.setattr(Database, "text_lines", broken)
+    with urllib.request.urlopen(url + "transcript.txt", timeout=5) as response:
+        with pytest.raises(http.client.IncompleteRead):
+            response.read()

@@ -1,6 +1,6 @@
 # Student phone captions — 0.8.0b1 evidence
 
-Date: 2026-10-13. This feature adds a separate optional phone reader. The existing projector, ASR/translation code and settings are unchanged except for a bounded observer of final journal records. The unrelated local whitespace edit in accelerators.py is excluded from these commits.
+Date: 2026-10-13. This feature adds a separate optional phone reader. The existing projector, ASR/translation code and settings are unchanged except for a bounded observer of final journal records.
 
 ## Investigation before implementation
 
@@ -10,13 +10,14 @@ Actual missing speech/translation is still possible through overload, recognitio
 
 ## Automated evidence
 
-- Native Windows ARM64: **167 passed, 2 POSIX-only skips**. Includes 21 new sharing regressions plus existing queues, pause/switch/shutdown, translation failure and all six export/recovery tests.
-- Windows x64 runtime under ARM emulation: **167 passed, 2 POSIX-only skips**. Physical Intel performance is not measured.
+- Native Windows ARM64: **168 passed, 2 POSIX-only skips**. Includes 22 new sharing regressions plus existing queues, pause/switch/shutdown, translation failure and all six export/recovery tests.
+- Windows x64 runtime under ARM emulation: **168 passed, 2 POSIX-only skips**. Physical Intel performance is not measured.
 - Native UI real English/Mandarin WAV replay with sharing: all four English-session and two Mandarin-session entries exactly match the saved journal. Pause/switch, old-epoch final records and muted spoken output pass.
 - Source native Qt controls: explicit start/off/stop, QR generation, current-journal import, long late translation during pause, new lecture link revocation, history cleanup and fresh empty session all pass.
 - Real loopback HTTP: 20 concurrent readers, old/full-history access, TXT streaming, token/Host/Origin/path guards, and distinct main/helper offline policies pass.
 - Edge/Chromium mobile emulation: 10,000 bilingual entries initially, 10,002 after updates; at most 120 entries in the DOM. Whole TXT includes every entry and the full long delayed translation. Stable reading anchor (<3 CSS px), no duplicate updated row, Back to live, all language views, size control, whole-history search, eight simultaneous emulated iPhone/Pixel clients, disconnect/reconnect and refresh pass. Clipboard fallback text selection/copy invocation is tested with a mocked browser copy command; physical OS clipboard pasting still needs verification.
 - Fixed real-model regression: **36 speech / 40 translation cases exactly match** docs/evidence/spoken-072-english-regression.json, covering CPU Base, QNN Base/Small and Standard/Careful recognition. This is output equivalence on the existing fixtures, not a new human accuracy assessment.
+- Interrupted-download regression first reproduced the incomplete-file bug; HTTP chunk framing now makes an interrupted TXT transfer fail rather than look complete. Per-entry copy feedback remains visible with the search toolbar collapsed.
 - Static network audit allows network imports only in the isolated inbound HTTP helper. Main inference retains Python socket/DNS denial; helper denies outgoing connections/DNS. This is not a native packet trace.
 
 Evidence artifacts are written under tests/artifacts/phone-*. JSON baseline and browser reports are also retained next to this document. Source test commands:
