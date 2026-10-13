@@ -161,6 +161,10 @@ class MainWindow(QMainWindow):
 
         self.spoken = SpokenAudio(self)
         tabs.addTab(self.spoken, "Spoken audio")
+        from app.ui.phone_sharing import PhoneSharing
+
+        self.phone = PhoneSharing(self)
+        tabs.addTab(self.phone, "Student phones")
         tabs.addTab(self.appearance_tab(), "Overlay")
         tabs.addTab(self.diagnostics_tab(), "Diagnostics")
         tabs.addTab(self.about_tab(), "About")
@@ -1304,6 +1308,7 @@ class MainWindow(QMainWindow):
         from dataclasses import replace
 
         run_cfg = replace(self.cfg, microphone=self.microphone.currentData())
+        self.phone.begin_lecture()
         self.pipeline = Pipeline(
             ROOT,
             DATA,
@@ -1313,6 +1318,7 @@ class MainWindow(QMainWindow):
             self.title.text(),
             self.wav,
             model_store=self.model_store,
+            caption_sink=self.phone.capture,
         )
         self.last_caption = None
         self.spoken.new_session()
@@ -1438,6 +1444,7 @@ class MainWindow(QMainWindow):
             if self.closing:
                 QTimer.singleShot(50, self.close)
         elif kind == "stopped":
+            self.phone.state("Lecture ended · download before sharing stops")
             self.spoken.player.reset()
             if self.teaching:
                 self.teaching.hide()
@@ -1532,6 +1539,7 @@ class MainWindow(QMainWindow):
         elif kind == "transcript":
             self.transcript_path = Path(value)
         elif kind == "state":
+            self.phone.state(value)
             if "unavailable" in str(value):
                 self.spoken.player.stop(clear_latest=True)
             if value in {"Listening", "Paused"} and not self.closer:
@@ -1619,6 +1627,7 @@ class MainWindow(QMainWindow):
             )
 
     def tick(self):
+        self.phone.tick()
         self.spoken.tick()
         if self.pipeline:
             self.meter.setValue(self.pipeline.level)
@@ -1650,6 +1659,10 @@ class MainWindow(QMainWindow):
             return
         if self.teaching:
             self.teaching.hide()
+        if not self.phone.shutdown():
+            event.ignore()
+            QTimer.singleShot(100, self.close)
+            return
         self.model_store.close()
         self.hotkeys.close()
         self.overlay.close()

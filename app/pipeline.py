@@ -82,11 +82,13 @@ class Pipeline:
         wav=None,
         force_cpu=False,
         model_store=None,
+        caption_sink=None,
     ):
         self.root = root
         self.data = data
         self.settings = settings
         self.emit = emit
+        self.caption_sink = caption_sink
         self.title = title
         self.wav = wav
         self.using_npu = False
@@ -372,6 +374,18 @@ class Pipeline:
         # ASR and translation both write exports. Detach a failed writer before
         # cleanup so another worker cannot reuse it or emit repeated errors.
         with self.export_lock:
+            if self.caption_sink is not None:
+                try:
+                    self.caption_sink(method, caption)
+                except Exception:
+                    self.caption_sink = None
+                    log.exception(
+                        "Optional caption reader failed; inference and exports continue"
+                    )
+                    self._notify(
+                        "warning",
+                        "Phone sharing history failed. Local captions and transcript saving continue.",
+                    )
             writer = self.export
             if writer is None:
                 return

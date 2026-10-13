@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "physical_phones_tested": false,
+  "classroom_wifi_tested": false,
+  "engine": "Microsoft Edge, Chromium mobile emulation",
+  "checks": [
+    "10,000 entries available; only 120 mounted; mobile layout fits",
+    "Late long translation updates original row; reading anchor unchanged",
+    "Whole-history search, all language views, font size, HTTP clipboard fallback",
+    "Temporary disconnect and refresh recover without duplicate turns",
+    "Download contains all 10,002 entries and untruncated delayed text",
+    "Eight simultaneous emulated phones; no remote assets or script injection"
+  ]
+}

@@ -90,3 +90,7 @@ For feedback, send the selected and verified backend, whether delays grow, any w
 and a sentence/caption example. Device ID and Windows Product ID are not needed.
 
 Processor reference: [Intel i5-1035G1 specifications](https://www.intel.com/content/www/us/en/products/compare.html?productIds=196603).
+
+## Optional student phone captions (0.8.0b1+)
+
+Open **Student phones → Start sharing**, choose your classroom Wi-Fi/Ethernet address, and show the QR code. Students on the same trusted local network can scroll back through bilingual captions, search/copy and download the full text. Internet access and accounts are not needed. **Stop sharing** closes the link. Previous 0.7.x downloads do not include this feature. Follow the [phone caption guide](PHONE_CAPTIONS.md), including privacy and firewall/Wi-Fi advice, before teaching.

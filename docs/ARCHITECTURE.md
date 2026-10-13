@@ -119,3 +119,13 @@ returns cannot be safely killed as a Python thread and remains a reliability lim
 Runtime modules have no model-download imports. Pinned setup manifests and resumable
 HTTPS download/extraction code live only in scripts. Presets and microphone checking
 are local; audio is not saved by the microphone-check flow.
+
+## 0.8 optional local phone reader
+
+An optional final-record observer at Pipeline._save fans out source/pair/gap/uncertain records to a bounded queue before the existing transcript writer. It does not receive raw audio or change any model calls, defaults or projector display state. The final pair path runs even when the current overlay intentionally suppresses old-epoch/paused updates. Sharing disabled means no history database/server; the observer returns immediately.
+
+A dedicated writer persists stable segment IDs in SQLite WAL. Late translations upsert the same entry, never append another turn. Journal snapshot import is serialized with the existing export lock; live records queue during import. Readers use small read-only snapshots. Full downloads stream from disk. The browser mounts at most 120 entries, loads older/newer pages, and restores its visible entry/offset after delayed updates.
+
+The model/GUI process retains its socket/DNS denial. Only an explicit --student-server child enters a separate inbound-only Python socket policy for the selected private IPv4 address. Its parent pipe closes on application exit; Stop terminates it immediately. It serves static local assets and read-only paged/text endpoints guarded by a random session token, Host/Origin checks, CSP and a 32-request concurrency cap. It has no model/download/API dependencies. HTTP is not encrypted. Static auditing permits network imports only in this helper; native library traffic still requires packet-level validation.
+
+Temporary text history exists even with normal transcript saving off. New lecture/sharing sessions revoke prior links. Disk or queue failure stops phone sharing with a warning, leaving ordinary captions/exports independent. See PHONE_CAPTIONS.md for limits and crash-cleanup details.

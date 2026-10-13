@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LectureLive · Student captions</title><link rel="stylesheet" href="reader.css"></head>
+<body><div class="shell"><header>
+<div class="brand"><div><span class="eyebrow">YOUR LECTURE, IN BOTH LANGUAGES</span><h1>LectureLive<span class="dot">●</span></h1></div><span id="connection" role="status">Connecting…</span></div>
+<div class="tools"><label>Show<select id="view"><option value="both">English + 简体中文</option><option value="en">English only</option><option value="zh">仅简体中文</option></select></label>
+
+<div class="size"><span>Text size</span><div><button id="smaller" aria-label="Smaller text">A−</button><button id="larger" aria-label="Larger text">A+</button></div></div></div>
+<details id="options"><summary>Search, copy &amp; download / 搜索与保存</summary><label class="search">Search the whole lecture<input id="search" type="search" maxlength="120" placeholder="Find a word / 搜索" autocomplete="off"></label>
+<div class="actions"><button id="copy">Copy visible text</button><a id="download" href="transcript.txt?view=both" download>Download full .txt</a><span id="notice" role="status"></span></div>
+<p class="context"><span id="coverage">Shared locally · automated captions may contain errors.</span><span id="count"></span></p></details>
+</header>
+<main id="reader" tabindex="0" aria-label="Scrollable bilingual lecture transcript"><button id="older" class="paging">Load earlier captions ↑</button><div id="entries"></div><p id="empty">Waiting for the lecturer’s first completed sentence…</p><button id="newer" class="paging">Load later captions ↓</button><div class="endspace"></div></main>
+<button id="live" hidden>Back to live ↓ <span lang="zh">返回实时</span></button>
+<footer><span id="lecture-state">Waiting for lecture</span><span>Read, scroll back, or save a copy.</span></footer></div><script src="reader.js"></script></body></html>

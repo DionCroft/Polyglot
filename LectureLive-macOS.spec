@@ -20,10 +20,10 @@ exe = EXE(pyz, a.scripts, [], exclude_binaries=True, name='LectureLive',
 coll = COLLECT(exe, a.binaries, a.datas, name='LectureLive-macOS', upx=False)
 app = BUNDLE(coll, name='LectureLive.app', icon='build/LectureLive.icns',
              bundle_identifier='io.github.dioncroft.lecturelive',
-             version='0.7.0', info_plist={
+             version='0.8.0', info_plist={
                  'CFBundleDisplayName': 'LectureLive',
-                 'CFBundleShortVersionString': '0.7.0',
-                 'CFBundleVersion': '0.7.0',
+                 'CFBundleShortVersionString': '0.8.0',
+                 'CFBundleVersion': '0.8.0',
                  'LSMinimumSystemVersion': '14.0',
                  'NSHighResolutionCapable': True,
                  'NSMicrophoneUsageDescription': 'LectureLive uses your microphone to create live lecture captions and translations entirely on this Mac. Audio is not uploaded.',

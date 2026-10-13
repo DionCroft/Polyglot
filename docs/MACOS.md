@@ -111,3 +111,7 @@ click **Speak last translation** or press **Ctrl+Alt+S** (Control+Option+S on Ma
 Listening pauses for speaker playback; press **Resume** afterwards. Automatic audio
 requires headphones. Audio starts off; English/Mandarin system voices may need a
 one-time download. [Voice setup and first test](SPOKEN_AUDIO.md).
+
+## Optional student phone captions (0.8.0b1+)
+
+Open **Student phones → Start sharing**, choose your classroom Wi-Fi/Ethernet address, and show the QR code. Students on the same trusted local network can scroll back through bilingual captions, search/copy and download the full text. Internet access and accounts are not needed. **Stop sharing** closes the link. Previous 0.7.x downloads do not include this feature. Follow the [phone caption guide](PHONE_CAPTIONS.md), including privacy and firewall/Wi-Fi advice, before teaching.

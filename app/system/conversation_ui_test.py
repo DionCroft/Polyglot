@@ -27,6 +27,28 @@ def run(fixtures, report_path, *, cpu_start=False):
             time.sleep(0.01)
         assert condition(), "Conversation UI timed out"
 
+    def verify_shared(folder):
+        from app.sharing.history import Database
+
+        assert window.phone.session and window.phone.session.history.flush()
+        expected = {}
+        for line in (folder / "events.jsonl").read_text(encoding="utf-8").splitlines():
+            item = json.loads(line)
+            expected[item["identifier"]] = item
+        with Database(window.phone.session.history.path) as history:
+            rows = history.page(after=0, limit=120)["entries"]
+            assert len(rows) == len(expected) and rows
+            for row in rows:
+                original = expected[row["identifier"]]
+                for key in (
+                    "english",
+                    "chinese",
+                    "source_language",
+                    "translation_status",
+                ):
+                    assert row.get(key) == original.get(key), (key, row, original)
+        return len(rows)
+
     result = {"passed": False, "physical_microphone_tested": False}
     try:
         wait(lambda: not window.checker.is_alive())
@@ -51,6 +73,8 @@ def run(fixtures, report_path, *, cpu_start=False):
         assert window.cfg.speaking_language == "zh"
         assert "spoken" in window.preview_zh_label.text()
         window.speaking_language.setCurrentIndex(0)
+        window.phone.start_sharing("127.0.0.1")
+        wait(lambda: bool(window.phone.link.text()))
         window.wav = str(Path(fixtures) / "jfk.wav")
         window.start_stop()
         wait(
@@ -127,6 +151,7 @@ def run(fixtures, report_path, *, cpu_start=False):
         assert window.pipeline.export.folder == folder
         window.stop()
         wait(lambda: window.pipeline is None)
+        result["shared_english_entries_match_journal"] = verify_shared(folder)
         assert window.speaking_language.isEnabled()
         assert (folder / "English.srt").stat().st_size > 0
         window.speaking_language.setCurrentIndex(1)
@@ -144,6 +169,10 @@ def run(fixtures, report_path, *, cpu_start=False):
                 window.last_caption is not None and bool(window.last_caption.english)
             )
         )
+        assert window.phone.session is None
+        wait(lambda: window.phone.cleaner is None)
+        window.phone.start_sharing("127.0.0.1")
+        wait(lambda: bool(window.phone.link.text()))
         result["mandarin_wav_caption"] = window.last_caption.__dict__
         mandarin_folder = window.pipeline.export.folder
         # A real Mandarin pipeline feeds a completed English translation to a
@@ -173,6 +202,7 @@ def run(fixtures, report_path, *, cpu_start=False):
             )
         window.stop()
         wait(lambda: window.pipeline is None)
+        result["shared_mandarin_entries_match_journal"] = verify_shared(mandarin_folder)
         assert "English · translation" in (
             mandarin_folder / "Bilingual Transcript.txt"
         ).read_text(encoding="utf-8")

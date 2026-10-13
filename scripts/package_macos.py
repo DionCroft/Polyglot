@@ -5,6 +5,7 @@ import os
 from pathlib import Path
 import subprocess
 import sys
+from app import __version__
 
 
 def main():
@@ -16,7 +17,7 @@ def main():
     subprocess.run(["codesign", "--verify", "--deep", "--strict", str(app)], check=True)
     release = root / "dist/macos-release"
     release.mkdir(parents=True, exist_ok=True)
-    name = "LectureLive-0.7.2b1-macOS-AppleSilicon"
+    name = f"LectureLive-{__version__}-macOS-AppleSilicon"
     archive = release / (name + ".zip")
     image = release / (name + ".dmg")
     # Notarisation is optional and only uses a preconfigured local keychain profile.

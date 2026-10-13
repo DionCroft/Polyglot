@@ -1,8 +1,23 @@
 # LectureLive — STATUS
 
-Updated 2026-10-12. Spoken-audio beta 0.7.2b1; Intel CPU package revision 1.
-Pre-rolling layout retained.
+Updated 2026-10-13. Main version 0.8.0b1: optional student phone captions.
+Pre-rolling projector layout retained.
 Production classroom acceptance remains open.
+
+## Student phone captions 0.8.0b1
+
+Optional QR sharing over trusted local Wi-Fi, with a separate bilingual reader,
+scrollback, search/copy, adjustable text size and full TXT download. Source and
+translation retain their original chronological entry. Disk-backed history is
+bounded independently of speech processing. Sharing starts off; Stop revokes the
+link. Speech and translation model settings and the projector are unchanged.
+
+The existing 36 speech / 40 translation outputs exactly match the previous baseline.
+A browser test retained all 10,002 entries, preserved the reading anchor through a
+long delayed translation, and exercised eight simultaneous emulated phones.
+Physical phones and classroom Wi-Fi still require rehearsal. Build/platform results
+are tracked in [the evidence report](docs/evidence/phone-captions-0.8.md).
+[Beginner instructions](docs/PHONE_CAPTIONS.md).
 
 ## Intel laptop CPU package
 

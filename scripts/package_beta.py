@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import json
 import zipfile
+from app import __version__
 from pathlib import Path
 
 root = Path(__file__).resolve().parents[1]
@@ -26,7 +27,7 @@ if not (source / (app_name + ".exe")).is_file():
 out = root / "recovery"
 out.mkdir(exist_ok=True)
 suffix = "-Intel-CPU1" if args.variant == "intel-cpu1" else ""
-archive = out / f"LectureLive-Windows-{architecture}-Beta-0.7.2b1{suffix}.zip"
+archive = out / f"LectureLive-Windows-{architecture}-Beta-{__version__}{suffix}.zip"
 partial = archive.with_suffix(".zip.partial")
 manifest = {}
 with zipfile.ZipFile(

@@ -19,7 +19,15 @@ remains the default. [Auto guide](docs/AUTO_LANGUAGE.md) · [Test results](docs/
 > **Preview/beta software:** rehearse with your teaching microphone and projector before a lecture.
 > Captions and translations can contain mistakes. [What has been tested](STATUS.md).
 
-**Current main version: 0.7.2b1 — optional spoken translations.**
+**Current main version: 0.8.0b1 — optional captions on students’ phones.**
+Open **Student phones → Start sharing** and show the QR code. Students on the same
+trusted local network can read continuous English/Chinese captions, scroll back,
+search, copy, change text size and download the whole shared lecture as TXT.
+No account or internet connection is needed during teaching. Sharing starts off;
+**Stop sharing** closes the link. The projector layout and recognition/translation
+settings stay the same. [Phone setup, privacy and connection help](docs/PHONE_CAPTIONS.md).
+
+**Optional spoken translations remain available.**
 Open **Spoken audio → On demand** to hear the completed translation in English or
 Mandarin. Speak/Stop is **Ctrl+Alt+S** (Control+Option+S on Mac). On-demand playback
 pauses listening; press **Resume** when it finishes. Automatic playback is for
@@ -31,7 +39,7 @@ Captured speech before an audio gap is finished rather than silently discarded. 
 **Audio was lost** warning asks you to repeat; saved files mark known missing intervals
 as **[Audio lost]**. Separate English and Chinese exports now keep conversation order
 when translations arrive late. Whisper, translation models, recognition defaults and
-Auto language thresholds are unchanged. No rolling reader has been reintroduced.
+Auto language thresholds are unchanged. The separate phone reader does not change the projector layout.
 [What to do if audio is lost](docs/RELIABILITY.md) · [Verification](docs/evidence/reliability-0.7.1.md).
 
 When speaking English, choose **English → 简体中文** under **Who is speaking?**.

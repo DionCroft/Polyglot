@@ -1,6 +1,29 @@
 {
-  "runtime_python_files": 40,
+  "runtime_python_files": 69,
   "forbidden_network_imports": [],
+  "separate_student_helper_imports": [
+    {
+      "file": "app/sharing/server.py",
+      "line": 8,
+      "module": "socket"
+    },
+    {
+      "file": "app/sharing/server.py",
+      "line": 11,
+      "module": "http.server"
+    },
+    {
+      "file": "app/sharing/server.py",
+      "line": 12,
+      "module": "socketserver"
+    },
+    {
+      "file": "app/sharing/server.py",
+      "line": 13,
+      "module": "urllib.parse"
+    }
+  ],
+  "boundary": "Speech process denies sockets/DNS as before. Explicit sharing spawns an inbound-only private-IPv4 helper; its Python audit denies outgoing connections and DNS.",
   "ort_telemetry_disabled": true,
   "native_packet_trace": "pending; not proven by static audit"
 }

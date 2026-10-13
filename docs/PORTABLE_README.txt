@@ -60,3 +60,11 @@ Listening pauses during speaker playback. Press Resume afterwards. Ctrl+Alt+S sp
 Automatic audio is for headphones only. Audio starts Off each time you open the app.
 Missing English/Mandarin voices can be installed in Windows Speech settings.
 See Help > Spoken translations and voice setup for instructions and a feedback checklist.
+
+STUDENT PHONE CAPTIONS (0.8.0b1+)
+Open Student phones, select the trusted classroom network, then Start sharing.
+Students scan the QR code on the same Wi-Fi to read, scroll back, search, copy
+and download bilingual captions. No internet or account is needed.
+Stop sharing closes the private link. Anyone with the link on your network
+can read the shared text; local HTTP is not encrypted.
+Use Connection help for full instructions, privacy and Wi-Fi troubleshooting.

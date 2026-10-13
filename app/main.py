@@ -5,6 +5,11 @@ from app.system.offline import enforce_offline
 
 
 def main():
+    if "--student-server" in sys.argv:
+        from app.sharing.server import run
+
+        index = sys.argv.index("--student-server")
+        return run(*sys.argv[index + 1 : index + 4])
     enforce_offline()
     if "--encoder-worker" in sys.argv:
         from app.asr.encoder_worker import run_worker
@@ -24,6 +29,10 @@ def main():
     from app.utils.logging import configure
 
     configure(DATA / "logs")
+    if "--phone-self-test" in sys.argv:
+        from app.system.phone_sharing_test import run
+
+        return run(sys.argv[sys.argv.index("--phone-self-test") + 1])
     if "--speech-self-test" in sys.argv:
         from app.system.speech_output_test import run
 
