@@ -1,0 +1,18 @@
+[
+  {
+    "name": "LectureLive-0.8.0b1-macOS-AppleSilicon.zip",
+    "bytes": 1174633980,
+    "sha256": "2190c558136408e3d4e22fbd2b977b99dbaaaedadfb143c77aac2a96e36852a4",
+    "url": "https://github.com/DionCroft/Polyglot/releases/download/macos-v0.8.0b1/LectureLive-0.8.0b1-macOS-AppleSilicon.zip",
+    "verified_on_native_runner": true,
+    "verified_uploaded_digest": true
+  },
+  {
+    "name": "LectureLive-0.8.0b1-macOS-AppleSilicon.dmg",
+    "bytes": 1223310615,
+    "sha256": "43bdae65d679c40b7a654bb8670a26bf990d4057cf1966bb48ff0f7924082ed4",
+    "url": "https://github.com/DionCroft/Polyglot/releases/download/macos-v0.8.0b1/LectureLive-0.8.0b1-macOS-AppleSilicon.dmg",
+    "verified_on_native_runner": true,
+    "verified_uploaded_digest": true
+  }
+]

@@ -57,3 +57,7 @@ Hosted Apple Silicon native CI: [run 38401879185](https://github.com/DionCroft/P
 Physical iPhones/Android devices, actual Safari, QR camera scanning, OS clipboard/download handling, campus firewall/device isolation, the i5-1035G1 laptop, an M2 MacBook Air and the expected classroom student count still require testing. Emulated mobile screens and loopback requests do not establish classroom Wi-Fi reliability or performance. No microphone/projector hardware was used for these generated-text tests.
 
 Rehearse with the instructions in [PHONE_CAPTIONS.md](../PHONE_CAPTIONS.md). Privacy: explicit sharing publishes temporary lecture text to holders of a random link over unencrypted trusted-LAN HTTP; stopping does not erase student copies.
+
+## Published downloads
+
+[Windows 0.8.0b1](https://github.com/DionCroft/Polyglot/releases/tag/windows-v0.8.0b1) and [Mac 0.8.0b1](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.8.0b1) are published prereleases. SHA-256 digests reported by GitHub match the locally verified Windows ZIPs and the native Mac packaging manifest. Mac DMG: 1,223,310,615 bytes; ZIP: 1,174,633,980 bytes. Final manifests: phone-windows-downloads-080.json and phone-macos-downloads-080.json. The Mac publication workflow completed successfully: [run 38404550952](https://github.com/DionCroft/Polyglot/actions/runs/38404550952). Current installation and student-phone guides are attached to the releases.
