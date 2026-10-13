@@ -1,0 +1,10 @@
+{
+  "arm64-phone-ui": true,
+  "arm64-conversation-ui": true,
+  "arm64-auto": true,
+  "arm64-http": true,
+  "x64-phone-ui": true,
+  "x64-conversation-ui": true,
+  "x64-auto": true,
+  "x64-http": true
+}

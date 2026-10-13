@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "packaged_assets": true,
+  "simultaneous_clients": 20,
+  "parent_exit_stops_server": true,
+  "physical_wifi": false
+}

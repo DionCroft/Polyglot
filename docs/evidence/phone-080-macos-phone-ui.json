@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "physical_phones_tested": false,
+  "default_off": true,
+  "journal_bootstrap": true,
+  "late_pair_during_pause": true,
+  "bilingual_long_text": true,
+  "qr_generated": true,
+  "new_lecture_revokes_link": true,
+  "history_removed": true,
+  "new_link_empty_history": true,
+  "helper_process_started": true
+}

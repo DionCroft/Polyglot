@@ -1,0 +1,42 @@
+{
+  "passed": true,
+  "version": "0.8.0b1",
+  "physical_microphone_tested": false,
+  "classroom_validated": false,
+  "audio_seconds": 35.38,
+  "directions": [
+    "en",
+    "zh",
+    "en"
+  ],
+  "completed_pairs": 7,
+  "uncertain_phrases": 3,
+  "journal_recovery": true,
+  "backend": "Local CPU · Whisper Base int8",
+  "metrics": {
+    "speaking_language": "auto",
+    "detected_language": "en",
+    "switching_language": false,
+    "recognition_mode": "standard",
+    "vocabulary_guidance": false,
+    "dropped_audio_chunks": 0,
+    "dropped_phrases": 0,
+    "translation_skips": 0,
+    "asr_seconds": 1.2659999999996217,
+    "translation_seconds": 0.07800000000133878,
+    "rtf": 0.3767857142856017,
+    "english_latency": 2.131999999999998,
+    "bilingual_latency": 2.2260000000009583,
+    "audio_gaps": 0,
+    "uncertain_language_phrases": 3,
+    "english_p95_seconds": 2.694,
+    "bilingual_p95_seconds": 2.903,
+    "audio_queue": 0,
+    "asr_queue": 0,
+    "translation_queue": 0
+  },
+  "warnings": [
+    "Using local CPU speech recognition; no internet is required.",
+    "WAV replay finished. Captions remain visible; stop to finish the session."
+  ]
+}

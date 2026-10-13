@@ -7,8 +7,8 @@ caption delay and sustained classroom performance still need testing on your lap
 
 ## Download the complete app
 
-1. Open the [Windows Intel CPU release](https://github.com/DionCroft/Polyglot/releases/tag/windows-v0.7.2b1-cpu1).
-2. Under **Assets**, download **LectureLive-Windows-x64-Beta-0.7.2b1-Intel-CPU1.zip**.
+1. Open the [Windows Intel CPU release](https://github.com/DionCroft/Polyglot/releases/tag/windows-v0.8.0b1).
+2. Under **Assets**, download **LectureLive-Windows-x64-Beta-0.8.0b1.zip**.
    Do not select **Source code**. The complete app is about 760 MB to download.
 3. Right-click the downloaded ZIP and choose **Extract All**. Allow at least **4 GB**
    of free space for the ZIP, extracted application and working files.

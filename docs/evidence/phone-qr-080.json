@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "physical_camera_scanning": false,
+  "results": [
+    {
+      "file": "tests/artifacts/phone-final-arm64-phone-ui.qr.png",
+      "decoded_valid_private_session_url": true
+    },
+    {
+      "file": "tests/artifacts/phone-packaged-x64-ui.qr.png",
+      "decoded_valid_private_session_url": true
+    }
+  ]
+}

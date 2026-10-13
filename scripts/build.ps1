@@ -33,6 +33,6 @@ Copy-Item -LiteralPath (Join-Path $projectRoot 'STATUS.md') -Destination (Join-P
 
 if ($beta) {
     Copy-Item -LiteralPath (Join-Path $projectRoot 'Launch-CPU.cmd') -Destination (Join-Path $releaseDir 'Launch-CPU.cmd') -Force
-    $intelGuide = [IO.File]::ReadAllText((Join-Path $projectRoot 'docs\INTEL_LAPTOP.md')).Replace('(SPOKEN_AUDIO.md)', '(_internal/docs/SPOKEN_AUDIO.md)').Replace('(evidence/', '(_internal/docs/evidence/')
+    $intelGuide = [IO.File]::ReadAllText((Join-Path $projectRoot 'docs\INTEL_LAPTOP.md')).Replace('(SPOKEN_AUDIO.md)', '(_internal/docs/SPOKEN_AUDIO.md)').Replace('(evidence/', '(_internal/docs/evidence/').Replace('(PHONE_CAPTIONS.md)', '(_internal/docs/PHONE_CAPTIONS.md)')
     [IO.File]::WriteAllText((Join-Path $releaseDir 'INSTALL-INTEL.md'), $intelGuide)
 }

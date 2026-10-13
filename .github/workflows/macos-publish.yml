@@ -59,8 +59,9 @@ jobs:
           assert set(records) == wanted
           PY
           cp docs/MACOS.md downloads/INSTALL-MAC.md
+          cp docs/PHONE_CAPTIONS.md downloads/PHONE_CAPTIONS.md
       - name: Attach verified installers and publish the prepared beta
         run: |
-          gh release upload "$RELEASE_TAG" downloads/*.dmg downloads/*.zip downloads/SHA256SUMS.txt downloads/INSTALL-MAC.md
+          gh release upload "$RELEASE_TAG" downloads/*.dmg downloads/*.zip downloads/SHA256SUMS.txt downloads/INSTALL-MAC.md downloads/PHONE_CAPTIONS.md
           gh release edit "$RELEASE_TAG" --draft=false --prerelease
           gh release view "$RELEASE_TAG" --json url,isDraft,isPrerelease,assets

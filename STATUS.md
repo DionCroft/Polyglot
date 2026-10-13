@@ -15,7 +15,13 @@ link. Speech and translation model settings and the projector are unchanged.
 The existing 36 speech / 40 translation outputs exactly match the previous baseline.
 A browser test retained all 10,002 entries, preserved the reading anchor through a
 long delayed translation, and exercised eight simultaneous emulated phones.
-Physical phones and classroom Wi-Fi still require rehearsal. Build/platform results
+Both Windows suites pass 168 tests (two POSIX-only skips each); hosted native Apple
+Silicon passes 170 with no skips and all nine packaged checks. Twenty-reader real
+Auto replays on NPU and CPU have no dropped audio or skipped translations. The
+25,000-entry load test retains all pairs with bounded helper memory. Complete
+[Windows](https://github.com/DionCroft/Polyglot/releases/tag/windows-v0.8.0b1) and
+[Mac](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.8.0b1) downloads include
+the feature. Physical phones and classroom Wi-Fi still require rehearsal. Details
 are tracked in [the evidence report](docs/evidence/phone-captions-0.8.md).
 [Beginner instructions](docs/PHONE_CAPTIONS.md).
 

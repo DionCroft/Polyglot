@@ -1,0 +1,19 @@
+{
+  "tests": 170,
+  "failed": 0,
+  "skipped": 0,
+  "packaged_checks": [
+    "macos-packaged",
+    "macos-ui",
+    "macos-conversations",
+    "macos-conversation-ui",
+    "macos-auto",
+    "macos-auto-ui",
+    "macos-spoken-audio",
+    "macos-phone-ui",
+    "macos-phone-http"
+  ],
+  "commit": "dabfe9659164dba0f2fa8e07ed18f67a38d024bc",
+  "run": "https://github.com/DionCroft/Polyglot/actions/runs/38401879185",
+  "physical_m2_air": false
+}

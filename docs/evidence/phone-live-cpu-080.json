@@ -1,0 +1,56 @@
+{
+  "passed": true,
+  "real_microphone": false,
+  "physical_wifi": false,
+  "backend": "Local CPU \u00b7 Whisper Base int8",
+  "audio_seconds": 35.38,
+  "matched_history_entries": 10,
+  "metrics": {
+    "dropped_audio_chunks": 0,
+    "dropped_phrases": 0,
+    "translation_skips": 0,
+    "asr_seconds": 1.2659999999996217,
+    "translation_seconds": 0.0930000000007567,
+    "rtf": 0.3767857142856017,
+    "english_latency": 2.1479999999996195,
+    "bilingual_latency": 2.2410000000003762,
+    "audio_gaps": 0,
+    "uncertain_language_phrases": 3
+  },
+  "exports": {
+    "directions": [
+      "en",
+      "zh",
+      "en"
+    ],
+    "completed_pairs": 7,
+    "uncertain_phrases": 3,
+    "journal_recovery": true
+  },
+  "concurrent_readers": 20,
+  "successful_http_requests": 2668,
+  "reader_counts": [
+    133,
+    133,
+    133,
+    133,
+    132,
+    134,
+    134,
+    134,
+    133,
+    133,
+    134,
+    134,
+    133,
+    133,
+    134,
+    133,
+    134,
+    133,
+    134,
+    134
+  ],
+  "lecture_connection_errors": [],
+  "environment": "Windows source runtime; microphone replaced by timed local WAV; HTTP over loopback"
+}
