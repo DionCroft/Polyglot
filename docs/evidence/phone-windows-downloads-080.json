@@ -1,0 +1,16 @@
+[
+  {
+    "archive": "recovery/LectureLive-Windows-ARM64-Beta-0.8.0b1.zip",
+    "bytes": 1537793642,
+    "files": 729,
+    "sha256": "3f0bac58b2d890c81416a9da135f02f55a672ed5366bcb389c6ea48fa1673403",
+    "verified": true
+  },
+  {
+    "archive": "recovery/LectureLive-Windows-x64-Beta-0.8.0b1.zip",
+    "bytes": 760434835,
+    "files": 1508,
+    "sha256": "9bf068e7639eed85d3b9a02aae39872d2df8761acaf865b797062dba8fa8531d",
+    "verified": true
+  }
+]
