@@ -135,11 +135,20 @@ class MainWindow(QMainWindow):
         name = QLabel("LectureLive · Beta" if is_x64() or is_macos() else "LectureLive")
         name.setObjectName("brand")
         brand.addWidget(name)
-        tagline = QLabel("Offline bilingual live captions for teaching")
+        tagline = QLabel("Bilingual captions for your projector and students’ phones")
+        tagline.setWordWrap(True)
         tagline.setObjectName("muted")
         brand.addWidget(tagline)
         head.addLayout(brand)
         head.addStretch()
+        self.phone_button = QPushButton("Student phones · QR")
+        self.phone_button.setToolTip(
+            "Open the QR sharing controls. Sharing begins only when you choose Start sharing."
+        )
+        self.phone_button.clicked.connect(
+            lambda: self.tabs.setCurrentWidget(self.phone)
+        )
+        head.addWidget(self.phone_button, 0, Qt.AlignVCenter)
         quick_start = QPushButton("Quick start")
         quick_start.setToolTip("Read the guide inside LectureLive")
         quick_start.clicked.connect(self.show_guide)
@@ -157,14 +166,14 @@ class MainWindow(QMainWindow):
         self.tabs = tabs
         layout.addWidget(tabs, 1)
         tabs.addTab(self.lecture_tab(), "Lecture")
-        from app.ui.spoken_audio import SpokenAudio
-
-        self.spoken = SpokenAudio(self)
-        tabs.addTab(self.spoken, "Spoken audio")
         from app.ui.phone_sharing import PhoneSharing
 
         self.phone = PhoneSharing(self)
         tabs.addTab(self.phone, "Student phones")
+        from app.ui.spoken_audio import SpokenAudio
+
+        self.spoken = SpokenAudio(self)
+        tabs.addTab(self.spoken, "Spoken audio")
         tabs.addTab(self.appearance_tab(), "Overlay")
         tabs.addTab(self.diagnostics_tab(), "Diagnostics")
         tabs.addTab(self.about_tab(), "About")
@@ -1027,7 +1036,9 @@ class MainWindow(QMainWindow):
         title.setObjectName("sectionTitle")
         layout.addWidget(title)
         intro = QLabel(
-            "English and Mandarin conversations. Speech and translation processed on your computer."
+            "English and Mandarin captions on your projector and students’ phones. "
+            "Share a QR code so students can follow along and read earlier bilingual text. "
+            "Speech and translation are processed on your computer, with no account or internet needed after setup."
         )
         intro.setWordWrap(True)
         intro.setObjectName("muted")
@@ -1072,7 +1083,9 @@ class MainWindow(QMainWindow):
         layout.addWidget(card)
         privacy, form = self.group("YOUR DATA STAYS LOCAL")
         text = QLabel(
-            "No account or cloud translation service is needed. Microphone audio is not recorded. Optional transcripts and saved lecture settings stay on this computer."
+            "No account or cloud translation service is needed. Microphone audio is not recorded. "
+            "Optional transcripts and saved lecture settings stay on this computer. "
+            "When you enable Student phones, caption text is shared over your chosen local network."
         )
         text.setWordWrap(True)
         form.addWidget(text)

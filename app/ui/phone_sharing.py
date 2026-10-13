@@ -35,7 +35,9 @@ class PhoneSharing(QScrollArea):
         title.setStyleSheet("font-size:23px;font-weight:600")
         layout.addWidget(title)
         intro = QLabel(
-            "Share this lecture over the same Wi-Fi or Ethernet network. Students scan the QR code to read, scroll back, search and download the bilingual text."
+            "Let every student follow along on their own phone. On the same local network, "
+            "they scan your QR code to read English and Chinese captions, scroll back, search "
+            "and save the text. No student app, account or internet connection is needed."
         )
         intro.setWordWrap(True)
         layout.addWidget(intro)

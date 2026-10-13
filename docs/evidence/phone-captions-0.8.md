@@ -54,9 +54,27 @@ Complete, member-hash-verified Windows ZIPs are in `recovery/` and on the [0.8.0
 
 Hosted Apple Silicon native CI: [run 38401879185](https://github.com/DionCroft/Polyglot/actions/runs/38401879185) tests/builds the same `dabfe96` code. **170 tests pass with no skips**, plus all nine packaged inference/Cocoa/conversation/Auto/voice/phone checks, including twenty HTTP clients and parent-exit shutdown. Native JSON reports accompany this document. DMG/ZIP packaging and signature verification succeed. macOS 14+ remains the minimum; ad-hoc signed, not notarised. Physical M2 Air behaviour is not established by the hosted runner.
 
-Physical iPhones/Android devices, actual Safari, QR camera scanning, OS clipboard/download handling, campus firewall/device isolation, the i5-1035G1 laptop, an M2 MacBook Air and the expected classroom student count still require testing. Emulated mobile screens and loopback requests do not establish classroom Wi-Fi reliability or performance. No microphone/projector hardware was used for these generated-text tests.
+User feedback on 2026-10-13: the lecturer reported that the QR version worked very well and asked to make it a main feature. This is a successful user-reported trial; the phone/browser, network, duration, student count and individual actions tested were not specified.
+
+Broader coverage of physical iPhones/Android devices, actual Safari, QR camera scanning, OS clipboard/download handling, campus firewall/device isolation, the i5-1035G1 laptop, an M2 MacBook Air and the expected classroom student count remains open. Emulated mobile screens and loopback requests do not establish classroom Wi-Fi reliability or performance. No microphone/projector hardware was used for the automated generated-text tests above.
 
 Rehearse with the instructions in [PHONE_CAPTIONS.md](../PHONE_CAPTIONS.md). Privacy: explicit sharing publishes temporary lecture text to holders of a random link over unencrypted trusted-LAN HTTP; stopping does not erase student copies.
+
+## Main-feature promotion (2026-10-13)
+
+The README, first-lecture walkthrough and in-app help now introduce QR phone captions
+as a main feature. The app adds a **Student phones · QR** header shortcut and places
+the Student phones tab immediately after Lecture. Opening either keeps sharing off.
+
+Verification for this navigation/documentation update: **22 phone history/server tests
+pass**; the existing native ARM64 phone self-test passes QR generation, helper lifecycle,
+long bilingual entries, late translation during pause, journal import and link revocation.
+Qt navigation/help/layout checks pass at 1060×860 and 860×640 on Windows ARM64 and x64
+under ARM emulation. Those layout checks mocked model readiness, microphone enumeration
+and global hotkeys; they do not test recognition or a physical Intel laptop. Recognition,
+translation and reader code were not changed, so the earlier accuracy/load evidence above
+remains the baseline rather than a newly repeated measurement. New Mac navigation awaits
+native CI. These presentation changes are in source, not the already published installers.
 
 ## Published downloads
 

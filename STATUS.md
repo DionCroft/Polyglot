@@ -1,10 +1,11 @@
 # LectureLive — STATUS
 
-Updated 2026-10-13. Main version 0.8.0b1: optional student phone captions.
+Updated 2026-10-13. Main version 0.8.0b1: QR student phone captions are a main feature,
+with optional sharing that starts off.
 Pre-rolling projector layout retained.
 Production classroom acceptance remains open.
 
-## Student phone captions 0.8.0b1
+## Main feature: student phone captions 0.8.0b1
 
 Optional QR sharing over trusted local Wi-Fi, with a separate bilingual reader,
 scrollback, search/copy, adjustable text size and full TXT download. Source and
@@ -21,9 +22,16 @@ Auto replays on NPU and CPU have no dropped audio or skipped translations. The
 25,000-entry load test retains all pairs with bounded helper memory. Complete
 [Windows](https://github.com/DionCroft/Polyglot/releases/tag/windows-v0.8.0b1) and
 [Mac](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.8.0b1) downloads include
-the feature. Physical phones and classroom Wi-Fi still require rehearsal. Details
+the feature. On 2026-10-13, the lecturer reported a successful QR caption trial and
+requested promotion to a main feature. Device, browser, network, duration and student
+count were not specified; broader physical-device and classroom Wi-Fi checks remain open. Details
 are tracked in [the evidence report](docs/evidence/phone-captions-0.8.md).
 [Beginner instructions](docs/PHONE_CAPTIONS.md).
+
+The main source now highlights phone captions in the app header, second tab, About,
+in-app help and beginner guides. Opening the shortcut does not start sharing.
+Published 0.8.0b1 installers already include the full reader; these newer navigation
+and wording changes are in source and will be included in the next packaged release.
 
 ## Intel laptop CPU package
 

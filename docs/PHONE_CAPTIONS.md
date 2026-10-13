@@ -1,6 +1,8 @@
-# Read LectureLive captions on your phone
+# Student phone captions — join by QR code
 
-Available in **0.8.0b1 and later**. Students need a phone browser and a connection to the lecturer’s local network. No account, app installation, mobile data or internet service is needed during the lecture. The lecturer’s computer still runs all speech recognition and translation.
+Student phone captions are a main LectureLive feature, included in the **Windows and Apple Silicon Mac downloads from 0.8.0b1 onwards**. Students can follow both languages live and scroll back through earlier explanations while the projector shows current captions.
+
+Students need a phone browser and a connection to the lecturer’s local network. No account, app installation, mobile data or internet service is needed during the lecture. The lecturer’s computer still runs all speech recognition and translation. Sharing remains optional and starts off; the lecturer decides when to share.
 
 ## Lecturer: share a lecture
 

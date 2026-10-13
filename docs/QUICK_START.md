@@ -3,7 +3,8 @@
 Need to install first? Use the [Windows installation guide](INSTALLATION.md),
 [Intel/AMD beta guide](WINDOWS_BETA.md) or [Mac guide](MACOS.md). No programming experience is needed.
 
-LectureLive uses Whisper to recognise English or Mandarin and displays English and Simplified Chinese captions.
+LectureLive uses Whisper to recognise English or Mandarin and displays English and Simplified Chinese
+captions on your projector and students’ phones. Students join by scanning a QR code.
 You do not need an account. Once setup is complete, speech and translation run on your computer.
 
 ## 1. Check your microphone
@@ -33,26 +34,47 @@ vocabulary and saved presets are optional. You can come back to these later.
 **Save text transcripts and subtitles** is on by default. Untick it before starting if you do not
 want saved text. Microphone audio is not recorded.
 
-## 3. Start speaking
+## 3. Share captions with students by QR code
 
-Wait for **Ready**, then select **Start lecture** at the bottom. Look for **Listening** and a moving meter.
-Speak one or two sentences, with a short natural pause between thoughts. Captions appear in a floating
-panel, called the **overlay**. Chinese follows the English after translation finishes.
+To let students follow along on their phones:
 
-Try: “The robot uses an ultrasonic sensor to estimate its distance from an obstacle.”
+1. Connect your computer and their phones to the **same trusted Wi-Fi**. Ethernet on your
+   computer also works if the network permits phones to reach it.
+2. Open **Student phones**, choose your Wi-Fi/Ethernet address and click **Start sharing**.
+3. Show the QR code. Students scan it with their camera and open the link in their browser.
+   They need no app installation, account or internet access.
+4. Students choose English, Chinese or both, adjust text size, and scroll back through earlier
+   captions. **Back to live** returns to the latest text. Search, copy and **Download full .txt**
+   are under **Search, copy & download**.
 
-## 4. Use your projector
+Sharing is optional and always starts off. Enable it before speaking to include the whole lecture.
+Keep the link within your class: anyone with it on the network can read and download the text.
+If phones cannot connect, university Wi-Fi may block device-to-device connections.
+See [phone setup and connection help](PHONE_CAPTIONS.md).
+
+## 4. Check your projector
 
 Open **Overlay**, choose the caption display, and select **Preview captions on selected display**
 before starting a lecture. Adjust the text size for the back of the room. Unlock the panel to move it;
 lock it to click through to your slides. Starting a lecture locks the overlay automatically.
 
-## 5. Pause or finish
+## 5. Start speaking
 
-- **Pause** hides captions and discards unfinished speech. Select **Resume** to continue.
+Wait for **Ready**, then select **Start lecture** at the bottom. Look for **Listening** and a moving meter.
+Speak one or two sentences, with a short natural pause between thoughts. Captions appear in a floating
+panel, called the **overlay**, and on connected phones. Chinese follows the English after translation finishes.
+
+Try: “The robot uses an ultrasonic sensor to estimate its distance from an obstacle.”
+
+## 6. Pause or finish
+
+- **Pause** hides projector captions and discards unfinished speech. Select **Resume** to continue.
+  Earlier phone captions stay readable, and already queued translations can still arrive.
 - **Stop lecture** finishes already captured speech, saves enabled transcripts, and stops listening.
   Wait while **Finishing…** is shown. Closing the app also finishes the session.
 - **Teaching controls** gives you a small floating Pause/Finish panel while your slides are open.
+- **Stop sharing** closes the student link. After stopping the lecture, give students time to
+  download their text before you stop sharing or close LectureLive.
 
 | Action | Windows shortcut | Mac shortcut |
 |---|---|---|
@@ -96,7 +118,7 @@ and subtitle files mark known gaps as **[Audio lost]**. See [audio-loss and reco
 Check the selected microphone and its test result first. If a device disconnects, reconnect it and
 use **Reconnect / retry**. If captions lag, try **Fast / Standard** for your next session.
 For missing files, close LectureLive and rerun **Setup.cmd** on Windows, or reinstall the Mac app
-from the [Mac beta release](https://github.com/DionCroft/Polyglot/releases/tag/macos-v0.7.1b1).
+using the [Mac installation guide](MACOS.md).
 
 This is a preview release. Review translations and rehearse with your actual microphone and
 projector before relying on it in class. Read the [full user guide](USER_GUIDE.md),
@@ -115,7 +137,3 @@ click **Speak last translation** or press **Ctrl+Alt+S** (Control+Option+S on Ma
 Listening pauses for speaker playback; press **Resume** afterwards. Automatic audio
 requires headphones. Audio starts off; English/Mandarin system voices may need a
 one-time download. [Voice setup and first test](SPOKEN_AUDIO.md).
-
-## Optional student phone captions (0.8.0b1+)
-
-Open **Student phones → Start sharing**, choose your classroom Wi-Fi/Ethernet address, and show the QR code. Students on the same trusted local network can scroll back through bilingual captions, search/copy and download the full text. Internet access and accounts are not needed. **Stop sharing** closes the link. Previous 0.7.x downloads do not include this feature. Follow the [phone caption guide](PHONE_CAPTIONS.md), including privacy and firewall/Wi-Fi advice, before teaching.

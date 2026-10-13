@@ -1,4 +1,4 @@
-# Teaching with LectureLive 0.7
+# Teaching with LectureLive
 
 New to the app? Use the **Quick start** button for the [short guide](QUICK_START.md).
 
@@ -9,12 +9,32 @@ New to the app? Use the **Quick start** button for the [short guide](QUICK_START
 4. Enter a title and technical vocabulary. **Save…** stores a named preset locally.
 5. In **Overlay**, select the caption display and use **Preview captions on selected
    display**. Check visibility from the back of the room; lock before teaching.
-6. Press **Start lecture**. The input meter and Listening status confirm capture.
-7. Use **Teaching controls** for a compact floating panel while your slides are open.
+6. To share with students, open **Student phones**, choose your classroom Wi-Fi/Ethernet
+   address and click **Start sharing**. Show the QR code to students on the same trusted network.
+7. Press **Start lecture**. The input meter and Listening status confirm capture.
+8. Use **Teaching controls** for a compact floating panel while your slides are open.
    **Full controls** returns to the main window.
 
 The Start/Finish and Pause controls remain visible outside the scrolling preparation
 area. Captions automatically lock when a lecture starts.
+
+## Student phone captions via QR code
+
+Students can read a continuous English/Chinese transcript on their own phones while your
+projector shows current captions. Open **Student phones** to start sharing and show the QR code.
+Students scan it with their camera and open the link; no student app, account or internet is needed.
+Use the same trusted local network. This feature is included in Windows and Apple Silicon Mac
+downloads from **0.8.0b1** onwards.
+
+Each student chooses English-only, Chinese-only or bilingual text and a comfortable font size.
+They can scroll back, tap **Back to live** to catch up, search/copy earlier explanations and
+download the full shared transcript as TXT. Delayed translations fill their original entries.
+
+Sharing always starts off. Enable it before speaking to include the whole lecture. Keep the
+link within your class; anyone with it on the network can read and download shared text.
+At the end, stop the lecture, allow time for downloads, then choose **Stop sharing** to close
+the link. Follow the [phone caption guide](PHONE_CAPTIONS.md) for setup, late joining,
+privacy and firewall/Wi-Fi help.
 
 ## Switch between English and Mandarin
 
@@ -32,12 +52,15 @@ and repeat. Auto can withhold short or ambiguous phrases; bilingual exports mark
 
 ## Pause, finish and reconnect
 
-**Pause** immediately hides captions and invalidates unfinished speech so private
+**Pause** immediately hides projector captions and invalidates unfinished speech so private
 asides do not appear when you resume. **Stop lecture** stops accepting new audio,
 finishes speech already captured, drains recognition and translation, and closes
 transcripts. The final bilingual caption remains visible. Closing the app uses the
 same finishing sequence. A slow native inference call can delay completion; status
 messages explain that local processing is still finishing.
+
+Earlier phone captions remain readable while paused, and already queued translations can
+still arrive. **Stop sharing** closes the student link; Pause and Stop lecture do not.
 
 When an input failure is reported, reconnect the microphone and press **Reconnect /
 retry**. The old session is finished before another starts. If the saved microphone
@@ -48,7 +71,7 @@ Default global shortcuts are **Ctrl+Alt+C** for lock and **Ctrl+Alt+Space** for 
 Change them under Overlay using Ctrl/Alt/Shift plus a letter, digit, Space or F1–F12.
 A conflicting shortcut is rejected and the previous bindings are restored.
 
-## Caption behaviour
+## Projector caption behaviour
 
 Provisional recognised speech appears after agreement between successive hypotheses.
 Completed English/Chinese pairs remain together while the next phrase is being translated.
@@ -115,7 +138,3 @@ click **Speak last translation** or press **Ctrl+Alt+S** (Control+Option+S on Ma
 Listening pauses for speaker playback; press **Resume** afterwards. Automatic audio
 requires headphones. Audio starts off; English/Mandarin system voices may need a
 one-time download. [Voice setup and first test](SPOKEN_AUDIO.md).
-
-## Optional student phone captions (0.8.0b1+)
-
-Open **Student phones → Start sharing**, choose your classroom Wi-Fi/Ethernet address, and show the QR code. Students on the same trusted local network can scroll back through bilingual captions, search/copy and download the full text. Internet access and accounts are not needed. **Stop sharing** closes the link. Previous 0.7.x downloads do not include this feature. Follow the [phone caption guide](PHONE_CAPTIONS.md), including privacy and firewall/Wi-Fi advice, before teaching.

@@ -1,49 +1,54 @@
 # LectureLive
 
-**Teach in English. Take questions in Mandarin. Show both languages together.**
+**Live bilingual captions — on your projector and every student’s phone.**
 
-LectureLive displays a floating caption panel over your slides, desktop or projector.
-It uses **Whisper** for **English → Simplified Chinese** and **Mandarin Chinese → English**
-captions, with translation on your computer. English remains the default. After installation,
-everyday use needs **no internet connection, account or API key**.
+Teach in English, take questions in Mandarin, and let students scan a **QR code** to
+follow both languages on their own phones. They can scroll back through longer
+explanations while your projector keeps showing the current captions.
+LectureLive uses **Whisper** for **English → Simplified Chinese** and
+**Mandarin Chinese → English**, with speech recognition and translation on your computer.
+English remains the default. After installation, everyday use needs
+**no internet connection, account or API key**.
 
 You do not need programming experience. The Mac download is a ready-made app; Windows users
 can use a complete Intel/AMD app download or double-click a setup file that prepares everything.
 
 ![LectureLive captions showing Mandarin speech and its English translation](docs/evidence/auto-overlay-0.7.png)
 
-**New in 0.7.0b1, included in the main application:** choose **Auto · English ↔ Mandarin**
-to change direction as speakers take turns. Manual selection remains available and English
-remains the default. [Auto guide](docs/AUTO_LANGUAGE.md) · [Test results](docs/evidence/auto-language-0.7.md).
+## Main features
 
-> **Preview/beta software:** rehearse with your teaching microphone and projector before a lecture.
-> Captions and translations can contain mistakes. [What has been tested](STATUS.md).
+| Feature | What it does for your lecture |
+|---|---|
+| **Student phone captions via QR code** | Students follow a continuous bilingual transcript, scroll back, search, copy, adjust text size and download the full shared text. No student app or account needed. |
+| **Projector captions** | A floating English/Chinese caption panel sits over your slides or desktop. |
+| **English ↔ Mandarin conversations** | Choose the speaking language yourself or use **Auto** as speakers take turns. [Conversation help](docs/CONVERSATIONS.md). |
+| **Offline speech and translation** | Whisper and translation models run on the lecturer’s computer after setup. Phone sharing needs only the same trusted local network. |
+| **Lecture vocabulary and presets** | Reuse microphone and caption settings, with technical vocabulary and CO7000 project-management terminology. |
+| **Saved text and optional spoken translations** | Save transcripts/subtitles, or hear a completed translation using **Spoken audio → On demand**. [Voice setup](docs/SPOKEN_AUDIO.md). |
 
-**Current main version: 0.8.0b1 — optional captions on students’ phones.**
-Open **Student phones → Start sharing** and show the QR code. Students on the same
-trusted local network can read continuous English/Chinese captions, scroll back,
-search, copy, change text size and download the whole shared lecture as TXT.
-No account or internet connection is needed during teaching. Sharing starts off;
-**Stop sharing** closes the link. The projector layout and recognition/translation
-settings stay the same. [Phone setup, privacy and connection help](docs/PHONE_CAPTIONS.md).
+**Current main version: 0.8.0b1.** QR phone captions are included in the main Windows
+and Apple Silicon Mac downloads. Earlier 0.7.x downloads do not include them.
 
-**Optional spoken translations remain available.**
-Open **Spoken audio → On demand** to hear the completed translation in English or
-Mandarin. Speak/Stop is **Ctrl+Alt+S** (Control+Option+S on Mac). On-demand playback
-pauses listening; press **Resume** when it finishes. Automatic playback is for
-headphones only. Audio starts off, and missing system voices do not stop captions.
-[Voice installation and your first test](docs/SPOKEN_AUDIO.md).
+> **Preview/beta software:** rehearse with your teaching microphone, projector and classroom
+> Wi-Fi before a lecture. Captions and translations can contain mistakes. [What has been tested](STATUS.md).
 
-**Includes the 0.7.1 reliability update and pre-rolling layout.**
-Captured speech before an audio gap is finished rather than silently discarded. An
-**Audio was lost** warning asks you to repeat; saved files mark known missing intervals
-as **[Audio lost]**. Separate English and Chinese exports now keep conversation order
-when translations arrive late. Whisper, translation models, recognition defaults and
-Auto language thresholds are unchanged. The separate phone reader does not change the projector layout.
-[What to do if audio is lost](docs/RELIABILITY.md) · [Verification](docs/evidence/reliability-0.7.1.md).
+## Share captions with students
 
-When speaking English, choose **English → 简体中文** under **Who is speaking?**.
-A manually selected Mandarin mode expects Mandarin speech.
+1. Connect the lecturer’s computer and students’ phones to the **same trusted Wi-Fi**
+   (Ethernet on the computer also works if the network allows phones to reach it).
+2. Open **Student phones**, choose your Wi-Fi/Ethernet address, then click **Start sharing**.
+3. Show the **QR code**. Students scan it with their phone camera and open the link in their browser.
+4. Start your lecture normally. Students choose **English only**, **Chinese only** or
+   **bilingual**, scroll back to earlier text and tap **Back to live** to catch up.
+5. At the end, stop the lecture and allow time for **Download full .txt**, then click
+   **Stop sharing** to close the link.
+
+Sharing is **optional and starts off**. Start sharing before speaking to include the
+whole lecture. It uses the same captions and translations as the existing app; the
+projector layout and recognition settings stay the same. The link lets anyone who has
+it on the network read and download the shared text, so keep it within your class.
+University Wi-Fi may block connections between devices: the
+[phone caption guide](docs/PHONE_CAPTIONS.md) explains connection help, privacy and a first rehearsal.
 
 ## Start here: choose your computer
 
@@ -146,12 +151,16 @@ performance choices, the ZIP alternative and current limitations.
    **Processing hardware** is shown, leave it on **Automatic**. Lecture details and presets are optional.
 4. **Choose whether to save text.** **Save text transcripts and subtitles** is on by default.
    Untick it before starting if you do not want saved text. Microphone audio is not recorded.
-5. **Click Start lecture.** Speak a sentence and pause briefly. Try:
+5. **Let students follow on their phones.** If you want to share, open **Student phones**,
+   choose your classroom network address and click **Start sharing**. Show the QR code.
+   [Step-by-step phone setup](docs/PHONE_CAPTIONS.md).
+6. **Click Start lecture.** Speak a sentence and pause briefly. Try:
    “The robot uses an ultrasonic sensor to estimate its distance from an obstacle.”
    Captions appear in the floating panel; Chinese follows after translation finishes.
-6. **Pause or finish.** **Pause** hides captions and discards unfinished speech; **Resume** continues.
+7. **Pause or finish.** **Pause** hides projector captions and discards unfinished speech; **Resume** continues.
    **Stop lecture** finishes captured speech and saves text if enabled. Wait for **Finishing…** to end
-   before closing the app.
+   before closing the app. Phone history stays readable until **Stop sharing** or a new lecture;
+   give students time to download before closing the link.
 
 | Computer | Speech profile for your first try |
 |---|---|
